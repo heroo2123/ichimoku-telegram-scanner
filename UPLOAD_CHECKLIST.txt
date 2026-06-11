@@ -1,0 +1,19 @@
+UPLOAD CHECKLIST
+
+Make sure these files/folders are in your GitHub repository:
+
+[ ] scanner.py
+[ ] config.py
+[ ] requirements.txt
+[ ] README.md
+[ ] data/scan_state.json
+[ ] data/heartbeat.json
+[ ] data/last_run_summary.json
+[ ] charts/.gitkeep
+[ ] .github/workflows/telegram-test.yml
+[ ] .github/workflows/crypto-daily.yml
+[ ] .github/workflows/us-daily.yml
+
+Very important:
+The .github folder may be hidden on some computers/phones because it starts with a dot.
+If the Actions tab does not show the three workflows, then the .github/workflows files were not uploaded correctly.
