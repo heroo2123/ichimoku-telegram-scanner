@@ -1,1 +1,714 @@
-{}
+{
+  "us": {
+    "alerts": [
+      {
+        "close": 0.6039999723434448,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "AERT",
+        "type": "bullish"
+      },
+      {
+        "close": 1.320099949836731,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "AIHS",
+        "type": "bearish"
+      },
+      {
+        "close": 2.0299999713897705,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "AMTX",
+        "type": "bearish"
+      },
+      {
+        "close": 53.970001220703125,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ANAB",
+        "type": "bullish"
+      },
+      {
+        "close": 84.83000183105469,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "APGE",
+        "type": "bullish"
+      },
+      {
+        "close": 0.8600999712944031,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "APM",
+        "type": "bearish"
+      },
+      {
+        "close": 163.24000549316406,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "APPF",
+        "type": "bearish"
+      },
+      {
+        "close": 1.3899999856948853,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "AWRE",
+        "type": "bearish"
+      },
+      {
+        "close": 20.90999984741211,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "BCAX",
+        "type": "bullish"
+      },
+      {
+        "close": 32.57899856567383,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "BEEZ",
+        "type": "bearish"
+      },
+      {
+        "close": 17.34000015258789,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "BIS",
+        "type": "bearish"
+      },
+      {
+        "close": 63.92499923706055,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "BKR",
+        "type": "bullish"
+      },
+      {
+        "close": 7.039999961853027,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "BOOM",
+        "type": "bullish"
+      },
+      {
+        "close": 1.3912999629974365,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "BRLS",
+        "type": "bearish"
+      },
+      {
+        "close": 25.690000534057617,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "BSSX",
+        "type": "bearish"
+      },
+      {
+        "close": 2.365000009536743,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "BTMD",
+        "type": "bullish"
+      },
+      {
+        "close": 36.9900016784668,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "CBFV",
+        "type": "bullish"
+      },
+      {
+        "close": 22.200000762939453,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "CCEC",
+        "type": "bullish"
+      },
+      {
+        "close": 27.364999771118164,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "CCFE",
+        "type": "bearish"
+      },
+      {
+        "close": 10.300000190734863,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "CCII",
+        "type": "bullish"
+      },
+      {
+        "close": 1.284999966621399,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "CHAI",
+        "type": "bearish"
+      },
+      {
+        "close": 25.04010009765625,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "CHSCN",
+        "type": "bearish"
+      },
+      {
+        "close": 11.25,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "COLAU",
+        "type": "bearish"
+      },
+      {
+        "close": 12.4399995803833,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "CRESY",
+        "type": "bullish"
+      },
+      {
+        "close": 19.274999618530273,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "CUSD",
+        "type": "bearish"
+      },
+      {
+        "close": 31.093000411987305,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "CZAR",
+        "type": "bearish"
+      },
+      {
+        "close": 10.989999771118164,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "DAAQU",
+        "type": "bullish"
+      },
+      {
+        "close": 539.5999755859375,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "DJCO",
+        "type": "bullish"
+      },
+      {
+        "close": 13.854999542236328,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "DRVN",
+        "type": "bullish"
+      },
+      {
+        "close": 25.844999313354492,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "DVXP",
+        "type": "bullish"
+      },
+      {
+        "close": 40.86000061035156,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ELVN",
+        "type": "bullish"
+      },
+      {
+        "close": 75.66999816894531,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ELVR",
+        "type": "bullish"
+      },
+      {
+        "close": 21.684999465942383,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "EML",
+        "type": "bullish"
+      },
+      {
+        "close": 136.88499450683594,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ENTG",
+        "type": "bullish"
+      },
+      {
+        "close": 1.7100000381469727,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "EPSM",
+        "type": "bearish"
+      },
+      {
+        "close": 896.52001953125,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ESLT",
+        "type": "bullish"
+      },
+      {
+        "close": 15.020000457763672,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "EUDA",
+        "type": "bearish"
+      },
+      {
+        "close": 67.7699966430664,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "FDTS",
+        "type": "bullish"
+      },
+      {
+        "close": 22.725000381469727,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "FLNC",
+        "type": "bullish"
+      },
+      {
+        "close": 37.650001525878906,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "FLY",
+        "type": "bullish"
+      },
+      {
+        "close": 121.52999877929688,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "FORM",
+        "type": "bullish"
+      },
+      {
+        "close": 3.9124999046325684,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "FOXX",
+        "type": "bearish"
+      },
+      {
+        "close": 11.25,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "FSHPU",
+        "type": "bullish"
+      },
+      {
+        "close": 1.25,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "GELS",
+        "type": "bullish"
+      },
+      {
+        "close": 54.040000915527344,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "GGAL",
+        "type": "bullish"
+      },
+      {
+        "close": 1.3600000143051147,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "GIBO",
+        "type": "bearish"
+      },
+      {
+        "close": 32.64500045776367,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "GLBE",
+        "type": "bearish"
+      },
+      {
+        "close": 51.724998474121094,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "GLNG",
+        "type": "bullish"
+      },
+      {
+        "close": 31.549999237060547,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "GLXY",
+        "type": "bullish"
+      },
+      {
+        "close": 25.15999984741211,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "GNTX",
+        "type": "bullish"
+      },
+      {
+        "close": 17.235000610351562,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "GRRR",
+        "type": "bullish"
+      },
+      {
+        "close": 9.710000038146973,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "HNNA",
+        "type": "bearish"
+      },
+      {
+        "close": 16.280000686645508,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "HOFT",
+        "type": "bullish"
+      },
+      {
+        "close": 30.75,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "HTFL",
+        "type": "bullish"
+      },
+      {
+        "close": 30.604999542236328,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "IBEX",
+        "type": "bearish"
+      },
+      {
+        "close": 2.7600998878479004,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ILAG",
+        "type": "bearish"
+      },
+      {
+        "close": 0.23999999463558197,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ILLR",
+        "type": "bearish"
+      },
+      {
+        "close": 42.915000915527344,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "IMOM",
+        "type": "bullish"
+      },
+      {
+        "close": 8.739999771118164,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "INNV",
+        "type": "bullish"
+      },
+      {
+        "close": 0.4226999878883362,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "IZM",
+        "type": "bearish"
+      },
+      {
+        "close": 2.450000047683716,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "JWEL",
+        "type": "bullish"
+      },
+      {
+        "close": 66.70999908447266,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "LASR",
+        "type": "bullish"
+      },
+      {
+        "close": 7.826000213623047,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "LILA",
+        "type": "bearish"
+      },
+      {
+        "close": 0.16990000009536743,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "LPBBW",
+        "type": "bearish"
+      },
+      {
+        "close": 24.350000381469727,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "LWAY",
+        "type": "bullish"
+      },
+      {
+        "close": 24.75,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "MATW",
+        "type": "bearish"
+      },
+      {
+        "close": 5.789999961853027,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "MB",
+        "type": "bearish"
+      },
+      {
+        "close": 14.25,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "MBBC",
+        "type": "bullish"
+      },
+      {
+        "close": 25.610000610351562,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "MBINM",
+        "type": "bullish"
+      },
+      {
+        "close": 155.8699951171875,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "MIDD",
+        "type": "bullish"
+      },
+      {
+        "close": 97.93499755859375,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "MIRM",
+        "type": "bullish"
+      },
+      {
+        "close": 2.972100019454956,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "MMLP",
+        "type": "bullish"
+      },
+      {
+        "close": 25.0,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "MNSBP",
+        "type": "bullish"
+      },
+      {
+        "close": 13.90999984741211,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "MSFD",
+        "type": "bullish"
+      },
+      {
+        "close": 387.875,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "MSFT",
+        "type": "bearish"
+      },
+      {
+        "close": 25.0,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "NEWTG",
+        "type": "bearish"
+      },
+      {
+        "close": 138.61000061035156,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "NUTX",
+        "type": "bullish"
+      },
+      {
+        "close": 10.25,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "OBAWU",
+        "type": "bearish"
+      },
+      {
+        "close": 24.899999618530273,
+        "date": "2026-06-10",
+        "market": "US Stock",
+        "symbol": "ONBPO",
+        "type": "bearish"
+      },
+      {
+        "close": 68.74500274658203,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ORKA",
+        "type": "bullish"
+      },
+      {
+        "close": 3.8299999237060547,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "ORMP",
+        "type": "bullish"
+      },
+      {
+        "close": 0.17520000040531158,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PASW",
+        "type": "bearish"
+      },
+      {
+        "close": 5.75,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PDC",
+        "type": "bullish"
+      },
+      {
+        "close": 4.400000095367432,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PGEN",
+        "type": "bullish"
+      },
+      {
+        "close": 0.7299000024795532,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PMEC",
+        "type": "bearish"
+      },
+      {
+        "close": 21.15999984741211,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PPI",
+        "type": "bullish"
+      },
+      {
+        "close": 14.5600004196167,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PRAA",
+        "type": "bearish"
+      },
+      {
+        "close": 31.010099411010742,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PRGS",
+        "type": "bearish"
+      },
+      {
+        "close": 4.090000152587891,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PRLD",
+        "type": "bullish"
+      },
+      {
+        "close": 74.56999969482422,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PTCT",
+        "type": "bullish"
+      },
+      {
+        "close": 5.090000152587891,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "PUSA",
+        "type": "bullish"
+      },
+      {
+        "close": 24.795000076293945,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "QQLV",
+        "type": "bullish"
+      },
+      {
+        "close": 7.110000133514404,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "RDAC",
+        "type": "bearish"
+      },
+      {
+        "close": 7.070000171661377,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "RPD",
+        "type": "bearish"
+      },
+      {
+        "close": 258.8482971191406,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "RTH",
+        "type": "bullish"
+      },
+      {
+        "close": 1.149999976158142,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "RYET",
+        "type": "bullish"
+      },
+      {
+        "close": 123.87000274658203,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "SATS",
+        "type": "bullish"
+      },
+      {
+        "close": 0.8682000041007996,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "SFWL",
+        "type": "bearish"
+      },
+      {
+        "close": 4.454999923706055,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "SIDU",
+        "type": "bullish"
+      },
+      {
+        "close": 24.969999313354492,
+        "date": "2026-06-11",
+        "market": "US Stock",
+        "symbol": "SJCP",
+        "type": "bearish"
+      },
+      {
+        "close": 76.11000061035156,
+        "date": "2026-06-11",
+        "market": "Commodity Future",
+        "symbol": "CT=F",
+        "type": "bullish"
+      }
+    ],
+    "last_run_utc": "2026-06-11T15:37:15+00:00"
+  }
+}
