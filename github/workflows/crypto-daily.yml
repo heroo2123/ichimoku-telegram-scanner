@@ -1,0 +1,49 @@
+name: Crypto Daily Ichimoku Scan
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Binance daily candles close at 00:00 UTC. Run 17 minutes later.
+    # GitHub cron uses UTC.
+    - cron: '17 0 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: crypto-daily-ichimoku-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python packages
+        run: pip install -r requirements.txt
+
+      - name: Run crypto scanner
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scanner.py --market crypto
+
+      - name: Commit updated scanner state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/scan_state.json data/heartbeat.json data/last_run_summary.json || true
+          git diff --cached --quiet || git commit -m "Update crypto scanner state"
+          git push || true
