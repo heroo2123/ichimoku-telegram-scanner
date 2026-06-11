@@ -30,7 +30,7 @@ STATE_PATH = DATA_DIR / "scan_state.json"
 HEARTBEAT_PATH = DATA_DIR / "heartbeat.json"
 SUMMARY_PATH = DATA_DIR / "last_run_summary.json"
 
-BINANCE_BASE = "https://api.binance.com"
+BINANCE_BASE = "https://data-api.binance.vision"
 NASDAQ_LISTED_URL = "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"
 OTHER_LISTED_URL = "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt"
 
