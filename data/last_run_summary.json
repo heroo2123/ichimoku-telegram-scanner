@@ -2,133 +2,91 @@
   "crypto": {
     "alerts": [
       {
-        "close": 0.1324,
-        "date": "2026-06-13",
+        "close": 4.97e-05,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "ATUSDC",
+        "symbol": "ARBETH",
         "type": "bearish"
       },
       {
-        "close": 0.1325,
-        "date": "2026-06-13",
+        "close": 2.16,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "ATUSDT",
+        "symbol": "AXLTRY",
         "type": "bearish"
       },
       {
-        "close": 2.087e-05,
-        "date": "2026-06-13",
+        "close": 3.379,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "CAKEBTC",
+        "symbol": "HOLOTRY",
         "type": "bullish"
       },
       {
-        "close": 0.0604,
-        "date": "2026-06-13",
+        "close": 0.3678,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "CATIUSDC",
+        "symbol": "ONDOUSDC",
         "type": "bullish"
       },
       {
-        "close": 0.0604,
-        "date": "2026-06-13",
+        "close": 0.3679,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "CATIUSDT",
+        "symbol": "ONDOUSDT",
         "type": "bullish"
       },
       {
-        "close": 3.23e-06,
-        "date": "2026-06-13",
+        "close": 9.385e-05,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "FETBTC",
-        "type": "bullish"
-      },
-      {
-        "close": 0.0842,
-        "date": "2026-06-13",
-        "market": "Crypto Spot",
-        "symbol": "HEIUSDC",
+        "symbol": "PARTIBNB",
         "type": "bearish"
       },
       {
-        "close": 0.0839,
-        "date": "2026-06-13",
+        "close": 83.4,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "HEIUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 22.25,
-        "date": "2026-06-13",
-        "market": "Crypto Spot",
-        "symbol": "KAITOTRY",
+        "symbol": "RENDERTRY",
         "type": "bullish"
       },
       {
-        "close": 0.0259,
-        "date": "2026-06-13",
+        "close": 0.0413,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "MEMETRY",
-        "type": "bearish"
-      },
-      {
-        "close": 16.86,
-        "date": "2026-06-13",
-        "market": "Crypto Spot",
-        "symbol": "ONDOTRY",
+        "symbol": "SOLETH",
         "type": "bullish"
       },
       {
-        "close": 0.0003938,
-        "date": "2026-06-13",
+        "close": 30.54,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "OPENBNB",
+        "symbol": "XLMJPY",
         "type": "bullish"
       },
       {
-        "close": 11.095,
-        "date": "2026-06-13",
+        "close": 0.0006876,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "OPENTRY",
+        "symbol": "XRPETH",
         "type": "bullish"
       },
       {
-        "close": 0.2404,
-        "date": "2026-06-13",
+        "close": 472.43,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "OPENUSDC",
+        "symbol": "ZECUSDC",
         "type": "bullish"
       },
       {
-        "close": 0.2405,
-        "date": "2026-06-13",
+        "close": 472.64,
+        "date": "2026-06-14",
         "market": "Crypto Spot",
-        "symbol": "OPENUSDT",
-        "type": "bullish"
-      },
-      {
-        "close": 2.8,
-        "date": "2026-06-13",
-        "market": "Crypto Spot",
-        "symbol": "PARTITRY",
-        "type": "bearish"
-      },
-      {
-        "close": 0.001066,
-        "date": "2026-06-13",
-        "market": "Crypto Spot",
-        "symbol": "QNTBTC",
-        "type": "bullish"
-      },
-      {
-        "close": 0.004083,
-        "date": "2026-06-13",
-        "market": "Crypto Spot",
-        "symbol": "TAOBTC",
+        "symbol": "ZECUSDT",
         "type": "bullish"
       }
     ],
-    "last_run_utc": "2026-06-14T05:26:14+00:00"
+    "last_run_utc": "2026-06-15T05:47:17+00:00"
   },
   "us": {
     "alerts": [
