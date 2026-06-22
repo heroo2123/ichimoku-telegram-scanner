@@ -2,154 +2,140 @@
   "crypto": {
     "alerts": [
       {
-        "close": 0.009175,
-        "date": "2026-06-20",
+        "close": 0.04337,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "BANANAS31USDC",
+        "symbol": "AAVEETH",
         "type": "bearish"
       },
       {
-        "close": 0.00919,
-        "date": "2026-06-20",
+        "close": 6.34,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "BANANAS31USDT",
+        "symbol": "ALICETRY",
         "type": "bearish"
       },
       {
-        "close": 7.0,
-        "date": "2026-06-20",
+        "close": 0.1367,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "BELTRY",
+        "symbol": "ALICEUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 0.01399,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "BABYUSDC",
+        "type": "bearish"
+      },
+      {
+        "close": 0.01397,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "BABYUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 0.03108,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "BIOUSDC",
+        "type": "bearish"
+      },
+      {
+        "close": 0.03109,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "BIOUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 63.35,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "CAKETRY",
+        "type": "bearish"
+      },
+      {
+        "close": 2.83e-06,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "FETBTC",
+        "type": "bearish"
+      },
+      {
+        "close": 3.5e-05,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "ICPBTC",
+        "type": "bearish"
+      },
+      {
+        "close": 22.063,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "KAITOTRY",
         "type": "bullish"
       },
       {
-        "close": 0.1509,
-        "date": "2026-06-20",
+        "close": 0.02604,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "BELUSDT",
+        "symbol": "LTCETH",
         "type": "bullish"
       },
       {
-        "close": 0.0634,
-        "date": "2026-06-20",
+        "close": 0.78,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "CATIUSDC",
+        "symbol": "NEXOUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 9.04,
+        "date": "2026-06-21",
+        "market": "Crypto Spot",
+        "symbol": "NMRUSDC",
         "type": "bullish"
       },
       {
-        "close": 0.0635,
-        "date": "2026-06-20",
+        "close": 9.05,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "CATIUSDT",
+        "symbol": "NMRUSDT",
         "type": "bullish"
       },
       {
-        "close": 9.97,
-        "date": "2026-06-20",
+        "close": 13.83,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "CRVTRY",
+        "symbol": "NXPCTRY",
         "type": "bearish"
       },
       {
-        "close": 1713.0,
-        "date": "2026-06-20",
+        "close": 0.2972,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "DASHTRY",
+        "symbol": "NXPCUSDC",
         "type": "bearish"
       },
       {
-        "close": 0.748,
-        "date": "2026-06-20",
+        "close": 0.2977,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "DODOTRY",
+        "symbol": "NXPCUSDT",
         "type": "bearish"
       },
       {
-        "close": 0.0001163,
-        "date": "2026-06-20",
+        "close": 8.56,
+        "date": "2026-06-21",
         "market": "Crypto Spot",
-        "symbol": "ETCBTC",
+        "symbol": "RENDERBRL",
         "type": "bearish"
-      },
-      {
-        "close": 8.73,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "FETTRY",
-        "type": "bearish"
-      },
-      {
-        "close": 9.75,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "JUPTRY",
-        "type": "bullish"
-      },
-      {
-        "close": 7.752,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "KITETRY",
-        "type": "bearish"
-      },
-      {
-        "close": 0.0001243,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "LINKBTC",
-        "type": "bearish"
-      },
-      {
-        "close": 9.147e-05,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "PARTIBNB",
-        "type": "bearish"
-      },
-      {
-        "close": 1.24e-06,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "POLBTC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.04207,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "SOLETH",
-        "type": "bullish"
-      },
-      {
-        "close": 1.00093,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "USDCUSDT",
-        "type": "bullish"
-      },
-      {
-        "close": 1.0,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "USDEUSDT",
-        "type": "bullish"
-      },
-      {
-        "close": 0.02078,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "VELODROMEUSDC",
-        "type": "bullish"
-      },
-      {
-        "close": 0.02072,
-        "date": "2026-06-20",
-        "market": "Crypto Spot",
-        "symbol": "VELODROMEUSDT",
-        "type": "bullish"
       }
     ],
-    "last_run_utc": "2026-06-21T05:32:54+00:00"
+    "last_run_utc": "2026-06-22T05:44:59+00:00"
   },
   "us": {
     "alerts": [
