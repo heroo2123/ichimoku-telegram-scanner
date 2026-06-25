@@ -2,203 +2,126 @@
   "crypto": {
     "alerts": [
       {
-        "close": 6.12,
-        "date": "2026-06-23",
+        "close": 1.878,
+        "date": "2026-06-24",
         "market": "Crypto Spot",
-        "symbol": "APETRY",
+        "symbol": "ARUSDC",
         "type": "bearish"
       },
       {
-        "close": 0.1318,
-        "date": "2026-06-23",
+        "close": 1.884,
+        "date": "2026-06-24",
         "market": "Crypto Spot",
-        "symbol": "APEUSDC",
+        "symbol": "ARUSDT",
         "type": "bearish"
       },
       {
-        "close": 0.1318,
-        "date": "2026-06-23",
+        "close": 0.0227,
+        "date": "2026-06-24",
         "market": "Crypto Spot",
-        "symbol": "APEUSDT",
+        "symbol": "BICOUSDT",
         "type": "bearish"
       },
       {
-        "close": 0.1201,
-        "date": "2026-06-23",
+        "close": 0.009243,
+        "date": "2026-06-24",
         "market": "Crypto Spot",
-        "symbol": "ARKMUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.1204,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "ARKMUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 0.14,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "ATUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.1402,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "ATUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 0.008794,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "BANANAS31USDC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.008813,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "BANANAS31USDT",
-        "type": "bearish"
-      },
-      {
-        "close": 0.9992,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "BFUSDUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 6.153,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "HEITRY",
+        "symbol": "BNBBTC",
         "type": "bullish"
       },
       {
-        "close": 0.1322,
-        "date": "2026-06-23",
+        "close": 26237.0,
+        "date": "2026-06-24",
         "market": "Crypto Spot",
-        "symbol": "HEIUSDC",
+        "symbol": "BNBTRY",
+        "type": "bearish"
+      },
+      {
+        "close": 0.9978,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "FDUSDUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 0.00699,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "HMSTRTRY",
+        "type": "bearish"
+      },
+      {
+        "close": 10.17,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "JUPTRY",
         "type": "bullish"
       },
       {
-        "close": 0.1325,
-        "date": "2026-06-23",
+        "close": 1.64,
+        "date": "2026-06-24",
         "market": "Crypto Spot",
-        "symbol": "HEIUSDT",
+        "symbol": "PHATRY",
+        "type": "bearish"
+      },
+      {
+        "close": 0.0352,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "PHAUSDC",
+        "type": "bearish"
+      },
+      {
+        "close": 0.0353,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "PHAUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 68.64,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "QNTUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 28295.0,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "RENDERIDR",
+        "type": "bearish"
+      },
+      {
+        "close": 73.6,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "RENDERTRY",
+        "type": "bearish"
+      },
+      {
+        "close": 5.2835,
+        "date": "2026-06-24",
+        "market": "Crypto Spot",
+        "symbol": "USDCBRL",
         "type": "bullish"
       },
       {
-        "close": 1.244e-05,
-        "date": "2026-06-23",
+        "close": 1.001,
+        "date": "2026-06-24",
         "market": "Crypto Spot",
-        "symbol": "NEXOBTC",
+        "symbol": "USDPUSDT",
         "type": "bullish"
       },
       {
-        "close": 0.000393,
-        "date": "2026-06-23",
+        "close": 5.2787,
+        "date": "2026-06-24",
         "market": "Crypto Spot",
-        "symbol": "NOTUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.000394,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "NOTUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 13.86,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "NXPCTRY",
-        "type": "bearish"
-      },
-      {
-        "close": 0.1805,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "OPENUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.1807,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "OPENUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 1.389,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "RENDEREUR",
-        "type": "bearish"
-      },
-      {
-        "close": 1.584,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "RENDERUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 1.585,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "RENDERUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 6.7e-06,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "RUNEBTC",
+        "symbol": "USDTBRL",
         "type": "bullish"
-      },
-      {
-        "close": 0.1864,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "STGUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 1.0001,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "USDEUSDT",
-        "type": "bullish"
-      },
-      {
-        "close": 4.98,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "ZBTTRY",
-        "type": "bearish"
-      },
-      {
-        "close": 0.1073,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "ZBTUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.1073,
-        "date": "2026-06-23",
-        "market": "Crypto Spot",
-        "symbol": "ZBTUSDT",
-        "type": "bearish"
       }
     ],
-    "last_run_utc": "2026-06-24T04:55:29+00:00"
+    "last_run_utc": "2026-06-25T04:53:38+00:00"
   },
   "us": {
     "alerts": [
