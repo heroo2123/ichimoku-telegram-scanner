@@ -2,182 +2,133 @@
   "crypto": {
     "alerts": [
       {
-        "close": 0.0525,
-        "date": "2026-06-25",
+        "close": 0.001579,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "AAVEETH",
+        "symbol": "AAVEBTC",
         "type": "bullish"
       },
       {
-        "close": 6.94,
-        "date": "2026-06-25",
+        "close": 5.518,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "ATTRY",
-        "type": "bullish"
-      },
-      {
-        "close": 0.795,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "DODOTRY",
+        "symbol": "ARKMTRY",
         "type": "bearish"
       },
       {
-        "close": 0.01706,
-        "date": "2026-06-25",
+        "close": 7.427,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "DODOUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 0.1812,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "HEIUSDC",
+        "symbol": "DYDXTRY",
         "type": "bullish"
       },
       {
-        "close": 0.1809,
-        "date": "2026-06-25",
+        "close": 0.15967,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "HEIUSDT",
+        "symbol": "DYDXUSDC",
         "type": "bullish"
       },
       {
-        "close": 0.02523,
-        "date": "2026-06-25",
+        "close": 0.16012,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "HUMAUSDC",
+        "symbol": "DYDXUSDT",
         "type": "bullish"
       },
       {
-        "close": 0.02527,
-        "date": "2026-06-25",
+        "close": 0.156,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "HUMAUSDT",
+        "symbol": "GTRY",
+        "type": "bearish"
+      },
+      {
+        "close": 1.18e-06,
+        "date": "2026-06-26",
+        "market": "Crypto Spot",
+        "symbol": "HBARBTC",
+        "type": "bearish"
+      },
+      {
+        "close": 0.885,
+        "date": "2026-06-26",
+        "market": "Crypto Spot",
+        "symbol": "HOMETRY",
+        "type": "bearish"
+      },
+      {
+        "close": 0.01902,
+        "date": "2026-06-26",
+        "market": "Crypto Spot",
+        "symbol": "HOMEUSDC",
+        "type": "bearish"
+      },
+      {
+        "close": 0.01905,
+        "date": "2026-06-26",
+        "market": "Crypto Spot",
+        "symbol": "HOMEUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 4.873,
+        "date": "2026-06-26",
+        "market": "Crypto Spot",
+        "symbol": "INJFDUSD",
         "type": "bullish"
       },
       {
-        "close": 0.2219,
-        "date": "2026-06-25",
+        "close": 226.4,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "JUPFDUSD",
+        "symbol": "INJTRY",
         "type": "bullish"
       },
       {
-        "close": 0.2213,
-        "date": "2026-06-25",
+        "close": 4.867,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "JUPUSDC",
+        "symbol": "INJUSDC",
         "type": "bullish"
       },
       {
-        "close": 0.2222,
-        "date": "2026-06-25",
+        "close": 4.875,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "JUPUSDT",
+        "symbol": "INJUSDT",
         "type": "bullish"
       },
       {
-        "close": 0.02612,
-        "date": "2026-06-25",
+        "close": 24.33,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "LTCETH",
+        "symbol": "KAITOTRY",
         "type": "bullish"
       },
       {
-        "close": 6.294,
-        "date": "2026-06-25",
+        "close": 0.5216,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "LUMIATRY",
+        "symbol": "KAITOUSDC",
         "type": "bullish"
       },
       {
-        "close": 406.6,
-        "date": "2026-06-25",
+        "close": 0.5231,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "NMRTRY",
+        "symbol": "KAITOUSDT",
         "type": "bullish"
       },
       {
-        "close": 0.0176,
-        "date": "2026-06-25",
+        "close": 0.0002867,
+        "date": "2026-06-26",
         "market": "Crypto Spot",
-        "symbol": "NOTTRY",
+        "symbol": "OPENBNB",
         "type": "bearish"
-      },
-      {
-        "close": 51.6,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "ORCATRY",
-        "type": "bearish"
-      },
-      {
-        "close": 1.106,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "ORCAUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 1.109,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "ORCAUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 64.72,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "QNTUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.7842,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "SUNTRY",
-        "type": "bearish"
-      },
-      {
-        "close": 16.54,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "TIATRY",
-        "type": "bearish"
-      },
-      {
-        "close": 0.3561,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "TIAUSDC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.3565,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "TIAUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 17.49,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "USDTMXN",
-        "type": "bearish"
-      },
-      {
-        "close": 0.0069644,
-        "date": "2026-06-25",
-        "market": "Crypto Spot",
-        "symbol": "ZECBTC",
-        "type": "bullish"
       }
     ],
-    "last_run_utc": "2026-06-26T04:55:13+00:00"
+    "last_run_utc": "2026-06-27T04:34:31+00:00"
   },
   "us": {
     "alerts": [
