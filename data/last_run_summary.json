@@ -2,133 +2,77 @@
   "crypto": {
     "alerts": [
       {
-        "close": 4265.0,
-        "date": "2026-06-28",
+        "close": 2.94e-06,
+        "date": "2026-06-29",
         "market": "Crypto Spot",
-        "symbol": "AAVETRY",
+        "symbol": "FETBTC",
         "type": "bearish"
       },
       {
-        "close": 0.05293,
-        "date": "2026-06-28",
+        "close": 0.0232,
+        "date": "2026-06-29",
         "market": "Crypto Spot",
-        "symbol": "AWEUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 5.04,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "BELTRY",
-        "type": "bearish"
-      },
-      {
-        "close": 0.1082,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "BELUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 0.002446,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "CAKEBNB",
+        "symbol": "HUMAUSDC",
         "type": "bullish"
       },
       {
-        "close": 0.0761,
-        "date": "2026-06-28",
+        "close": 0.02327,
+        "date": "2026-06-29",
         "market": "Crypto Spot",
-        "symbol": "CUSDT",
-        "type": "bearish"
-      },
-      {
-        "close": 0.00054,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "DASHBTC",
-        "type": "bearish"
-      },
-      {
-        "close": 0.15345,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "DYDXUSDC",
+        "symbol": "HUMAUSDT",
         "type": "bullish"
       },
       {
-        "close": 0.15359,
-        "date": "2026-06-28",
+        "close": 0.218,
+        "date": "2026-06-29",
         "market": "Crypto Spot",
-        "symbol": "DYDXUSDT",
+        "symbol": "JUPFDUSD",
         "type": "bullish"
       },
       {
-        "close": 0.0341,
-        "date": "2026-06-28",
+        "close": 0.2177,
+        "date": "2026-06-29",
         "market": "Crypto Spot",
-        "symbol": "IDUSDT",
+        "symbol": "JUPUSDC",
+        "type": "bullish"
+      },
+      {
+        "close": 0.218,
+        "date": "2026-06-29",
+        "market": "Crypto Spot",
+        "symbol": "JUPUSDT",
+        "type": "bullish"
+      },
+      {
+        "close": 8.38,
+        "date": "2026-06-29",
+        "market": "Crypto Spot",
+        "symbol": "NMRUSDC",
         "type": "bearish"
       },
       {
-        "close": 5.302,
-        "date": "2026-06-28",
+        "close": 2.262e-05,
+        "date": "2026-06-29",
         "market": "Crypto Spot",
-        "symbol": "LUMIATRY",
+        "symbol": "PENDLEBTC",
+        "type": "bullish"
+      },
+      {
+        "close": 6.42e-06,
+        "date": "2026-06-29",
+        "market": "Crypto Spot",
+        "symbol": "RUNEBTC",
         "type": "bearish"
       },
       {
-        "close": 7.4,
-        "date": "2026-06-28",
+        "close": 0.25249,
+        "date": "2026-06-29",
         "market": "Crypto Spot",
-        "symbol": "METTRY",
-        "type": "bearish"
-      },
-      {
-        "close": 0.0697,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "RIFUSDT",
-        "type": "bullish"
-      },
-      {
-        "close": 8.3e-07,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "SEIBTC",
-        "type": "bearish"
-      },
-      {
-        "close": 5.2384,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "USDCBRL",
-        "type": "bullish"
-      },
-      {
-        "close": 5.2313,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "USDTBRL",
-        "type": "bullish"
-      },
-      {
-        "close": 0.01902,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "VELODROMEUSDC",
-        "type": "bullish"
-      },
-      {
-        "close": 0.019,
-        "date": "2026-06-28",
-        "market": "Crypto Spot",
-        "symbol": "VELODROMEUSDT",
+        "symbol": "ZECETH",
         "type": "bullish"
       }
     ],
-    "last_run_utc": "2026-06-29T05:19:45+00:00"
+    "last_run_utc": "2026-06-30T04:52:02+00:00"
   },
   "us": {
     "alerts": [
