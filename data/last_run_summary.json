@@ -2,77 +2,126 @@
   "crypto": {
     "alerts": [
       {
-        "close": 2.94e-06,
-        "date": "2026-06-29",
+        "close": 1.941,
+        "date": "2026-06-30",
         "market": "Crypto Spot",
-        "symbol": "FETBTC",
+        "symbol": "ACXTRY",
         "type": "bearish"
       },
       {
-        "close": 0.0232,
-        "date": "2026-06-29",
+        "close": 3.4e-05,
+        "date": "2026-06-30",
         "market": "Crypto Spot",
-        "symbol": "HUMAUSDC",
+        "symbol": "ARBTC",
         "type": "bullish"
       },
       {
-        "close": 0.02327,
-        "date": "2026-06-29",
+        "close": 0.002402,
+        "date": "2026-06-30",
         "market": "Crypto Spot",
-        "symbol": "HUMAUSDT",
+        "symbol": "CAKEBNB",
         "type": "bullish"
       },
       {
-        "close": 0.218,
-        "date": "2026-06-29",
+        "close": 2.721,
+        "date": "2026-06-30",
         "market": "Crypto Spot",
-        "symbol": "JUPFDUSD",
+        "symbol": "CATITRY",
         "type": "bullish"
       },
       {
-        "close": 0.2177,
-        "date": "2026-06-29",
+        "close": 0.06659,
+        "date": "2026-06-30",
         "market": "Crypto Spot",
-        "symbol": "JUPUSDC",
-        "type": "bullish"
-      },
-      {
-        "close": 0.218,
-        "date": "2026-06-29",
-        "market": "Crypto Spot",
-        "symbol": "JUPUSDT",
-        "type": "bullish"
-      },
-      {
-        "close": 8.38,
-        "date": "2026-06-29",
-        "market": "Crypto Spot",
-        "symbol": "NMRUSDC",
+        "symbol": "MANTAUSDC",
         "type": "bearish"
       },
       {
-        "close": 2.262e-05,
-        "date": "2026-06-29",
+        "close": 0.06639,
+        "date": "2026-06-30",
         "market": "Crypto Spot",
-        "symbol": "PENDLEBTC",
-        "type": "bullish"
-      },
-      {
-        "close": 6.42e-06,
-        "date": "2026-06-29",
-        "market": "Crypto Spot",
-        "symbol": "RUNEBTC",
+        "symbol": "MANTAUSDT",
         "type": "bearish"
       },
       {
-        "close": 0.25249,
-        "date": "2026-06-29",
+        "close": 7.56,
+        "date": "2026-06-30",
         "market": "Crypto Spot",
-        "symbol": "ZECETH",
+        "symbol": "METTRY",
+        "type": "bearish"
+      },
+      {
+        "close": 412.4,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "NMRTRY",
         "type": "bullish"
+      },
+      {
+        "close": 0.5748,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "PORTALTRY",
+        "type": "bearish"
+      },
+      {
+        "close": 0.01238,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "PORTALUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 16.53,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "TIATRY",
+        "type": "bearish"
+      },
+      {
+        "close": 0.3555,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "TIAUSDC",
+        "type": "bearish"
+      },
+      {
+        "close": 0.3559,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "TIAUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 1.001,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "USDPUSDT",
+        "type": "bullish"
+      },
+      {
+        "close": 0.2523,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "USTCTRY",
+        "type": "bearish"
+      },
+      {
+        "close": 1.732e-05,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "WINEUR",
+        "type": "bearish"
+      },
+      {
+        "close": 4.026,
+        "date": "2026-06-30",
+        "market": "Crypto Spot",
+        "symbol": "XPLTRY",
+        "type": "bearish"
       }
     ],
-    "last_run_utc": "2026-06-30T04:52:02+00:00"
+    "last_run_utc": "2026-07-01T05:08:02+00:00"
   },
   "us": {
     "alerts": [
