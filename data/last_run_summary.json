@@ -2,84 +2,133 @@
   "crypto": {
     "alerts": [
       {
-        "close": 26625.0,
-        "date": "2026-07-08",
+        "close": 0.05226,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "BNBTRY",
-        "type": "bearish"
-      },
-      {
-        "close": 1.0002,
-        "date": "2026-07-08",
-        "market": "Crypto Spot",
-        "symbol": "EUREURI",
+        "symbol": "AAVEETH",
         "type": "bullish"
       },
       {
-        "close": 0.9977,
-        "date": "2026-07-08",
+        "close": 2.45e-05,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "FDUSDUSDT",
+        "symbol": "ATOMBTC",
         "type": "bearish"
       },
       {
-        "close": 5692.0,
-        "date": "2026-07-08",
+        "close": 4.8,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "ONDOIDR",
+        "symbol": "BELTRY",
         "type": "bearish"
       },
       {
-        "close": 14.76,
-        "date": "2026-07-08",
+        "close": 6.339,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "ONDOTRY",
+        "symbol": "DYDXTRY",
         "type": "bearish"
       },
       {
-        "close": 31.69,
-        "date": "2026-07-08",
+        "close": 0.02761,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "RAYTRY",
+        "symbol": "ETHBTC",
         "type": "bearish"
       },
       {
-        "close": 0.6782,
-        "date": "2026-07-08",
+        "close": 0.011381,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "RAYUSDC",
+        "symbol": "KGSTUSDT",
         "type": "bearish"
       },
       {
-        "close": 0.6802,
-        "date": "2026-07-08",
+        "close": 14.03,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "RAYUSDT",
+        "symbol": "LDOTRY",
         "type": "bearish"
       },
       {
-        "close": 7.811,
-        "date": "2026-07-08",
+        "close": 0.1212,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "SYRUPTRY",
+        "symbol": "LUMIAUSDT",
         "type": "bearish"
       },
       {
-        "close": 0.09096,
-        "date": "2026-07-08",
+        "close": 104.76,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "XPLUSDC",
+        "symbol": "MORPHOTRY",
+        "type": "bullish"
+      },
+      {
+        "close": 0.0344,
+        "date": "2026-07-09",
+        "market": "Crypto Spot",
+        "symbol": "OSMOUSDC",
         "type": "bearish"
       },
       {
-        "close": 0.091,
-        "date": "2026-07-08",
+        "close": 0.0345,
+        "date": "2026-07-09",
         "market": "Crypto Spot",
-        "symbol": "XPLUSDT",
+        "symbol": "OSMOUSDT",
         "type": "bearish"
+      },
+      {
+        "close": 15.554,
+        "date": "2026-07-09",
+        "market": "Crypto Spot",
+        "symbol": "TRXTRY",
+        "type": "bullish"
+      },
+      {
+        "close": 1.0002,
+        "date": "2026-07-09",
+        "market": "Crypto Spot",
+        "symbol": "USDEUSDT",
+        "type": "bullish"
+      },
+      {
+        "close": 1.0008,
+        "date": "2026-07-09",
+        "market": "Crypto Spot",
+        "symbol": "XUSDUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 2104.0,
+        "date": "2026-07-09",
+        "market": "Crypto Spot",
+        "symbol": "YFIUSDT",
+        "type": "bearish"
+      },
+      {
+        "close": 480.68,
+        "date": "2026-07-09",
+        "market": "Crypto Spot",
+        "symbol": "ZECUSD1",
+        "type": "bullish"
+      },
+      {
+        "close": 481.14,
+        "date": "2026-07-09",
+        "market": "Crypto Spot",
+        "symbol": "ZECUSDC",
+        "type": "bullish"
+      },
+      {
+        "close": 481.54,
+        "date": "2026-07-09",
+        "market": "Crypto Spot",
+        "symbol": "ZECUSDT",
+        "type": "bullish"
       }
     ],
-    "last_run_utc": "2026-07-09T04:31:22+00:00"
+    "last_run_utc": "2026-07-10T04:28:32+00:00"
   },
   "us": {
     "alerts": [
