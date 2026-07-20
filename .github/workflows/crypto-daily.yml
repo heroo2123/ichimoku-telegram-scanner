@@ -3,9 +3,9 @@ name: Crypto Daily Ichimoku Scan
 on:
   workflow_dispatch:
   schedule:
-    # Binance daily candles close at 00:00 UTC. Run 17 minutes later.
-    # GitHub cron uses UTC.
-    - cron: '17 0 * * *'
+    # Run daily at 15:00 Kuwait time (UTC+3).
+    # GitHub cron uses UTC, so 15:00 Kuwait = 12:00 UTC.
+    - cron: '0 12 * * *'
 
 permissions:
   contents: write
