@@ -36,6 +36,30 @@ jobs:
       - name: Compile all Python files
         run: python -m compileall -q scanner.py config.py
 
+      - name: Export decoded scanner implementation
+        run: |
+          python - <<'PY'
+          import base64
+          import zlib
+          from pathlib import Path
+
+          root = Path('.')
+          payload = ''.join(
+              (root / 'scanner_payload' / f'part{i}.txt').read_text(encoding='utf-8').strip()
+              for i in range(5)
+          )
+          source = zlib.decompress(base64.b85decode(payload.encode('ascii'))).decode('utf-8')
+          Path('scanner_impl.py').write_text(source, encoding='utf-8')
+          print(f'Exported scanner_impl.py ({len(source)} characters)')
+          PY
+
+      - name: Upload decoded scanner source
+        uses: actions/upload-artifact@v4
+        with:
+          name: scanner-implementation-source
+          path: scanner_impl.py
+          retention-days: 3
+
       - name: Validate scanner API and configuration
         run: |
           python - <<'PY'
