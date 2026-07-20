@@ -3,9 +3,9 @@ name: US Markets Daily Ichimoku Scan
 on:
   workflow_dispatch:
   schedule:
-    # Runs Monday-Friday at 23:17 UTC, which is after the normal US cash-market close
-    # in both daylight-saving and standard-time seasons.
-    - cron: '17 23 * * 1-5'
+    # Run Monday-Friday at 15:00 Kuwait time (UTC+3).
+    # GitHub cron uses UTC, so 15:00 Kuwait = 12:00 UTC.
+    - cron: '0 12 * * 1-5'
 
 permissions:
   contents: write
