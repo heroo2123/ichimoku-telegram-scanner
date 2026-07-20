@@ -31,7 +31,7 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -q -r requirements.txt
 
       - name: Compile all Python files
         run: python -m compileall -q scanner.py config.py
@@ -72,9 +72,12 @@ jobs:
           raise SystemExit(scanner.main())
           PY
 
-      - name: Run limited US dry scan
+      - name: Run limited US dry scan and capture diagnostics
+        id: us_scan
+        shell: bash
         run: |
-          python - <<'PY'
+          set +e
+          python - <<'PY' > us-scan.log 2>&1
           import sys
           import config
           import scanner
@@ -90,6 +93,27 @@ jobs:
           sys.argv = ["scanner.py", "--market", "us", "--dry-run"]
           raise SystemExit(scanner.main())
           PY
+          status=$?
+          echo "$status" > us-scan-status.txt
+          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
+          tail -n 120 us-scan.log
+          exit 0
+
+      - name: Upload US scan diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-scan-diagnostics
+          path: |
+            us-scan.log
+            us-scan-status.txt
+          retention-days: 3
 
       - name: Send Telegram validation message
         run: python scanner.py --test-telegram
+
+      - name: Fail if US dry scan failed
+        if: steps.us_scan.outputs.exit_code != '0'
+        run: |
+          echo "US dry scan failed with exit code ${{ steps.us_scan.outputs.exit_code }}"
+          exit 1
