@@ -1,0 +1,95 @@
+name: Ichimoku 2.0 Branch Validation
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ichimoku-pr-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+    steps:
+      - name: Checkout upgrade branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compile all Python files
+        run: python -m compileall -q scanner.py config.py
+
+      - name: Validate scanner API and configuration
+        run: |
+          python - <<'PY'
+          import config
+          import scanner
+
+          assert callable(getattr(scanner, "main", None)), "scanner.main is missing"
+          assert config.CONVERSION_LENGTH == 20
+          assert config.BASE_LENGTH == 60
+          assert config.SPAN_B_LENGTH == 120
+          assert config.DISPLACEMENT == 30
+          assert "USDT" in config.CRYPTO_STABLE_ASSETS
+          assert "TRY" in config.CRYPTO_FIAT_ASSETS
+          assert config.MIN_SCORE_TO_REPORT <= config.MIN_SCORE_FOR_DETAIL
+          assert config.TELEGRAM_MAX_RETRIES >= 3
+          assert config.PERFORMANCE_HORIZONS == [1, 3, 5, 10, 20]
+          print("Scanner API and configuration checks passed")
+          PY
+
+      - name: Run limited crypto dry scan
+        run: |
+          python - <<'PY'
+          import sys
+          import config
+          import scanner
+
+          config.MAX_SYMBOLS_PER_MARKET = 8
+          config.SEND_CHART_IMAGES = False
+          config.SEND_CSV_REPORT = False
+          config.SEND_COMPLETION_SUMMARY = False
+          config.SEND_RUN_SUMMARY_WHEN_NO_SIGNALS = False
+          config.BINANCE_SYMBOL_PAUSE_SECONDS = 0
+          sys.argv = ["scanner.py", "--market", "crypto", "--dry-run"]
+          raise SystemExit(scanner.main())
+          PY
+
+      - name: Run limited US dry scan
+        run: |
+          python - <<'PY'
+          import sys
+          import config
+          import scanner
+
+          config.MAX_SYMBOLS_PER_MARKET = 8
+          config.SEND_CHART_IMAGES = False
+          config.SEND_CSV_REPORT = False
+          config.SEND_COMPLETION_SUMMARY = False
+          config.SEND_RUN_SUMMARY_WHEN_NO_SIGNALS = False
+          config.YFINANCE_BATCH_SIZE = 4
+          config.YFINANCE_BATCH_RETRIES = 1
+          config.YFINANCE_BATCH_PAUSE_SECONDS = 0
+          sys.argv = ["scanner.py", "--market", "us", "--dry-run"]
+          raise SystemExit(scanner.main())
+          PY
+
+      - name: Send Telegram validation message
+        run: python scanner.py --test-telegram
