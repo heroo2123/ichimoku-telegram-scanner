@@ -1,80 +1,66 @@
-# Ichimoku Telegram Scanner
+# Ichimoku Telegram Scanner 2.0
 
-This scanner runs online using GitHub Actions and sends fresh daily Ichimoku cloud signals to Telegram.
+A daily multi-market Ichimoku scanner that runs on GitHub Actions, ranks fresh signals, sends concise Telegram digests, and tracks post-signal performance.
 
-## What it scans
+## Universe
 
-- US listed stocks from Nasdaq Trader symbol directories
-- Major US indices from `config.py`
-- Major commodity futures from `config.py`
-- Binance spot crypto pairs
+**US:** common stocks and ETFs from the Nasdaq Trader directories, plus configured indices and commodity futures. Warrants, rights, units, preferred shares, debt instruments, test issues, low-priced stocks, and illiquid stocks are filtered.
 
-## Signal rules
+**Crypto:** Binance spot pairs are retained when the base is a real crypto asset. Crypto/USDT, crypto/USDC, crypto/BTC, crypto/ETH, crypto/BNB, and other crypto-quoted markets remain included. Fiat and stablecoin base assets, fiat-quoted markets, and leveraged tokens are excluded.
 
-Ichimoku settings:
+## Signal engine
 
-- Conversion Line: 20
-- Base Line: 60
-- Leading Span B: 120
-- Displacement / Lagging Span: 30
-- Timeframe: Daily only
+Daily settings remain `20/60/120/30`. Weekly confirmation uses completed weekly candles with `9/26/52/26` settings.
 
-Bullish signal:
+The scanner detects and classifies:
 
-- Today's closed candle is above today's visible cloud
-- Today's lagging span is above the cloud at its standard plotted location
-- Yesterday the combined bullish condition was not already true
+- Cloud breakouts and breakdowns
+- Tenkan/Kijun crosses
+- Kijun bounces
+- Cloud rejections
+- Kumo twists
+- Trend continuations
 
-Bearish signal:
+Every candidate receives a 0–10 score and A/B/C/D grade using cloud position, Chikou confirmation, Tenkan/Kijun alignment, future cloud, volume, weekly trend, ATR, extension, and liquidity context.
 
-- Today's closed candle is below today's visible cloud
-- Today's lagging span is below the cloud at its standard plotted location
-- Yesterday the combined bearish condition was not already true
+## Telegram delivery
 
-## Important free-data note
+- Retries temporary Telegram failures with exponential backoff
+- Does not terminate the scan when one chart fails
+- Marks a signal delivered only after its digest succeeds
+- Keeps unsuccessful alerts pending for the next run
+- Sends a ranked digest, top detailed charts, CSV report, and final health summary
 
-This is a free scanner. Crypto uses Binance public market data. US stocks, indices, and commodity futures use yfinance/Yahoo Finance data through the yfinance library. Free data can fail, be delayed, rate-limited, or miss symbols. This is normal for a free setup.
+## Performance tracking
 
-## Files you may edit later
+Delivered signals are evaluated after 1, 3, 5, 10, and 20 sessions, including directional return, maximum favorable/adverse excursion, cloud re-entry, and Kijun invalidation. Aggregated grade and weekly-alignment statistics are written to `data/last_run_summary.json`.
 
-Most settings are in `config.py`.
+## Health monitoring
 
-Common changes:
+Each completed run checks the other market's heartbeat and sends a cooldown-protected warning when a scheduled scanner becomes stale.
 
-```python
-SEND_RUN_SUMMARY = False
-MAX_ALERTS_PER_RUN = 100
-CRYPTO_QUOTE_ASSETS = []      # all Binance spot pairs
-# CRYPTO_QUOTE_ASSETS = ["USDT", "USDC"]  # less duplicate crypto noise
-MAX_SYMBOLS_PER_MARKET = None # full scan
+## Commands
+
+```bash
+python scanner.py --market crypto
+python scanner.py --market us
+python scanner.py --market all
+python scanner.py --market crypto --dry-run
+python scanner.py --test-telegram
+python -m unittest discover -s tests -v
 ```
 
-Do not put Telegram tokens inside any file. Use GitHub Secrets.
+`--dry-run` does not send Telegram messages or modify scanner state.
 
-## GitHub Secrets needed
+## Secrets
 
-Create these two repository secrets:
+Configure these GitHub Actions repository secrets:
 
 - `TELEGRAM_BOT_TOKEN`
 - `TELEGRAM_CHAT_ID`
 
-## Workflows
+## Configuration
 
-- `Telegram Test`: manual only, sends one test message.
-- `Crypto Daily Ichimoku Scan`: runs daily at 00:17 UTC.
-- `US Markets Daily Ichimoku Scan`: runs Monday-Friday at 23:17 UTC.
+Edit `config.py` to adjust liquidity thresholds, stable/fiat asset sets, enabled signal types, grade cutoffs, detail limits, retry behavior, performance horizons, and stale-heartbeat thresholds.
 
-## How duplicate prevention works
-
-The scanner writes the last sent signal date into `data/scan_state.json`. GitHub Actions commits this file back to the repository after each run.
-
-Example:
-
-```json
-{
-  "US Stock|AAPL|1D|bullish": "2026-06-10",
-  "Crypto Spot|BTCUSDT|1D|bearish": "2026-06-09"
-}
-```
-
-If the same ticker/direction/date appears again, the scanner will not resend it.
+This remains a free-data scanner. Binance and Yahoo Finance can be delayed, incomplete, or temporarily rate-limited, so the code retries and isolates failures but cannot guarantee institutional-grade coverage.
