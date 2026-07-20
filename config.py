@@ -1,80 +1,107 @@
-"""
-User-editable settings for the Ichimoku Telegram scanner.
-Do NOT put Telegram tokens here. Tokens go into GitHub Secrets.
+"""User-editable settings for the Ichimoku Telegram scanner.
+
+Keep Telegram credentials in GitHub Actions secrets:
+- TELEGRAM_BOT_TOKEN
+- TELEGRAM_CHAT_ID
 """
 
-# Ichimoku settings from your screenshot
 CONVERSION_LENGTH = 20
 BASE_LENGTH = 60
 SPAN_B_LENGTH = 120
 DISPLACEMENT = 30
-
-# Daily candles only
 INTERVAL = "1d"
 
-# How many daily candles to request.
-# Needs at least SPAN_B + 2*DISPLACEMENT. 420 gives enough chart/history buffer.
-LOOKBACK_DAYS = 420
+WEEKLY_CONVERSION_LENGTH = 9
+WEEKLY_BASE_LENGTH = 26
+WEEKLY_SPAN_B_LENGTH = 52
+WEEKLY_DISPLACEMENT = 26
+LOOKBACK_DAYS = 900
 
-# Chart image settings
-CHART_LOOKBACK_CANDLES = 180
+ENABLED_SIGNAL_TYPES = [
+    "cloud_breakout", "cloud_breakdown",
+    "tk_cross_bullish", "tk_cross_bearish",
+    "kijun_bounce_bullish", "kijun_bounce_bearish",
+    "cloud_rejection_bullish", "cloud_rejection_bearish",
+    "kumo_twist_bullish", "kumo_twist_bearish",
+    "trend_continuation_bullish", "trend_continuation_bearish",
+]
 
-# Telegram behavior
+US_MIN_PRICE = 2.0
+US_MIN_AVG_VOLUME_20D = 100_000
+US_MIN_AVG_DOLLAR_VOLUME_20D = 2_000_000
+US_LIQUIDITY_WINDOW = 20
+US_INCLUDE_ETFS = True
+US_EXCLUDED_SECURITY_NAME_TERMS = [
+    "warrant", "right", "unit", "preferred", "preference",
+    "depositary shares", "depositary share", "notes due", "senior notes",
+    "subordinated notes", "debenture", "bond", "capital securities",
+    "income shares",
+]
+
+CRYPTO_STABLE_ASSETS = {
+    "USDT", "USDC", "FDUSD", "TUSD", "USDP", "DAI", "BUSD", "USD1",
+    "BFUSD", "AEUR", "EURI", "USDE", "PYUSD", "RLUSD",
+}
+CRYPTO_FIAT_ASSETS = {
+    "USD", "EUR", "GBP", "AUD", "BRL", "TRY", "UAH", "RUB", "PLN",
+    "RON", "ZAR", "NGN", "IDR", "JPY", "MXN", "ARS", "COP", "CZK",
+    "HUF", "CAD", "CHF", "AED", "SAR",
+}
+CRYPTO_EXCLUDED_BASE_SUFFIXES = ("UP", "DOWN", "BULL", "BEAR")
+CRYPTO_EXCLUDED_BASES = set()
+
+GRADE_A_MIN = 8
+GRADE_B_MIN = 6
+GRADE_C_MIN = 4
+MIN_SCORE_TO_REPORT = 4
+MIN_SCORE_FOR_DETAIL = 6
+TOP_DETAILED_ALERTS = 10
+DIGEST_SIGNALS_PER_MESSAGE = 24
+MAX_REPORT_SIGNALS = 1000
+
+ATR_LENGTH = 14
+VOLUME_AVG_LENGTH = 20
+EXTENDED_KIJUN_ATR = 2.5
+EXTREME_CANDLE_ATR = 2.0
+MIN_CLOUD_THICKNESS_ATR = 0.10
+
 SEND_CHART_IMAGES = True
-SEND_RUN_SUMMARY = False  # Set True if you want a Telegram summary even when there are no signals.
-MAX_ALERTS_PER_RUN = 100  # Safety cap so Telegram does not get spammed if something goes wrong.
+CHART_LOOKBACK_CANDLES = 180
+SEND_CSV_REPORT = True
+SEND_RUN_SUMMARY_WHEN_NO_SIGNALS = True
+SEND_COMPLETION_SUMMARY = True
+REPORT_DIR_NAME = "reports"
 
-# Crypto universe.
-# Empty list [] = all Binance spot pairs.
-# Example to reduce duplicates: ["USDT", "USDC"]
-CRYPTO_QUOTE_ASSETS = []
+TELEGRAM_MAX_RETRIES = 5
+TELEGRAM_RETRY_BASE_SECONDS = 2.0
+TELEGRAM_REQUEST_TIMEOUT = 75
+TELEGRAM_MESSAGE_PAUSE_SECONDS = 0.7
 
-# US index symbols from Yahoo Finance / yfinance
+REQUEST_TIMEOUT = 30
+HTTP_MAX_RETRIES = 4
+HTTP_RETRY_BASE_SECONDS = 1.5
+YFINANCE_BATCH_SIZE = 60
+YFINANCE_BATCH_RETRIES = 3
+YFINANCE_BATCH_PAUSE_SECONDS = 1.2
+BINANCE_SYMBOL_PAUSE_SECONDS = 0.04
+
+PERFORMANCE_HORIZONS = [1, 3, 5, 10, 20]
+PERFORMANCE_MAX_HORIZON = 20
+SIGNAL_HISTORY_RETENTION_DAYS = 730
+MAX_SIGNAL_HISTORY_RECORDS = 5_000
+
+CRYPTO_STALE_HOURS = 36
+US_STALE_HOURS = 72
+HEALTH_ALERT_COOLDOWN_HOURS = 24
+
 US_INDEX_SYMBOLS = [
-    "^GSPC",   # S&P 500
-    "^DJI",    # Dow Jones Industrial Average
-    "^IXIC",   # Nasdaq Composite
-    "^NDX",    # Nasdaq 100
-    "^RUT",    # Russell 2000
-    "^VIX",    # CBOE Volatility Index
-    "^SOX",    # PHLX Semiconductor Index
-    "^NYA",    # NYSE Composite
-    "^XAX",    # NYSE American Composite
-    "^MID",    # S&P 400 MidCap
-    "^SML",    # S&P 600 SmallCap
+    "^GSPC", "^DJI", "^IXIC", "^NDX", "^RUT", "^VIX", "^SOX", "^NYA",
+    "^XAX", "^MID", "^SML",
 ]
-
-# Commodity futures symbols from Yahoo Finance / yfinance
 COMMODITY_FUTURES_SYMBOLS = [
-    "GC=F",  # Gold
-    "SI=F",  # Silver
-    "HG=F",  # Copper
-    "PL=F",  # Platinum
-    "PA=F",  # Palladium
-    "CL=F",  # WTI Crude Oil
-    "BZ=F",  # Brent Crude Oil
-    "NG=F",  # Natural Gas
-    "HO=F",  # Heating Oil
-    "RB=F",  # RBOB Gasoline
-    "ZC=F",  # Corn
-    "ZW=F",  # Wheat
-    "KE=F",  # KC Wheat
-    "ZS=F",  # Soybeans
-    "ZM=F",  # Soybean Meal
-    "ZL=F",  # Soybean Oil
-    "KC=F",  # Coffee
-    "CC=F",  # Cocoa
-    "CT=F",  # Cotton
-    "SB=F",  # Sugar
-    "OJ=F",  # Orange Juice
-    "LE=F",  # Live Cattle
-    "HE=F",  # Lean Hogs
-    "GF=F",  # Feeder Cattle
+    "GC=F", "SI=F", "HG=F", "PL=F", "PA=F", "CL=F", "BZ=F", "NG=F",
+    "HO=F", "RB=F", "ZC=F", "ZW=F", "KE=F", "ZS=F", "ZM=F", "ZL=F",
+    "KC=F", "CC=F", "CT=F", "SB=F", "OJ=F", "LE=F", "HE=F", "GF=F",
 ]
 
-# yfinance download batching. Lower is slower but more reliable.
-YFINANCE_BATCH_SIZE = 80
-
-# For testing only. Leave None for full market scan.
-# Example: MAX_SYMBOLS_PER_MARKET = 50
 MAX_SYMBOLS_PER_MARKET = None
