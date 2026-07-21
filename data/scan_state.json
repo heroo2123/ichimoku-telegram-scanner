@@ -2238,5 +2238,7 @@
   "US Stock|YLDE|1D|bullish": "2026-07-02",
   "US Stock|ZJK|1D|bearish": "2026-06-18",
   "US Stock|ZSQR|1D|bullish": "2026-06-18",
-  "US Stock|ZYME|1D|bullish": "2026-07-02"
+  "US Stock|ZYME|1D|bullish": "2026-07-02",
+  "_pending_signals": {},
+  "_signal_history": {}
 }
