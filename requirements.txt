@@ -4,3 +4,5 @@ requests>=2.31,<3
 yfinance>=0.2.66,<2
 matplotlib>=3.8,<4
 mplfinance>=0.12.10b0,<0.13
+fastapi==0.139.2
+uvicorn[standard]==0.51.0

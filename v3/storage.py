@@ -1,0 +1,168 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Optional
+
+import requests
+
+from .models import utc_now_iso
+from .settings import settings
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA_DIR = ROOT / "data"
+
+
+class LocalStore:
+    def __init__(self, data_dir: Path = DATA_DIR):
+        self.data_dir = data_dir
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+
+    def _path(self, name: str) -> Path:
+        return self.data_dir / f"v3_{name}.json"
+
+    def _read(self, name: str, default: Any) -> Any:
+        path = self._path(name)
+        try:
+            return json.loads(path.read_text(encoding="utf-8")) if path.exists() else default
+        except Exception:
+            return default
+
+    def _write(self, name: str, value: Any) -> None:
+        path = self._path(name)
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(value, indent=2, sort_keys=True, default=str), encoding="utf-8")
+        tmp.replace(path)
+
+    def upsert_signals(self, rows: Iterable[Dict[str, Any]]) -> None:
+        data = self._read("signals", {})
+        for row in rows:
+            data[str(row["id"])] = row
+        self._write("signals", data)
+
+    def list_signals(self, limit: int = 200, status: Optional[str] = None) -> List[Dict[str, Any]]:
+        values = list(self._read("signals", {}).values())
+        if status:
+            values = [row for row in values if row.get("status") == status]
+        values.sort(key=lambda row: (row.get("signal_date", ""), row.get("score", 0)), reverse=True)
+        return values[:limit]
+
+    def record_event(self, signal_id: str, event_type: str, payload: Dict[str, Any]) -> None:
+        events = self._read("events", [])
+        events.append({"signal_id": signal_id, "event_type": event_type, "payload": payload, "created_at": utc_now_iso()})
+        self._write("events", events[-5000:])
+
+    def save_regime(self, row: Dict[str, Any]) -> None:
+        regimes = self._read("regimes", [])
+        regimes.append(row)
+        self._write("regimes", regimes[-1000:])
+
+    def list_regimes(self, limit: int = 50) -> List[Dict[str, Any]]:
+        return list(reversed(self._read("regimes", [])))[:limit]
+
+    def save_backtest(self, row: Dict[str, Any]) -> None:
+        runs = self._read("backtests", [])
+        runs.append(row)
+        self._write("backtests", runs[-100:])
+
+    def list_backtests(self, limit: int = 20) -> List[Dict[str, Any]]:
+        return list(reversed(self._read("backtests", [])))[:limit]
+
+    def save_calibration(self, row: Dict[str, Any]) -> None:
+        models = self._read("calibrations", [])
+        models.append({**row, "trained_at": row.get("trained_at") or utc_now_iso()})
+        self._write("calibrations", models[-100:])
+
+    def list_calibrations(self, limit: int = 20) -> List[Dict[str, Any]]:
+        return list(reversed(self._read("calibrations", [])))[:limit]
+
+    def save_paper_state(self, state: Dict[str, Any]) -> None:
+        self._write("paper", state)
+
+    def load_paper_state(self) -> Dict[str, Any]:
+        return self._read("paper", {})
+
+
+class SupabaseStore(LocalStore):
+    def __init__(self):
+        super().__init__()
+        self.base = f"{settings.supabase_url}/rest/v1"
+        self.headers = {
+            "apikey": settings.supabase_service_role_key,
+            "Authorization": f"Bearer {settings.supabase_service_role_key}",
+            "Content-Type": "application/json",
+        }
+
+    def _request(self, method: str, path: str, **kwargs: Any) -> Any:
+        headers = dict(self.headers)
+        headers.update(kwargs.pop("headers", {}))
+        response = requests.request(method, f"{self.base}/{path}", headers=headers, timeout=45, **kwargs)
+        response.raise_for_status()
+        return response.json() if response.content else None
+
+    def upsert_signals(self, rows: Iterable[Dict[str, Any]]) -> None:
+        payload = list(rows)
+        if payload:
+            self._request("POST", "signals?on_conflict=id", json=payload, headers={"Prefer": "resolution=merge-duplicates,return=minimal"})
+        super().upsert_signals(payload)
+
+    def list_signals(self, limit: int = 200, status: Optional[str] = None) -> List[Dict[str, Any]]:
+        query = f"signals?select=*&order=signal_date.desc,score.desc&limit={int(limit)}"
+        if status:
+            query += f"&status=eq.{status}"
+        try:
+            return self._request("GET", query)
+        except Exception:
+            return super().list_signals(limit, status)
+
+    def record_event(self, signal_id: str, event_type: str, payload: Dict[str, Any]) -> None:
+        row = {"signal_id": signal_id, "event_type": event_type, "payload": payload}
+        self._request("POST", "signal_events", json=row, headers={"Prefer": "return=minimal"})
+        super().record_event(signal_id, event_type, payload)
+
+    def save_regime(self, row: Dict[str, Any]) -> None:
+        self._request("POST", "market_regimes", json=row, headers={"Prefer": "return=minimal"})
+        super().save_regime(row)
+
+    def list_regimes(self, limit: int = 50) -> List[Dict[str, Any]]:
+        try:
+            return self._request("GET", f"market_regimes?select=*&order=as_of.desc&limit={int(limit)}")
+        except Exception:
+            return super().list_regimes(limit)
+
+    def save_backtest(self, row: Dict[str, Any]) -> None:
+        self._request("POST", "backtest_runs", json=row, headers={"Prefer": "return=minimal"})
+        super().save_backtest(row)
+
+    def list_backtests(self, limit: int = 20) -> List[Dict[str, Any]]:
+        try:
+            return self._request("GET", f"backtest_runs?select=*&order=completed_at.desc&limit={int(limit)}")
+        except Exception:
+            return super().list_backtests(limit)
+
+    def save_calibration(self, row: Dict[str, Any]) -> None:
+        payload = {**row, "trained_at": row.get("trained_at") or utc_now_iso()}
+        self._request("POST", "model_calibrations", json=payload, headers={"Prefer": "return=minimal"})
+        super().save_calibration(payload)
+
+    def list_calibrations(self, limit: int = 20) -> List[Dict[str, Any]]:
+        try:
+            return self._request("GET", f"model_calibrations?select=*&order=trained_at.desc&limit={int(limit)}")
+        except Exception:
+            return super().list_calibrations(limit)
+
+    def save_paper_state(self, state: Dict[str, Any]) -> None:
+        row = {"account_key": "default", "state": state, "updated_at": utc_now_iso()}
+        self._request("POST", "paper_accounts?on_conflict=account_key", json=row, headers={"Prefer": "resolution=merge-duplicates,return=minimal"})
+        super().save_paper_state(state)
+
+    def load_paper_state(self) -> Dict[str, Any]:
+        try:
+            rows = self._request("GET", "paper_accounts?select=state&account_key=eq.default&limit=1")
+            return rows[0]["state"] if rows else super().load_paper_state()
+        except Exception:
+            return super().load_paper_state()
+
+
+def get_store() -> LocalStore:
+    return SupabaseStore() if settings.supabase_enabled else LocalStore()
