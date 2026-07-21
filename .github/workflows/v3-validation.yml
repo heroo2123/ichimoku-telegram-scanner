@@ -32,6 +32,46 @@ jobs:
           assert app.title
           print('Deferred delivery and dashboard APIs available')
           PY
+      - name: Supabase integration round trip
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python - <<'PY'
+          import uuid
+          from v3.models import utc_now_iso
+          from v3.settings import settings
+          from v3.storage import SupabaseStore, get_store
+
+          assert settings.supabase_enabled, 'Supabase repository secrets are missing'
+          store = get_store()
+          assert isinstance(store, SupabaseStore)
+          marker = f"ci_smoke_{uuid.uuid4().hex}"
+          row = {
+              'setting_key': marker,
+              'value': {'integration': 'ok'},
+              'updated_at': utc_now_iso(),
+          }
+          try:
+              store._request(
+                  'POST',
+                  'user_settings?on_conflict=setting_key',
+                  json=row,
+                  headers={'Prefer': 'resolution=merge-duplicates,return=minimal'},
+              )
+              rows = store._request(
+                  'GET',
+                  f'user_settings?select=setting_key,value&setting_key=eq.{marker}&limit=1',
+              )
+              assert rows and rows[0]['value']['integration'] == 'ok'
+              print('Supabase read/write integration passed')
+          finally:
+              store._request(
+                  'DELETE',
+                  f'user_settings?setting_key=eq.{marker}',
+                  headers={'Prefer': 'return=minimal'},
+              )
+          PY
       - name: Limited crypto live-data dry scan
         run: |
           python - <<'PY'
