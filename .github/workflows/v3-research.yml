@@ -20,9 +20,9 @@ jobs:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with: { persist-credentials: true }
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with: { python-version: '3.11', cache: pip }
       - run: pip install -r requirements.txt
       - name: Benchmark backtests
@@ -30,6 +30,7 @@ jobs:
           python -m v3.cli backtest --market crypto --symbols BTCUSDT ETHUSDT BNBUSDT
           python -m v3.cli backtest --market us --symbols SPY QQQ IWM
           python -m v3.cli calibrate --horizon 10
+          python -m v3.cli maintenance
       - name: Commit local fallback research data
         if: always()
         run: |

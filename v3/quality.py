@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Tuple
 import pandas as pd
 
 
-def validate_ohlcv(frame: pd.DataFrame, *, minimum_rows: int = 50) -> Tuple[bool, List[str], Dict[str, Any]]:
+def validate_ohlcv(frame: pd.DataFrame, *, minimum_rows: int = 50, max_age_days: int | None = None, now: Any = None) -> Tuple[bool, List[str], Dict[str, Any]]:
     issues: List[str] = []
     meta: Dict[str, Any] = {"rows": len(frame)}
     required = {"Open", "High", "Low", "Close", "Volume"}
@@ -33,6 +33,19 @@ def validate_ohlcv(frame: pd.DataFrame, *, minimum_rows: int = 50) -> Tuple[bool
     extreme_moves = int((returns > 0.80).sum())
     if extreme_moves:
         issues.append(f"Extreme one-session moves requiring review: {extreme_moves}")
-    meta.update({"duplicates": duplicate_count, "invalid_ohlc": invalid_ohlc, "nulls": nulls, "extreme_moves": extreme_moves, "last_timestamp": str(frame.index[-1]) if len(frame) else None})
-    hard_fail = bool(missing or len(frame) < minimum_rows or duplicate_count or invalid_ohlc or nulls or zero_prices)
+    stale = False
+    age_days = None
+    if len(frame) and max_age_days is not None:
+        latest = pd.Timestamp(frame.index[-1])
+        if latest.tzinfo is not None:
+            latest = latest.tz_convert("UTC").tz_localize(None)
+        reference = pd.Timestamp(now) if now is not None else pd.Timestamp.now(tz="UTC").tz_localize(None)
+        if reference.tzinfo is not None:
+            reference = reference.tz_convert("UTC").tz_localize(None)
+        age_days = max(0.0, (reference - latest).total_seconds() / 86400.0)
+        stale = age_days > float(max_age_days)
+        if stale:
+            issues.append(f"Stale data: {age_days:.1f} days old")
+    meta.update({"duplicates": duplicate_count, "invalid_ohlc": invalid_ohlc, "nulls": nulls, "extreme_moves": extreme_moves, "last_timestamp": str(frame.index[-1]) if len(frame) else None, "age_days": round(age_days, 3) if age_days is not None else None})
+    hard_fail = bool(missing or len(frame) < minimum_rows or duplicate_count or invalid_ohlc or nulls or zero_prices or stale)
     return not hard_fail, issues, meta

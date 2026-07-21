@@ -35,6 +35,9 @@ create table if not exists public.dashboard_sessions (
   user_agent_hash text
 );
 
+alter table public.dashboard_sessions
+  add column if not exists key_fingerprint text;
+
 create index if not exists dashboard_sessions_expiry_idx
   on public.dashboard_sessions (expires_at)
   where revoked_at is null;
@@ -45,6 +48,108 @@ revoke all on table public.scanner_runs from anon, authenticated;
 revoke all on table public.dashboard_sessions from anon, authenticated;
 grant all on table public.scanner_runs to service_role;
 grant all on table public.dashboard_sessions to service_role;
+
+create or replace function public.set_telegram_config(
+  p_token text,
+  p_chat_id text
+) returns void
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  token_id uuid;
+  chat_id_id uuid;
+begin
+  if nullif(btrim(p_token), '') is null or nullif(btrim(p_chat_id), '') is null then
+    raise exception 'Telegram token and chat ID are required';
+  end if;
+  select id into token_id from vault.secrets where name = 'ichimoku_telegram_bot_token';
+  if token_id is null then
+    perform vault.create_secret(p_token, 'ichimoku_telegram_bot_token', 'Ichimoku Telegram bot token');
+  else
+    perform vault.update_secret(token_id, p_token, 'ichimoku_telegram_bot_token', 'Ichimoku Telegram bot token');
+  end if;
+  select id into chat_id_id from vault.secrets where name = 'ichimoku_telegram_chat_id';
+  if chat_id_id is null then
+    perform vault.create_secret(p_chat_id, 'ichimoku_telegram_chat_id', 'Authorized Ichimoku Telegram chat');
+  else
+    perform vault.update_secret(chat_id_id, p_chat_id, 'ichimoku_telegram_chat_id', 'Authorized Ichimoku Telegram chat');
+  end if;
+end;
+$$;
+
+create or replace function public.get_telegram_config()
+returns table (token text, chat_id text)
+language sql
+security definer
+set search_path = ''
+as $$
+  select
+    max(decrypted_secret) filter (where name = 'ichimoku_telegram_bot_token') as token,
+    max(decrypted_secret) filter (where name = 'ichimoku_telegram_chat_id') as chat_id
+  from vault.decrypted_secrets
+  where name in ('ichimoku_telegram_bot_token', 'ichimoku_telegram_chat_id');
+$$;
+
+revoke all on function public.set_telegram_config(text, text) from public, anon, authenticated;
+revoke all on function public.get_telegram_config() from public, anon, authenticated;
+grant execute on function public.set_telegram_config(text, text) to service_role;
+grant execute on function public.get_telegram_config() to service_role;
+
+create or replace function public.prune_v3_operational_data()
+returns jsonb
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  deleted_runs integer := 0;
+  deleted_regimes integer := 0;
+  deleted_events integer := 0;
+  deleted_queue integer := 0;
+  deleted_sessions integer := 0;
+begin
+  delete from public.scanner_runs where started_at < now() - interval '365 days';
+  get diagnostics deleted_runs = row_count;
+  delete from public.market_regimes where as_of < now() - interval '730 days';
+  get diagnostics deleted_regimes = row_count;
+  delete from public.signal_events where created_at < now() - interval '730 days';
+  get diagnostics deleted_events = row_count;
+  delete from public.delivery_queue
+  where status in ('delivered', 'cancelled') and updated_at < now() - interval '365 days';
+  get diagnostics deleted_queue = row_count;
+  delete from public.dashboard_sessions
+  where expires_at < now() or (revoked_at is not null and revoked_at < now() - interval '30 days');
+  get diagnostics deleted_sessions = row_count;
+  return jsonb_build_object(
+    'scanner_runs', deleted_runs,
+    'market_regimes', deleted_regimes,
+    'signal_events', deleted_events,
+    'delivery_queue', deleted_queue,
+    'dashboard_sessions', deleted_sessions
+  );
+end;
+$$;
+
+revoke all on function public.prune_v3_operational_data() from public, anon, authenticated;
+grant execute on function public.prune_v3_operational_data() to service_role;
+
+do $$
+declare
+  legacy_token text;
+  legacy_chat_id text;
+begin
+  select value->>'value' into legacy_token
+  from public.user_settings where setting_key = 'telegram_bot_token';
+  select value->>'value' into legacy_chat_id
+  from public.user_settings where setting_key = 'telegram_chat_id';
+  if nullif(legacy_token, '') is not null and nullif(legacy_chat_id, '') is not null then
+    perform public.set_telegram_config(legacy_token, legacy_chat_id);
+    delete from public.user_settings where setting_key in ('telegram_bot_token', 'telegram_chat_id');
+  end if;
+end;
+$$;
 
 create or replace function public.upsert_signal_records(
   p_rows jsonb,

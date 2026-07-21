@@ -30,12 +30,16 @@ def _token_hash(token: str) -> str:
     return hashlib.sha256(token.encode("utf-8")).hexdigest()
 
 
+def _key_fingerprint() -> str:
+    return hashlib.sha256(settings.dashboard_api_key.encode("utf-8")).hexdigest()
+
+
 def _issue_session(response: JSONResponse, request: Request) -> None:
     token = secrets.token_urlsafe(32)
     expires = datetime.now(timezone.utc) + timedelta(seconds=COOKIE_MAX_AGE_SECONDS)
     user_agent = request.headers.get("user-agent", "")
     user_agent_hash = hashlib.sha256(user_agent.encode("utf-8")).hexdigest() if user_agent else None
-    get_store().create_dashboard_session(_token_hash(token), expires.isoformat(), user_agent_hash)
+    get_store().create_dashboard_session(_token_hash(token), expires.isoformat(), user_agent_hash, _key_fingerprint())
     response.set_cookie(
         key=COOKIE_NAME,
         value=token,
@@ -65,7 +69,7 @@ def _authorize(
     cookie_ok = False
     if cookie_value and not legacy_cookie_ok:
         try:
-            cookie_ok = get_store().validate_dashboard_session(_token_hash(cookie_value))
+            cookie_ok = get_store().validate_dashboard_session(_token_hash(cookie_value), _key_fingerprint())
         except Exception:
             cookie_ok = False
 

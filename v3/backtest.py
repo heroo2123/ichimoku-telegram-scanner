@@ -140,11 +140,11 @@ def fetch_and_backtest(scanner_module: Any, market: str, symbols: Sequence[str])
     results: List[Dict[str, Any]] = []
     if market == "crypto":
         for symbol in symbols:
-            frame = scanner_module.fetch_binance_ohlcv(symbol, 1000)
+            frame = scanner_module.fetch_binance_history(symbol, int(scanner_module.config.BACKTEST_CRYPTO_DAYS))
             if frame is not None:
                 results.append(run_frame_backtest(scanner_module, frame, "Crypto Spot", symbol).to_dict())
     else:
-        frames = scanner_module.fetch_yfinance_batch(symbols)
+        frames = scanner_module.fetch_yfinance_batch(symbols, period=str(scanner_module.config.BACKTEST_US_PERIOD))
         for symbol, frame in frames.items():
             results.append(run_frame_backtest(scanner_module, frame, "US Stock", symbol).to_dict())
     store = get_store()

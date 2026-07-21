@@ -84,6 +84,9 @@ YFINANCE_BATCH_SIZE = 60
 YFINANCE_BATCH_RETRIES = 3
 YFINANCE_BATCH_PAUSE_SECONDS = 1.2
 BINANCE_SYMBOL_PAUSE_SECONDS = 0.04
+YFINANCE_AUTO_ADJUST = True
+CRYPTO_MAX_DATA_AGE_DAYS = 2
+US_MAX_DATA_AGE_DAYS = 5
 
 PERFORMANCE_HORIZONS = [1, 3, 5, 10, 20]
 PERFORMANCE_MAX_HORIZON = 20
@@ -105,6 +108,10 @@ COMMODITY_FUTURES_SYMBOLS = [
 ]
 
 MAX_SYMBOLS_PER_MARKET = None
+
+# Research history is deliberately longer than the daily production lookback.
+BACKTEST_CRYPTO_DAYS = 3650
+BACKTEST_US_PERIOD = "10y"
 
 # Optional timing context for already-qualified daily signals. This never
 # blocks or promotes the daily signal; it only labels lower-timeframe timing.

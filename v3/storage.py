@@ -110,18 +110,22 @@ class LocalStore:
     def delivery_queue_health(self) -> Dict[str, Any]:
         return {"pending": 0, "in_progress": 0, "failed": 0, "oldest_scheduled_for": None}
 
-    def create_dashboard_session(self, token_hash: str, expires_at: str, user_agent_hash: Optional[str]) -> None:
+    def prune_operational_data(self) -> Dict[str, int]:
+        return {"scanner_runs": 0, "market_regimes": 0, "signal_events": 0, "delivery_queue": 0, "dashboard_sessions": 0}
+
+    def create_dashboard_session(self, token_hash: str, expires_at: str, user_agent_hash: Optional[str], key_fingerprint: str) -> None:
         sessions = self._read("dashboard_sessions", {})
         sessions[token_hash] = {
             "token_hash": token_hash,
             "expires_at": expires_at,
             "user_agent_hash": user_agent_hash,
+            "key_fingerprint": key_fingerprint,
             "revoked_at": None,
             "last_seen_at": utc_now_iso(),
         }
         self._write("dashboard_sessions", sessions)
 
-    def validate_dashboard_session(self, token_hash: str) -> bool:
+    def validate_dashboard_session(self, token_hash: str, key_fingerprint: str) -> bool:
         sessions = self._read("dashboard_sessions", {})
         row = sessions.get(token_hash) or {}
         if row.get("revoked_at"):
@@ -133,6 +137,10 @@ class LocalStore:
             valid = False
         if valid:
             row["last_seen_at"] = utc_now_iso()
+            if not row.get("key_fingerprint"):
+                row["key_fingerprint"] = key_fingerprint
+            elif row.get("key_fingerprint") != key_fingerprint:
+                return False
             sessions[token_hash] = row
             self._write("dashboard_sessions", sessions)
         return valid
@@ -276,11 +284,13 @@ class SupabaseStore(LocalStore):
         try:
             rows = self._request(
                 "GET",
-                "delivery_queue?select=status,scheduled_for&status=in.(pending,in_progress,failed)&order=scheduled_for.asc&limit=1000",
+                "delivery_queue?select=status,scheduled_for&status=in.(pending,sending,failed)&order=scheduled_for.asc&limit=1000",
             )
             counts = {"pending": 0, "in_progress": 0, "failed": 0}
             for row in rows:
                 status = str(row.get("status", ""))
+                if status == "sending":
+                    status = "in_progress"
                 if status in counts:
                     counts[status] += 1
             return {
@@ -290,7 +300,13 @@ class SupabaseStore(LocalStore):
         except Exception:
             return super().delivery_queue_health()
 
-    def create_dashboard_session(self, token_hash: str, expires_at: str, user_agent_hash: Optional[str]) -> None:
+    def prune_operational_data(self) -> Dict[str, int]:
+        result = self._request("POST", "rpc/prune_v3_operational_data", json={})
+        if isinstance(result, list) and result:
+            return dict(result[0].get("prune_v3_operational_data") or result[0])
+        return dict(result or {})
+
+    def create_dashboard_session(self, token_hash: str, expires_at: str, user_agent_hash: Optional[str], key_fingerprint: str) -> None:
         self._request(
             "POST",
             "dashboard_sessions?on_conflict=token_hash",
@@ -298,13 +314,14 @@ class SupabaseStore(LocalStore):
                 "token_hash": token_hash,
                 "expires_at": expires_at,
                 "user_agent_hash": user_agent_hash,
+                "key_fingerprint": key_fingerprint,
                 "last_seen_at": utc_now_iso(),
                 "revoked_at": None,
             },
             headers={"Prefer": "resolution=merge-duplicates,return=minimal"},
         )
 
-    def validate_dashboard_session(self, token_hash: str) -> bool:
+    def validate_dashboard_session(self, token_hash: str, key_fingerprint: str) -> bool:
         rows = self._request(
             "GET",
             "dashboard_sessions",
@@ -313,6 +330,7 @@ class SupabaseStore(LocalStore):
                 "token_hash": f"eq.{token_hash}",
                 "revoked_at": "is.null",
                 "expires_at": f"gt.{utc_now_iso()}",
+                "or": f"(key_fingerprint.is.null,key_fingerprint.eq.{key_fingerprint})",
                 "limit": "1",
             },
         )
@@ -322,7 +340,7 @@ class SupabaseStore(LocalStore):
             "PATCH",
             "dashboard_sessions",
             params={"token_hash": f"eq.{token_hash}"},
-            json={"last_seen_at": utc_now_iso()},
+            json={"last_seen_at": utc_now_iso(), "key_fingerprint": key_fingerprint},
             headers={"Prefer": "return=minimal"},
         )
         return True

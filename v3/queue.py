@@ -113,6 +113,24 @@ class DatabaseDeliveryQueue:
         )
         return QueueClaim(self.store, worker_id, list(result or []))
 
+    def delivered_signal_ids(self, signal_ids: Sequence[str]) -> set[str]:
+        delivered: set[str] = set()
+        values = [str(value) for value in signal_ids if value]
+        for start in range(0, len(values), 40):
+            batch = values[start:start + 40]
+            quoted = ",".join(f'"{value.replace(chr(34), "")}"' for value in batch)
+            rows = self.store._request(
+                "GET",
+                "signals",
+                params={
+                    "select": "id",
+                    "id": f"in.({quoted})",
+                    "delivered_at": "not.is.null",
+                },
+            )
+            delivered.update(str(row["id"]) for row in rows or [])
+        return delivered
+
 
 def get_delivery_queue() -> Optional[DatabaseDeliveryQueue]:
     if not settings.database_delivery_enabled:

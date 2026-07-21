@@ -6,13 +6,7 @@ from .lifecycle import evaluate_status
 from .storage import get_store
 
 
-def _latest_context(scanner_module: Any, signal: Dict[str, Any]) -> Dict[str, Any] | None:
-    market = signal.get("market")
-    symbol = str(signal.get("symbol"))
-    if market == "Crypto Spot":
-        frame = scanner_module.fetch_binance_ohlcv(symbol, int(scanner_module.config.LOOKBACK_DAYS))
-    else:
-        frame = scanner_module.fetch_yfinance_batch([symbol]).get(symbol)
+def _context_from_frame(scanner_module: Any, frame: Any) -> Dict[str, Any] | None:
     if frame is None or len(frame) < scanner_module.minimum_daily_rows():
         return None
     enriched = scanner_module.add_ichimoku(frame)
@@ -29,13 +23,35 @@ def _latest_context(scanner_module: Any, signal: Dict[str, Any]) -> Dict[str, An
 
 def refresh_lifecycle(scanner_module: Any, limit: int = 50) -> List[Dict[str, Any]]:
     store = get_store()
-    signals = store.list_signals(limit=limit)
+    signals = [
+        signal for signal in store.list_signals(limit=limit)
+        if signal.get("status") not in {"invalidated", "completed"}
+    ]
+    contexts: Dict[tuple[str, str], Dict[str, Any]] = {}
+    crypto_symbols = sorted({str(signal.get("symbol")) for signal in signals if signal.get("market") == "Crypto Spot"})
+    for symbol in crypto_symbols:
+        try:
+            frame = scanner_module.fetch_binance_ohlcv(symbol, int(scanner_module.config.LOOKBACK_DAYS))
+            context = _context_from_frame(scanner_module, frame)
+            if context:
+                contexts[("Crypto Spot", symbol)] = context
+        except Exception as exc:
+            print(f"Lifecycle refresh failed to fetch {symbol}: {exc}")
+    for market in ("US Stock", "US Index", "Commodity Future"):
+        symbols = sorted({str(signal.get("symbol")) for signal in signals if signal.get("market") == market})
+        for batch in scanner_module.chunks(symbols, int(scanner_module.config.YFINANCE_BATCH_SIZE)):
+            try:
+                frames = scanner_module.fetch_yfinance_batch(batch)
+                for symbol, frame in frames.items():
+                    context = _context_from_frame(scanner_module, frame)
+                    if context:
+                        contexts[(market, symbol)] = context
+            except Exception as exc:
+                print(f"Lifecycle refresh failed to fetch {market} batch: {exc}")
     updated: List[Dict[str, Any]] = []
     for signal in signals:
-        if signal.get("status") in {"invalidated", "completed"}:
-            continue
         try:
-            context = _latest_context(scanner_module, signal)
+            context = contexts.get((str(signal.get("market")), str(signal.get("symbol"))))
             if not context:
                 continue
             old = signal.get("status")

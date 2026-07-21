@@ -3,6 +3,11 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta
 from typing import Any, Dict, Optional
 
+try:
+    import pandas_market_calendars as market_calendars
+except ImportError:  # The scanner can still use a conservative weekday fallback.
+    market_calendars = None
+
 from .settings import settings
 
 
@@ -31,6 +36,10 @@ def sessions_since(signal_date: str, as_of: Optional[str] = None, market: str = 
             return 0
         if str(market).lower().startswith("crypto"):
             return (end - start).days
+        if str(market).lower().startswith("us") and market_calendars is not None:
+            calendar = market_calendars.get_calendar("NYSE")
+            schedule = calendar.schedule(start_date=start + timedelta(days=1), end_date=end)
+            return len(schedule)
         count = 0
         cursor = start + timedelta(days=1)
         while cursor <= end:

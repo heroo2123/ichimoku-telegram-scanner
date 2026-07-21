@@ -295,27 +295,59 @@ def completed_yfinance_daily_rows(df: pd.DataFrame) -> pd.DataFrame:
         result = result.iloc[:-1]
     return result
 
+def binance_rows_to_frame(rows: Sequence[Sequence[Any]], interval: str) -> Optional[pd.DataFrame]:
+    if not rows:
+        return None
+    frame = pd.DataFrame(rows, columns=['OpenTime', 'Open', 'High', 'Low', 'Close', 'Volume', 'CloseTime', 'QuoteVolume', 'Trades', 'TakerBase', 'TakerQuote', 'Ignore'])
+    frame['Date'] = pd.to_datetime(frame['OpenTime'], unit='ms', utc=True).dt.tz_convert(None)
+    for column in ['Open', 'High', 'Low', 'Close', 'Volume']:
+        frame[column] = pd.to_numeric(frame[column], errors='coerce')
+    if interval == '1d':
+        frame['Date'] = frame['Date'].dt.normalize()
+    else:
+        now_ms = int(now_utc().timestamp() * 1000)
+        frame = frame[pd.to_numeric(frame['CloseTime'], errors='coerce') < now_ms]
+    frame = frame.set_index('Date')[['Open', 'High', 'Low', 'Close', 'Volume']].dropna()
+    if interval == '1d':
+        frame = completed_crypto_daily_rows(frame)
+    return frame
+
+
 def fetch_binance_ohlcv(symbol: str, limit: int, interval: str='1d') -> Optional[pd.DataFrame]:
     try:
         response = binance_get('/api/v3/klines', params={'symbol': symbol, 'interval': interval, 'limit': min(max(int(limit), 200), 1000)})
         rows = response.json()
-        if not rows:
-            return None
-        frame = pd.DataFrame(rows, columns=['OpenTime', 'Open', 'High', 'Low', 'Close', 'Volume', 'CloseTime', 'QuoteVolume', 'Trades', 'TakerBase', 'TakerQuote', 'Ignore'])
-        frame['Date'] = pd.to_datetime(frame['OpenTime'], unit='ms', utc=True).dt.tz_convert(None)
-        for column in ['Open', 'High', 'Low', 'Close', 'Volume']:
-            frame[column] = pd.to_numeric(frame[column], errors='coerce')
-        if interval == '1d':
-            frame['Date'] = frame['Date'].dt.normalize()
-        else:
-            now_ms = int(now_utc().timestamp() * 1000)
-            frame = frame[pd.to_numeric(frame['CloseTime'], errors='coerce') < now_ms]
-        frame = frame.set_index('Date')[['Open', 'High', 'Low', 'Close', 'Volume']].dropna()
-        if interval == '1d':
-            frame = completed_crypto_daily_rows(frame)
-        return frame if len(frame) >= minimum_daily_rows() else None
+        frame = binance_rows_to_frame(rows, interval)
+        return frame if frame is not None and len(frame) >= minimum_daily_rows() else None
     except Exception as exc:
         print(f'Warning: Binance fetch failed for {symbol}: {exc}', file=sys.stderr)
+        return None
+
+
+def fetch_binance_history(symbol: str, days: int) -> Optional[pd.DataFrame]:
+    cutoff_ms = int((now_utc() - timedelta(days=max(200, int(days)))).timestamp() * 1000)
+    end_time: Optional[int] = None
+    pages: List[Sequence[Any]] = []
+    try:
+        for _ in range(max(1, math.ceil(int(days) / 1000) + 1)):
+            params: Dict[str, Any] = {'symbol': symbol, 'interval': '1d', 'limit': 1000}
+            if end_time is not None:
+                params['endTime'] = end_time
+            rows = binance_get('/api/v3/klines', params=params).json()
+            if not rows:
+                break
+            pages[0:0] = rows
+            earliest = int(rows[0][0])
+            if earliest <= cutoff_ms or len(rows) < 1000:
+                break
+            end_time = earliest - 1
+        selected = [row for row in pages if int(row[0]) >= cutoff_ms]
+        frame = binance_rows_to_frame(selected, '1d')
+        if frame is not None:
+            frame = frame[~frame.index.duplicated(keep='last')].sort_index()
+        return frame if frame is not None and len(frame) >= minimum_daily_rows() else None
+    except Exception as exc:
+        print(f'Warning: Binance history fetch failed for {symbol}: {exc}', file=sys.stderr)
         return None
 
 
@@ -328,7 +360,7 @@ def fetch_yfinance_lower_timeframe(symbol: str) -> Optional[pd.DataFrame]:
             period=str(config.LOWER_TIMEFRAME_US_PERIOD),
             interval=str(config.LOWER_TIMEFRAME_US_INTERVAL),
             group_by='ticker',
-            auto_adjust=False,
+            auto_adjust=bool(config.YFINANCE_AUTO_ADJUST),
             threads=False,
             progress=False,
             timeout=int(config.REQUEST_TIMEOUT),
@@ -373,7 +405,7 @@ def attach_lower_timeframe_confirmation(candidate: Candidate) -> None:
     except Exception as exc:
         candidate.metrics['lower_timeframe'] = {'status': 'unknown', 'reason': str(exc)[:160]}
 
-def fetch_yfinance_batch(symbols: Sequence[str]) -> Dict[str, pd.DataFrame]:
+def fetch_yfinance_batch(symbols: Sequence[str], period: Optional[str]=None) -> Dict[str, pd.DataFrame]:
     if yf is None:
         raise ScannerError('yfinance is not installed')
     if not symbols:
@@ -382,7 +414,7 @@ def fetch_yfinance_batch(symbols: Sequence[str]) -> Dict[str, pd.DataFrame]:
     raw: Optional[pd.DataFrame] = None
     for attempt in range(1, int(config.YFINANCE_BATCH_RETRIES) + 1):
         try:
-            raw = yf.download(tickers=' '.join(symbols), period=f'{int(config.LOOKBACK_DAYS)}d', interval='1d', group_by='ticker', auto_adjust=False, threads=True, progress=False, timeout=int(config.REQUEST_TIMEOUT))
+            raw = yf.download(tickers=' '.join(symbols), period=period or f'{int(config.LOOKBACK_DAYS)}d', interval='1d', group_by='ticker', auto_adjust=bool(config.YFINANCE_AUTO_ADJUST), threads=True, progress=False, timeout=int(config.REQUEST_TIMEOUT))
             if raw is not None and (not raw.empty):
                 break
             raise ScannerError('empty yfinance response')
@@ -1045,7 +1077,7 @@ def scan_crypto(state: Dict[str, Any], stats: ScanStats, dry_run: bool=False) ->
                 stats.symbols_failed += 1
                 continue
             from v3.quality import validate_ohlcv
-            quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows())
+            quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows(), max_age_days=int(config.CRYPTO_MAX_DATA_AGE_DAYS))
             if not quality_ok:
                 stats.symbols_filtered_quality += 1
                 stats.provider_errors.append(f'{symbol}: data quality failed: {"; ".join(quality_issues[:3])}')
@@ -1083,7 +1115,7 @@ def scan_yfinance_symbols(symbols: Sequence[str], market: str, state: Dict[str, 
         for symbol, frame in data.items():
             try:
                 from v3.quality import validate_ohlcv
-                quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows())
+                quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows(), max_age_days=int(config.US_MAX_DATA_AGE_DAYS))
                 if not quality_ok:
                     stats.symbols_filtered_quality += 1
                     stats.provider_errors.append(f'{symbol}: data quality failed: {"; ".join(quality_issues[:3])}')
@@ -1174,6 +1206,12 @@ def deliver_pending_market(market: str, state: Dict[str, Any], dry_run: bool=Fal
             if queue is not None:
                 if local_pending:
                     queue.enqueue([candidate.serializable() for candidate in local_pending], scheduled_for=now_utc_iso())
+                    persisted_delivered = queue.delivered_signal_ids([candidate.id for candidate in local_pending])
+                    if persisted_delivered:
+                        for candidate in local_pending:
+                            if candidate.id in persisted_delivered:
+                                mark_delivered(state, candidate)
+                        local_pending = [candidate for candidate in local_pending if candidate.id not in persisted_delivered]
                 delivery_claim = queue.claim(market)
                 claimed: List[Candidate] = []
                 already_delivered: List[str] = []
@@ -1293,16 +1331,16 @@ def test_telegram() -> None:
     send_telegram_message(f'✅ <b>Ichimoku scanner Telegram test successful</b>\n\nTime UTC: {now_utc_iso()}\nDaily settings: {config.CONVERSION_LENGTH}/{config.BASE_LENGTH}/{config.SPAN_B_LENGTH}/{config.DISPLACEMENT}\nRetry-protected Telegram delivery is working.')
     print('Telegram test sent.')
 
-def save_scanner_run_record(run_id: str, market: str, mode: str, status: str, stats: Optional[ScanStats]=None, error: Optional[str]=None) -> None:
+def save_scanner_run_record(run_id: str, market: str, mode: str, status: str, stats: Optional[ScanStats]=None, error: Optional[str]=None, started_at: Optional[str]=None) -> None:
     try:
         from v3.storage import get_store
-        started_at = stats.started_utc if stats is not None else now_utc_iso()
+        effective_started_at = started_at or (stats.started_utc if stats is not None else now_utc_iso())
         get_store().save_scanner_run({
             'run_id': run_id,
             'market': market,
             'mode': mode,
             'status': status,
-            'started_at': started_at,
+            'started_at': effective_started_at,
             'completed_at': now_utc_iso() if status != 'running' else None,
             'stats': stats.as_dict() if stats is not None else {},
             'error': error,
@@ -1333,8 +1371,9 @@ def main() -> int:
         for market in markets:
             run_id = str(uuid.uuid4())
             mode = 'delivery' if args.deliver_pending else ('deferred' if args.defer_delivery else 'live')
+            run_started_at = now_utc_iso()
             if not args.dry_run:
-                save_scanner_run_record(run_id, market, mode, 'running')
+                save_scanner_run_record(run_id, market, mode, 'running', started_at=run_started_at)
             try:
                 if args.deliver_pending:
                     delivered, stats = deliver_pending_market(market, state, args.dry_run, quiet_when_empty=args.quiet_when_empty)
@@ -1343,11 +1382,11 @@ def main() -> int:
             except Exception as exc:
                 if not args.dry_run:
                     failed_stats = ScanStats(market=market)
-                    save_scanner_run_record(run_id, market, mode, 'failed', failed_stats, str(exc)[:1000])
+                    save_scanner_run_record(run_id, market, mode, 'failed', failed_stats, str(exc)[:1000], started_at=run_started_at)
                 raise
             if not args.dry_run:
                 delivery_failures = stats.digest_failed + stats.details_failed
-                save_scanner_run_record(run_id, market, mode, 'partial' if delivery_failures else 'completed', stats)
+                save_scanner_run_record(run_id, market, mode, 'partial' if delivery_failures else 'completed', stats, started_at=run_started_at)
             print(f'Completed {market}: delivered={len(delivered)} deferred={stats.delivery_deferred} attempted={stats.symbols_attempted} valid={stats.symbols_with_data} errors={stats.symbols_failed} elapsed={stats.elapsed_seconds}s')
         return 0
     except Exception as exc:

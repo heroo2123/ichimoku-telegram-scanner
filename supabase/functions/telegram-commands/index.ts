@@ -26,6 +26,18 @@ async function dbGet(path: string): Promise<unknown> {
   return await response.json();
 }
 
+async function dbPost(path: string, body: Record<string, unknown> = {}): Promise<unknown> {
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    method: "POST",
+    headers: dbHeaders(),
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    throw new Error(`Database RPC failed (${response.status})`);
+  }
+  return response.status === 204 ? null : await response.json();
+}
+
 function unwrapSetting(value: unknown): string {
   if (typeof value === "string") return value;
   if (value && typeof value === "object") {
@@ -41,17 +53,14 @@ async function loadBotConfig(): Promise<{ token: string; chatId: string }> {
   if (environmentToken && environmentChatId) {
     return { token: environmentToken, chatId: environmentChatId };
   }
-  // Transitional fallback for the already-live installation. Once the two
-  // Edge Function secrets are set, Telegram credentials are no longer read
-  // from a database row.
-  const rows = await dbGet(
-    "user_settings?select=setting_key,value&setting_key=in.%28telegram_bot_token%2Ctelegram_chat_id%29",
-  ) as Array<Record<string, unknown>>;
+  const vaultRows = await dbPost("rpc/get_telegram_config") as Array<Record<string, unknown>>;
+  const vaultToken = String(vaultRows[0]?.token ?? "");
+  const vaultChatId = String(vaultRows[0]?.chat_id ?? "");
+  if (vaultToken && vaultChatId) return { token: vaultToken, chatId: vaultChatId };
+  // Transitional fallback only; the V3.1 migration removes these legacy rows.
+  const rows = await dbGet("user_settings?select=setting_key,value&setting_key=in.%28telegram_bot_token%2Ctelegram_chat_id%29") as Array<Record<string, unknown>>;
   const values = new Map(rows.map((row) => [String(row.setting_key), unwrapSetting(row.value)]));
-  return {
-    token: values.get("telegram_bot_token") ?? "",
-    chatId: values.get("telegram_chat_id") ?? "",
-  };
+  return { token: values.get("telegram_bot_token") ?? "", chatId: values.get("telegram_chat_id") ?? "" };
 }
 
 async function sha256Hex(value: string): Promise<string> {
@@ -181,11 +190,12 @@ Deno.serve(async (request: Request) => {
         "scanner_runs?select=market,mode,status,started_at,completed_at&order=started_at.desc&limit=4",
       ) as Array<Record<string, unknown>>;
       const queueRows = await dbGet(
-        "delivery_queue?select=status&status=in.%28pending%2Cin_progress%2Cfailed%29&limit=1000",
+        "delivery_queue?select=status&status=in.%28pending%2Csending%2Cfailed%29&limit=1000",
       ) as Array<Record<string, unknown>>;
       const queue = { pending: 0, in_progress: 0, failed: 0 };
       for (const row of queueRows) {
-        const status = String(row.status ?? "") as keyof typeof queue;
+        const rawStatus = String(row.status ?? "");
+        const status = (rawStatus === "sending" ? "in_progress" : rawStatus) as keyof typeof queue;
         if (status in queue) queue[status] += 1;
       }
       const regimeText = regimes.map((row) => `${escapeHtml(row.market)}=${escapeHtml(row.regime)}`).join(", ") || "not available yet";

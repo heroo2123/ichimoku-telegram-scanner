@@ -31,6 +31,7 @@ def main() -> int:
     calibrate = sub.add_parser("calibrate")
     calibrate.add_argument("--horizon", type=int, default=10)
     sub.add_parser("status")
+    sub.add_parser("maintenance")
     args = parser.parse_args()
     if args.command == "ingest":
         result = ingest_summary(args.market)
@@ -56,6 +57,8 @@ def main() -> int:
             result[f"{market}|{direction}"] = model
             if model.get("ready"):
                 get_store().save_calibration({"market": market, "direction": direction, "horizon": args.horizon, "model": model, "metrics": {"count": model.get("count"), "validation_count": model.get("validation_count"), "brier_score": model.get("brier_score"), "accuracy": model.get("accuracy"), "base_rate": model.get("base_rate")}})
+    elif args.command == "maintenance":
+        result = get_store().prune_operational_data()
     else:
         store = get_store()
         result = {"signals": len(store.list_signals(limit=1000)), "regimes": store.list_regimes(5), "paper": store.load_paper_state()}

@@ -82,6 +82,13 @@ class V3Tests(unittest.TestCase):
             self.assertEqual(saved['status'],'completed')
             self.assertEqual(saved['stats']['symbols_attempted'],10)
 
+    def test_dashboard_session_is_bound_to_dashboard_key(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store=LocalStore(Path(tmp))
+            store.create_dashboard_session('token-hash','2099-01-01T00:00:00+00:00',None,'key-a')
+            self.assertTrue(store.validate_dashboard_session('token-hash','key-a'))
+            self.assertFalse(store.validate_dashboard_session('token-hash','key-b'))
+
     def test_new_supabase_secret_uses_apikey_only(self):
         fake = SimpleNamespace(
             supabase_url='https://example.supabase.co',
@@ -109,6 +116,8 @@ class V3Tests(unittest.TestCase):
         self.assertIn('signals',result.summary)
         self.assertEqual(result.parameters['daily'],[20,60,120,30])
         self.assertEqual(result.parameters['entry_model'],'next_open')
+        self.assertEqual(result.parameters['fee_bps'],10.0)
+        self.assertEqual(result.parameters['slippage_bps'],5.0)
         self.assertIn('profit_factor',result.summary['h10'])
 
     def test_completed_weekly_frame_excludes_partial_week(self):
@@ -139,6 +148,7 @@ class V3Tests(unittest.TestCase):
     def test_sessions_use_market_calendar(self):
         self.assertEqual(sessions_since('2026-01-02','2026-01-05','US Stock'),1)
         self.assertEqual(sessions_since('2026-01-02','2026-01-05','Crypto Spot'),3)
+        self.assertEqual(sessions_since('2026-07-02','2026-07-06','US Stock'),1)
 
     def test_data_quality_rejects_invalid_ohlc(self):
         idx=pd.date_range('2026-01-01',periods=60,freq='D')
@@ -148,6 +158,14 @@ class V3Tests(unittest.TestCase):
         self.assertFalse(ok)
         self.assertTrue(any('Invalid OHLC' in issue for issue in issues))
         self.assertEqual(meta['invalid_ohlc'],1)
+
+    def test_data_quality_rejects_stale_prices(self):
+        idx=pd.date_range('2026-01-01',periods=60,freq='D')
+        frame=pd.DataFrame({'Open':100.0,'High':101.0,'Low':99.0,'Close':100.0,'Volume':1000.0},index=idx)
+        ok,issues,meta=validate_ohlcv(frame,minimum_rows=50,max_age_days=2,now='2026-03-10')
+        self.assertFalse(ok)
+        self.assertTrue(any('Stale data' in issue for issue in issues))
+        self.assertGreater(meta['age_days'],2)
 
     def test_database_queue_payload_and_claim(self):
         fake=SupabaseStore.__new__(SupabaseStore)
@@ -160,6 +178,14 @@ class V3Tests(unittest.TestCase):
         self.assertEqual(fake._request.call_args_list[0].args[1],'rpc/enqueue_delivery_signals')
         self.assertEqual(fake._request.call_args_list[1].args[1],'rpc/claim_delivery_batch')
         self.assertEqual(fake._request.call_args_list[2].args[1],'rpc/complete_delivery_batch')
+
+    def test_database_queue_reconciles_delivered_signal_ids(self):
+        fake=SupabaseStore.__new__(SupabaseStore)
+        fake._request=MagicMock(return_value=[{'id':self.candidate()['id']}])
+        queue=DatabaseDeliveryQueue(fake)
+        delivered=queue.delivered_signal_ids([self.candidate()['id'],'another-id'])
+        self.assertEqual(delivered,{self.candidate()['id']})
+        self.assertEqual(fake._request.call_args.kwargs['params']['delivered_at'],'not.is.null')
 
     def test_next_delivery_boundary(self):
         before=datetime(2026,7,21,11,59,tzinfo=timezone.utc)
