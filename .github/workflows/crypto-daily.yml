@@ -3,9 +3,8 @@ name: Crypto Daily Ichimoku Scan
 on:
   workflow_dispatch:
   schedule:
-    # Run daily at 15:00 Kuwait time (UTC+3).
-    # GitHub cron uses UTC, so 15:00 Kuwait = 12:00 UTC.
-    - cron: '0 12 * * *'
+    # Binance daily candle closes at 00:00 UTC. Scan after close; deliver at 15:00 Kuwait.
+    - cron: '17 0 * * *'
 
 permissions:
   contents: write
@@ -18,32 +17,28 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     timeout-minutes: 180
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: true
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-
-      - name: Install Python packages
-        run: pip install -r requirements.txt
-
-      - name: Run crypto scanner
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scanner.py --market crypto
-
-      - name: Commit updated scanner state
+      - uses: actions/checkout@v4
+        with: { persist-credentials: true }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Scan completed crypto candles and defer Telegram
+        run: python scanner.py --market crypto --defer-delivery
+      - name: Persist V3 signals and regime
+        run: |
+          python -m v3.cli ingest --market crypto
+          python -m v3.cli regime --market crypto
+          python -m v3.cli lifecycle --limit 50
+          python -m v3.cli paper
+      - name: Commit scanner and V3 fallback state
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/scan_state.json data/heartbeat.json data/last_run_summary.json || true
-          git diff --cached --quiet || git commit -m "Update crypto scanner state"
+          git add data/*.json || true
+          git diff --cached --quiet || git commit -m "Update crypto scanner V3 state"
           git push || true
