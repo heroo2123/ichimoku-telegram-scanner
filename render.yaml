@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: ichimoku-v3-dashboard
+    runtime: python
+    plan: free
+    autoDeploy: true
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn v3.dashboard:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: DASHBOARD_API_KEY
+        generateValue: true
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: TELEGRAM_WEBHOOK_SECRET
+        generateValue: true
+      - key: PAPER_STARTING_EQUITY
+        value: "100000"
+      - key: PAPER_RISK_PER_TRADE_PCT
+        value: "0.5"
+      - key: PAPER_MAX_POSITIONS
+        value: "12"
+      - key: PAPER_MAX_CLUSTER_POSITIONS
+        value: "3"

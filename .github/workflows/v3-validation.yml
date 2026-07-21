@@ -1,0 +1,108 @@
+name: Validate Ichimoku V3
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Compile
+        run: python -m compileall -q scanner.py scanner_impl.py config.py v3 tests
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: CLI and dashboard smoke tests
+        run: |
+          python -m v3.cli status
+          python - <<'PY'
+          import scanner
+          from v3.dashboard import app
+          assert callable(scanner.deliver_pending_market)
+          assert callable(scanner.run_market)
+          assert app.title
+          print('Deferred delivery and dashboard APIs available')
+          PY
+      - name: Supabase integration round trip
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python - <<'PY'
+          import uuid
+          from v3.models import utc_now_iso
+          from v3.settings import settings
+          from v3.storage import SupabaseStore, get_store
+
+          assert settings.supabase_enabled, 'Supabase repository secrets are missing'
+          store = get_store()
+          assert isinstance(store, SupabaseStore)
+          marker = f"ci_smoke_{uuid.uuid4().hex}"
+          row = {
+              'setting_key': marker,
+              'value': {'integration': 'ok'},
+              'updated_at': utc_now_iso(),
+          }
+          try:
+              store._request(
+                  'POST',
+                  'user_settings?on_conflict=setting_key',
+                  json=row,
+                  headers={'Prefer': 'resolution=merge-duplicates,return=minimal'},
+              )
+              rows = store._request(
+                  'GET',
+                  f'user_settings?select=setting_key,value&setting_key=eq.{marker}&limit=1',
+              )
+              assert rows and rows[0]['value']['integration'] == 'ok'
+              print('Supabase read/write integration passed')
+          finally:
+              store._request(
+                  'DELETE',
+                  f'user_settings?setting_key=eq.{marker}',
+                  headers={'Prefer': 'return=minimal'},
+              )
+          PY
+      - name: Limited crypto live-data dry scan
+        run: |
+          python - <<'PY'
+          import sys
+          import config
+          import scanner
+
+          config.MAX_SYMBOLS_PER_MARKET = 6
+          config.SEND_CHART_IMAGES = False
+          config.SEND_CSV_REPORT = False
+          config.SEND_COMPLETION_SUMMARY = False
+          config.SEND_RUN_SUMMARY_WHEN_NO_SIGNALS = False
+          config.BINANCE_SYMBOL_PAUSE_SECONDS = 0
+          sys.argv = ["scanner.py", "--market", "crypto", "--dry-run", "--defer-delivery"]
+          raise SystemExit(scanner.main())
+          PY
+      - name: Limited US live-data dry scan
+        run: |
+          python - <<'PY'
+          import sys
+          import config
+          import scanner
+
+          config.MAX_SYMBOLS_PER_MARKET = 6
+          config.SEND_CHART_IMAGES = False
+          config.SEND_CSV_REPORT = False
+          config.SEND_COMPLETION_SUMMARY = False
+          config.SEND_RUN_SUMMARY_WHEN_NO_SIGNALS = False
+          config.YFINANCE_BATCH_SIZE = 3
+          config.YFINANCE_BATCH_RETRIES = 1
+          config.YFINANCE_BATCH_PAUSE_SECONDS = 0
+          sys.argv = ["scanner.py", "--market", "us", "--dry-run", "--defer-delivery"]
+          raise SystemExit(scanner.main())
+          PY

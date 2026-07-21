@@ -1,23 +1,25 @@
-name: US Markets Daily Ichimoku Scan
+name: Telegram Delivery at 3 PM Kuwait
 
 on:
   workflow_dispatch:
   schedule:
-    # Scan after the completed US cash session; delivery remains 15:00 Kuwait next day.
-    - cron: '17 23 * * 1-5'
+    # 15:00 Kuwait (UTC+3) = 12:00 UTC.
+    - cron: '0 12 * * *'
 
 permissions:
   contents: write
 
 concurrency:
-  group: us-daily-ichimoku-scan
+  group: ichimoku-telegram-delivery
   cancel-in-progress: false
 
 jobs:
-  scan:
+  deliver:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 120
     env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
@@ -26,19 +28,17 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.11', cache: pip }
       - run: pip install -r requirements.txt
-      - name: Scan completed US candles and defer Telegram
-        run: python scanner.py --market us --defer-delivery
-      - name: Persist V3 signals and regime
+      - name: Deliver queued signals
+        run: python scanner.py --market all --deliver-pending
+      - name: Refresh V3 state after delivery
         run: |
-          python -m v3.cli ingest --market us
-          python -m v3.cli regime --market us
-          python -m v3.cli lifecycle --limit 50
+          python -m v3.cli ingest --market all
           python -m v3.cli paper
-      - name: Commit scanner and V3 fallback state
+      - name: Commit delivery state
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/*.json || true
-          git diff --cached --quiet || git commit -m "Update US scanner V3 state"
+          git diff --cached --quiet || git commit -m "Update Telegram delivery state"
           git push || true
