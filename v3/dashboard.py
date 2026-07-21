@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hmac
-import os
 from typing import Optional
 
 from fastapi import FastAPI, Header, HTTPException, Request
@@ -11,7 +10,7 @@ from .settings import settings
 from .storage import get_store
 from .telegram_commands import handle_update
 
-app = FastAPI(title="Ichimoku Scanner V3", version="3.0.0")
+app = FastAPI(title="Ichimoku Scanner V3", version="3.0.1")
 
 
 def _authorize(key: Optional[str]) -> None:
@@ -21,7 +20,7 @@ def _authorize(key: Optional[str]) -> None:
 
 @app.get("/health")
 def health() -> dict:
-    return {"ok": True, "version": "3.0.0", "supabase": settings.supabase_enabled}
+    return {"ok": True, "version": "3.0.1", "supabase": settings.supabase_enabled}
 
 
 @app.get("/api/signals")
@@ -50,7 +49,9 @@ def paper(x_api_key: Optional[str] = Header(default=None)) -> dict:
 
 @app.post("/telegram/webhook")
 async def telegram_webhook(request: Request, x_telegram_bot_api_secret_token: Optional[str] = Header(default=None)) -> dict:
-    if settings.telegram_webhook_secret and not hmac.compare_digest(x_telegram_bot_api_secret_token or "", settings.telegram_webhook_secret):
+    if settings.telegram_webhook_secret and not hmac.compare_digest(
+        x_telegram_bot_api_secret_token or "", settings.telegram_webhook_secret
+    ):
         raise HTTPException(status_code=401, detail="Invalid webhook secret")
     update = await request.json()
     return handle_update(update)
@@ -59,18 +60,22 @@ async def telegram_webhook(request: Request, x_telegram_bot_api_secret_token: Op
 DASHBOARD_HTML = """
 <!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
 <title>Ichimoku V3</title><style>
-body{font-family:system-ui;margin:0;background:#0d1117;color:#e6edf3}header{padding:24px;background:#161b22;position:sticky;top:0}main{padding:20px;max-width:1200px;margin:auto}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}.card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:16px}table{width:100%;border-collapse:collapse;background:#161b22}th,td{padding:10px;border-bottom:1px solid #30363d;text-align:left;font-size:14px}.bullish{color:#3fb950}.bearish{color:#f85149}.muted{color:#8b949e}input{padding:8px;background:#0d1117;color:white;border:1px solid #30363d;border-radius:6px}</style></head>
+body{font-family:system-ui;margin:0;background:#0d1117;color:#e6edf3}header{padding:24px;background:#161b22;position:sticky;top:0}main{padding:20px;max-width:1200px;margin:auto}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}.card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:16px}table{width:100%;border-collapse:collapse;background:#161b22}th,td{padding:10px;border-bottom:1px solid #30363d;text-align:left;font-size:14px}.bullish{color:#3fb950}.bearish{color:#f85149}.muted{color:#8b949e}.ok{color:#3fb950}.error{color:#f85149}input{box-sizing:border-box;width:100%;padding:10px;background:#0d1117;color:white;border:1px solid #30363d;border-radius:6px;margin-bottom:10px}button{padding:10px 14px;border:0;border-radius:6px;cursor:pointer}button:disabled{opacity:.6;cursor:wait}.note{font-size:13px;line-height:1.4}</style></head>
 <body><header><h1>Ichimoku Scanner V3</h1><span class='muted'>Signals, regimes, risk plans and paper portfolio</span></header><main>
-<div class='grid'><div class='card'><h3>Market regimes</h3><div id='regimes'>Loading…</div></div><div class='card'><h3>Paper portfolio</h3><div id='paper'>Loading…</div></div><div class='card'><h3>Filters</h3><input id='key' placeholder='Dashboard API key'><button onclick='loadAll()'>Refresh</button></div></div>
-<h2>Latest signals</h2><div style='overflow:auto'><table><thead><tr><th>Symbol</th><th>Market</th><th>Direction</th><th>Type</th><th>Grade</th><th>Status</th><th>Entry zone</th><th>Invalidation</th></tr></thead><tbody id='signals'></tbody></table></div>
+<div class='grid'><div class='card'><h3>Market regimes</h3><div id='regimes' class='muted'>Unlock the dashboard to load data.</div></div><div class='card'><h3>Paper portfolio</h3><div id='paper' class='muted'>Unlock the dashboard to load data.</div></div><div class='card'><h3>Dashboard access</h3><input id='key' type='password' autocomplete='current-password' placeholder='Dashboard API key'><button id='refresh' onclick='loadAll()'>Unlock & refresh</button><p id='status' class='muted note'>Copy DASHBOARD_API_KEY from Render → Environment. It is stored only in this browser.</p></div></div>
+<h2>Latest signals</h2><div style='overflow:auto'><table><thead><tr><th>Symbol</th><th>Market</th><th>Direction</th><th>Type</th><th>Grade</th><th>Status</th><th>Entry zone</th><th>Invalidation</th></tr></thead><tbody id='signals'><tr><td colspan='8' class='muted'>Unlock the dashboard to load signals.</td></tr></tbody></table></div>
 <script>
-const headers=()=>{const k=document.getElementById('key').value;return k?{'X-API-Key':k}:{}};
-async function j(url){const r=await fetch(url,{headers:headers()});if(!r.ok)throw new Error(await r.text());return r.json()}
-async function loadAll(){try{const [s,r,p]=await Promise.all([j('/api/signals?limit=100'),j('/api/regimes'),j('/api/paper')]);
-document.getElementById('signals').innerHTML=s.map(x=>`<tr><td><b>${x.symbol}</b></td><td>${x.market}</td><td class='${x.direction}'>${x.direction}</td><td>${x.signal_type}</td><td>${x.grade}/${x.score}</td><td>${x.status}</td><td>${x.risk_plan?.entry_low??'-'} – ${x.risk_plan?.entry_high??'-'}</td><td>${x.risk_plan?.invalidation??'-'}</td></tr>`).join('');
-document.getElementById('regimes').innerHTML=r.slice(0,4).map(x=>`<p><b>${x.market}</b>: ${x.regime} (${x.score}) — ${x.volatility} volatility</p>`).join('')||'No regime data yet';
-document.getElementById('paper').innerHTML=`Equity: ${(p.equity||0).toLocaleString()}<br>Open positions: ${Object.keys(p.positions||{}).length}<br>Closed trades: ${(p.closed_trades||[]).length}`;}catch(e){alert(e)}}
-loadAll();</script></main></body></html>
+const keyInput=document.getElementById('key');
+const refreshButton=document.getElementById('refresh');
+const statusBox=document.getElementById('status');
+keyInput.value=localStorage.getItem('ichimokuDashboardApiKey')||'';
+const headers=()=>{const k=keyInput.value.trim();return k?{'X-API-Key':k}:{}};
+async function j(url){const r=await fetch(url,{headers:headers()});if(!r.ok){const body=await r.text();const err=new Error(body);err.status=r.status;throw err}return r.json()}
+function locked(message){document.getElementById('regimes').innerHTML='Unlock the dashboard to load data.';document.getElementById('paper').innerHTML='Unlock the dashboard to load data.';document.getElementById('signals').innerHTML="<tr><td colspan='8' class='muted'>Unlock the dashboard to load signals.</td></tr>";statusBox.textContent=message;statusBox.className='error note'}
+async function loadAll(){const key=keyInput.value.trim();if(!key){locked('Enter the generated DASHBOARD_API_KEY from Render → Environment.');keyInput.focus();return}refreshButton.disabled=true;statusBox.textContent='Connecting…';statusBox.className='muted note';try{const [s,r,p]=await Promise.all([j('/api/signals?limit=100'),j('/api/regimes'),j('/api/paper')]);localStorage.setItem('ichimokuDashboardApiKey',key);document.getElementById('signals').innerHTML=s.length?s.map(x=>`<tr><td><b>${x.symbol}</b></td><td>${x.market}</td><td class='${x.direction}'>${x.direction}</td><td>${x.signal_type}</td><td>${x.grade}/${x.score}</td><td>${x.status}</td><td>${x.risk_plan?.entry_low??'-'} – ${x.risk_plan?.entry_high??'-'}</td><td>${x.risk_plan?.invalidation??'-'}</td></tr>`).join(''):"<tr><td colspan='8' class='muted'>No signals stored yet. The next completed market scans will populate this table.</td></tr>";document.getElementById('regimes').innerHTML=r.slice(0,4).map(x=>`<p><b>${x.market}</b>: ${x.regime} (${x.score}) — ${x.volatility} volatility</p>`).join('')||'No regime data yet';document.getElementById('paper').innerHTML=`Equity: ${(p.equity||0).toLocaleString()}<br>Open positions: ${Object.keys(p.positions||{}).length}<br>Closed trades: ${(p.closed_trades||[]).length}`;statusBox.textContent='Connected. The key is saved in this browser.';statusBox.className='ok note'}catch(e){if(e.status===401){localStorage.removeItem('ichimokuDashboardApiKey');locked('That API key was rejected. Copy the complete DASHBOARD_API_KEY value from Render → Environment and try again.')}else{statusBox.textContent='Could not load data: '+e.message;statusBox.className='error note'}}finally{refreshButton.disabled=false}}
+keyInput.addEventListener('keydown',e=>{if(e.key==='Enter')loadAll()});
+if(keyInput.value)loadAll();
+</script></main></body></html>
 """
 
 
