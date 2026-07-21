@@ -1,0 +1,32 @@
+name: Validate Ichimoku V3
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Compile
+        run: python -m compileall -q scanner.py scanner_impl.py config.py v3 tests
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: CLI smoke tests
+        run: |
+          python -m v3.cli status
+          python - <<'PY'
+          import scanner
+          assert callable(scanner.deliver_pending_market)
+          assert callable(scanner.run_market)
+          print('Deferred delivery API available')
+          PY
