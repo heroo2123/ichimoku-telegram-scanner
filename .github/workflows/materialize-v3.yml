@@ -7,6 +7,12 @@ on:
       - 'v3_payload/**'
       - 'tools/materialize_v3.py'
       - '.github/workflows/materialize-v3.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'v3_payload/**'
+      - 'tools/materialize_v3.py'
+      - '.github/workflows/materialize-v3.yml'
   workflow_dispatch:
 
 permissions:
@@ -16,8 +22,11 @@ jobs:
   materialize:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with: { persist-credentials: true }
+      - name: Checkout V3 branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/ichimoku-v3-platform
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with: { python-version: '3.11' }
       - run: python tools/materialize_v3.py
