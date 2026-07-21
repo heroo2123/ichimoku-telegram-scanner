@@ -32,7 +32,6 @@ jobs:
         run: python scanner.py --market all --deliver-pending
       - name: Refresh V3 state after delivery
         run: |
-          python -m v3.cli ingest --market all
           python -m v3.cli paper
       - name: Commit delivery state
         if: always()

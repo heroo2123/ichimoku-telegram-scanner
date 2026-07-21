@@ -46,9 +46,16 @@ def main() -> int:
         trades = []
         for run in get_store().list_backtests(limit=100):
             trades.extend(run.get("trades") or [])
-        result = fit_logistic_calibrator(trades, horizon=args.horizon)
-        if result.get("ready"):
-            get_store().save_calibration({"market": "all", "direction": "all", "horizon": args.horizon, "model": result, "metrics": {"count": result.get("count"), "brier_score": result.get("brier_score"), "accuracy": result.get("accuracy")}})
+        result = {}
+        groups = {("all", "all"): trades}
+        for market in sorted({str(trade.get("market") or "unknown") for trade in trades}):
+            for direction in ("bullish", "bearish"):
+                groups[(market, direction)] = [trade for trade in trades if str(trade.get("market") or "unknown") == market and trade.get("direction") == direction]
+        for (market, direction), selected in groups.items():
+            model = fit_logistic_calibrator(selected, horizon=args.horizon)
+            result[f"{market}|{direction}"] = model
+            if model.get("ready"):
+                get_store().save_calibration({"market": market, "direction": direction, "horizon": args.horizon, "model": model, "metrics": {"count": model.get("count"), "validation_count": model.get("validation_count"), "brier_score": model.get("brier_score"), "accuracy": model.get("accuracy"), "base_rate": model.get("base_rate")}})
     else:
         store = get_store()
         result = {"signals": len(store.list_signals(limit=1000)), "regimes": store.list_regimes(5), "paper": store.load_paper_state()}

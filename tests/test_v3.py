@@ -8,9 +8,11 @@ from unittest.mock import MagicMock, patch
 
 import numpy as np
 import pandas as pd
+from fastapi.testclient import TestClient
 
 import scanner
 from v3.backtest import run_frame_backtest
+from v3.calibration import fit_logistic_calibrator
 from v3.ingest import normalize_candidate
 from v3.lifecycle import evaluate_status, initial_status
 from v3.lifecycle import sessions_since
@@ -19,6 +21,7 @@ from v3.quality import validate_ohlcv
 from v3.queue import DatabaseDeliveryQueue, next_delivery_time
 from v3.risk import build_risk_plan, classify_cluster, correlation_warnings
 from v3.storage import LocalStore, SupabaseStore
+from v3.dashboard import app
 
 
 class V3Tests(unittest.TestCase):
@@ -95,6 +98,8 @@ class V3Tests(unittest.TestCase):
         result=run_frame_backtest(scanner,frame,'US Stock','TEST')
         self.assertIn('signals',result.summary)
         self.assertEqual(result.parameters['daily'],[20,60,120,30])
+        self.assertEqual(result.parameters['entry_model'],'next_open')
+        self.assertIn('profit_factor',result.summary['h10'])
 
     def test_completed_weekly_frame_excludes_partial_week(self):
         idx=pd.bdate_range('2024-01-01',periods=503)
@@ -147,6 +152,49 @@ class V3Tests(unittest.TestCase):
                 marked=update_paper_portfolio([signal])
                 self.assertGreater(marked['unrealized_pnl'],0)
                 self.assertGreater(marked['equity'],marked['cash'])
+
+    def test_dashboard_uses_revocable_cookie_session(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store=LocalStore(Path(tmp))
+            fake_settings=SimpleNamespace(dashboard_api_key='correct-key',supabase_enabled=False,paper_starting_equity=100000.0)
+            with patch('v3.dashboard.get_store',return_value=store), patch('v3.dashboard.settings',fake_settings):
+                client=TestClient(app,base_url='https://testserver')
+                self.assertEqual(client.get('/api/signals').status_code,401)
+                unlocked=client.post('/auth/unlock',json={'key':'correct-key'})
+                self.assertEqual(unlocked.status_code,200)
+                self.assertNotIn('session_token',unlocked.json())
+                self.assertIn('ichimoku_dashboard_session',client.cookies)
+                self.assertEqual(client.get('/api/signals').status_code,200)
+                self.assertEqual(client.post('/auth/logout').status_code,200)
+                self.assertEqual(client.get('/api/signals').status_code,401)
+
+    def test_calibration_reports_walk_forward_metrics(self):
+        trades=[]
+        for index in range(90):
+            trades.append({
+                'date':f'2025-{1 + index // 28:02d}-{1 + index % 28:02d}',
+                'symbol':f'T{index % 5}',
+                'score':4 + index % 6,
+                'weekly_alignment':'aligned' if index % 2 else 'neutral',
+                'metrics':{'volume_ratio':1 + index % 3,'cloud_distance_atr':0.5,'kijun_distance_atr':1.0,'cloud_thickness_atr':0.5},
+                'return_10':1.0 if index % 3 else -0.8,
+            })
+        model=fit_logistic_calibrator(trades,horizon=10,iterations=100)
+        self.assertTrue(model['ready'])
+        self.assertEqual(model['validation'],'expanding_window_walk_forward')
+        self.assertGreater(model['validation_count'],0)
+
+    def test_delivery_summary_does_not_replace_scan_summary(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            heartbeat=Path(tmp)/'heartbeat.json'; summary=Path(tmp)/'summary.json'
+            with patch.object(scanner,'HEARTBEAT_PATH',heartbeat), patch.object(scanner,'SUMMARY_PATH',summary):
+                scan_stats=scanner.ScanStats('crypto',symbols_attempted=25,symbols_with_data=20)
+                scanner.write_run_files('crypto',scan_stats,[],{},observed=[],mode='deferred')
+                delivery_stats=scanner.ScanStats('crypto-delivery')
+                scanner.write_run_files('crypto',delivery_stats,[],{},observed=[],mode='delivery')
+            payload=__import__('json').loads(summary.read_text(encoding='utf-8'))['crypto']
+            self.assertEqual(payload['stats']['symbols_attempted'],25)
+            self.assertEqual(payload['last_delivery']['stats']['symbols_attempted'],0)
 
 
 if __name__=='__main__': unittest.main()

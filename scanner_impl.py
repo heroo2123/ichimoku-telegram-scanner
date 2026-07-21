@@ -58,6 +58,9 @@ class ScanStats:
     symbols_with_data: int = 0
     symbols_filtered_liquidity: int = 0
     symbols_filtered_quality: int = 0
+    breadth_total: int = 0
+    breadth_above_cloud: int = 0
+    breadth_below_cloud: int = 0
     symbols_failed: int = 0
     fresh_candidates: int = 0
     pending_loaded: int = 0
@@ -71,7 +74,21 @@ class ScanStats:
     elapsed_seconds: float = 0.0
 
     def as_dict(self) -> Dict[str, Any]:
-        return {'market': self.market, 'symbols_discovered': self.symbols_discovered, 'symbols_filtered_universe': self.symbols_filtered_universe, 'symbols_attempted': self.symbols_attempted, 'symbols_with_data': self.symbols_with_data, 'symbols_filtered_liquidity': self.symbols_filtered_liquidity, 'symbols_filtered_quality': self.symbols_filtered_quality, 'symbols_failed': self.symbols_failed, 'fresh_candidates': self.fresh_candidates, 'pending_loaded': self.pending_loaded, 'digest_delivered': self.digest_delivered, 'digest_failed': self.digest_failed, 'details_delivered': self.details_delivered, 'details_failed': self.details_failed, 'delivery_deferred': self.delivery_deferred, 'provider_errors': self.provider_errors[-30:], 'started_utc': self.started_utc, 'elapsed_seconds': self.elapsed_seconds}
+        breadth_above_pct = round(self.breadth_above_cloud / self.breadth_total * 100.0, 2) if self.breadth_total else None
+        breadth_below_pct = round(self.breadth_below_cloud / self.breadth_total * 100.0, 2) if self.breadth_total else None
+        return {'market': self.market, 'symbols_discovered': self.symbols_discovered, 'symbols_filtered_universe': self.symbols_filtered_universe, 'symbols_attempted': self.symbols_attempted, 'symbols_with_data': self.symbols_with_data, 'symbols_filtered_liquidity': self.symbols_filtered_liquidity, 'symbols_filtered_quality': self.symbols_filtered_quality, 'symbols_failed': self.symbols_failed, 'fresh_candidates': self.fresh_candidates, 'pending_loaded': self.pending_loaded, 'digest_delivered': self.digest_delivered, 'digest_failed': self.digest_failed, 'details_delivered': self.details_delivered, 'details_failed': self.details_failed, 'delivery_deferred': self.delivery_deferred, 'breadth_total': self.breadth_total, 'breadth_above_cloud': self.breadth_above_cloud, 'breadth_below_cloud': self.breadth_below_cloud, 'breadth_above_pct': breadth_above_pct, 'breadth_below_pct': breadth_below_pct, 'provider_errors': self.provider_errors[-30:], 'started_utc': self.started_utc, 'elapsed_seconds': self.elapsed_seconds}
+
+
+def update_breadth(stats: ScanStats, frame: pd.DataFrame) -> None:
+    enriched = add_ichimoku(frame)
+    context = ichimoku_context_at(enriched, -1, int(config.DISPLACEMENT))
+    if not context:
+        return
+    stats.breadth_total += 1
+    if context.get('price_above_cloud'):
+        stats.breadth_above_cloud += 1
+    elif context.get('price_below_cloud'):
+        stats.breadth_below_cloud += 1
 
 @dataclass
 class Candidate:
@@ -969,6 +986,7 @@ def scan_crypto(state: Dict[str, Any], stats: ScanStats, dry_run: bool=False) ->
                 stats.provider_errors.append(f'{symbol}: data quality failed: {"; ".join(quality_issues[:3])}')
                 continue
             stats.symbols_with_data += 1
+            update_breadth(stats, frame)
             frame_map[symbol] = frame
             update_history_for_symbol(state, 'Crypto Spot', symbol, frame)
             candidate = candidate_from_frame(symbol, 'Crypto Spot', frame, extra_metrics={'data_quality': quality_meta, 'data_quality_warnings': quality_issues})
@@ -1012,6 +1030,7 @@ def scan_yfinance_symbols(symbols: Sequence[str], market: str, state: Dict[str, 
                     if not passed:
                         stats.symbols_filtered_liquidity += 1
                         continue
+                update_breadth(stats, frame)
                 frame_map[symbol] = frame
                 candidate = candidate_from_frame(symbol, market, frame, extra_metrics=extra)
                 if candidate and (dry_run or queue_candidate(state, candidate)):
@@ -1122,10 +1141,16 @@ def deliver_pending_market(market: str, state: Dict[str, Any], dry_run: bool=Fal
 def write_run_files(market: str, stats: ScanStats, delivered: Sequence[Candidate], state: Dict[str, Any], observed: Optional[Sequence[Candidate]]=None, mode: str='live') -> None:
     heartbeat = load_json(HEARTBEAT_PATH, {})
     alerts = list(observed if observed is not None else delivered)
-    heartbeat[market] = {'last_run_utc': now_utc_iso(), 'alerts_count': len(alerts), 'delivered_count': len(delivered), 'status': 'completed', 'mode': mode, 'stats': stats.as_dict()}
+    heartbeat_key = f'{market}_delivery' if mode == 'delivery' else market
+    heartbeat[heartbeat_key] = {'last_run_utc': now_utc_iso(), 'alerts_count': len(alerts), 'delivered_count': len(delivered), 'status': 'completed', 'mode': mode, 'stats': stats.as_dict()}
     save_json(HEARTBEAT_PATH, heartbeat)
     summary = load_json(SUMMARY_PATH, {})
-    summary[market] = {'last_run_utc': now_utc_iso(), 'alerts': [candidate.serializable() for candidate in alerts], 'delivered_alerts': [candidate.serializable() for candidate in delivered], 'delivery_mode': mode, 'stats': stats.as_dict(), 'performance': performance_summary(state)}
+    payload = {'last_run_utc': now_utc_iso(), 'alerts': [candidate.serializable() for candidate in alerts], 'delivered_alerts': [candidate.serializable() for candidate in delivered], 'delivery_mode': mode, 'stats': stats.as_dict(), 'performance': performance_summary(state)}
+    if mode == 'delivery':
+        market_summary = summary.setdefault(market, {})
+        market_summary['last_delivery'] = payload
+    else:
+        summary[market] = {**payload, 'last_scan': payload}
     save_json(SUMMARY_PATH, summary)
 
 def send_no_signal_summary(stats: ScanStats, dry_run: bool) -> None:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
@@ -89,6 +90,39 @@ class LocalStore:
 
     def load_paper_state(self) -> Dict[str, Any]:
         return self._read("paper", {})
+
+    def create_dashboard_session(self, token_hash: str, expires_at: str, user_agent_hash: Optional[str]) -> None:
+        sessions = self._read("dashboard_sessions", {})
+        sessions[token_hash] = {
+            "token_hash": token_hash,
+            "expires_at": expires_at,
+            "user_agent_hash": user_agent_hash,
+            "revoked_at": None,
+            "last_seen_at": utc_now_iso(),
+        }
+        self._write("dashboard_sessions", sessions)
+
+    def validate_dashboard_session(self, token_hash: str) -> bool:
+        sessions = self._read("dashboard_sessions", {})
+        row = sessions.get(token_hash) or {}
+        if row.get("revoked_at"):
+            return False
+        try:
+            expires = datetime.fromisoformat(str(row.get("expires_at", "")).replace("Z", "+00:00"))
+            valid = expires > datetime.now(timezone.utc)
+        except (TypeError, ValueError):
+            valid = False
+        if valid:
+            row["last_seen_at"] = utc_now_iso()
+            sessions[token_hash] = row
+            self._write("dashboard_sessions", sessions)
+        return valid
+
+    def revoke_dashboard_session(self, token_hash: str) -> None:
+        sessions = self._read("dashboard_sessions", {})
+        if token_hash in sessions:
+            sessions[token_hash]["revoked_at"] = utc_now_iso()
+            self._write("dashboard_sessions", sessions)
 
 
 class SupabaseStore(LocalStore):
@@ -200,6 +234,52 @@ class SupabaseStore(LocalStore):
             return rows[0]["state"] if rows else super().load_paper_state()
         except Exception:
             return super().load_paper_state()
+
+    def create_dashboard_session(self, token_hash: str, expires_at: str, user_agent_hash: Optional[str]) -> None:
+        self._request(
+            "POST",
+            "dashboard_sessions?on_conflict=token_hash",
+            json={
+                "token_hash": token_hash,
+                "expires_at": expires_at,
+                "user_agent_hash": user_agent_hash,
+                "last_seen_at": utc_now_iso(),
+                "revoked_at": None,
+            },
+            headers={"Prefer": "resolution=merge-duplicates,return=minimal"},
+        )
+
+    def validate_dashboard_session(self, token_hash: str) -> bool:
+        rows = self._request(
+            "GET",
+            "dashboard_sessions",
+            params={
+                "select": "token_hash",
+                "token_hash": f"eq.{token_hash}",
+                "revoked_at": "is.null",
+                "expires_at": f"gt.{utc_now_iso()}",
+                "limit": "1",
+            },
+        )
+        if not rows:
+            return False
+        self._request(
+            "PATCH",
+            "dashboard_sessions",
+            params={"token_hash": f"eq.{token_hash}"},
+            json={"last_seen_at": utc_now_iso()},
+            headers={"Prefer": "return=minimal"},
+        )
+        return True
+
+    def revoke_dashboard_session(self, token_hash: str) -> None:
+        self._request(
+            "PATCH",
+            "dashboard_sessions",
+            params={"token_hash": f"eq.{token_hash}"},
+            json={"revoked_at": utc_now_iso()},
+            headers={"Prefer": "return=minimal"},
+        )
 
 
 def get_store() -> LocalStore:
