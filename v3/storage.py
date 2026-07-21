@@ -87,11 +87,16 @@ class SupabaseStore(LocalStore):
     def __init__(self):
         super().__init__()
         self.base = f"{settings.supabase_url}/rest/v1"
+        key = settings.supabase_service_role_key
         self.headers = {
-            "apikey": settings.supabase_service_role_key,
-            "Authorization": f"Bearer {settings.supabase_service_role_key}",
+            "apikey": key,
             "Content-Type": "application/json",
         }
+        # New sb_secret_* keys are opaque API keys, not JWTs. Sending them as
+        # Authorization: Bearer causes Supabase to reject them as invalid JWTs.
+        # Keep Bearer support only for the legacy JWT-based service_role key.
+        if key and not key.startswith("sb_"):
+            self.headers["Authorization"] = f"Bearer {key}"
 
     def _request(self, method: str, path: str, **kwargs: Any) -> Any:
         headers = dict(self.headers)
