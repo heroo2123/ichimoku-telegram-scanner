@@ -11,16 +11,10 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: SUPABASE_URL
-        sync: false
+        value: https://okyguoonpgbvdkhvkjcd.supabase.co
       - key: SUPABASE_SERVICE_ROLE_KEY
         sync: false
       - key: DASHBOARD_API_KEY
-        generateValue: true
-      - key: TELEGRAM_BOT_TOKEN
-        sync: false
-      - key: TELEGRAM_CHAT_ID
-        sync: false
-      - key: TELEGRAM_WEBHOOK_SECRET
         generateValue: true
       - key: PAPER_STARTING_EQUITY
         value: "100000"
