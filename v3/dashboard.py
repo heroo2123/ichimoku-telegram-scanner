@@ -11,7 +11,7 @@ from .settings import settings
 from .storage import get_store
 from .telegram_commands import handle_update
 
-app = FastAPI(title="Ichimoku Scanner V3", version="3.0.2")
+app = FastAPI(title="Ichimoku Scanner V3", version="3.0.3")
 
 COOKIE_NAME = "ichimoku_dashboard_session"
 COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365
@@ -24,34 +24,44 @@ def _session_token() -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
-def _authorize(request: Request, key: Optional[str] = None) -> None:
+def _authorize(
+    request: Request,
+    key: Optional[str] = None,
+    session: Optional[str] = None,
+) -> None:
     if not settings.dashboard_api_key:
         return
 
-    header_ok = bool(key) and hmac.compare_digest(key or "", settings.dashboard_api_key)
+    expected_session = _session_token()
+    header_key_ok = bool(key) and hmac.compare_digest(key or "", settings.dashboard_api_key)
+    session_header_ok = bool(session and expected_session) and hmac.compare_digest(
+        session or "", expected_session
+    )
     cookie_value = request.cookies.get(COOKIE_NAME, "")
-    expected_cookie = _session_token()
-    cookie_ok = bool(cookie_value and expected_cookie) and hmac.compare_digest(cookie_value, expected_cookie)
+    cookie_ok = bool(cookie_value and expected_session) and hmac.compare_digest(
+        cookie_value, expected_session
+    )
 
-    if not (header_ok or cookie_ok):
+    if not (header_key_ok or session_header_ok or cookie_ok):
         raise HTTPException(status_code=401, detail="Dashboard is locked")
 
 
 @app.get("/health")
 def health() -> dict:
-    return {"ok": True, "version": "3.0.2", "supabase": settings.supabase_enabled}
+    return {"ok": True, "version": "3.0.3", "supabase": settings.supabase_enabled}
 
 
 @app.post("/auth/unlock")
 async def unlock(request: Request) -> JSONResponse:
     body = await request.json()
     key = str(body.get("key", "")).strip()
-    _authorize(request, key)
+    _authorize(request, key=key)
 
-    response = JSONResponse({"ok": True})
+    token = _session_token()
+    response = JSONResponse({"ok": True, "session_token": token})
     response.set_cookie(
         key=COOKIE_NAME,
-        value=_session_token(),
+        value=token,
         max_age=COOKIE_MAX_AGE_SECONDS,
         httponly=True,
         secure=True,
@@ -74,8 +84,9 @@ def signals(
     limit: int = 100,
     status: Optional[str] = None,
     x_api_key: Optional[str] = Header(default=None),
+    x_dashboard_session: Optional[str] = Header(default=None),
 ) -> list:
-    _authorize(request, x_api_key)
+    _authorize(request, key=x_api_key, session=x_dashboard_session)
     return get_store().list_signals(min(max(limit, 1), 1000), status)
 
 
@@ -84,8 +95,9 @@ def regimes(
     request: Request,
     limit: int = 20,
     x_api_key: Optional[str] = Header(default=None),
+    x_dashboard_session: Optional[str] = Header(default=None),
 ) -> list:
-    _authorize(request, x_api_key)
+    _authorize(request, key=x_api_key, session=x_dashboard_session)
     return get_store().list_regimes(min(max(limit, 1), 100))
 
 
@@ -94,14 +106,19 @@ def backtests(
     request: Request,
     limit: int = 20,
     x_api_key: Optional[str] = Header(default=None),
+    x_dashboard_session: Optional[str] = Header(default=None),
 ) -> list:
-    _authorize(request, x_api_key)
+    _authorize(request, key=x_api_key, session=x_dashboard_session)
     return get_store().list_backtests(min(max(limit, 1), 100))
 
 
 @app.get("/api/paper")
-def paper(request: Request, x_api_key: Optional[str] = Header(default=None)) -> dict:
-    _authorize(request, x_api_key)
+def paper(
+    request: Request,
+    x_api_key: Optional[str] = Header(default=None),
+    x_dashboard_session: Optional[str] = Header(default=None),
+) -> dict:
+    _authorize(request, key=x_api_key, session=x_dashboard_session)
     state = get_store().load_paper_state()
     if state:
         return state
@@ -134,16 +151,18 @@ body{font-family:system-ui;margin:0;background:#0d1117;color:#e6edf3}header{padd
 <div class='grid'><div class='card'><h3>Market regimes</h3><div id='regimes' class='muted'>Loading…</div></div><div class='card'><h3>Paper portfolio</h3><div id='paper' class='muted'>Loading…</div></div><div id='access-card' class='card' hidden><h3>Unlock dashboard</h3><input id='key' type='password' autocomplete='current-password' placeholder='Dashboard API key'><button id='unlock' onclick='unlockDashboard()'>Unlock this phone</button><p id='status' class='muted note'>You only need to enter the key once on this browser.</p></div></div>
 <h2>Latest signals</h2><div style='overflow:auto'><table><thead><tr><th>Symbol</th><th>Market</th><th>Direction</th><th>Type</th><th>Grade</th><th>Status</th><th>Entry zone</th><th>Invalidation</th></tr></thead><tbody id='signals'><tr><td colspan='8' class='muted'>Loading…</td></tr></tbody></table></div>
 <script>
-localStorage.removeItem('ichimokuDashboardApiKey');
+const SESSION_STORAGE_KEY='ichimokuDashboardSession';
 const accessCard=document.getElementById('access-card');
 const keyInput=document.getElementById('key');
 const unlockButton=document.getElementById('unlock');
 const statusBox=document.getElementById('status');
-async function j(url,options={}){const r=await fetch(url,{credentials:'same-origin',...options});if(!r.ok){const body=await r.text();const err=new Error(body);err.status=r.status;throw err}return r.json()}
+let sessionToken=localStorage.getItem(SESSION_STORAGE_KEY)||'';
+function sessionHeaders(){return sessionToken?{'X-Dashboard-Session':sessionToken}:{}}
+async function j(url,options={}){const headers={...sessionHeaders(),...(options.headers||{})};const r=await fetch(url,{credentials:'same-origin',...options,headers});if(!r.ok){const body=await r.text();const err=new Error(body);err.status=r.status;throw err}return r.json()}
 function showLocked(message){accessCard.hidden=false;document.getElementById('regimes').innerHTML='Unlock the dashboard to load data.';document.getElementById('paper').innerHTML='Unlock the dashboard to load data.';document.getElementById('signals').innerHTML="<tr><td colspan='8' class='muted'>Unlock the dashboard to load signals.</td></tr>";statusBox.textContent=message;statusBox.className='muted note'}
 function renderData(s,r,p){accessCard.hidden=true;document.getElementById('signals').innerHTML=s.length?s.map(x=>`<tr><td><b>${x.symbol}</b></td><td>${x.market}</td><td class='${x.direction}'>${x.direction}</td><td>${x.signal_type}</td><td>${x.grade}/${x.score}</td><td>${x.status}</td><td>${x.risk_plan?.entry_low??'-'} – ${x.risk_plan?.entry_high??'-'}</td><td>${x.risk_plan?.invalidation??'-'}</td></tr>`).join(''):"<tr><td colspan='8' class='muted'>No signals stored yet. The next completed market scans will populate this table.</td></tr>";document.getElementById('regimes').innerHTML=r.slice(0,4).map(x=>`<p><b>${x.market}</b>: ${x.regime} (${x.score}) — ${x.volatility} volatility</p>`).join('')||'No regime data yet';document.getElementById('paper').innerHTML=`Equity: ${(p.equity||0).toLocaleString()}<br>Open positions: ${Object.keys(p.positions||{}).length}<br>Closed trades: ${(p.closed_trades||[]).length}`}
-async function loadAll(){try{const [s,r,p]=await Promise.all([j('/api/signals?limit=100'),j('/api/regimes'),j('/api/paper')]);renderData(s,r,p)}catch(e){if(e.status===401)showLocked('Enter the dashboard key once. This phone will stay signed in for one year.');else showLocked('Could not load data: '+e.message)}}
-async function unlockDashboard(){const key=keyInput.value.trim();if(!key){statusBox.textContent='Enter the dashboard API key.';statusBox.className='error note';return}unlockButton.disabled=true;statusBox.textContent='Unlocking…';statusBox.className='muted note';try{await j('/auth/unlock',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key})});keyInput.value='';await loadAll()}catch(e){statusBox.textContent=e.status===401?'That key was rejected. Copy the complete DASHBOARD_API_KEY from Render → Environment.':'Could not unlock: '+e.message;statusBox.className='error note'}finally{unlockButton.disabled=false}}
+async function loadAll(){try{const [s,r,p]=await Promise.all([j('/api/signals?limit=100'),j('/api/regimes'),j('/api/paper')]);renderData(s,r,p)}catch(e){if(e.status===401){sessionToken='';localStorage.removeItem(SESSION_STORAGE_KEY);showLocked('Enter the dashboard key once. This browser will remember the session.')}else showLocked('Could not load data: '+e.message)}}
+async function unlockDashboard(){const key=keyInput.value.trim();if(!key){statusBox.textContent='Enter the dashboard API key.';statusBox.className='error note';return}unlockButton.disabled=true;statusBox.textContent='Unlocking…';statusBox.className='muted note';try{const result=await j('/auth/unlock',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key})});sessionToken=result.session_token||'';if(sessionToken)localStorage.setItem(SESSION_STORAGE_KEY,sessionToken);keyInput.value='';await loadAll()}catch(e){statusBox.textContent=e.status===401?'That key was rejected. Copy the complete DASHBOARD_API_KEY from Render → Environment.':'Could not unlock: '+e.message;statusBox.className='error note'}finally{unlockButton.disabled=false}}
 keyInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlockDashboard()});
 loadAll();
 </script></main></body></html>
