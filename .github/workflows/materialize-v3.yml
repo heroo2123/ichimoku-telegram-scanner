@@ -1,0 +1,32 @@
+name: Materialize Ichimoku V3 Sources
+
+on:
+  push:
+    branches: [agent/ichimoku-v3-platform]
+    paths:
+      - 'v3_payload/**'
+      - 'tools/materialize_v3.py'
+      - '.github/workflows/materialize-v3.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: true }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: python tools/materialize_v3.py
+      - name: Remove legacy compressed scanner payload
+        run: rm -rf scanner_payload
+      - name: Commit generated V3 sources
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A requirements.txt render.yaml docs supabase v3 tests scanner.py scanner_impl.py scanner_payload .github/workflows
+          git diff --cached --quiet || git commit -m "Materialize Ichimoku V3 platform"
+          git push
