@@ -30,6 +30,21 @@ def _max_drawdown(returns_pct: Sequence[float]) -> float | None:
     return round(worst * 100.0, 4)
 
 
+def _weekly_alignment_at(scanner_module: Any, weekly: pd.DataFrame, as_of: Any, direction: str) -> str:
+    history = weekly[weekly.index <= pd.Timestamp(as_of).normalize()]
+    minimum = int(scanner_module.config.WEEKLY_SPAN_B_LENGTH) + 2 * int(scanner_module.config.WEEKLY_DISPLACEMENT) + 5
+    if len(history) < minimum:
+        return "unknown"
+    current = scanner_module.ichimoku_context_at(history, -1, int(scanner_module.config.WEEKLY_DISPLACEMENT))
+    if not current:
+        return "unknown"
+    bullish = bool(current["price_above_cloud"] and current["chikou_above_cloud"])
+    bearish = bool(current["price_below_cloud"] and current["chikou_below_cloud"])
+    if direction == "bullish":
+        return "aligned" if bullish else "opposed" if bearish else "neutral"
+    return "aligned" if bearish else "opposed" if bullish else "neutral"
+
+
 def run_frame_backtest(
     scanner_module: Any,
     frame: pd.DataFrame,
@@ -41,6 +56,10 @@ def run_frame_backtest(
     fee_bps: float = 10.0,
     slippage_bps: float = 5.0,
 ) -> BacktestResult:
+    if entry_model not in {"next_open", "signal_close"}:
+        raise ValueError("entry_model must be 'next_open' or 'signal_close'")
+    if not horizons or any(int(horizon) <= 0 for horizon in horizons):
+        raise ValueError("horizons must contain positive session counts")
     started = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     clean = frame.dropna(subset=["Open", "High", "Low", "Close"]).copy()
     trades: List[Dict[str, Any]] = []
@@ -48,14 +67,15 @@ def run_frame_backtest(
     max_horizon = max(horizons)
     entry_offset = 1 if entry_model == "next_open" else 0
     round_trip_cost_pct = 2.0 * (float(fee_bps) + float(slippage_bps)) / 100.0
-    for pos in range(minimum, len(clean) - max_horizon - entry_offset):
-        history = clean.iloc[: pos + 1]
-        enriched = scanner_module.add_ichimoku(history)
+    enriched_full = scanner_module.add_ichimoku(clean)
+    weekly_full = scanner_module.weekly_frame(clean)
+    for pos in range(minimum - 1, len(clean) - max_horizon - entry_offset):
+        enriched = enriched_full.iloc[: pos + 1]
         classification = scanner_module.classify_signal(enriched)
         if not classification:
             continue
         signal_type, direction = classification
-        weekly_status, _ = scanner_module.weekly_alignment(history, direction)
+        weekly_status = _weekly_alignment_at(scanner_module, weekly_full, clean.index[pos], direction)
         score, reasons, warnings, metrics = scanner_module.score_signal(enriched, direction, signal_type, weekly_status)
         if score < int(scanner_module.config.MIN_SCORE_TO_REPORT):
             continue
@@ -66,7 +86,8 @@ def run_frame_backtest(
             entry *= 1.0 + float(slippage_bps) / 10_000.0
         else:
             entry *= 1.0 - float(slippage_bps) / 10_000.0
-        future = clean.iloc[entry_pos : entry_pos + max_horizon + 1]
+        excursion_start = entry_pos if entry_model == "next_open" else entry_pos + 1
+        future = clean.iloc[excursion_start : entry_pos + max_horizon + 1]
         row: Dict[str, Any] = {
             "date": pd.Timestamp(clean.index[pos]).strftime("%Y-%m-%d"),
             "entry_date": pd.Timestamp(clean.index[entry_pos]).strftime("%Y-%m-%d"),
@@ -99,7 +120,7 @@ def run_frame_backtest(
             row["mfe_pct"] = round((1.0 - float(future["Low"].min()) / entry) * 100.0, 4)
             row["mae_pct"] = round((1.0 - float(future["High"].max()) / entry) * 100.0, 4)
         trades.append(row)
-    summary: Dict[str, Any] = {"signals": len(trades)}
+    summary: Dict[str, Any] = {"signals": len(trades), "drawdown_method": "chronological_signal_sequence"}
     for horizon in horizons:
         values = [float(trade[f"return_{horizon}"]) for trade in trades]
         summary[f"h{horizon}"] = {

@@ -56,7 +56,7 @@ def main() -> int:
             model = fit_logistic_calibrator(selected, horizon=args.horizon)
             result[f"{market}|{direction}"] = model
             if model.get("ready"):
-                get_store().save_calibration({"market": market, "direction": direction, "horizon": args.horizon, "model": model, "metrics": {"count": model.get("count"), "validation_count": model.get("validation_count"), "brier_score": model.get("brier_score"), "accuracy": model.get("accuracy"), "base_rate": model.get("base_rate")}})
+                get_store().save_calibration({"market": market, "direction": direction, "horizon": args.horizon, "model": model, "metrics": {"count": model.get("count"), "validation_count": model.get("validation_count"), "brier_score": model.get("brier_score"), "baseline_brier_score": model.get("baseline_brier_score"), "brier_skill_score": model.get("brier_skill_score"), "accuracy": model.get("accuracy"), "base_rate": model.get("base_rate"), "deployable": model.get("deployable", False)}})
     elif args.command == "maintenance":
         result = get_store().prune_operational_data()
     else:

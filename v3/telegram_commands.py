@@ -50,7 +50,7 @@ def handle_update(update: Dict[str, Any]) -> Dict[str, Any]:
         reply = "<b>Recent backtests</b>\n" + "\n".join(f"{html.escape(str(run.get('symbol')))}: {run.get('summary', {}).get('signals', 0)} signals" for run in runs) if runs else "No backtests stored yet."
     elif command == "/paper":
         state = store.load_paper_state()
-        reply = f"<b>Paper portfolio</b>\nEquity: {float(state.get('equity', 0)):,.2f}\nOpen positions: {len(state.get('positions', {}))}\nClosed trades: {len(state.get('closed_trades', []))}"
+        reply = f"<b>Paper portfolio</b>\nEquity: {float(state.get('equity', 0)):,.2f}\nPending next-open entries: {len(state.get('pending_orders', {}))}\nOpen positions: {len(state.get('positions', {}))}\nClosed trades: {len(state.get('closed_trades', []))}"
     elif command == "/status":
         regimes = store.list_regimes(limit=2)
         runs = store.list_scanner_runs(limit=4)

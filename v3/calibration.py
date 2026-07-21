@@ -56,6 +56,9 @@ def fit_logistic_calibrator(trades: Sequence[Dict[str, Any]], horizon: int = 10,
     oos_y = np.asarray(out_of_sample_targets, dtype=float)
     brier = float(np.mean((oos_p - oos_y) ** 2))
     accuracy = float(np.mean((oos_p >= 0.5) == oos_y))
+    base_rate = float(np.mean(oos_y))
+    baseline_brier = float(np.mean((base_rate - oos_y) ** 2))
+    brier_skill = 1.0 - brier / baseline_brier if baseline_brier > 0 else 0.0
     weights = _fit_weights(x, y, iterations, learning_rate, l2)
     return {
         "ready": True,
@@ -66,8 +69,11 @@ def fit_logistic_calibrator(trades: Sequence[Dict[str, Any]], horizon: int = 10,
         "features": ["intercept", *FEATURES],
         "weights": [round(float(value), 8) for value in weights],
         "brier_score": round(brier, 6),
+        "baseline_brier_score": round(baseline_brier, 6),
+        "brier_skill_score": round(brier_skill, 6),
         "accuracy": round(accuracy, 6),
-        "base_rate": round(float(np.mean(oos_y)), 6),
+        "base_rate": round(base_rate, 6),
+        "deployable": bool(len(oos_y) >= 30 and brier_skill > 0),
     }
 
 

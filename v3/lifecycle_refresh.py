@@ -13,6 +13,7 @@ def _context_from_frame(scanner_module: Any, frame: Any) -> Dict[str, Any] | Non
     row = enriched.iloc[-1]
     return {
         "date": str(enriched.index[-1].date()),
+        "open": float(row["Open"]),
         "close": float(row["Close"]),
         "kijun": float(row["Kijun"]) if row["Kijun"] == row["Kijun"] else None,
         "cloud_top": float(row["CloudTop"]) if row["CloudTop"] == row["CloudTop"] else None,
@@ -58,7 +59,11 @@ def refresh_lifecycle(scanner_module: Any, limit: int = 50) -> List[Dict[str, An
             new = evaluate_status(signal, context)
             signal["status"] = new
             signal["close"] = context["close"]
-            signal.setdefault("metrics", {}).update({k: v for k, v in context.items() if k != "date"})
+            signal.setdefault("metrics", {}).update({
+                **{k: v for k, v in context.items() if k != "date"},
+                "current_date": context["date"],
+                "current_open": context["open"],
+            })
             updated.append(signal)
             if new != old:
                 store.record_event(signal["id"], "status_changed", {"from": old, "to": new, "context": context})

@@ -119,6 +119,8 @@ class V3Tests(unittest.TestCase):
         self.assertEqual(result.parameters['fee_bps'],10.0)
         self.assertEqual(result.parameters['slippage_bps'],5.0)
         self.assertIn('profit_factor',result.summary['h10'])
+        with self.assertRaises(ValueError):
+            run_frame_backtest(scanner,frame,'US Stock','TEST',entry_model='unknown')
 
     def test_completed_weekly_frame_excludes_partial_week(self):
         idx=pd.bdate_range('2024-01-01',periods=503)
@@ -144,6 +146,15 @@ class V3Tests(unittest.TestCase):
         with patch.object(scanner.config,'LOWER_TIMEFRAME_CONFIRMATION_ENABLED',True), patch.object(scanner,'fetch_yfinance_lower_timeframe',return_value=None):
             scanner.attach_lower_timeframe_confirmation(candidate)
         self.assertEqual(candidate.metrics['lower_timeframe'],{'status':'unknown','reason':'data_unavailable'})
+
+    def test_binance_parser_drops_open_intraday_candle(self):
+        columns=lambda open_ms,close_ms:[open_ms,'1','2','0.5','1.5','100',close_ms,'0','1','0','0','0']
+        rows=[columns(1_000,2_000),columns(3_000,9_000)]
+        fixed=datetime(1970,1,1,0,0,5,tzinfo=timezone.utc)
+        with patch.object(scanner,'now_utc',return_value=fixed):
+            frame=scanner.binance_rows_to_frame(rows,'4h')
+        self.assertEqual(len(frame),1)
+        self.assertEqual(float(frame.iloc[0]['Close']),1.5)
 
     def test_sessions_use_market_calendar(self):
         self.assertEqual(sessions_since('2026-01-02','2026-01-05','US Stock'),1)
@@ -197,9 +208,14 @@ class V3Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             store=LocalStore(Path(tmp)); signal=normalize_candidate(self.candidate()).to_dict()
             with patch('v3.paper.get_store',return_value=store):
+                queued=update_paper_portfolio([signal])
+                self.assertEqual(len(queued['positions']),0)
+                self.assertEqual(len(queued['pending_orders']),1)
+                signal={**signal,'close':102.0,'status':'active','metrics':{**signal['metrics'],'current_date':'2026-01-02','current_open':101.0}}
                 opened=update_paper_portfolio([signal])
                 self.assertEqual(len(opened['positions']),1)
-                signal={**signal,'close':105.0,'status':'active'}
+                self.assertEqual(opened['positions'][signal['id']]['entry_model'],'next_open')
+                signal={**signal,'close':105.0}
                 marked=update_paper_portfolio([signal])
                 self.assertGreater(marked['unrealized_pnl'],0)
                 self.assertGreater(marked['equity'],marked['cash'])
@@ -236,6 +252,8 @@ class V3Tests(unittest.TestCase):
         self.assertTrue(model['ready'])
         self.assertEqual(model['validation'],'expanding_window_walk_forward')
         self.assertGreater(model['validation_count'],0)
+        self.assertIn('brier_skill_score',model)
+        self.assertIn('deployable',model)
 
     def test_delivery_summary_does_not_replace_scan_summary(self):
         with tempfile.TemporaryDirectory() as tmp:

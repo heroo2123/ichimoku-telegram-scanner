@@ -34,6 +34,8 @@ class V3Settings:
     paper_max_position_pct: float = _float("PAPER_MAX_POSITION_PCT", 15.0)
     paper_fee_bps: float = _float("PAPER_FEE_BPS", 10.0)
     paper_slippage_bps: float = _float("PAPER_SLIPPAGE_BPS", 5.0)
+    paper_entry_model: str = os.getenv("PAPER_ENTRY_MODEL", "next_open").strip().lower()
+    paper_pending_expiry_sessions: int = _int("PAPER_PENDING_EXPIRY_SESSIONS", 5)
     paper_max_positions: int = _int("PAPER_MAX_POSITIONS", 12)
     paper_max_cluster_positions: int = _int("PAPER_MAX_CLUSTER_POSITIONS", 3)
     paper_min_grade: str = os.getenv("PAPER_MIN_GRADE", "B").upper()

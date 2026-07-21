@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from .models import utc_now_iso
+from .lifecycle import sessions_since
 from .settings import settings
 from .storage import get_store
 
@@ -15,6 +16,7 @@ def _default_state() -> Dict[str, Any]:
         "cash": settings.paper_starting_equity,
         "equity": settings.paper_starting_equity,
         "positions": {},
+        "pending_orders": {},
         "closed_trades": [],
         "realized_pnl": 0.0,
         "unrealized_pnl": 0.0,
@@ -24,9 +26,9 @@ def _default_state() -> Dict[str, Any]:
     }
 
 
-def _position_size(signal: Dict[str, Any], equity: float) -> float:
+def _position_size(signal: Dict[str, Any], equity: float, entry_override: float | None = None) -> float:
     risk_plan = dict(signal.get("risk_plan") or {})
-    entry = float(signal.get("close") or 0.0)
+    entry = float(entry_override if entry_override is not None else signal.get("close") or 0.0)
     invalidation = risk_plan.get("invalidation")
     if not entry or invalidation is None:
         return 0.0
@@ -54,10 +56,43 @@ def _pnl(position: Dict[str, Any], price: float) -> float:
     return raw if position["direction"] == "bullish" else -raw
 
 
+def _open_position(state: Dict[str, Any], signal: Dict[str, Any], reference_price: float, equity: float, cluster_counts: Dict[str, int]) -> bool:
+    cluster = str(signal.get("cluster") or "unknown")
+    if len(state["positions"]) >= settings.paper_max_positions or cluster_counts.get(cluster, 0) >= settings.paper_max_cluster_positions:
+        return False
+    units = _position_size(signal, equity, reference_price)
+    if units <= 0:
+        return False
+    direction = str(signal["direction"])
+    entry_price = _execution_price(reference_price, direction, opening=True)
+    entry_fee = abs(entry_price * units) * settings.paper_fee_bps / 10_000.0
+    state["positions"][str(signal["id"])] = {
+        "signal_id": signal["id"],
+        "symbol": signal["symbol"],
+        "market": signal["market"],
+        "direction": direction,
+        "cluster": cluster,
+        "entry_price": round(entry_price, 8),
+        "last_price": float(signal.get("close") or reference_price),
+        "invalidation": (signal.get("risk_plan") or {}).get("invalidation"),
+        "units": round(units, 8),
+        "opened_at": utc_now_iso(),
+        "grade": signal.get("grade"),
+        "score": signal.get("score"),
+        "entry_fee": round(entry_fee, 4),
+        "entry_model": settings.paper_entry_model,
+    }
+    state["cash"] = float(state.get("cash", settings.paper_starting_equity)) - entry_fee
+    state["fees_paid"] = float(state.get("fees_paid", 0.0)) + entry_fee
+    cluster_counts[cluster] = cluster_counts.get(cluster, 0) + 1
+    return True
+
+
 def update_paper_portfolio(signals: List[Dict[str, Any]]) -> Dict[str, Any]:
     store = get_store()
     state = store.load_paper_state() or _default_state()
     state.setdefault("positions", {})
+    state.setdefault("pending_orders", {})
     state.setdefault("closed_trades", [])
     state.setdefault("fees_paid", 0.0)
     state.setdefault("realized_pnl", 0.0)
@@ -97,43 +132,47 @@ def update_paper_portfolio(signals: List[Dict[str, Any]]) -> Dict[str, Any]:
     for position in state["positions"].values():
         cluster = str(position.get("cluster", "unknown"))
         cluster_counts[cluster] = cluster_counts.get(cluster, 0) + 1
+    for signal_id, order in list(state["pending_orders"].items()):
+        current = by_id.get(signal_id)
+        if not current or current.get("status") in {"invalidated", "completed"}:
+            del state["pending_orders"][signal_id]
+            continue
+        metrics = dict(current.get("metrics") or {})
+        current_date = str(metrics.get("current_date") or "")
+        age = sessions_since(str(order.get("signal_date") or ""), current_date, str(current.get("market") or "")) if current_date else 0
+        if age > settings.paper_pending_expiry_sessions:
+            del state["pending_orders"][signal_id]
+            continue
+        current_open = metrics.get("current_open")
+        if age >= 1 and current_open is not None and _open_position(state, current, float(current_open), equity, cluster_counts):
+            del state["pending_orders"][signal_id]
     ranked = sorted(signals, key=lambda row: (row.get("score", 0), row.get("weekly_alignment") == "aligned"), reverse=True)
     for signal in ranked:
         if len(state["positions"]) >= settings.paper_max_positions:
             break
-        if str(signal["id"]) in state["positions"]:
+        if str(signal["id"]) in state["positions"] or str(signal["id"]) in state["pending_orders"]:
             continue
         if GRADE_RANK.get(str(signal.get("grade", "D")), 1) < min_rank:
             continue
         if signal.get("status") not in {"confirmed", "entry_zone", "active"}:
             continue
         cluster = str(signal.get("cluster") or "unknown")
-        if cluster_counts.get(cluster, 0) >= settings.paper_max_cluster_positions:
+        pending_cluster_count = sum(1 for order in state["pending_orders"].values() if order.get("cluster") == cluster)
+        if cluster_counts.get(cluster, 0) + pending_cluster_count >= settings.paper_max_cluster_positions:
             continue
-        units = _position_size(signal, equity)
-        if units <= 0:
-            continue
-        direction = str(signal["direction"])
-        entry_price = _execution_price(float(signal["close"]), direction, opening=True)
-        entry_fee = abs(entry_price * units) * settings.paper_fee_bps / 10_000.0
-        state["positions"][str(signal["id"])] = {
-            "signal_id": signal["id"],
-            "symbol": signal["symbol"],
-            "market": signal["market"],
-            "direction": direction,
-            "cluster": cluster,
-            "entry_price": round(entry_price, 8),
-            "last_price": float(signal["close"]),
-            "invalidation": (signal.get("risk_plan") or {}).get("invalidation"),
-            "units": round(units, 8),
-            "opened_at": utc_now_iso(),
-            "grade": signal.get("grade"),
-            "score": signal.get("score"),
-            "entry_fee": round(entry_fee, 4),
-        }
-        state["cash"] = float(state.get("cash", settings.paper_starting_equity)) - entry_fee
-        state["fees_paid"] = float(state.get("fees_paid", 0.0)) + entry_fee
-        cluster_counts[cluster] = cluster_counts.get(cluster, 0) + 1
+        if settings.paper_entry_model == "next_open":
+            if len(state["positions"]) + len(state["pending_orders"]) >= settings.paper_max_positions:
+                break
+            state["pending_orders"][str(signal["id"])] = {
+                "signal_id": signal["id"],
+                "symbol": signal["symbol"],
+                "market": signal["market"],
+                "cluster": cluster,
+                "signal_date": signal.get("signal_date"),
+                "queued_at": utc_now_iso(),
+            }
+        else:
+            _open_position(state, signal, float(signal["close"]), equity, cluster_counts)
     state["closed_trades"] = state["closed_trades"][-1000:]
     state["updated_at"] = utc_now_iso()
     unrealized = 0.0

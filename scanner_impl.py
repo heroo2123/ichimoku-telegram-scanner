@@ -669,7 +669,7 @@ def score_signal(frame: pd.DataFrame, direction: str, signal_type: str, weekly_s
         if cloud_thickness_atr < float(config.MIN_CLOUD_THICKNESS_ATR):
             warnings.append('Very thin cloud')
     score = max(0, min(10, int(score)))
-    metrics.update({'atr': atr, 'atr_pct': round(abs(atr / close) * 100.0, 3) if atr not in {None, 0} and close not in {None, 0} else None, 'tenkan': tenkan, 'kijun': kijun, 'cloud_top': cloud_top, 'cloud_bottom': cloud_bottom, 'future_cloud': 'bullish' if future_bull else 'bearish', 'previous_close': previous.get('close')})
+    metrics.update({'atr': atr, 'atr_pct': round(abs(atr / close) * 100.0, 3) if atr not in {None, 0} and close not in {None, 0} else None, 'tenkan': tenkan, 'kijun': kijun, 'cloud_top': cloud_top, 'cloud_bottom': cloud_bottom, 'future_cloud': 'bullish' if future_bull else 'bearish', 'previous_close': previous.get('close'), 'signal_open': current.get('open')})
     return (score, reasons, warnings, metrics)
 
 def candidate_id(market: str, symbol: str, direction: str, signal_type: str, date: str) -> str:

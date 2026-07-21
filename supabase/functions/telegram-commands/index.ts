@@ -53,10 +53,14 @@ async function loadBotConfig(): Promise<{ token: string; chatId: string }> {
   if (environmentToken && environmentChatId) {
     return { token: environmentToken, chatId: environmentChatId };
   }
-  const vaultRows = await dbPost("rpc/get_telegram_config") as Array<Record<string, unknown>>;
-  const vaultToken = String(vaultRows[0]?.token ?? "");
-  const vaultChatId = String(vaultRows[0]?.chat_id ?? "");
-  if (vaultToken && vaultChatId) return { token: vaultToken, chatId: vaultChatId };
+  try {
+    const vaultRows = await dbPost("rpc/get_telegram_config") as Array<Record<string, unknown>>;
+    const vaultToken = String(vaultRows[0]?.token ?? "");
+    const vaultChatId = String(vaultRows[0]?.chat_id ?? "");
+    if (vaultToken && vaultChatId) return { token: vaultToken, chatId: vaultChatId };
+  } catch (_error) {
+    // The additive migration may not be installed during a rolling deploy.
+  }
   // Transitional fallback only; the V3.1 migration removes these legacy rows.
   const rows = await dbGet("user_settings?select=setting_key,value&setting_key=in.%28telegram_bot_token%2Ctelegram_chat_id%29") as Array<Record<string, unknown>>;
   const values = new Map(rows.map((row) => [String(row.setting_key), unwrapSetting(row.value)]));
@@ -179,19 +183,22 @@ Deno.serve(async (request: Request) => {
       ) as Array<Record<string, unknown>>;
       const state = (rows[0]?.state ?? {}) as Record<string, unknown>;
       const positions = (state.positions ?? {}) as Record<string, unknown>;
+      const pendingOrders = (state.pending_orders ?? {}) as Record<string, unknown>;
       const closedTrades = Array.isArray(state.closed_trades) ? state.closed_trades : [];
       const equity = Number(state.equity ?? 100000);
-      reply = `<b>Paper portfolio</b>\nEquity: ${equity.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\nOpen positions: ${Object.keys(positions).length}\nClosed trades: ${closedTrades.length}`;
+      reply = `<b>Paper portfolio</b>\nEquity: ${equity.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\nPending next-open entries: ${Object.keys(pendingOrders).length}\nOpen positions: ${Object.keys(positions).length}\nClosed trades: ${closedTrades.length}`;
     } else if (command === "/status") {
       const regimes = await dbGet(
         "market_regimes?select=market,regime,score,volatility&order=as_of.desc&limit=2",
       ) as Array<Record<string, unknown>>;
-      const runs = await dbGet(
-        "scanner_runs?select=market,mode,status,started_at,completed_at&order=started_at.desc&limit=4",
-      ) as Array<Record<string, unknown>>;
-      const queueRows = await dbGet(
-        "delivery_queue?select=status&status=in.%28pending%2Csending%2Cfailed%29&limit=1000",
-      ) as Array<Record<string, unknown>>;
+      let runs: Array<Record<string, unknown>> = [];
+      let queueRows: Array<Record<string, unknown>> = [];
+      try {
+        runs = await dbGet("scanner_runs?select=market,mode,status,started_at,completed_at&order=started_at.desc&limit=4") as Array<Record<string, unknown>>;
+        queueRows = await dbGet("delivery_queue?select=status&status=in.%28pending%2Csending%2Cfailed%29&limit=1000") as Array<Record<string, unknown>>;
+      } catch (_error) {
+        // Health tables are additive; commands remain available during rollout.
+      }
       const queue = { pending: 0, in_progress: 0, failed: 0 };
       for (const row of queueRows) {
         const rawStatus = String(row.status ?? "");
