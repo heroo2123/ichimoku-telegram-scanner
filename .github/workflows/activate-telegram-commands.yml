@@ -1,0 +1,128 @@
+name: Activate Telegram Slash Commands
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/activate-telegram-commands.yml'
+      - 'supabase/functions/telegram-commands/**'
+
+permissions:
+  contents: read
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests
+      - name: Store private bot configuration and register webhook
+        run: |
+          python - <<'PY'
+          import hashlib
+          import os
+          import requests
+
+          token = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
+          chat_id = os.environ.get('TELEGRAM_CHAT_ID', '').strip()
+          supabase_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+          service_key = os.environ.get('SUPABASE_SERVICE_ROLE_KEY', '').strip()
+
+          missing = [
+              name for name, value in {
+                  'TELEGRAM_BOT_TOKEN': token,
+                  'TELEGRAM_CHAT_ID': chat_id,
+                  'SUPABASE_URL': supabase_url,
+                  'SUPABASE_SERVICE_ROLE_KEY': service_key,
+              }.items() if not value
+          ]
+          if missing:
+              raise SystemExit('Missing required repository secrets: ' + ', '.join(missing))
+
+          db_headers = {
+              'apikey': service_key,
+              'Content-Type': 'application/json',
+              'Prefer': 'resolution=merge-duplicates,return=minimal',
+          }
+          if not service_key.startswith('sb_'):
+              db_headers['Authorization'] = f'Bearer {service_key}'
+
+          settings_payload = [
+              {'setting_key': 'telegram_bot_token', 'value': {'value': token}},
+              {'setting_key': 'telegram_chat_id', 'value': {'value': chat_id}},
+          ]
+          response = requests.post(
+              f'{supabase_url}/rest/v1/user_settings?on_conflict=setting_key',
+              headers=db_headers,
+              json=settings_payload,
+              timeout=30,
+          )
+          response.raise_for_status()
+
+          telegram_api = f'https://api.telegram.org/bot{token}'
+          commands = [
+              {'command': 'status', 'description': 'Scanner and market regime status'},
+              {'command': 'top', 'description': 'Top current signals'},
+              {'command': 'active', 'description': 'Active and confirmed setups'},
+              {'command': 'performance', 'description': 'Recent backtest summary'},
+              {'command': 'paper', 'description': 'Paper portfolio status'},
+              {'command': 'help', 'description': 'Show available commands'},
+          ]
+          response = requests.post(
+              f'{telegram_api}/setMyCommands',
+              json={'commands': commands},
+              timeout=30,
+          )
+          response.raise_for_status()
+          result = response.json()
+          if not result.get('ok'):
+              raise SystemExit('Telegram rejected setMyCommands')
+
+          webhook_url = f'{supabase_url}/functions/v1/telegram-commands'
+          webhook_secret = hashlib.sha256(f'ichimoku-v3-webhook:{token}'.encode()).hexdigest()
+          response = requests.post(
+              f'{telegram_api}/setWebhook',
+              json={
+                  'url': webhook_url,
+                  'secret_token': webhook_secret,
+                  'allowed_updates': ['message', 'edited_message'],
+                  'drop_pending_updates': False,
+              },
+              timeout=30,
+          )
+          response.raise_for_status()
+          result = response.json()
+          if not result.get('ok'):
+              raise SystemExit('Telegram rejected setWebhook')
+
+          response = requests.get(f'{telegram_api}/getWebhookInfo', timeout=30)
+          response.raise_for_status()
+          info = response.json()
+          actual_url = (info.get('result') or {}).get('url')
+          if actual_url != webhook_url:
+              raise SystemExit(f'Webhook verification failed: {actual_url!r}')
+
+          response = requests.post(
+              f'{telegram_api}/sendMessage',
+              json={
+                  'chat_id': chat_id,
+                  'text': '✅ Ichimoku V3 slash commands are active. Tap the menu button or send /help.',
+              },
+              timeout=30,
+          )
+          response.raise_for_status()
+          if not response.json().get('ok'):
+              raise SystemExit('Confirmation message failed')
+
+          print('Telegram slash commands activated successfully.')
+          print(f'Webhook: {webhook_url}')
+          PY
