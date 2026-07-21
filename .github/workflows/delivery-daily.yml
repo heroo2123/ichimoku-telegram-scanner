@@ -1,0 +1,44 @@
+name: Telegram Delivery at 3 PM Kuwait
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 15:00 Kuwait (UTC+3) = 12:00 UTC.
+    - cron: '0 12 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ichimoku-telegram-delivery
+  cancel-in-progress: false
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: true }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Deliver queued signals
+        run: python scanner.py --market all --deliver-pending
+      - name: Refresh V3 state after delivery
+        run: |
+          python -m v3.cli ingest --market all
+          python -m v3.cli paper
+      - name: Commit delivery state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/*.json || true
+          git diff --cached --quiet || git commit -m "Update Telegram delivery state"
+          git push || true
