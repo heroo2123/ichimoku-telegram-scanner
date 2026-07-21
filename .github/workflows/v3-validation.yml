@@ -51,6 +51,8 @@ jobs:
           store = get_store()
           assert isinstance(store, SupabaseStore)
           marker = f"ci_smoke_{uuid.uuid4().hex}"
+          run_id = str(uuid.uuid4())
+          session_hash = uuid.uuid4().hex
           row = {
               'setting_key': marker,
               'value': {'integration': 'ok'},
@@ -68,6 +70,22 @@ jobs:
                   f'user_settings?select=setting_key,value&setting_key=eq.{marker}&limit=1',
               )
               assert rows and rows[0]['value']['integration'] == 'ok'
+              store.save_scanner_run({
+                  'run_id': run_id,
+                  'market': 'ci',
+                  'mode': 'validation',
+                  'status': 'completed',
+                  'started_at': utc_now_iso(),
+                  'completed_at': utc_now_iso(),
+                  'stats': {'integration': 'ok'},
+                  'error': None,
+                  'source': 'github-actions',
+              })
+              assert any(row['run_id'] == run_id for row in store.list_scanner_runs(limit=20))
+              store.create_dashboard_session(session_hash, '2099-01-01T00:00:00+00:00', None, 'ci-key')
+              assert store.validate_dashboard_session(session_hash, 'ci-key')
+              config_rows = store._request('POST', 'rpc/get_telegram_config', json={})
+              assert config_rows and config_rows[0].get('token') and config_rows[0].get('chat_id')
               print('Supabase read/write integration passed')
           finally:
               store._request(
@@ -75,6 +93,8 @@ jobs:
                   f'user_settings?setting_key=eq.{marker}',
                   headers={'Prefer': 'return=minimal'},
               )
+              store._request('DELETE', f'scanner_runs?run_id=eq.{run_id}', headers={'Prefer': 'return=minimal'})
+              store._request('DELETE', f'dashboard_sessions?token_hash=eq.{session_hash}', headers={'Prefer': 'return=minimal'})
           PY
       - name: Limited crypto live-data dry scan
         run: |
