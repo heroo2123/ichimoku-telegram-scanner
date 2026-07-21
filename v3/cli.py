@@ -12,6 +12,7 @@ from .lifecycle_refresh import refresh_lifecycle
 from .paper import update_paper_portfolio
 from .regime import refresh_regimes
 from .storage import get_store
+from .settings import settings
 
 
 def main() -> int:
@@ -26,10 +27,11 @@ def main() -> int:
     backtest.add_argument("--symbols", nargs="+", required=True)
     sub.add_parser("paper")
     lifecycle = sub.add_parser("lifecycle")
-    lifecycle.add_argument("--limit", type=int, default=50)
+    lifecycle.add_argument("--limit", type=int, default=settings.lifecycle_refresh_limit)
     calibrate = sub.add_parser("calibrate")
     calibrate.add_argument("--horizon", type=int, default=10)
     sub.add_parser("status")
+    sub.add_parser("maintenance")
     args = parser.parse_args()
     if args.command == "ingest":
         result = ingest_summary(args.market)
@@ -38,16 +40,25 @@ def main() -> int:
     elif args.command == "backtest":
         result = fetch_and_backtest(scanner, args.market, args.symbols)
     elif args.command == "paper":
-        result = update_paper_portfolio(get_store().list_signals(limit=1000))
+        result = update_paper_portfolio(get_store().list_signals(limit=5000))
     elif args.command == "lifecycle":
         result = refresh_lifecycle(scanner, args.limit)
     elif args.command == "calibrate":
         trades = []
         for run in get_store().list_backtests(limit=100):
             trades.extend(run.get("trades") or [])
-        result = fit_logistic_calibrator(trades, horizon=args.horizon)
-        if result.get("ready"):
-            get_store().save_calibration({"market": "all", "direction": "all", "horizon": args.horizon, "model": result, "metrics": {"count": result.get("count"), "brier_score": result.get("brier_score"), "accuracy": result.get("accuracy")}})
+        result = {}
+        groups = {("all", "all"): trades}
+        for market in sorted({str(trade.get("market") or "unknown") for trade in trades}):
+            for direction in ("bullish", "bearish"):
+                groups[(market, direction)] = [trade for trade in trades if str(trade.get("market") or "unknown") == market and trade.get("direction") == direction]
+        for (market, direction), selected in groups.items():
+            model = fit_logistic_calibrator(selected, horizon=args.horizon)
+            result[f"{market}|{direction}"] = model
+            if model.get("ready"):
+                get_store().save_calibration({"market": market, "direction": direction, "horizon": args.horizon, "model": model, "metrics": {"count": model.get("count"), "validation_count": model.get("validation_count"), "brier_score": model.get("brier_score"), "baseline_brier_score": model.get("baseline_brier_score"), "brier_skill_score": model.get("brier_skill_score"), "accuracy": model.get("accuracy"), "base_rate": model.get("base_rate"), "deployable": model.get("deployable", False)}})
+    elif args.command == "maintenance":
+        result = get_store().prune_operational_data()
     else:
         store = get_store()
         result = {"signals": len(store.list_signals(limit=1000)), "regimes": store.list_regimes(5), "paper": store.load_paper_state()}

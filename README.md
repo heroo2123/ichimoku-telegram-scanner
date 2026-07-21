@@ -1,6 +1,6 @@
-# Ichimoku Telegram Scanner 2.0
+# Ichimoku Scanner V3.1
 
-A daily multi-market Ichimoku scanner that runs on GitHub Actions, ranks fresh signals, sends concise Telegram digests, and tracks post-signal performance.
+A production multi-market Ichimoku scanner that ranks fresh daily signals, stores lifecycle and research data in Supabase, sends Telegram results at 3 PM Kuwait, and exposes a private Render dashboard. It does not place live trades.
 
 ## Universe
 
@@ -29,7 +29,11 @@ Every candidate receives a 0–10 score and A/B/C/D grade using cloud position, 
 - Does not terminate the scan when one chart fails
 - Marks a signal delivered only after its digest succeeds
 - Keeps unsuccessful alerts pending for the next run
+- Uses an atomic Supabase queue with the existing JSON state as a fallback
+- Runs a quiet 3:20 PM Kuwait catch-up if the primary 3 PM scheduler misses queued work
 - Sends a ranked digest, top detailed charts, CSV report, and final health summary
+
+Crypto is scanned after its UTC daily candle closes. US markets are scanned after the completed cash session. Scanning and Telegram delivery remain separate, so the dashboard can update before the scheduled message without using an incomplete candle.
 
 ## Performance tracking
 
@@ -37,7 +41,11 @@ Delivered signals are evaluated after 1, 3, 5, 10, and 20 sessions, including di
 
 ## Health monitoring
 
-Each completed run checks the other market's heartbeat and sends a cooldown-protected warning when a scheduled scanner becomes stale.
+Each production scan and delivery writes a durable run record. The dashboard and `/status` show recent run state and queue health. Completed runs also retain the existing cooldown-protected stale-market warning.
+
+## Dashboard and commands
+
+The private Render dashboard keeps the same URL and remembers a revocable server-side session on each browser. Telegram supports `/status`, `/top`, `/active`, `/performance`, `/paper`, and `/help`.
 
 ## Commands
 
@@ -58,9 +66,11 @@ Configure these GitHub Actions repository secrets:
 
 - `TELEGRAM_BOT_TOKEN`
 - `TELEGRAM_CHAT_ID`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
 
 ## Configuration
 
 Edit `config.py` to adjust liquidity thresholds, stable/fiat asset sets, enabled signal types, grade cutoffs, detail limits, retry behavior, performance horizons, and stale-heartbeat thresholds.
 
-This remains a free-data scanner. Binance and Yahoo Finance can be delayed, incomplete, or temporarily rate-limited, so the code retries and isolates failures but cannot guarantee institutional-grade coverage.
+This remains a free-data scanner. Binance and Yahoo Finance can be delayed, incomplete, or temporarily rate-limited, so the code retries, rejects stale/invalid candles, and isolates failures but cannot guarantee institutional-grade coverage. US OHLC data is split-adjusted; crypto data remains native Binance spot data.

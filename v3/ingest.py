@@ -84,12 +84,14 @@ def ingest_summary(market: str = "all") -> List[Dict[str, Any]]:
     store = get_store()
     records = summary_candidates(market)
     rows = [record.to_dict() for record in records]
+    existing_ids = {str(row.get("id")) for row in store.list_signals(limit=5000)}
     correlated = correlation_warnings(rows)
     for row in rows:
         cluster_symbols = correlated.get(row.get('cluster'))
         if cluster_symbols:
             row.setdefault('warnings', []).append(f"Correlation concentration: {', '.join(cluster_symbols[:8])}")
-    store.upsert_signals(rows)
+    store.upsert_signals(rows, preserve_lifecycle=True)
     for row in rows:
-        store.record_event(row["id"], "detected", {"status": row["status"], "score": row["score"], "grade": row["grade"]})
+        if str(row["id"]) not in existing_ids:
+            store.record_event(row["id"], "detected", {"status": row["status"], "score": row["score"], "grade": row["grade"]})
     return rows

@@ -8,6 +8,7 @@ import os
 import re
 import sys
 import time
+import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from io import StringIO
@@ -57,6 +58,10 @@ class ScanStats:
     symbols_attempted: int = 0
     symbols_with_data: int = 0
     symbols_filtered_liquidity: int = 0
+    symbols_filtered_quality: int = 0
+    breadth_total: int = 0
+    breadth_above_cloud: int = 0
+    breadth_below_cloud: int = 0
     symbols_failed: int = 0
     fresh_candidates: int = 0
     pending_loaded: int = 0
@@ -70,7 +75,21 @@ class ScanStats:
     elapsed_seconds: float = 0.0
 
     def as_dict(self) -> Dict[str, Any]:
-        return {'market': self.market, 'symbols_discovered': self.symbols_discovered, 'symbols_filtered_universe': self.symbols_filtered_universe, 'symbols_attempted': self.symbols_attempted, 'symbols_with_data': self.symbols_with_data, 'symbols_filtered_liquidity': self.symbols_filtered_liquidity, 'symbols_failed': self.symbols_failed, 'fresh_candidates': self.fresh_candidates, 'pending_loaded': self.pending_loaded, 'digest_delivered': self.digest_delivered, 'digest_failed': self.digest_failed, 'details_delivered': self.details_delivered, 'details_failed': self.details_failed, 'delivery_deferred': self.delivery_deferred, 'provider_errors': self.provider_errors[-30:], 'started_utc': self.started_utc, 'elapsed_seconds': self.elapsed_seconds}
+        breadth_above_pct = round(self.breadth_above_cloud / self.breadth_total * 100.0, 2) if self.breadth_total else None
+        breadth_below_pct = round(self.breadth_below_cloud / self.breadth_total * 100.0, 2) if self.breadth_total else None
+        return {'market': self.market, 'symbols_discovered': self.symbols_discovered, 'symbols_filtered_universe': self.symbols_filtered_universe, 'symbols_attempted': self.symbols_attempted, 'symbols_with_data': self.symbols_with_data, 'symbols_filtered_liquidity': self.symbols_filtered_liquidity, 'symbols_filtered_quality': self.symbols_filtered_quality, 'symbols_failed': self.symbols_failed, 'fresh_candidates': self.fresh_candidates, 'pending_loaded': self.pending_loaded, 'digest_delivered': self.digest_delivered, 'digest_failed': self.digest_failed, 'details_delivered': self.details_delivered, 'details_failed': self.details_failed, 'delivery_deferred': self.delivery_deferred, 'breadth_total': self.breadth_total, 'breadth_above_cloud': self.breadth_above_cloud, 'breadth_below_cloud': self.breadth_below_cloud, 'breadth_above_pct': breadth_above_pct, 'breadth_below_pct': breadth_below_pct, 'provider_errors': self.provider_errors[-30:], 'started_utc': self.started_utc, 'elapsed_seconds': self.elapsed_seconds}
+
+
+def update_breadth(stats: ScanStats, frame: pd.DataFrame) -> None:
+    enriched = add_ichimoku(frame)
+    context = ichimoku_context_at(enriched, -1, int(config.DISPLACEMENT))
+    if not context:
+        return
+    stats.breadth_total += 1
+    if context.get('price_above_cloud'):
+        stats.breadth_above_cloud += 1
+    elif context.get('price_below_cloud'):
+        stats.breadth_below_cloud += 1
 
 @dataclass
 class Candidate:
@@ -276,24 +295,117 @@ def completed_yfinance_daily_rows(df: pd.DataFrame) -> pd.DataFrame:
         result = result.iloc[:-1]
     return result
 
-def fetch_binance_ohlcv(symbol: str, limit: int) -> Optional[pd.DataFrame]:
-    try:
-        response = binance_get('/api/v3/klines', params={'symbol': symbol, 'interval': '1d', 'limit': min(max(int(limit), 200), 1000)})
-        rows = response.json()
-        if not rows:
-            return None
-        frame = pd.DataFrame(rows, columns=['OpenTime', 'Open', 'High', 'Low', 'Close', 'Volume', 'CloseTime', 'QuoteVolume', 'Trades', 'TakerBase', 'TakerQuote', 'Ignore'])
-        frame['Date'] = pd.to_datetime(frame['OpenTime'], unit='ms', utc=True).dt.tz_convert(None).dt.normalize()
-        for column in ['Open', 'High', 'Low', 'Close', 'Volume']:
-            frame[column] = pd.to_numeric(frame[column], errors='coerce')
-        frame = frame.set_index('Date')[['Open', 'High', 'Low', 'Close', 'Volume']].dropna()
+def binance_rows_to_frame(rows: Sequence[Sequence[Any]], interval: str) -> Optional[pd.DataFrame]:
+    if not rows:
+        return None
+    frame = pd.DataFrame(rows, columns=['OpenTime', 'Open', 'High', 'Low', 'Close', 'Volume', 'CloseTime', 'QuoteVolume', 'Trades', 'TakerBase', 'TakerQuote', 'Ignore'])
+    frame['Date'] = pd.to_datetime(frame['OpenTime'], unit='ms', utc=True).dt.tz_convert(None)
+    for column in ['Open', 'High', 'Low', 'Close', 'Volume']:
+        frame[column] = pd.to_numeric(frame[column], errors='coerce')
+    if interval == '1d':
+        frame['Date'] = frame['Date'].dt.normalize()
+    else:
+        now_ms = int(now_utc().timestamp() * 1000)
+        frame = frame[pd.to_numeric(frame['CloseTime'], errors='coerce') < now_ms]
+    frame = frame.set_index('Date')[['Open', 'High', 'Low', 'Close', 'Volume']].dropna()
+    if interval == '1d':
         frame = completed_crypto_daily_rows(frame)
-        return frame if len(frame) >= minimum_daily_rows() else None
+    return frame
+
+
+def fetch_binance_ohlcv(symbol: str, limit: int, interval: str='1d') -> Optional[pd.DataFrame]:
+    try:
+        response = binance_get('/api/v3/klines', params={'symbol': symbol, 'interval': interval, 'limit': min(max(int(limit), 200), 1000)})
+        rows = response.json()
+        frame = binance_rows_to_frame(rows, interval)
+        return frame if frame is not None and len(frame) >= minimum_daily_rows() else None
     except Exception as exc:
         print(f'Warning: Binance fetch failed for {symbol}: {exc}', file=sys.stderr)
         return None
 
-def fetch_yfinance_batch(symbols: Sequence[str]) -> Dict[str, pd.DataFrame]:
+
+def fetch_binance_history(symbol: str, days: int) -> Optional[pd.DataFrame]:
+    cutoff_ms = int((now_utc() - timedelta(days=max(200, int(days)))).timestamp() * 1000)
+    end_time: Optional[int] = None
+    pages: List[Sequence[Any]] = []
+    try:
+        for _ in range(max(1, math.ceil(int(days) / 1000) + 1)):
+            params: Dict[str, Any] = {'symbol': symbol, 'interval': '1d', 'limit': 1000}
+            if end_time is not None:
+                params['endTime'] = end_time
+            rows = binance_get('/api/v3/klines', params=params).json()
+            if not rows:
+                break
+            pages[0:0] = rows
+            earliest = int(rows[0][0])
+            if earliest <= cutoff_ms or len(rows) < 1000:
+                break
+            end_time = earliest - 1
+        selected = [row for row in pages if int(row[0]) >= cutoff_ms]
+        frame = binance_rows_to_frame(selected, '1d')
+        if frame is not None:
+            frame = frame[~frame.index.duplicated(keep='last')].sort_index()
+        return frame if frame is not None and len(frame) >= minimum_daily_rows() else None
+    except Exception as exc:
+        print(f'Warning: Binance history fetch failed for {symbol}: {exc}', file=sys.stderr)
+        return None
+
+
+def fetch_yfinance_lower_timeframe(symbol: str) -> Optional[pd.DataFrame]:
+    if yf is None:
+        return None
+    try:
+        raw = yf.download(
+            tickers=symbol,
+            period=str(config.LOWER_TIMEFRAME_US_PERIOD),
+            interval=str(config.LOWER_TIMEFRAME_US_INTERVAL),
+            group_by='ticker',
+            auto_adjust=bool(config.YFINANCE_AUTO_ADJUST),
+            threads=False,
+            progress=False,
+            timeout=int(config.REQUEST_TIMEOUT),
+        )
+        if raw is None or raw.empty:
+            return None
+        if isinstance(raw.columns, pd.MultiIndex):
+            levels0 = set(map(str, raw.columns.get_level_values(0)))
+            frame = raw[symbol].copy() if symbol in levels0 else raw.xs(symbol, axis=1, level=1).copy()
+        else:
+            frame = raw.copy()
+        required = ['Open', 'High', 'Low', 'Close']
+        if not set(required).issubset(frame.columns):
+            return None
+        if 'Volume' not in frame.columns:
+            frame['Volume'] = 0.0
+        frame = frame[['Open', 'High', 'Low', 'Close', 'Volume']].copy()
+        for column in frame.columns:
+            frame[column] = pd.to_numeric(frame[column], errors='coerce')
+        frame.index = pd.to_datetime(frame.index, utc=True).tz_convert(None)
+        frame = frame.dropna(subset=required)
+        four_hour = frame.resample('4h').agg({'Open': 'first', 'High': 'max', 'Low': 'min', 'Close': 'last', 'Volume': 'sum'}).dropna(subset=required)
+        return four_hour if len(four_hour) >= minimum_daily_rows() else None
+    except Exception as exc:
+        print(f'Warning: lower-timeframe fetch failed for {symbol}: {exc}', file=sys.stderr)
+        return None
+
+
+def attach_lower_timeframe_confirmation(candidate: Candidate) -> None:
+    if not getattr(config, 'LOWER_TIMEFRAME_CONFIRMATION_ENABLED', False):
+        return
+    try:
+        if candidate.market == 'Crypto Spot':
+            frame = fetch_binance_ohlcv(candidate.symbol, int(config.LOWER_TIMEFRAME_CRYPTO_LIMIT), str(config.LOWER_TIMEFRAME_CRYPTO_INTERVAL))
+        else:
+            frame = fetch_yfinance_lower_timeframe(candidate.symbol)
+        if frame is None:
+            candidate.metrics['lower_timeframe'] = {'status': 'unknown', 'reason': 'data_unavailable'}
+            return
+        from v3.confirmation import lower_timeframe_confirmation
+        candidate.metrics['lower_timeframe'] = lower_timeframe_confirmation(frame, candidate.direction, sys.modules[__name__])
+    except Exception as exc:
+        candidate.metrics['lower_timeframe'] = {'status': 'unknown', 'reason': str(exc)[:160]}
+
+def fetch_yfinance_batch(symbols: Sequence[str], period: Optional[str]=None) -> Dict[str, pd.DataFrame]:
     if yf is None:
         raise ScannerError('yfinance is not installed')
     if not symbols:
@@ -302,7 +414,7 @@ def fetch_yfinance_batch(symbols: Sequence[str]) -> Dict[str, pd.DataFrame]:
     raw: Optional[pd.DataFrame] = None
     for attempt in range(1, int(config.YFINANCE_BATCH_RETRIES) + 1):
         try:
-            raw = yf.download(tickers=' '.join(symbols), period=f'{int(config.LOOKBACK_DAYS)}d', interval='1d', group_by='ticker', auto_adjust=False, threads=True, progress=False, timeout=int(config.REQUEST_TIMEOUT))
+            raw = yf.download(tickers=' '.join(symbols), period=period or f'{int(config.LOOKBACK_DAYS)}d', interval='1d', group_by='ticker', auto_adjust=bool(config.YFINANCE_AUTO_ADJUST), threads=True, progress=False, timeout=int(config.REQUEST_TIMEOUT))
             if raw is not None and (not raw.empty):
                 break
             raise ScannerError('empty yfinance response')
@@ -557,7 +669,7 @@ def score_signal(frame: pd.DataFrame, direction: str, signal_type: str, weekly_s
         if cloud_thickness_atr < float(config.MIN_CLOUD_THICKNESS_ATR):
             warnings.append('Very thin cloud')
     score = max(0, min(10, int(score)))
-    metrics.update({'atr': atr, 'atr_pct': round(abs(atr / close) * 100.0, 3) if atr not in {None, 0} and close not in {None, 0} else None, 'tenkan': tenkan, 'kijun': kijun, 'cloud_top': cloud_top, 'cloud_bottom': cloud_bottom, 'future_cloud': 'bullish' if future_bull else 'bearish', 'previous_close': previous.get('close')})
+    metrics.update({'atr': atr, 'atr_pct': round(abs(atr / close) * 100.0, 3) if atr not in {None, 0} and close not in {None, 0} else None, 'tenkan': tenkan, 'kijun': kijun, 'cloud_top': cloud_top, 'cloud_bottom': cloud_bottom, 'future_cloud': 'bullish' if future_bull else 'bearish', 'previous_close': previous.get('close'), 'signal_open': current.get('open')})
     return (score, reasons, warnings, metrics)
 
 def candidate_id(market: str, symbol: str, direction: str, signal_type: str, date: str) -> str:
@@ -749,8 +861,8 @@ def telegram_chat_id() -> str:
         raise ScannerError('Missing TELEGRAM_CHAT_ID GitHub secret')
     return chat_id
 
-def send_telegram_message(text: str) -> None:
-    telegram_request('sendMessage', {'chat_id': telegram_chat_id(), 'text': text[:4096], 'parse_mode': 'HTML', 'disable_web_page_preview': True})
+def send_telegram_message(text: str) -> Dict[str, Any]:
+    return telegram_request('sendMessage', {'chat_id': telegram_chat_id(), 'text': text[:4096], 'parse_mode': 'HTML', 'disable_web_page_preview': True})
 
 def send_telegram_photo(caption: str, path: Path) -> None:
     telegram_request('sendPhoto', {'chat_id': telegram_chat_id(), 'caption': caption[:1024], 'parse_mode': 'HTML'}, files_factory=lambda: {'photo': path.open('rb')})
@@ -776,6 +888,9 @@ def detail_caption(candidate: Candidate) -> str:
     emoji = '🟢' if candidate.direction == 'bullish' else '🔴'
     metrics = candidate.metrics
     lines = [f'{emoji} <b>{candidate.grade}-GRADE {candidate.direction.upper()} ICHIMOKU SIGNAL</b>', '', f'<b>Ticker:</b> {html.escape(candidate.symbol)}', f'<b>Name:</b> {html.escape(candidate.name)}', f'<b>Market:</b> {html.escape(candidate.market)}', f'<b>Pattern:</b> {html.escape(signal_label(candidate.signal_type))}', f'<b>Score:</b> {candidate.score}/10', f'<b>Signal candle:</b> {candidate.date}', f'<b>Close:</b> {candidate.close:.8g}', f'<b>Weekly:</b> {html.escape(candidate.weekly_alignment)}']
+    lower = candidate.metrics.get('lower_timeframe')
+    if isinstance(lower, dict):
+        lines.append(f"<b>Lower timeframe:</b> {html.escape(str(lower.get('status', 'unknown')))} — {html.escape(str(lower.get('reason', '')))}")
     for label, key, suffix in [('Volume', 'volume_ratio', '× avg'), ('Cloud distance', 'cloud_distance_pct', '%'), ('Kijun distance', 'kijun_distance_atr', ' ATR'), ('ATR', 'atr_pct', '% of price')]:
         value = metrics.get(key)
         if value is not None:
@@ -837,7 +952,7 @@ def performance_digest_line(summary: Dict[str, Any]) -> Optional[str]:
         return None
     return f'Tracked weekly-aligned 10D: n={n}, win={win}%, avg={avg}%'
 
-def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], stats: ScanStats, dry_run: bool) -> List[Candidate]:
+def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], stats: ScanStats, dry_run: bool, delivery_claim: Optional[Any]=None) -> List[Candidate]:
     ordered = sorted(candidates, key=lambda item: (-item.score, item.grade, item.symbol))[:int(config.MAX_REPORT_SIGNALS)]
     if dry_run:
         for candidate in ordered:
@@ -849,13 +964,21 @@ def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], s
     for index, group in enumerate(groups, 1):
         header = [f'📊 <b>Ichimoku Daily Digest — {html.escape(stats.market)}</b>', f"Part {index}/{len(groups)} · Signals {len(ordered)} · {now_utc().strftime('%Y-%m-%d UTC')}"]
         if index == 1:
-            header.append(f'Scanned {stats.symbols_attempted} · Valid {stats.symbols_with_data} · Filtered {stats.symbols_filtered_liquidity + stats.symbols_filtered_universe} · Errors {stats.symbols_failed}')
+            header.append(f'Scanned {stats.symbols_attempted} · Valid {stats.symbols_with_data} · Filtered {stats.symbols_filtered_liquidity + stats.symbols_filtered_universe + stats.symbols_filtered_quality} · Errors {stats.symbols_failed}')
             if perf_line:
                 header.append(perf_line)
         text = '\n'.join(header + [''] + [compact_candidate_line(candidate) for candidate in group])
         ids = [candidate.id for candidate in group]
         try:
-            send_telegram_message(text)
+            response = send_telegram_message(text)
+            if delivery_claim is not None:
+                try:
+                    result = dict(response.get('result') or {}) if isinstance(response, dict) else {}
+                    chat = result.get('chat') if isinstance(result.get('chat'), dict) else {}
+                    delivery_claim.complete(ids, {'telegram_message_id': result.get('message_id'), 'chat_id': chat.get('id')})
+                except Exception as tracking_exc:
+                    record_delivery_failure(state, ids, f'Digest sent but Supabase completion tracking failed: {tracking_exc}')
+                    print(f'Warning: digest sent but queue completion failed: {tracking_exc}', file=sys.stderr)
             for candidate in group:
                 mark_delivered(state, candidate)
                 delivered.append(candidate)
@@ -863,6 +986,11 @@ def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], s
             stats.digest_delivered += len(group)
         except Exception as exc:
             stats.digest_failed += len(group)
+            if delivery_claim is not None:
+                try:
+                    delivery_claim.fail(ids, str(exc))
+                except Exception as tracking_exc:
+                    print(f'Warning: queue failure tracking failed: {tracking_exc}', file=sys.stderr)
             record_delivery_failure(state, ids, str(exc))
             save_json(STATE_PATH, state)
             print(f'Warning: digest part {index} failed: {exc}', file=sys.stderr)
@@ -948,10 +1076,19 @@ def scan_crypto(state: Dict[str, Any], stats: ScanStats, dry_run: bool=False) ->
             if frame is None:
                 stats.symbols_failed += 1
                 continue
+            from v3.quality import validate_ohlcv
+            quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows(), max_age_days=int(config.CRYPTO_MAX_DATA_AGE_DAYS))
+            if not quality_ok:
+                stats.symbols_filtered_quality += 1
+                stats.provider_errors.append(f'{symbol}: data quality failed: {"; ".join(quality_issues[:3])}')
+                continue
             stats.symbols_with_data += 1
+            update_breadth(stats, frame)
             frame_map[symbol] = frame
             update_history_for_symbol(state, 'Crypto Spot', symbol, frame)
-            candidate = candidate_from_frame(symbol, 'Crypto Spot', frame)
+            candidate = candidate_from_frame(symbol, 'Crypto Spot', frame, extra_metrics={'data_quality': quality_meta, 'data_quality_warnings': quality_issues})
+            if candidate:
+                attach_lower_timeframe_confirmation(candidate)
             if candidate and (dry_run or queue_candidate(state, candidate)):
                 candidates.append(candidate)
                 stats.fresh_candidates += 1
@@ -977,16 +1114,26 @@ def scan_yfinance_symbols(symbols: Sequence[str], market: str, state: Dict[str, 
         stats.symbols_failed += missing
         for symbol, frame in data.items():
             try:
+                from v3.quality import validate_ohlcv
+                quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows(), max_age_days=int(config.US_MAX_DATA_AGE_DAYS))
+                if not quality_ok:
+                    stats.symbols_filtered_quality += 1
+                    stats.provider_errors.append(f'{symbol}: data quality failed: {"; ".join(quality_issues[:3])}')
+                    continue
                 stats.symbols_with_data += 1
                 update_history_for_symbol(state, market, symbol, frame)
-                extra: Dict[str, Any] = {}
+                extra: Dict[str, Any] = {'data_quality': quality_meta, 'data_quality_warnings': quality_issues}
                 if apply_liquidity_filter:
-                    passed, extra = passes_us_liquidity(frame)
+                    passed, liquidity = passes_us_liquidity(frame)
+                    extra.update(liquidity)
                     if not passed:
                         stats.symbols_filtered_liquidity += 1
                         continue
+                update_breadth(stats, frame)
                 frame_map[symbol] = frame
                 candidate = candidate_from_frame(symbol, market, frame, extra_metrics=extra)
+                if candidate:
+                    attach_lower_timeframe_confirmation(candidate)
                 if candidate and (dry_run or queue_candidate(state, candidate)):
                     candidates.append(candidate)
                     stats.fresh_candidates += 1
@@ -1046,18 +1193,51 @@ def refresh_pending_frames(pending: Sequence[Candidate]) -> Dict[str, pd.DataFra
                 print(f'Warning: could not refresh {market} pending frames: {exc}', file=sys.stderr)
     return frame_map
 
-def deliver_pending_market(market: str, state: Dict[str, Any], dry_run: bool=False) -> Tuple[List[Candidate], ScanStats]:
+def deliver_pending_market(market: str, state: Dict[str, Any], dry_run: bool=False, quiet_when_empty: bool=False) -> Tuple[List[Candidate], ScanStats]:
     stats = ScanStats(market=f'{market}-delivery')
     started = time.time()
-    pending = load_pending_for_market(state, market)
+    local_pending = load_pending_for_market(state, market)
+    pending = local_pending
+    delivery_claim: Optional[Any] = None
+    if not dry_run:
+        try:
+            from v3.queue import get_delivery_queue
+            queue = get_delivery_queue()
+            if queue is not None:
+                if local_pending:
+                    queue.enqueue([candidate.serializable() for candidate in local_pending], scheduled_for=now_utc_iso())
+                    persisted_delivered = queue.delivered_signal_ids([candidate.id for candidate in local_pending])
+                    if persisted_delivered:
+                        for candidate in local_pending:
+                            if candidate.id in persisted_delivered:
+                                mark_delivered(state, candidate)
+                        local_pending = [candidate for candidate in local_pending if candidate.id not in persisted_delivered]
+                delivery_claim = queue.claim(market)
+                claimed: List[Candidate] = []
+                already_delivered: List[str] = []
+                for raw in delivery_claim.candidates:
+                    candidate = Candidate.from_dict(raw)
+                    if is_delivered(state, candidate):
+                        already_delivered.append(candidate.id)
+                    else:
+                        claimed.append(candidate)
+                if already_delivered:
+                    delivery_claim.complete(already_delivered, {'reconciled_from_local_state': True})
+                pending = claimed
+        except Exception as exc:
+            delivery_claim = None
+            pending = local_pending
+            stats.provider_errors.append(f'Supabase queue fallback: {exc}')
+            print(f'Warning: using local delivery queue fallback: {exc}', file=sys.stderr)
     stats.pending_loaded = len(pending)
     if pending:
         frame_map = refresh_pending_frames(pending)
         attach_pending_frames(pending, frame_map)
-        delivered = deliver_candidates(state, pending, stats, dry_run=dry_run)
+        delivered = deliver_candidates(state, pending, stats, dry_run=dry_run, delivery_claim=delivery_claim)
     else:
         delivered = []
-        send_no_signal_summary(stats, dry_run=dry_run)
+        if not quiet_when_empty:
+            send_no_signal_summary(stats, dry_run=dry_run)
     stats.elapsed_seconds = round(time.time() - started, 1)
     if pending:
         send_completion_summary(stats, len(load_pending_for_market(state, market)), dry_run=dry_run)
@@ -1069,16 +1249,22 @@ def deliver_pending_market(market: str, state: Dict[str, Any], dry_run: bool=Fal
 def write_run_files(market: str, stats: ScanStats, delivered: Sequence[Candidate], state: Dict[str, Any], observed: Optional[Sequence[Candidate]]=None, mode: str='live') -> None:
     heartbeat = load_json(HEARTBEAT_PATH, {})
     alerts = list(observed if observed is not None else delivered)
-    heartbeat[market] = {'last_run_utc': now_utc_iso(), 'alerts_count': len(alerts), 'delivered_count': len(delivered), 'status': 'completed', 'mode': mode, 'stats': stats.as_dict()}
+    heartbeat_key = f'{market}_delivery' if mode == 'delivery' else market
+    heartbeat[heartbeat_key] = {'last_run_utc': now_utc_iso(), 'alerts_count': len(alerts), 'delivered_count': len(delivered), 'status': 'completed', 'mode': mode, 'stats': stats.as_dict()}
     save_json(HEARTBEAT_PATH, heartbeat)
     summary = load_json(SUMMARY_PATH, {})
-    summary[market] = {'last_run_utc': now_utc_iso(), 'alerts': [candidate.serializable() for candidate in alerts], 'delivered_alerts': [candidate.serializable() for candidate in delivered], 'delivery_mode': mode, 'stats': stats.as_dict(), 'performance': performance_summary(state)}
+    payload = {'last_run_utc': now_utc_iso(), 'alerts': [candidate.serializable() for candidate in alerts], 'delivered_alerts': [candidate.serializable() for candidate in delivered], 'delivery_mode': mode, 'stats': stats.as_dict(), 'performance': performance_summary(state)}
+    if mode == 'delivery':
+        market_summary = summary.setdefault(market, {})
+        market_summary['last_delivery'] = payload
+    else:
+        summary[market] = {**payload, 'last_scan': payload}
     save_json(SUMMARY_PATH, summary)
 
 def send_no_signal_summary(stats: ScanStats, dry_run: bool) -> None:
     if not config.SEND_RUN_SUMMARY_WHEN_NO_SIGNALS:
         return
-    message = f'✅ <b>Ichimoku scan complete — no new reportable signals</b>\nMarket: {html.escape(stats.market)}\nAttempted: {stats.symbols_attempted}\nValid data: {stats.symbols_with_data}\nFiltered: {stats.symbols_filtered_universe + stats.symbols_filtered_liquidity}\nErrors: {stats.symbols_failed}'
+    message = f'✅ <b>Ichimoku scan complete — no new reportable signals</b>\nMarket: {html.escape(stats.market)}\nAttempted: {stats.symbols_attempted}\nValid data: {stats.symbols_with_data}\nFiltered: {stats.symbols_filtered_universe + stats.symbols_filtered_liquidity + stats.symbols_filtered_quality}\nErrors: {stats.symbols_failed}'
     if dry_run:
         print('DRY RUN SUMMARY:', message)
     else:
@@ -1114,6 +1300,15 @@ def run_market(market: str, state: Dict[str, Any], dry_run: bool, defer_delivery
     if defer_delivery:
         delivered: List[Candidate] = []
         stats.delivery_deferred = len(queued)
+        if queued and not dry_run:
+            try:
+                from v3.queue import get_delivery_queue
+                queue = get_delivery_queue()
+                if queue is not None:
+                    queue.enqueue([candidate.serializable() for candidate in queued])
+            except Exception as exc:
+                stats.provider_errors.append(f'Supabase queue dual-write failed: {exc}')
+                print(f'Warning: Supabase queue dual-write failed; JSON fallback retained: {exc}', file=sys.stderr)
     else:
         delivered = deliver_candidates(state, queued, stats, dry_run=dry_run) if queued else []
         if not queued:
@@ -1136,6 +1331,24 @@ def test_telegram() -> None:
     send_telegram_message(f'✅ <b>Ichimoku scanner Telegram test successful</b>\n\nTime UTC: {now_utc_iso()}\nDaily settings: {config.CONVERSION_LENGTH}/{config.BASE_LENGTH}/{config.SPAN_B_LENGTH}/{config.DISPLACEMENT}\nRetry-protected Telegram delivery is working.')
     print('Telegram test sent.')
 
+def save_scanner_run_record(run_id: str, market: str, mode: str, status: str, stats: Optional[ScanStats]=None, error: Optional[str]=None, started_at: Optional[str]=None) -> None:
+    try:
+        from v3.storage import get_store
+        effective_started_at = started_at or (stats.started_utc if stats is not None else now_utc_iso())
+        get_store().save_scanner_run({
+            'run_id': run_id,
+            'market': market,
+            'mode': mode,
+            'status': status,
+            'started_at': effective_started_at,
+            'completed_at': now_utc_iso() if status != 'running' else None,
+            'stats': stats.as_dict() if stats is not None else {},
+            'error': error,
+            'source': 'github-actions' if os.getenv('GITHUB_ACTIONS') == 'true' else 'local',
+        })
+    except Exception as exc:
+        print(f'Warning: scanner run observability unavailable: {exc}', file=sys.stderr)
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Ranked multi-timeframe Ichimoku scanner with Telegram delivery')
     parser.add_argument('--market', choices=['crypto', 'us', 'all'], default='all')
@@ -1143,6 +1356,7 @@ def main() -> int:
     parser.add_argument('--test-telegram', action='store_true', help='Send a retry-protected Telegram test')
     parser.add_argument('--defer-delivery', action='store_true', help='Scan and queue signals without sending Telegram messages')
     parser.add_argument('--deliver-pending', action='store_true', help='Deliver queued signals without running a full scan')
+    parser.add_argument('--quiet-when-empty', action='store_true', help='Do not send a no-signal message when a catch-up delivery has no work')
     args = parser.parse_args()
     for directory in [DATA_DIR, CHART_DIR, REPORT_DIR]:
         directory.mkdir(parents=True, exist_ok=True)
@@ -1155,10 +1369,24 @@ def main() -> int:
             raise ScannerError('--defer-delivery and --deliver-pending cannot be combined')
         markets = ['crypto', 'us'] if args.market == 'all' else [args.market]
         for market in markets:
-            if args.deliver_pending:
-                delivered, stats = deliver_pending_market(market, state, args.dry_run)
-            else:
-                delivered, stats = run_market(market, state, args.dry_run, defer_delivery=args.defer_delivery)
+            run_id = str(uuid.uuid4())
+            mode = 'delivery' if args.deliver_pending else ('deferred' if args.defer_delivery else 'live')
+            run_started_at = now_utc_iso()
+            if not args.dry_run:
+                save_scanner_run_record(run_id, market, mode, 'running', started_at=run_started_at)
+            try:
+                if args.deliver_pending:
+                    delivered, stats = deliver_pending_market(market, state, args.dry_run, quiet_when_empty=args.quiet_when_empty)
+                else:
+                    delivered, stats = run_market(market, state, args.dry_run, defer_delivery=args.defer_delivery)
+            except Exception as exc:
+                if not args.dry_run:
+                    failed_stats = ScanStats(market=market)
+                    save_scanner_run_record(run_id, market, mode, 'failed', failed_stats, str(exc)[:1000], started_at=run_started_at)
+                raise
+            if not args.dry_run:
+                delivery_failures = stats.digest_failed + stats.details_failed
+                save_scanner_run_record(run_id, market, mode, 'partial' if delivery_failures else 'completed', stats, started_at=run_started_at)
             print(f'Completed {market}: delivered={len(delivered)} deferred={stats.delivery_deferred} attempted={stats.symbols_attempted} valid={stats.symbols_with_data} errors={stats.symbols_failed} elapsed={stats.elapsed_seconds}s')
         return 0
     except Exception as exc:
