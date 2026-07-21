@@ -5,6 +5,8 @@ on:
   schedule:
     # 15:00 Kuwait (UTC+3) = 12:00 UTC.
     - cron: '0 12 * * *'
+    # Quiet catch-up protects against a delayed or missed primary scheduler run.
+    - cron: '20 12 * * *'
 
 permissions:
   contents: write
@@ -29,7 +31,13 @@ jobs:
         with: { python-version: '3.11', cache: pip }
       - run: pip install -r requirements.txt
       - name: Deliver queued signals
-        run: python scanner.py --market all --deliver-pending
+        shell: bash
+        run: |
+          extra=()
+          if [[ "${{ github.event.schedule }}" == "20 12 * * *" ]]; then
+            extra+=(--quiet-when-empty)
+          fi
+          python scanner.py --market all --deliver-pending "${extra[@]}"
       - name: Refresh V3 state after delivery
         run: |
           python -m v3.cli paper

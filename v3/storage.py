@@ -91,6 +91,25 @@ class LocalStore:
     def load_paper_state(self) -> Dict[str, Any]:
         return self._read("paper", {})
 
+    def save_scanner_run(self, row: Dict[str, Any]) -> None:
+        runs = self._read("scanner_runs", {})
+        run_id = str(row["run_id"])
+        runs[run_id] = {**dict(runs.get(run_id) or {}), **row}
+        ordered = sorted(
+            runs.values(),
+            key=lambda item: str(item.get("started_at", "")),
+            reverse=True,
+        )[:1000]
+        self._write("scanner_runs", {str(item["run_id"]): item for item in ordered})
+
+    def list_scanner_runs(self, limit: int = 20) -> List[Dict[str, Any]]:
+        rows = list(self._read("scanner_runs", {}).values())
+        rows.sort(key=lambda item: str(item.get("started_at", "")), reverse=True)
+        return rows[:limit]
+
+    def delivery_queue_health(self) -> Dict[str, Any]:
+        return {"pending": 0, "in_progress": 0, "failed": 0, "oldest_scheduled_for": None}
+
     def create_dashboard_session(self, token_hash: str, expires_at: str, user_agent_hash: Optional[str]) -> None:
         sessions = self._read("dashboard_sessions", {})
         sessions[token_hash] = {
@@ -234,6 +253,42 @@ class SupabaseStore(LocalStore):
             return rows[0]["state"] if rows else super().load_paper_state()
         except Exception:
             return super().load_paper_state()
+
+    def save_scanner_run(self, row: Dict[str, Any]) -> None:
+        self._request(
+            "POST",
+            "scanner_runs?on_conflict=run_id",
+            json=row,
+            headers={"Prefer": "resolution=merge-duplicates,return=minimal"},
+        )
+        super().save_scanner_run(row)
+
+    def list_scanner_runs(self, limit: int = 20) -> List[Dict[str, Any]]:
+        try:
+            return self._request(
+                "GET",
+                f"scanner_runs?select=*&order=started_at.desc&limit={int(limit)}",
+            )
+        except Exception:
+            return super().list_scanner_runs(limit)
+
+    def delivery_queue_health(self) -> Dict[str, Any]:
+        try:
+            rows = self._request(
+                "GET",
+                "delivery_queue?select=status,scheduled_for&status=in.(pending,in_progress,failed)&order=scheduled_for.asc&limit=1000",
+            )
+            counts = {"pending": 0, "in_progress": 0, "failed": 0}
+            for row in rows:
+                status = str(row.get("status", ""))
+                if status in counts:
+                    counts[status] += 1
+            return {
+                **counts,
+                "oldest_scheduled_for": rows[0].get("scheduled_for") if rows else None,
+            }
+        except Exception:
+            return super().delivery_queue_health()
 
     def create_dashboard_session(self, token_hash: str, expires_at: str, user_agent_hash: Optional[str]) -> None:
         self._request(

@@ -105,3 +105,11 @@ COMMODITY_FUTURES_SYMBOLS = [
 ]
 
 MAX_SYMBOLS_PER_MARKET = None
+
+# Optional timing context for already-qualified daily signals. This never
+# blocks or promotes the daily signal; it only labels lower-timeframe timing.
+LOWER_TIMEFRAME_CONFIRMATION_ENABLED = True
+LOWER_TIMEFRAME_CRYPTO_INTERVAL = "4h"
+LOWER_TIMEFRAME_CRYPTO_LIMIT = 500
+LOWER_TIMEFRAME_US_PERIOD = "1y"
+LOWER_TIMEFRAME_US_INTERVAL = "1h"

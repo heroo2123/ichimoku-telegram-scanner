@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: '3.11', cache: pip }
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements-dev.txt
       - name: Compile
         run: python -m compileall -q scanner.py scanner_impl.py config.py v3 tests
       - name: Unit tests

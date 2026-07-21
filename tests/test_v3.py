@@ -72,6 +72,16 @@ class V3Tests(unittest.TestCase):
             self.assertEqual(saved['delivered_at'],'2026-01-02T00:00:00+00:00')
             self.assertEqual(saved['close'],105.0)
 
+    def test_local_store_tracks_scanner_runs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store=LocalStore(Path(tmp))
+            running={'run_id':'run-1','market':'crypto','mode':'deferred','status':'running','started_at':'2026-01-01T00:00:00+00:00','completed_at':None,'stats':{},'error':None,'source':'test'}
+            store.save_scanner_run(running)
+            store.save_scanner_run({**running,'status':'completed','completed_at':'2026-01-01T00:05:00+00:00','stats':{'symbols_attempted':10}})
+            saved=store.list_scanner_runs()[0]
+            self.assertEqual(saved['status'],'completed')
+            self.assertEqual(saved['stats']['symbols_attempted'],10)
+
     def test_new_supabase_secret_uses_apikey_only(self):
         fake = SimpleNamespace(
             supabase_url='https://example.supabase.co',
@@ -110,6 +120,21 @@ class V3Tests(unittest.TestCase):
         self.assertTrue(len(weekly))
         self.assertLessEqual(weekly.index[-1],frame.index[-1])
         self.assertEqual(weekly.index[-1].weekday(),4)
+
+    def test_lower_timeframe_context_never_changes_daily_qualification(self):
+        candidate=scanner.Candidate.from_dict(self.candidate())
+        frame=pd.DataFrame({'Open':[1.0],'High':[1.1],'Low':[0.9],'Close':[1.0],'Volume':[100.0]},index=pd.date_range('2026-01-01',periods=1,freq='4h'))
+        with patch.object(scanner.config,'LOWER_TIMEFRAME_CONFIRMATION_ENABLED',True), patch.object(scanner,'fetch_yfinance_lower_timeframe',return_value=frame), patch('v3.confirmation.lower_timeframe_confirmation',return_value={'status':'waiting','reason':'no_entry_trigger'}):
+            scanner.attach_lower_timeframe_confirmation(candidate)
+        self.assertEqual(candidate.metrics['lower_timeframe']['status'],'waiting')
+        self.assertEqual(candidate.id,self.candidate()['id'])
+        self.assertEqual(candidate.score,self.candidate()['score'])
+
+    def test_lower_timeframe_unavailable_is_informational(self):
+        candidate=scanner.Candidate.from_dict(self.candidate())
+        with patch.object(scanner.config,'LOWER_TIMEFRAME_CONFIRMATION_ENABLED',True), patch.object(scanner,'fetch_yfinance_lower_timeframe',return_value=None):
+            scanner.attach_lower_timeframe_confirmation(candidate)
+        self.assertEqual(candidate.metrics['lower_timeframe'],{'status':'unknown','reason':'data_unavailable'})
 
     def test_sessions_use_market_calendar(self):
         self.assertEqual(sessions_since('2026-01-02','2026-01-05','US Stock'),1)
@@ -165,6 +190,8 @@ class V3Tests(unittest.TestCase):
                 self.assertNotIn('session_token',unlocked.json())
                 self.assertIn('ichimoku_dashboard_session',client.cookies)
                 self.assertEqual(client.get('/api/signals').status_code,200)
+                self.assertEqual(client.get('/api/runs').status_code,200)
+                self.assertEqual(client.get('/api/queue-health').status_code,200)
                 self.assertEqual(client.post('/auth/logout').status_code,200)
                 self.assertEqual(client.get('/api/signals').status_code,401)
 

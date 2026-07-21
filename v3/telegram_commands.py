@@ -53,7 +53,19 @@ def handle_update(update: Dict[str, Any]) -> Dict[str, Any]:
         reply = f"<b>Paper portfolio</b>\nEquity: {float(state.get('equity', 0)):,.2f}\nOpen positions: {len(state.get('positions', {}))}\nClosed trades: {len(state.get('closed_trades', []))}"
     elif command == "/status":
         regimes = store.list_regimes(limit=2)
-        reply = f"<b>Ichimoku V3 status</b>\nSignals stored: {len(signals)}\nSupabase: {'enabled' if settings.supabase_enabled else 'local fallback'}\nRegimes: " + ", ".join(f"{r.get('market')}={r.get('regime')}" for r in regimes)
+        runs = store.list_scanner_runs(limit=4)
+        queue = store.delivery_queue_health()
+        run_lines = "\n".join(
+            f"{html.escape(str(run.get('market')))} {html.escape(str(run.get('mode')))}: {html.escape(str(run.get('status')))} — {html.escape(str(run.get('completed_at') or run.get('started_at')))}"
+            for run in runs
+        ) or "No V3.1 run records yet."
+        reply = (
+            f"<b>Ichimoku V3 status</b>\nSignals stored: {len(signals)}"
+            f"\nSupabase: {'enabled' if settings.supabase_enabled else 'local fallback'}"
+            f"\nQueue: {int(queue.get('pending', 0))} pending, {int(queue.get('in_progress', 0))} processing, {int(queue.get('failed', 0))} failed"
+            f"\nRegimes: " + ", ".join(f"{html.escape(str(r.get('market')))}={html.escape(str(r.get('regime')))}" for r in regimes)
+            + f"\n\n<b>Recent runs</b>\n{run_lines}"
+        )
     elif command == "/help":
         reply = "<b>Commands</b>\n/status\n/top\n/active\n/performance\n/paper"
     else:

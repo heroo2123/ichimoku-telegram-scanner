@@ -13,7 +13,7 @@ from .settings import settings
 from .storage import get_store
 from .telegram_commands import handle_update
 
-app = FastAPI(title="Ichimoku Scanner V3", version="3.0.3")
+app = FastAPI(title="Ichimoku Scanner V3", version="3.1.0")
 
 COOKIE_NAME = "ichimoku_dashboard_session"
 COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365
@@ -86,7 +86,7 @@ async def security_headers(request: Request, call_next):
 
 @app.get("/health")
 def health() -> dict:
-    return {"ok": True, "version": "3.0.3", "supabase": settings.supabase_enabled}
+    return {"ok": True, "version": "3.1.0", "supabase": settings.supabase_enabled}
 
 
 @app.post("/auth/unlock")
@@ -178,6 +178,27 @@ def paper(
     }
 
 
+@app.get("/api/runs")
+def scanner_runs(
+    request: Request,
+    limit: int = 20,
+    x_api_key: Optional[str] = Header(default=None),
+    x_dashboard_session: Optional[str] = Header(default=None),
+) -> list:
+    _authorize(request, key=x_api_key, session=x_dashboard_session)
+    return get_store().list_scanner_runs(min(max(limit, 1), 100))
+
+
+@app.get("/api/queue-health")
+def queue_health(
+    request: Request,
+    x_api_key: Optional[str] = Header(default=None),
+    x_dashboard_session: Optional[str] = Header(default=None),
+) -> dict:
+    _authorize(request, key=x_api_key, session=x_dashboard_session)
+    return get_store().delivery_queue_health()
+
+
 @app.post("/telegram/webhook")
 async def telegram_webhook(
     request: Request,
@@ -196,7 +217,7 @@ DASHBOARD_HTML = """
 <title>Ichimoku V3</title><style>
 body{font-family:system-ui;margin:0;background:#0d1117;color:#e6edf3}header{padding:24px;background:#161b22;position:sticky;top:0}main{padding:20px;max-width:1200px;margin:auto}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}.card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:16px}table{width:100%;border-collapse:collapse;background:#161b22}th,td{padding:10px;border-bottom:1px solid #30363d;text-align:left;font-size:14px}.bullish{color:#3fb950}.bearish{color:#f85149}.muted{color:#8b949e}.ok{color:#3fb950}.error{color:#f85149}input{box-sizing:border-box;width:100%;padding:10px;background:#0d1117;color:white;border:1px solid #30363d;border-radius:6px;margin-bottom:10px}button{padding:10px 14px;border:0;border-radius:6px;cursor:pointer}button:disabled{opacity:.6;cursor:wait}.note{font-size:13px;line-height:1.4}[hidden]{display:none!important}</style></head>
 <body><header><h1>Ichimoku Scanner V3</h1><span class='muted'>Signals, regimes, risk plans and paper portfolio</span></header><main>
-<div class='grid'><div class='card'><h3>Market regimes</h3><div id='regimes' class='muted'>Loading…</div></div><div class='card'><h3>Paper portfolio</h3><div id='paper' class='muted'>Loading…</div></div><div id='access-card' class='card' hidden><h3>Unlock dashboard</h3><input id='key' type='password' autocomplete='current-password' placeholder='Dashboard API key'><button id='unlock' onclick='unlockDashboard()'>Unlock this phone</button><p id='status' class='muted note'>You only need to enter the key once on this browser.</p></div></div>
+<div class='grid'><div class='card'><h3>Market regimes</h3><div id='regimes' class='muted'>Loading…</div></div><div class='card'><h3>Paper portfolio</h3><div id='paper' class='muted'>Loading…</div></div><div class='card'><h3>Scanner health</h3><div id='scanner-health' class='muted'>Loading…</div></div><div id='access-card' class='card' hidden><h3>Unlock dashboard</h3><input id='key' type='password' autocomplete='current-password' placeholder='Dashboard API key'><button id='unlock' onclick='unlockDashboard()'>Unlock this phone</button><p id='status' class='muted note'>You only need to enter the key once on this browser.</p></div></div>
 <h2>Latest signals</h2><div style='overflow:auto'><table><thead><tr><th>Symbol</th><th>Market</th><th>Direction</th><th>Type</th><th>Grade</th><th>Status</th><th>Entry zone</th><th>Invalidation</th></tr></thead><tbody id='signals'><tr><td colspan='8' class='muted'>Loading…</td></tr></tbody></table></div>
 <script>
 const LEGACY_SESSION_STORAGE_KEY='ichimokuDashboardSession';
@@ -206,10 +227,10 @@ const unlockButton=document.getElementById('unlock');
 const statusBox=document.getElementById('status');
 async function j(url,options={}){const r=await fetch(url,{credentials:'same-origin',...options});if(!r.ok){const body=await r.text();const err=new Error(body);err.status=r.status;throw err}return r.json()}
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]))}
-function showLocked(message){accessCard.hidden=false;document.getElementById('regimes').innerHTML='Unlock the dashboard to load data.';document.getElementById('paper').innerHTML='Unlock the dashboard to load data.';document.getElementById('signals').innerHTML="<tr><td colspan='8' class='muted'>Unlock the dashboard to load signals.</td></tr>";statusBox.textContent=message;statusBox.className='muted note'}
-function renderData(s,r,p){accessCard.hidden=true;document.getElementById('signals').innerHTML=s.length?s.map(x=>`<tr><td><b>${esc(x.symbol)}</b></td><td>${esc(x.market)}</td><td class='${x.direction==='bullish'?'bullish':'bearish'}'>${esc(x.direction)}</td><td>${esc(x.signal_type)}</td><td>${esc(x.grade)}/${esc(x.score)}</td><td>${esc(x.status)}</td><td>${esc(x.risk_plan?.entry_low??'-')} – ${esc(x.risk_plan?.entry_high??'-')}</td><td>${esc(x.risk_plan?.invalidation??'-')}</td></tr>`).join(''):"<tr><td colspan='8' class='muted'>No signals stored yet. The next completed market scans will populate this table.</td></tr>";document.getElementById('regimes').innerHTML=r.slice(0,4).map(x=>`<p><b>${esc(x.market)}</b>: ${esc(x.regime)} (${esc(x.score)}) — ${esc(x.volatility)} volatility</p>`).join('')||'No regime data yet';document.getElementById('paper').innerHTML=`Equity: ${Number(p.equity||0).toLocaleString()}<br>Open positions: ${Object.keys(p.positions||{}).length}<br>Closed trades: ${(p.closed_trades||[]).length}<br>Unrealized P&amp;L: ${Number(p.unrealized_pnl||0).toLocaleString()}`}
+function showLocked(message){accessCard.hidden=false;document.getElementById('regimes').innerHTML='Unlock the dashboard to load data.';document.getElementById('paper').innerHTML='Unlock the dashboard to load data.';document.getElementById('scanner-health').innerHTML='Unlock the dashboard to load data.';document.getElementById('signals').innerHTML="<tr><td colspan='8' class='muted'>Unlock the dashboard to load signals.</td></tr>";statusBox.textContent=message;statusBox.className='muted note'}
+function renderData(s,r,p,runs,q){accessCard.hidden=true;document.getElementById('signals').innerHTML=s.length?s.map(x=>`<tr><td><b>${esc(x.symbol)}</b></td><td>${esc(x.market)}</td><td class='${x.direction==='bullish'?'bullish':'bearish'}'>${esc(x.direction)}</td><td>${esc(x.signal_type)}</td><td>${esc(x.grade)}/${esc(x.score)}</td><td>${esc(x.status)}</td><td>${esc(x.risk_plan?.entry_low??'-')} – ${esc(x.risk_plan?.entry_high??'-')}</td><td>${esc(x.risk_plan?.invalidation??'-')}</td></tr>`).join(''):"<tr><td colspan='8' class='muted'>No signals stored yet. The next completed market scans will populate this table.</td></tr>";document.getElementById('regimes').innerHTML=r.slice(0,4).map(x=>`<p><b>${esc(x.market)}</b>: ${esc(x.regime)} (${esc(x.score)}) — ${esc(x.volatility)} volatility</p>`).join('')||'No regime data yet';document.getElementById('paper').innerHTML=`Equity: ${Number(p.equity||0).toLocaleString()}<br>Open positions: ${Object.keys(p.positions||{}).length}<br>Closed trades: ${(p.closed_trades||[]).length}<br>Unrealized P&amp;L: ${Number(p.unrealized_pnl||0).toLocaleString()}`;const last=runs[0];document.getElementById('scanner-health').innerHTML=last?`Last run: <b>${esc(last.market)}</b> — <span class='${last.status==='completed'?'ok':last.status==='failed'?'error':''}'>${esc(last.status)}</span><br>${esc(last.completed_at||last.started_at)}<br>Queue: ${Number(q.pending||0)} pending, ${Number(q.in_progress||0)} processing, ${Number(q.failed||0)} failed`:`No V3.1 run records yet.<br>Queue: ${Number(q.pending||0)} pending, ${Number(q.in_progress||0)} processing, ${Number(q.failed||0)} failed`}
 async function migrateLegacySession(){const legacy=localStorage.getItem(LEGACY_SESSION_STORAGE_KEY)||'';if(!legacy)return;try{const response=await fetch('/auth/migrate',{method:'POST',credentials:'same-origin',headers:{'X-Dashboard-Session':legacy}});if(response.ok)localStorage.removeItem(LEGACY_SESSION_STORAGE_KEY)}catch(e){}}
-async function loadAll(){try{const [s,r,p]=await Promise.all([j('/api/signals?limit=100'),j('/api/regimes'),j('/api/paper')]);renderData(s,r,p)}catch(e){if(e.status===401){showLocked('Enter the dashboard key once. This browser will remember the session.')}else showLocked('Could not load data: '+e.message)}}
+async function loadAll(){try{const [s,r,p,runs,q]=await Promise.all([j('/api/signals?limit=100'),j('/api/regimes'),j('/api/paper'),j('/api/runs?limit=10'),j('/api/queue-health')]);renderData(s,r,p,runs,q)}catch(e){if(e.status===401){showLocked('Enter the dashboard key once. This browser will remember the session.')}else showLocked('Could not load data: '+e.message)}}
 async function unlockDashboard(){const key=keyInput.value.trim();if(!key){statusBox.textContent='Enter the dashboard API key.';statusBox.className='error note';return}unlockButton.disabled=true;statusBox.textContent='Unlocking…';statusBox.className='muted note';try{await j('/auth/unlock',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key})});localStorage.removeItem(LEGACY_SESSION_STORAGE_KEY);keyInput.value='';await loadAll()}catch(e){statusBox.textContent=e.status===401?'That key was rejected. Copy the complete DASHBOARD_API_KEY from Render → Environment.':'Could not unlock: '+e.message;statusBox.className='error note'}finally{unlockButton.disabled=false}}
 keyInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlockDashboard()});
 migrateLegacySession().finally(loadAll);

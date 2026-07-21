@@ -36,6 +36,14 @@ function unwrapSetting(value: unknown): string {
 }
 
 async function loadBotConfig(): Promise<{ token: string; chatId: string }> {
+  const environmentToken = Deno.env.get("TELEGRAM_BOT_TOKEN") ?? "";
+  const environmentChatId = Deno.env.get("TELEGRAM_CHAT_ID") ?? "";
+  if (environmentToken && environmentChatId) {
+    return { token: environmentToken, chatId: environmentChatId };
+  }
+  // Transitional fallback for the already-live installation. Once the two
+  // Edge Function secrets are set, Telegram credentials are no longer read
+  // from a database row.
   const rows = await dbGet(
     "user_settings?select=setting_key,value&setting_key=in.%28telegram_bot_token%2Ctelegram_chat_id%29",
   ) as Array<Record<string, unknown>>;
@@ -169,8 +177,20 @@ Deno.serve(async (request: Request) => {
       const regimes = await dbGet(
         "market_regimes?select=market,regime,score,volatility&order=as_of.desc&limit=2",
       ) as Array<Record<string, unknown>>;
+      const runs = await dbGet(
+        "scanner_runs?select=market,mode,status,started_at,completed_at&order=started_at.desc&limit=4",
+      ) as Array<Record<string, unknown>>;
+      const queueRows = await dbGet(
+        "delivery_queue?select=status&status=in.%28pending%2Cin_progress%2Cfailed%29&limit=1000",
+      ) as Array<Record<string, unknown>>;
+      const queue = { pending: 0, in_progress: 0, failed: 0 };
+      for (const row of queueRows) {
+        const status = String(row.status ?? "") as keyof typeof queue;
+        if (status in queue) queue[status] += 1;
+      }
       const regimeText = regimes.map((row) => `${escapeHtml(row.market)}=${escapeHtml(row.regime)}`).join(", ") || "not available yet";
-      reply = `<b>Ichimoku V3 status</b>\nSignals stored: ${signals.length}\nSupabase: enabled\nRegimes: ${regimeText}`;
+      const runText = runs.map((run) => `${escapeHtml(run.market)} ${escapeHtml(run.mode)}: ${escapeHtml(run.status)} — ${escapeHtml(run.completed_at ?? run.started_at)}`).join("\n") || "No V3.1 run records yet.";
+      reply = `<b>Ichimoku V3 status</b>\nSignals stored: ${signals.length}\nSupabase: enabled\nQueue: ${queue.pending} pending, ${queue.in_progress} processing, ${queue.failed} failed\nRegimes: ${regimeText}\n\n<b>Recent runs</b>\n${runText}`;
     } else if (command === "/help" || command === "/start") {
       reply = "<b>Ichimoku V3 commands</b>\n/status — scanner status\n/top — top signals\n/active — active setups\n/performance — recent backtests\n/paper — paper portfolio\n/help — command list";
     } else {
