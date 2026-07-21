@@ -57,6 +57,7 @@ class ScanStats:
     symbols_attempted: int = 0
     symbols_with_data: int = 0
     symbols_filtered_liquidity: int = 0
+    symbols_filtered_quality: int = 0
     symbols_failed: int = 0
     fresh_candidates: int = 0
     pending_loaded: int = 0
@@ -70,7 +71,7 @@ class ScanStats:
     elapsed_seconds: float = 0.0
 
     def as_dict(self) -> Dict[str, Any]:
-        return {'market': self.market, 'symbols_discovered': self.symbols_discovered, 'symbols_filtered_universe': self.symbols_filtered_universe, 'symbols_attempted': self.symbols_attempted, 'symbols_with_data': self.symbols_with_data, 'symbols_filtered_liquidity': self.symbols_filtered_liquidity, 'symbols_failed': self.symbols_failed, 'fresh_candidates': self.fresh_candidates, 'pending_loaded': self.pending_loaded, 'digest_delivered': self.digest_delivered, 'digest_failed': self.digest_failed, 'details_delivered': self.details_delivered, 'details_failed': self.details_failed, 'delivery_deferred': self.delivery_deferred, 'provider_errors': self.provider_errors[-30:], 'started_utc': self.started_utc, 'elapsed_seconds': self.elapsed_seconds}
+        return {'market': self.market, 'symbols_discovered': self.symbols_discovered, 'symbols_filtered_universe': self.symbols_filtered_universe, 'symbols_attempted': self.symbols_attempted, 'symbols_with_data': self.symbols_with_data, 'symbols_filtered_liquidity': self.symbols_filtered_liquidity, 'symbols_filtered_quality': self.symbols_filtered_quality, 'symbols_failed': self.symbols_failed, 'fresh_candidates': self.fresh_candidates, 'pending_loaded': self.pending_loaded, 'digest_delivered': self.digest_delivered, 'digest_failed': self.digest_failed, 'details_delivered': self.details_delivered, 'details_failed': self.details_failed, 'delivery_deferred': self.delivery_deferred, 'provider_errors': self.provider_errors[-30:], 'started_utc': self.started_utc, 'elapsed_seconds': self.elapsed_seconds}
 
 @dataclass
 class Candidate:
@@ -749,8 +750,8 @@ def telegram_chat_id() -> str:
         raise ScannerError('Missing TELEGRAM_CHAT_ID GitHub secret')
     return chat_id
 
-def send_telegram_message(text: str) -> None:
-    telegram_request('sendMessage', {'chat_id': telegram_chat_id(), 'text': text[:4096], 'parse_mode': 'HTML', 'disable_web_page_preview': True})
+def send_telegram_message(text: str) -> Dict[str, Any]:
+    return telegram_request('sendMessage', {'chat_id': telegram_chat_id(), 'text': text[:4096], 'parse_mode': 'HTML', 'disable_web_page_preview': True})
 
 def send_telegram_photo(caption: str, path: Path) -> None:
     telegram_request('sendPhoto', {'chat_id': telegram_chat_id(), 'caption': caption[:1024], 'parse_mode': 'HTML'}, files_factory=lambda: {'photo': path.open('rb')})
@@ -837,7 +838,7 @@ def performance_digest_line(summary: Dict[str, Any]) -> Optional[str]:
         return None
     return f'Tracked weekly-aligned 10D: n={n}, win={win}%, avg={avg}%'
 
-def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], stats: ScanStats, dry_run: bool) -> List[Candidate]:
+def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], stats: ScanStats, dry_run: bool, delivery_claim: Optional[Any]=None) -> List[Candidate]:
     ordered = sorted(candidates, key=lambda item: (-item.score, item.grade, item.symbol))[:int(config.MAX_REPORT_SIGNALS)]
     if dry_run:
         for candidate in ordered:
@@ -849,13 +850,21 @@ def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], s
     for index, group in enumerate(groups, 1):
         header = [f'📊 <b>Ichimoku Daily Digest — {html.escape(stats.market)}</b>', f"Part {index}/{len(groups)} · Signals {len(ordered)} · {now_utc().strftime('%Y-%m-%d UTC')}"]
         if index == 1:
-            header.append(f'Scanned {stats.symbols_attempted} · Valid {stats.symbols_with_data} · Filtered {stats.symbols_filtered_liquidity + stats.symbols_filtered_universe} · Errors {stats.symbols_failed}')
+            header.append(f'Scanned {stats.symbols_attempted} · Valid {stats.symbols_with_data} · Filtered {stats.symbols_filtered_liquidity + stats.symbols_filtered_universe + stats.symbols_filtered_quality} · Errors {stats.symbols_failed}')
             if perf_line:
                 header.append(perf_line)
         text = '\n'.join(header + [''] + [compact_candidate_line(candidate) for candidate in group])
         ids = [candidate.id for candidate in group]
         try:
-            send_telegram_message(text)
+            response = send_telegram_message(text)
+            if delivery_claim is not None:
+                try:
+                    result = dict(response.get('result') or {}) if isinstance(response, dict) else {}
+                    chat = result.get('chat') if isinstance(result.get('chat'), dict) else {}
+                    delivery_claim.complete(ids, {'telegram_message_id': result.get('message_id'), 'chat_id': chat.get('id')})
+                except Exception as tracking_exc:
+                    record_delivery_failure(state, ids, f'Digest sent but Supabase completion tracking failed: {tracking_exc}')
+                    print(f'Warning: digest sent but queue completion failed: {tracking_exc}', file=sys.stderr)
             for candidate in group:
                 mark_delivered(state, candidate)
                 delivered.append(candidate)
@@ -863,6 +872,11 @@ def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], s
             stats.digest_delivered += len(group)
         except Exception as exc:
             stats.digest_failed += len(group)
+            if delivery_claim is not None:
+                try:
+                    delivery_claim.fail(ids, str(exc))
+                except Exception as tracking_exc:
+                    print(f'Warning: queue failure tracking failed: {tracking_exc}', file=sys.stderr)
             record_delivery_failure(state, ids, str(exc))
             save_json(STATE_PATH, state)
             print(f'Warning: digest part {index} failed: {exc}', file=sys.stderr)
@@ -948,10 +962,16 @@ def scan_crypto(state: Dict[str, Any], stats: ScanStats, dry_run: bool=False) ->
             if frame is None:
                 stats.symbols_failed += 1
                 continue
+            from v3.quality import validate_ohlcv
+            quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows())
+            if not quality_ok:
+                stats.symbols_filtered_quality += 1
+                stats.provider_errors.append(f'{symbol}: data quality failed: {"; ".join(quality_issues[:3])}')
+                continue
             stats.symbols_with_data += 1
             frame_map[symbol] = frame
             update_history_for_symbol(state, 'Crypto Spot', symbol, frame)
-            candidate = candidate_from_frame(symbol, 'Crypto Spot', frame)
+            candidate = candidate_from_frame(symbol, 'Crypto Spot', frame, extra_metrics={'data_quality': quality_meta, 'data_quality_warnings': quality_issues})
             if candidate and (dry_run or queue_candidate(state, candidate)):
                 candidates.append(candidate)
                 stats.fresh_candidates += 1
@@ -977,11 +997,18 @@ def scan_yfinance_symbols(symbols: Sequence[str], market: str, state: Dict[str, 
         stats.symbols_failed += missing
         for symbol, frame in data.items():
             try:
+                from v3.quality import validate_ohlcv
+                quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows())
+                if not quality_ok:
+                    stats.symbols_filtered_quality += 1
+                    stats.provider_errors.append(f'{symbol}: data quality failed: {"; ".join(quality_issues[:3])}')
+                    continue
                 stats.symbols_with_data += 1
                 update_history_for_symbol(state, market, symbol, frame)
-                extra: Dict[str, Any] = {}
+                extra: Dict[str, Any] = {'data_quality': quality_meta, 'data_quality_warnings': quality_issues}
                 if apply_liquidity_filter:
-                    passed, extra = passes_us_liquidity(frame)
+                    passed, liquidity = passes_us_liquidity(frame)
+                    extra.update(liquidity)
                     if not passed:
                         stats.symbols_filtered_liquidity += 1
                         continue
@@ -1049,12 +1076,38 @@ def refresh_pending_frames(pending: Sequence[Candidate]) -> Dict[str, pd.DataFra
 def deliver_pending_market(market: str, state: Dict[str, Any], dry_run: bool=False) -> Tuple[List[Candidate], ScanStats]:
     stats = ScanStats(market=f'{market}-delivery')
     started = time.time()
-    pending = load_pending_for_market(state, market)
+    local_pending = load_pending_for_market(state, market)
+    pending = local_pending
+    delivery_claim: Optional[Any] = None
+    if not dry_run:
+        try:
+            from v3.queue import get_delivery_queue
+            queue = get_delivery_queue()
+            if queue is not None:
+                if local_pending:
+                    queue.enqueue([candidate.serializable() for candidate in local_pending], scheduled_for=now_utc_iso())
+                delivery_claim = queue.claim(market)
+                claimed: List[Candidate] = []
+                already_delivered: List[str] = []
+                for raw in delivery_claim.candidates:
+                    candidate = Candidate.from_dict(raw)
+                    if is_delivered(state, candidate):
+                        already_delivered.append(candidate.id)
+                    else:
+                        claimed.append(candidate)
+                if already_delivered:
+                    delivery_claim.complete(already_delivered, {'reconciled_from_local_state': True})
+                pending = claimed
+        except Exception as exc:
+            delivery_claim = None
+            pending = local_pending
+            stats.provider_errors.append(f'Supabase queue fallback: {exc}')
+            print(f'Warning: using local delivery queue fallback: {exc}', file=sys.stderr)
     stats.pending_loaded = len(pending)
     if pending:
         frame_map = refresh_pending_frames(pending)
         attach_pending_frames(pending, frame_map)
-        delivered = deliver_candidates(state, pending, stats, dry_run=dry_run)
+        delivered = deliver_candidates(state, pending, stats, dry_run=dry_run, delivery_claim=delivery_claim)
     else:
         delivered = []
         send_no_signal_summary(stats, dry_run=dry_run)
@@ -1078,7 +1131,7 @@ def write_run_files(market: str, stats: ScanStats, delivered: Sequence[Candidate
 def send_no_signal_summary(stats: ScanStats, dry_run: bool) -> None:
     if not config.SEND_RUN_SUMMARY_WHEN_NO_SIGNALS:
         return
-    message = f'✅ <b>Ichimoku scan complete — no new reportable signals</b>\nMarket: {html.escape(stats.market)}\nAttempted: {stats.symbols_attempted}\nValid data: {stats.symbols_with_data}\nFiltered: {stats.symbols_filtered_universe + stats.symbols_filtered_liquidity}\nErrors: {stats.symbols_failed}'
+    message = f'✅ <b>Ichimoku scan complete — no new reportable signals</b>\nMarket: {html.escape(stats.market)}\nAttempted: {stats.symbols_attempted}\nValid data: {stats.symbols_with_data}\nFiltered: {stats.symbols_filtered_universe + stats.symbols_filtered_liquidity + stats.symbols_filtered_quality}\nErrors: {stats.symbols_failed}'
     if dry_run:
         print('DRY RUN SUMMARY:', message)
     else:
@@ -1114,6 +1167,15 @@ def run_market(market: str, state: Dict[str, Any], dry_run: bool, defer_delivery
     if defer_delivery:
         delivered: List[Candidate] = []
         stats.delivery_deferred = len(queued)
+        if queued and not dry_run:
+            try:
+                from v3.queue import get_delivery_queue
+                queue = get_delivery_queue()
+                if queue is not None:
+                    queue.enqueue([candidate.serializable() for candidate in queued])
+            except Exception as exc:
+                stats.provider_errors.append(f'Supabase queue dual-write failed: {exc}')
+                print(f'Warning: Supabase queue dual-write failed; JSON fallback retained: {exc}', file=sys.stderr)
     else:
         delivered = deliver_candidates(state, queued, stats, dry_run=dry_run) if queued else []
         if not queued:

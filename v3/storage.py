@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
@@ -34,10 +35,17 @@ class LocalStore:
         tmp.write_text(json.dumps(value, indent=2, sort_keys=True, default=str), encoding="utf-8")
         tmp.replace(path)
 
-    def upsert_signals(self, rows: Iterable[Dict[str, Any]]) -> None:
+    def upsert_signals(self, rows: Iterable[Dict[str, Any]], *, preserve_lifecycle: bool = False) -> None:
         data = self._read("signals", {})
         for row in rows:
-            data[str(row["id"])] = row
+            signal_id = str(row["id"])
+            existing = dict(data.get(signal_id) or {})
+            merged = {**existing, **row}
+            if preserve_lifecycle and existing:
+                for key in ("status", "detected_at", "delivered_at"):
+                    if existing.get(key) is not None:
+                        merged[key] = existing[key]
+            data[signal_id] = merged
         self._write("signals", data)
 
     def list_signals(self, limit: int = 200, status: Optional[str] = None) -> List[Dict[str, Any]]:
@@ -99,17 +107,42 @@ class SupabaseStore(LocalStore):
             self.headers["Authorization"] = f"Bearer {key}"
 
     def _request(self, method: str, path: str, **kwargs: Any) -> Any:
-        headers = dict(self.headers)
-        headers.update(kwargs.pop("headers", {}))
-        response = requests.request(method, f"{self.base}/{path}", headers=headers, timeout=45, **kwargs)
-        response.raise_for_status()
-        return response.json() if response.content else None
+        extra_headers = kwargs.pop("headers", {})
+        last_error: Optional[Exception] = None
+        for attempt in range(1, 4):
+            headers = dict(self.headers)
+            headers.update(extra_headers)
+            try:
+                response = requests.request(
+                    method,
+                    f"{self.base}/{path}",
+                    headers=headers,
+                    timeout=45,
+                    **kwargs,
+                )
+                if response.status_code in {408, 425, 429, 500, 502, 503, 504}:
+                    raise requests.HTTPError(
+                        f"Supabase temporary HTTP {response.status_code}: {response.text[:300]}",
+                        response=response,
+                    )
+                response.raise_for_status()
+                return response.json() if response.content else None
+            except Exception as exc:
+                last_error = exc
+                if attempt < 3:
+                    time.sleep(0.5 * (2 ** (attempt - 1)))
+        assert last_error is not None
+        raise last_error
 
-    def upsert_signals(self, rows: Iterable[Dict[str, Any]]) -> None:
+    def upsert_signals(self, rows: Iterable[Dict[str, Any]], *, preserve_lifecycle: bool = False) -> None:
         payload = list(rows)
         if payload:
-            self._request("POST", "signals?on_conflict=id", json=payload, headers={"Prefer": "resolution=merge-duplicates,return=minimal"})
-        super().upsert_signals(payload)
+            self._request(
+                "POST",
+                "rpc/upsert_signal_records",
+                json={"p_rows": payload, "p_preserve_lifecycle": preserve_lifecycle},
+            )
+        super().upsert_signals(payload, preserve_lifecycle=preserve_lifecycle)
 
     def list_signals(self, limit: int = 200, status: Optional[str] = None) -> List[Dict[str, Any]]:
         query = f"signals?select=*&order=signal_date.desc,score.desc&limit={int(limit)}"

@@ -12,6 +12,7 @@ from .lifecycle_refresh import refresh_lifecycle
 from .paper import update_paper_portfolio
 from .regime import refresh_regimes
 from .storage import get_store
+from .settings import settings
 
 
 def main() -> int:
@@ -26,7 +27,7 @@ def main() -> int:
     backtest.add_argument("--symbols", nargs="+", required=True)
     sub.add_parser("paper")
     lifecycle = sub.add_parser("lifecycle")
-    lifecycle.add_argument("--limit", type=int, default=50)
+    lifecycle.add_argument("--limit", type=int, default=settings.lifecycle_refresh_limit)
     calibrate = sub.add_parser("calibrate")
     calibrate.add_argument("--horizon", type=int, default=10)
     sub.add_parser("status")
@@ -38,7 +39,7 @@ def main() -> int:
     elif args.command == "backtest":
         result = fetch_and_backtest(scanner, args.market, args.symbols)
     elif args.command == "paper":
-        result = update_paper_portfolio(get_store().list_signals(limit=1000))
+        result = update_paper_portfolio(get_store().list_signals(limit=5000))
     elif args.command == "lifecycle":
         result = refresh_lifecycle(scanner, args.limit)
     elif args.command == "calibrate":

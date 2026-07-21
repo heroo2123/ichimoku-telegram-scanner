@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Any, Dict, Optional
 
 from .settings import settings
@@ -23,11 +23,21 @@ def initial_status(candidate: Dict[str, Any]) -> str:
     return "confirmed"
 
 
-def sessions_since(signal_date: str, as_of: Optional[str] = None) -> int:
+def sessions_since(signal_date: str, as_of: Optional[str] = None, market: str = "") -> int:
     try:
         start = date.fromisoformat(signal_date[:10])
         end = date.fromisoformat((as_of or datetime.utcnow().date().isoformat())[:10])
-        return max(0, (end - start).days)
+        if end <= start:
+            return 0
+        if str(market).lower().startswith("crypto"):
+            return (end - start).days
+        count = 0
+        cursor = start + timedelta(days=1)
+        while cursor <= end:
+            if cursor.weekday() < 5:
+                count += 1
+            cursor += timedelta(days=1)
+        return count
     except (TypeError, ValueError):
         return 0
 
@@ -51,7 +61,11 @@ def evaluate_status(signal: Dict[str, Any], current: Dict[str, Any]) -> str:
             return "invalidated"
         if kijun is not None and close > kijun:
             return "invalidated"
-    if sessions_since(str(signal.get("signal_date", "")), str(current.get("date", ""))) >= settings.lifecycle_complete_sessions:
+    if sessions_since(
+        str(signal.get("signal_date", "")),
+        str(current.get("date", "")),
+        str(signal.get("market", "")),
+    ) >= settings.lifecycle_complete_sessions:
         return "completed"
     if atr and kijun is not None:
         distance = abs(close - kijun) / atr
