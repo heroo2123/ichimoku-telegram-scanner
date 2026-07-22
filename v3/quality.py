@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Tuple
 import pandas as pd
 
 
-def validate_ohlcv(frame: pd.DataFrame, *, minimum_rows: int = 50, max_age_days: int | None = None, now: Any = None) -> Tuple[bool, List[str], Dict[str, Any]]:
+def validate_ohlcv(frame: pd.DataFrame, *, minimum_rows: int = 50, max_age_days: int | None = None, now: Any = None, allow_settlement_close_outside_range: bool = False) -> Tuple[bool, List[str], Dict[str, Any]]:
     issues: List[str] = []
     meta: Dict[str, Any] = {"rows": len(frame)}
     required = {"Open", "High", "Low", "Close", "Volume"}
@@ -20,7 +20,12 @@ def validate_ohlcv(frame: pd.DataFrame, *, minimum_rows: int = 50, max_age_days:
     duplicate_count = int(frame.index.duplicated().sum())
     if duplicate_count:
         issues.append(f"Duplicate timestamps: {duplicate_count}")
-    invalid_ohlc = int(((frame["High"] < frame[["Open", "Close", "Low"]].max(axis=1)) | (frame["Low"] > frame[["Open", "Close", "High"]].min(axis=1))).sum())
+    # Futures commonly report an official settlement close outside the traded
+    # intraday high/low. That is valid market data, while Open/High/Low must
+    # still form a consistent envelope.
+    bounded_columns = ["Open", "Low"] if allow_settlement_close_outside_range else ["Open", "Close", "Low"]
+    floor_columns = ["Open", "High"] if allow_settlement_close_outside_range else ["Open", "Close", "High"]
+    invalid_ohlc = int(((frame["High"] < frame[bounded_columns].max(axis=1)) | (frame["Low"] > frame[floor_columns].min(axis=1))).sum())
     if invalid_ohlc:
         issues.append(f"Invalid OHLC rows: {invalid_ohlc}")
     nulls = int(frame[list(required)].isna().sum().sum())
@@ -46,6 +51,6 @@ def validate_ohlcv(frame: pd.DataFrame, *, minimum_rows: int = 50, max_age_days:
         stale = age_days > float(max_age_days)
         if stale:
             issues.append(f"Stale data: {age_days:.1f} days old")
-    meta.update({"duplicates": duplicate_count, "invalid_ohlc": invalid_ohlc, "nulls": nulls, "extreme_moves": extreme_moves, "last_timestamp": str(frame.index[-1]) if len(frame) else None, "age_days": round(age_days, 3) if age_days is not None else None})
+    meta.update({"duplicates": duplicate_count, "invalid_ohlc": invalid_ohlc, "settlement_close_allowed": allow_settlement_close_outside_range, "nulls": nulls, "extreme_moves": extreme_moves, "last_timestamp": str(frame.index[-1]) if len(frame) else None, "age_days": round(age_days, 3) if age_days is not None else None})
     hard_fail = bool(missing or len(frame) < minimum_rows or duplicate_count or invalid_ohlc or nulls or zero_prices or stale)
     return not hard_fail, issues, meta

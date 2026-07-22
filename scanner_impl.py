@@ -63,6 +63,8 @@ class ScanStats:
     breadth_above_cloud: int = 0
     breadth_below_cloud: int = 0
     symbols_failed: int = 0
+    symbols_missing_data: int = 0
+    symbols_processing_errors: int = 0
     fresh_candidates: int = 0
     pending_loaded: int = 0
     digest_delivered: int = 0
@@ -70,6 +72,9 @@ class ScanStats:
     details_delivered: int = 0
     details_failed: int = 0
     delivery_deferred: int = 0
+    lifecycle_skipped: int = 0
+    csv_reported: int = 0
+    digest_messages: int = 0
     provider_errors: List[str] = field(default_factory=list)
     started_utc: str = field(default_factory=lambda: now_utc_iso())
     elapsed_seconds: float = 0.0
@@ -77,7 +82,7 @@ class ScanStats:
     def as_dict(self) -> Dict[str, Any]:
         breadth_above_pct = round(self.breadth_above_cloud / self.breadth_total * 100.0, 2) if self.breadth_total else None
         breadth_below_pct = round(self.breadth_below_cloud / self.breadth_total * 100.0, 2) if self.breadth_total else None
-        return {'market': self.market, 'symbols_discovered': self.symbols_discovered, 'symbols_filtered_universe': self.symbols_filtered_universe, 'symbols_attempted': self.symbols_attempted, 'symbols_with_data': self.symbols_with_data, 'symbols_filtered_liquidity': self.symbols_filtered_liquidity, 'symbols_filtered_quality': self.symbols_filtered_quality, 'symbols_failed': self.symbols_failed, 'fresh_candidates': self.fresh_candidates, 'pending_loaded': self.pending_loaded, 'digest_delivered': self.digest_delivered, 'digest_failed': self.digest_failed, 'details_delivered': self.details_delivered, 'details_failed': self.details_failed, 'delivery_deferred': self.delivery_deferred, 'breadth_total': self.breadth_total, 'breadth_above_cloud': self.breadth_above_cloud, 'breadth_below_cloud': self.breadth_below_cloud, 'breadth_above_pct': breadth_above_pct, 'breadth_below_pct': breadth_below_pct, 'provider_errors': self.provider_errors[-30:], 'started_utc': self.started_utc, 'elapsed_seconds': self.elapsed_seconds}
+        return {'market': self.market, 'symbols_discovered': self.symbols_discovered, 'symbols_filtered_universe': self.symbols_filtered_universe, 'symbols_attempted': self.symbols_attempted, 'symbols_with_data': self.symbols_with_data, 'symbols_filtered_liquidity': self.symbols_filtered_liquidity, 'symbols_filtered_quality': self.symbols_filtered_quality, 'symbols_failed': self.symbols_failed, 'symbols_missing_data': self.symbols_missing_data, 'symbols_processing_errors': self.symbols_processing_errors, 'fresh_candidates': self.fresh_candidates, 'pending_loaded': self.pending_loaded, 'digest_delivered': self.digest_delivered, 'digest_failed': self.digest_failed, 'details_delivered': self.details_delivered, 'details_failed': self.details_failed, 'delivery_deferred': self.delivery_deferred, 'lifecycle_skipped': self.lifecycle_skipped, 'csv_reported': self.csv_reported, 'digest_messages': self.digest_messages, 'breadth_total': self.breadth_total, 'breadth_above_cloud': self.breadth_above_cloud, 'breadth_below_cloud': self.breadth_below_cloud, 'breadth_above_pct': breadth_above_pct, 'breadth_below_pct': breadth_below_pct, 'provider_errors': self.provider_errors[-30:], 'started_utc': self.started_utc, 'elapsed_seconds': self.elapsed_seconds}
 
 
 def update_breadth(stats: ScanStats, frame: pd.DataFrame) -> None:
@@ -108,14 +113,15 @@ class Candidate:
     warnings: List[str]
     metrics: Dict[str, Any]
     lagging_compare_date: str
+    lifecycle_status: str = 'confirmed'
     chart_df: Optional[pd.DataFrame] = field(default=None, repr=False)
 
     def serializable(self) -> Dict[str, Any]:
-        return {'id': self.id, 'symbol': self.symbol, 'name': self.name, 'market': self.market, 'direction': self.direction, 'signal_type': self.signal_type, 'date': self.date, 'close': self.close, 'score': self.score, 'grade': self.grade, 'weekly_alignment': self.weekly_alignment, 'reasons': self.reasons, 'warnings': self.warnings, 'metrics': self.metrics, 'lagging_compare_date': self.lagging_compare_date}
+        return {'id': self.id, 'symbol': self.symbol, 'name': self.name, 'market': self.market, 'direction': self.direction, 'signal_type': self.signal_type, 'date': self.date, 'close': self.close, 'score': self.score, 'grade': self.grade, 'weekly_alignment': self.weekly_alignment, 'reasons': self.reasons, 'warnings': self.warnings, 'metrics': self.metrics, 'lagging_compare_date': self.lagging_compare_date, 'lifecycle_status': self.lifecycle_status}
 
     @classmethod
     def from_dict(cls, raw: Dict[str, Any]) -> 'Candidate':
-        return cls(id=str(raw['id']), symbol=str(raw['symbol']), name=str(raw.get('name', raw.get('symbol', ''))), market=str(raw['market']), direction=str(raw['direction']), signal_type=str(raw['signal_type']), date=str(raw['date']), close=float(raw.get('close', 0.0)), score=int(raw.get('score', 0)), grade=str(raw.get('grade', 'D')), weekly_alignment=str(raw.get('weekly_alignment', 'unknown')), reasons=list(raw.get('reasons', [])), warnings=list(raw.get('warnings', [])), metrics=dict(raw.get('metrics', {})), lagging_compare_date=str(raw.get('lagging_compare_date', '')))
+        return cls(id=str(raw['id']), symbol=str(raw['symbol']), name=str(raw.get('name', raw.get('symbol', ''))), market=str(raw['market']), direction=str(raw['direction']), signal_type=str(raw['signal_type']), date=str(raw['date']), close=float(raw.get('close', 0.0)), score=int(raw.get('score', 0)), grade=str(raw.get('grade', 'D')), weekly_alignment=str(raw.get('weekly_alignment', 'unknown')), reasons=list(raw.get('reasons', [])), warnings=list(raw.get('warnings', [])), metrics=dict(raw.get('metrics', {})), lagging_compare_date=str(raw.get('lagging_compare_date', '')), lifecycle_status=str(raw.get('lifecycle_status') or raw.get('status') or 'confirmed'))
 
 def now_utc() -> datetime:
     return datetime.now(timezone.utc)
@@ -426,10 +432,39 @@ def fetch_yfinance_batch(symbols: Sequence[str], period: Optional[str]=None) -> 
         print(f'Warning: yfinance batch failed for {list(symbols)[:3]}: {last_error}', file=sys.stderr)
         return {}
     output: Dict[str, pd.DataFrame] = {}
-    for symbol in symbols:
-        parsed = extract_symbol_from_yfinance(raw, symbol)
-        if parsed is not None and len(parsed) >= minimum_daily_rows():
-            output[symbol] = parsed
+
+    def collect(downloaded: Optional[pd.DataFrame], wanted: Sequence[str]) -> None:
+        if downloaded is None or downloaded.empty:
+            return
+        for wanted_symbol in wanted:
+            parsed = extract_symbol_from_yfinance(downloaded, wanted_symbol)
+            if parsed is not None and len(parsed) >= minimum_daily_rows():
+                output[wanted_symbol] = parsed
+
+    collect(raw, symbols)
+    missing = [symbol for symbol in symbols if symbol not in output]
+    for retry in range(1, int(getattr(config, 'YFINANCE_MISSING_RETRIES', 1)) + 1):
+        if not missing:
+            break
+        retry_sleep(config.HTTP_RETRY_BASE_SECONDS, retry)
+        try:
+            recovered = yf.download(
+                tickers=' '.join(missing),
+                period=period or f'{int(config.LOOKBACK_DAYS)}d',
+                interval='1d',
+                group_by='ticker',
+                auto_adjust=bool(config.YFINANCE_AUTO_ADJUST),
+                threads=False,
+                progress=False,
+                timeout=int(config.REQUEST_TIMEOUT),
+            )
+            before = len(output)
+            collect(recovered, missing)
+            if len(output) > before:
+                print(f'yfinance recovered {len(output) - before}/{len(missing)} missing symbol(s) on retry {retry}')
+        except Exception as exc:
+            print(f'Warning: yfinance missing-symbol retry {retry} failed: {exc}', file=sys.stderr)
+        missing = [symbol for symbol in missing if symbol not in output]
     return output
 
 def extract_symbol_from_yfinance(raw: pd.DataFrame, symbol: str) -> Optional[pd.DataFrame]:
@@ -729,6 +764,17 @@ def mark_delivered(state: Dict[str, Any], candidate: Candidate) -> None:
     if candidate.id not in history:
         history[candidate.id] = {'id': candidate.id, 'symbol': candidate.symbol, 'name': candidate.name, 'market': candidate.market, 'direction': candidate.direction, 'signal_type': candidate.signal_type, 'date': candidate.date, 'grade': candidate.grade, 'score': candidate.score, 'weekly_alignment': candidate.weekly_alignment, 'entry_close': candidate.close, 'delivered_utc': now_utc_iso(), 'outcomes': {}, 'mfe_pct': None, 'mae_pct': None, 'returned_into_cloud': False, 'kijun_invalidated': False, 'complete': False}
 
+def mark_cancelled_local(state: Dict[str, Any], candidate: Candidate, reason: str) -> None:
+    """Remove a terminal setup from the fallback queue without calling it delivered."""
+
+    pending_store(state).pop(candidate.id, None)
+    cancelled = state.setdefault('cancelled_deliveries', [])
+    if not isinstance(cancelled, list):
+        cancelled = []
+        state['cancelled_deliveries'] = cancelled
+    cancelled.append({'time_utc': now_utc_iso(), 'candidate_id': candidate.id, 'status': candidate.lifecycle_status, 'reason': reason[:300]})
+    del cancelled[:-500]
+
 def record_delivery_failure(state: Dict[str, Any], candidate_ids: Sequence[str], error: str) -> None:
     failures = state.setdefault(STATE_FAILURES_KEY, [])
     if not isinstance(failures, list):
@@ -882,7 +928,8 @@ def tradingview_link(candidate: Candidate) -> str:
 def compact_candidate_line(candidate: Candidate) -> str:
     emoji = '🟢' if candidate.direction == 'bullish' else '🔴'
     warning = ' ⚠️' if candidate.warnings else ''
-    return f'{emoji} <b>{html.escape(candidate.symbol)}</b> · {candidate.grade}{candidate.score}/10 · {html.escape(signal_label(candidate.signal_type))} · W:{candidate.weekly_alignment}{warning}'
+    status = candidate.lifecycle_status.replace('_', ' ')
+    return f'{emoji} <b>{html.escape(candidate.symbol)}</b> · {candidate.grade}{candidate.score}/10 · {html.escape(signal_label(candidate.signal_type))} · {html.escape(status)} · W:{candidate.weekly_alignment}{warning}'
 
 def detail_caption(candidate: Candidate) -> str:
     emoji = '🟢' if candidate.direction == 'bullish' else '🔴'
@@ -935,12 +982,12 @@ def write_csv_report(candidates: Sequence[Candidate], market: str) -> Path:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     date = now_utc().strftime('%Y-%m-%d')
     path = REPORT_DIR / f'ichimoku_{market}_{date}.csv'
-    columns = ['symbol', 'name', 'market', 'date', 'direction', 'signal_type', 'grade', 'score', 'weekly_alignment', 'close', 'volume_ratio', 'cloud_distance_pct', 'cloud_distance_atr', 'cloud_dwell_candles', 'kijun_distance_atr', 'atr_pct', 'gap_pct', 'avg_volume_20d', 'avg_dollar_volume_20d', 'reasons', 'warnings', 'tradingview']
+    columns = ['symbol', 'name', 'market', 'date', 'direction', 'signal_type', 'grade', 'score', 'lifecycle_status', 'weekly_alignment', 'close', 'volume_ratio', 'cloud_distance_pct', 'cloud_distance_atr', 'cloud_dwell_candles', 'kijun_distance_atr', 'atr_pct', 'gap_pct', 'avg_volume_20d', 'avg_dollar_volume_20d', 'reasons', 'warnings', 'tradingview']
     with path.open('w', newline='', encoding='utf-8-sig') as handle:
         writer = csv.DictWriter(handle, fieldnames=columns)
         writer.writeheader()
         for candidate in candidates:
-            writer.writerow({'symbol': candidate.symbol, 'name': candidate.name, 'market': candidate.market, 'date': candidate.date, 'direction': candidate.direction, 'signal_type': candidate.signal_type, 'grade': candidate.grade, 'score': candidate.score, 'weekly_alignment': candidate.weekly_alignment, 'close': candidate.close, 'volume_ratio': candidate.metrics.get('volume_ratio'), 'cloud_distance_pct': candidate.metrics.get('cloud_distance_pct'), 'cloud_distance_atr': candidate.metrics.get('cloud_distance_atr'), 'cloud_dwell_candles': candidate.metrics.get('cloud_dwell_candles'), 'kijun_distance_atr': candidate.metrics.get('kijun_distance_atr'), 'atr_pct': candidate.metrics.get('atr_pct'), 'gap_pct': candidate.metrics.get('gap_pct'), 'avg_volume_20d': candidate.metrics.get('avg_volume_20d'), 'avg_dollar_volume_20d': candidate.metrics.get('avg_dollar_volume_20d'), 'reasons': '; '.join(candidate.reasons), 'warnings': '; '.join(candidate.warnings), 'tradingview': tradingview_link(candidate)})
+            writer.writerow({'symbol': candidate.symbol, 'name': candidate.name, 'market': candidate.market, 'date': candidate.date, 'direction': candidate.direction, 'signal_type': candidate.signal_type, 'grade': candidate.grade, 'score': candidate.score, 'lifecycle_status': candidate.lifecycle_status, 'weekly_alignment': candidate.weekly_alignment, 'close': candidate.close, 'volume_ratio': candidate.metrics.get('volume_ratio'), 'cloud_distance_pct': candidate.metrics.get('cloud_distance_pct'), 'cloud_distance_atr': candidate.metrics.get('cloud_distance_atr'), 'cloud_dwell_candles': candidate.metrics.get('cloud_dwell_candles'), 'kijun_distance_atr': candidate.metrics.get('kijun_distance_atr'), 'atr_pct': candidate.metrics.get('atr_pct'), 'gap_pct': candidate.metrics.get('gap_pct'), 'avg_volume_20d': candidate.metrics.get('avg_volume_20d'), 'avg_dollar_volume_20d': candidate.metrics.get('avg_dollar_volume_20d'), 'reasons': '; '.join(candidate.reasons), 'warnings': '; '.join(candidate.warnings), 'tradingview': tradingview_link(candidate)})
     return path
 
 def performance_digest_line(summary: Dict[str, Any]) -> Optional[str]:
@@ -952,57 +999,89 @@ def performance_digest_line(summary: Dict[str, Any]) -> Optional[str]:
         return None
     return f'Tracked weekly-aligned 10D: n={n}, win={win}%, avg={avg}%'
 
+def build_delivery_plan(candidates: Sequence[Candidate]) -> Dict[str, Any]:
+    terminal = {'invalidated', 'completed'}
+    full_report = [candidate for candidate in candidates if candidate.lifecycle_status not in terminal]
+    full_report = sorted(full_report, key=lambda item: (-item.score, item.grade, item.symbol))[:int(config.MAX_REPORT_SIGNALS)]
+    digest_statuses = {'confirmed', 'active', 'entry_zone', 'unknown'}
+    digest = [candidate for candidate in full_report if candidate.lifecycle_status in digest_statuses]
+    digest = digest[:int(config.MAX_DIGEST_SIGNALS)]
+    details = [candidate for candidate in digest if candidate.score >= int(config.MIN_SCORE_FOR_DETAIL)][:int(config.TOP_DETAILED_ALERTS)]
+    digest_messages = math.ceil(len(digest) / max(1, int(config.DIGEST_SIGNALS_PER_MESSAGE))) if digest else 0
+    expected_messages = digest_messages + len(details) + 1
+    if full_report:
+        expected_messages += 1
+    return {'full_report': full_report, 'digest': digest, 'details': details, 'expected_messages': expected_messages, 'digest_messages': digest_messages}
+
 def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], stats: ScanStats, dry_run: bool, delivery_claim: Optional[Any]=None) -> List[Candidate]:
-    ordered = sorted(candidates, key=lambda item: (-item.score, item.grade, item.symbol))[:int(config.MAX_REPORT_SIGNALS)]
+    plan = build_delivery_plan(candidates)
+    ordered: List[Candidate] = plan['full_report']
+    digest_candidates: List[Candidate] = plan['digest']
+    print(f"Delivery preview {stats.market}: queued={len(candidates)} actionable={len(ordered)} digest={len(digest_candidates)} details={len(plan['details'])} expected_messages={plan['expected_messages']} lifecycle_skipped={stats.lifecycle_skipped}")
     if dry_run:
-        for candidate in ordered:
+        for candidate in digest_candidates:
             print('DRY RUN:', json.dumps(candidate.serializable(), default=str))
         return []
-    delivered: List[Candidate] = []
+
+    delivered_by_id: Dict[str, Candidate] = {}
+
+    def complete_group(group: Sequence[Candidate], receipt: Dict[str, Any]) -> None:
+        ids = [candidate.id for candidate in group]
+        if delivery_claim is not None:
+            delivery_claim.complete(ids, receipt)
+        for candidate in group:
+            mark_delivered(state, candidate)
+            delivered_by_id[candidate.id] = candidate
+        save_json(STATE_PATH, state)
+
     perf_line = performance_digest_line(performance_summary(state))
-    groups = list(chunks(ordered, int(config.DIGEST_SIGNALS_PER_MESSAGE)))
+    groups = list(chunks(digest_candidates, int(config.DIGEST_SIGNALS_PER_MESSAGE)))
     for index, group in enumerate(groups, 1):
-        header = [f'📊 <b>Ichimoku Daily Digest — {html.escape(stats.market)}</b>', f"Part {index}/{len(groups)} · Signals {len(ordered)} · {now_utc().strftime('%Y-%m-%d UTC')}"]
+        header = [f'📊 <b>Ichimoku Daily Digest — {html.escape(stats.market)}</b>', f"Top {len(digest_candidates)} actionable · Full report {len(ordered)} · {now_utc().strftime('%Y-%m-%d UTC')}"]
         if index == 1:
             header.append(f'Scanned {stats.symbols_attempted} · Valid {stats.symbols_with_data} · Filtered {stats.symbols_filtered_liquidity + stats.symbols_filtered_universe + stats.symbols_filtered_quality} · Errors {stats.symbols_failed}')
             if perf_line:
                 header.append(perf_line)
-        text = '\n'.join(header + [''] + [compact_candidate_line(candidate) for candidate in group])
-        ids = [candidate.id for candidate in group]
+        message = '\n'.join(header + [''] + [compact_candidate_line(candidate) for candidate in group])
         try:
-            response = send_telegram_message(text)
-            if delivery_claim is not None:
-                try:
-                    result = dict(response.get('result') or {}) if isinstance(response, dict) else {}
-                    chat = result.get('chat') if isinstance(result.get('chat'), dict) else {}
-                    delivery_claim.complete(ids, {'telegram_message_id': result.get('message_id'), 'chat_id': chat.get('id')})
-                except Exception as tracking_exc:
-                    record_delivery_failure(state, ids, f'Digest sent but Supabase completion tracking failed: {tracking_exc}')
-                    print(f'Warning: digest sent but queue completion failed: {tracking_exc}', file=sys.stderr)
-            for candidate in group:
-                mark_delivered(state, candidate)
-                delivered.append(candidate)
-            save_json(STATE_PATH, state)
+            response = send_telegram_message(message)
+            result = dict(response.get('result') or {}) if isinstance(response, dict) else {}
+            chat = result.get('chat') if isinstance(result.get('chat'), dict) else {}
+            complete_group(group, {'channel': 'telegram_digest', 'telegram_message_id': result.get('message_id'), 'chat_id': chat.get('id')})
             stats.digest_delivered += len(group)
+            stats.digest_messages += 1
         except Exception as exc:
             stats.digest_failed += len(group)
-            if delivery_claim is not None:
-                try:
-                    delivery_claim.fail(ids, str(exc))
-                except Exception as tracking_exc:
-                    print(f'Warning: queue failure tracking failed: {tracking_exc}', file=sys.stderr)
-            record_delivery_failure(state, ids, str(exc))
+            record_delivery_failure(state, [candidate.id for candidate in group], str(exc))
             save_json(STATE_PATH, state)
             print(f'Warning: digest part {index} failed: {exc}', file=sys.stderr)
         time.sleep(float(config.TELEGRAM_MESSAGE_PAUSE_SECONDS))
-    if delivered and config.SEND_CSV_REPORT:
+
+    remaining = [candidate for candidate in ordered if candidate.id not in delivered_by_id]
+    if ordered and config.SEND_CSV_REPORT:
         try:
-            report = write_csv_report(delivered, stats.market.replace(' ', '_').lower())
-            send_telegram_document(f'Full {html.escape(stats.market)} Ichimoku report ({len(delivered)} signals)', report)
+            report = write_csv_report(ordered, stats.market.replace(' ', '_').lower())
+            send_telegram_document(f'Full {html.escape(stats.market)} actionable Ichimoku report ({len(ordered)} signals)', report)
+            if remaining:
+                complete_group(remaining, {'channel': 'telegram_csv', 'report_signals': len(ordered)})
+            stats.csv_reported = len(ordered)
         except Exception as exc:
             print(f'Warning: CSV report delivery failed: {exc}', file=sys.stderr)
-    detail_pool = [candidate for candidate in delivered if candidate.score >= int(config.MIN_SCORE_FOR_DETAIL)]
-    for candidate in detail_pool[:int(config.TOP_DETAILED_ALERTS)]:
+            if delivery_claim is not None and remaining:
+                delivery_claim.fail([candidate.id for candidate in remaining], f'CSV report delivery failed: {exc}')
+            record_delivery_failure(state, [candidate.id for candidate in remaining], f'CSV report delivery failed: {exc}')
+    elif remaining:
+        try:
+            send_telegram_message(f'ℹ️ {len(remaining)} additional actionable {html.escape(stats.market)} signals are available in the dashboard.')
+            complete_group(remaining, {'channel': 'telegram_dashboard_summary', 'report_signals': len(remaining)})
+        except Exception as exc:
+            if delivery_claim is not None:
+                delivery_claim.fail([candidate.id for candidate in remaining], str(exc))
+            record_delivery_failure(state, [candidate.id for candidate in remaining], str(exc))
+
+    for candidate in plan['details']:
+        if candidate.id not in delivered_by_id:
+            continue
         try:
             chart = make_chart(candidate)
             if chart and chart.exists():
@@ -1014,7 +1093,7 @@ def deliver_candidates(state: Dict[str, Any], candidates: Sequence[Candidate], s
             stats.details_failed += 1
             print(f'Warning: detail delivery failed for {candidate.symbol}: {exc}', file=sys.stderr)
         time.sleep(float(config.TELEGRAM_MESSAGE_PAUSE_SECONDS))
-    return delivered
+    return list(delivered_by_id.values())
 
 def check_stale_heartbeats(current_market: str, heartbeat: Dict[str, Any], state: Dict[str, Any], dry_run: bool) -> None:
     thresholds = {'crypto': int(config.CRYPTO_STALE_HOURS), 'us': int(config.US_STALE_HOURS)}
@@ -1075,6 +1154,7 @@ def scan_crypto(state: Dict[str, Any], stats: ScanStats, dry_run: bool=False) ->
             frame = fetch_binance_ohlcv(symbol, int(config.LOOKBACK_DAYS))
             if frame is None:
                 stats.symbols_failed += 1
+                stats.symbols_missing_data += 1
                 continue
             from v3.quality import validate_ohlcv
             quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows(), max_age_days=int(config.CRYPTO_MAX_DATA_AGE_DAYS))
@@ -1094,6 +1174,7 @@ def scan_crypto(state: Dict[str, Any], stats: ScanStats, dry_run: bool=False) ->
                 stats.fresh_candidates += 1
         except Exception as exc:
             stats.symbols_failed += 1
+            stats.symbols_processing_errors += 1
             stats.provider_errors.append(f'{symbol}: {exc}')
         if index % 100 == 0:
             if not dry_run:
@@ -1110,12 +1191,24 @@ def scan_yfinance_symbols(symbols: Sequence[str], market: str, state: Dict[str, 
     for batch_no, batch in enumerate(chunks(symbols, int(config.YFINANCE_BATCH_SIZE)), 1):
         stats.symbols_attempted += len(batch)
         data = fetch_yfinance_batch(batch)
-        missing = len(batch) - len(data)
+        missing_symbols = [symbol for symbol in batch if symbol not in data]
+        # Indices and futures are small, important universes. Give each missing
+        # symbol a final isolated request so a noisy neighbor cannot hide it.
+        if market in {'US Index', 'Commodity Future'} and missing_symbols:
+            for symbol in list(missing_symbols):
+                recovered = fetch_yfinance_batch([symbol])
+                if symbol in recovered:
+                    data[symbol] = recovered[symbol]
+            missing_symbols = [symbol for symbol in batch if symbol not in data]
+        missing = len(missing_symbols)
         stats.symbols_failed += missing
+        stats.symbols_missing_data += missing
+        if missing_symbols:
+            stats.provider_errors.append(f'{market} batch {batch_no}: no usable data for {len(missing_symbols)} symbol(s), examples: {", ".join(missing_symbols[:8])}')
         for symbol, frame in data.items():
             try:
                 from v3.quality import validate_ohlcv
-                quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows(), max_age_days=int(config.US_MAX_DATA_AGE_DAYS))
+                quality_ok, quality_issues, quality_meta = validate_ohlcv(frame, minimum_rows=minimum_daily_rows(), max_age_days=int(config.US_MAX_DATA_AGE_DAYS), allow_settlement_close_outside_range=(market in {'US Index', 'Commodity Future'}))
                 if not quality_ok:
                     stats.symbols_filtered_quality += 1
                     stats.provider_errors.append(f'{symbol}: data quality failed: {"; ".join(quality_issues[:3])}')
@@ -1139,6 +1232,7 @@ def scan_yfinance_symbols(symbols: Sequence[str], market: str, state: Dict[str, 
                     stats.fresh_candidates += 1
             except Exception as exc:
                 stats.symbols_failed += 1
+                stats.symbols_processing_errors += 1
                 stats.provider_errors.append(f'{symbol}: {exc}')
         if not dry_run:
             save_json(STATE_PATH, state)
@@ -1203,6 +1297,8 @@ def deliver_pending_market(market: str, state: Dict[str, Any], dry_run: bool=Fal
         try:
             from v3.queue import get_delivery_queue
             queue = get_delivery_queue()
+            if queue is None and os.getenv('SUPABASE_URL'):
+                raise ScannerError('Supabase delivery queue is configured but unavailable; refusing unsafe local fallback')
             if queue is not None:
                 if local_pending:
                     queue.enqueue([candidate.serializable() for candidate in local_pending], scheduled_for=now_utc_iso())
@@ -1215,16 +1311,32 @@ def deliver_pending_market(market: str, state: Dict[str, Any], dry_run: bool=Fal
                 delivery_claim = queue.claim(market)
                 claimed: List[Candidate] = []
                 already_delivered: List[str] = []
-                for raw in delivery_claim.candidates:
+                terminal: List[Candidate] = []
+                for raw in delivery_claim.reconciled_candidates():
                     candidate = Candidate.from_dict(raw)
                     if is_delivered(state, candidate):
                         already_delivered.append(candidate.id)
+                    elif candidate.lifecycle_status in {'invalidated', 'completed'}:
+                        terminal.append(candidate)
                     else:
                         claimed.append(candidate)
                 if already_delivered:
                     delivery_claim.complete(already_delivered, {'reconciled_from_local_state': True})
+                if terminal:
+                    terminal_ids = [candidate.id for candidate in terminal]
+                    delivery_claim.cancel(terminal_ids, 'Lifecycle status is terminal before Telegram delivery')
+                    for candidate in terminal:
+                        mark_cancelled_local(state, candidate, 'Lifecycle status is terminal before Telegram delivery')
+                    stats.lifecycle_skipped += len(terminal)
                 pending = claimed
         except Exception as exc:
+            if delivery_claim is not None or os.getenv('SUPABASE_URL'):
+                if delivery_claim is not None:
+                    try:
+                        delivery_claim.fail([str(row.get('signal_id')) for row in delivery_claim.rows], f'Lifecycle reconciliation failed: {exc}')
+                    except Exception as tracking_exc:
+                        print(f'Warning: could not release failed delivery claim: {tracking_exc}', file=sys.stderr)
+                raise ScannerError(f'Safe delivery reconciliation failed: {exc}') from exc
             delivery_claim = None
             pending = local_pending
             stats.provider_errors.append(f'Supabase queue fallback: {exc}')
@@ -1276,7 +1388,7 @@ def send_no_signal_summary(stats: ScanStats, dry_run: bool) -> None:
 def send_completion_summary(stats: ScanStats, pending_count: int, dry_run: bool) -> None:
     if not getattr(config, 'SEND_COMPLETION_SUMMARY', True):
         return
-    message = f'✅ <b>Ichimoku scanner run complete</b>\nMarket: {html.escape(stats.market)}\nSymbols attempted: {stats.symbols_attempted}\nValid data: {stats.symbols_with_data}\nFresh signals: {stats.fresh_candidates}\nDigest delivered: {stats.digest_delivered}\nDigest failures this run: {stats.digest_failed}\nPending for retry: {pending_count}\nDetail charts: {stats.details_delivered} sent, {stats.details_failed} failed\nProvider errors: {stats.symbols_failed}\nElapsed: {stats.elapsed_seconds:.1f}s'
+    message = f'✅ <b>Ichimoku delivery complete</b>\nMarket: {html.escape(stats.market)}\nTop digest signals: {stats.digest_delivered}\nFull CSV signals: {stats.csv_reported}\nLifecycle-invalid signals skipped: {stats.lifecycle_skipped}\nDigest failures this run: {stats.digest_failed}\nPending for retry: {pending_count}\nDetail charts: {stats.details_delivered} sent, {stats.details_failed} failed\nElapsed: {stats.elapsed_seconds:.1f}s'
     if dry_run:
         print('DRY RUN COMPLETION:', message)
     else:

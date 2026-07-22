@@ -44,6 +44,16 @@ class V3Tests(unittest.TestCase):
         c=self.candidate(); self.assertEqual(initial_status(c),'confirmed')
         self.assertEqual(evaluate_status({'direction':'bullish','signal_date':'2026-01-01','status':'active'}, {'close':90,'kijun':95,'cloud_bottom':92,'cloud_top':98,'atr':2,'date':'2026-01-03'}),'invalidated')
 
+    def test_lifecycle_cannot_invalidate_on_signal_candle(self):
+        signal=normalize_candidate(self.candidate()).to_dict()
+        current={'close':90,'kijun':95,'cloud_bottom':92,'cloud_top':98,'atr':2,'date':'2026-01-01'}
+        self.assertEqual(evaluate_status(signal,current),'confirmed')
+
+    def test_kijun_only_invalidates_when_signal_started_beyond_it(self):
+        signal=normalize_candidate({**self.candidate(),'close':100.0,'metrics':{**self.candidate()['metrics'],'kijun':102.0}}).to_dict()
+        current={'close':101,'kijun':103,'cloud_bottom':95,'cloud_top':99,'atr':2,'date':'2026-01-02'}
+        self.assertEqual(evaluate_status(signal,current),'active')
+
     def test_normalize_candidate(self):
         record=normalize_candidate(self.candidate())
         self.assertEqual(record.cluster,'us-other')
@@ -170,6 +180,17 @@ class V3Tests(unittest.TestCase):
         self.assertTrue(any('Invalid OHLC' in issue for issue in issues))
         self.assertEqual(meta['invalid_ohlc'],1)
 
+    def test_futures_quality_allows_settlement_close_outside_range(self):
+        idx=pd.date_range('2026-01-01',periods=60,freq='D')
+        frame=pd.DataFrame({'Open':100.0,'High':101.0,'Low':99.0,'Close':100.0,'Volume':1000.0},index=idx)
+        frame.loc[idx[-1],'Close']=102.0
+        strict_ok,_,_=validate_ohlcv(frame,minimum_rows=50)
+        futures_ok,issues,meta=validate_ohlcv(frame,minimum_rows=50,allow_settlement_close_outside_range=True)
+        self.assertFalse(strict_ok)
+        self.assertTrue(futures_ok)
+        self.assertEqual(issues,[])
+        self.assertTrue(meta['settlement_close_allowed'])
+
     def test_data_quality_rejects_stale_prices(self):
         idx=pd.date_range('2026-01-01',periods=60,freq='D')
         frame=pd.DataFrame({'Open':100.0,'High':101.0,'Low':99.0,'Close':100.0,'Volume':1000.0},index=idx)
@@ -180,15 +201,46 @@ class V3Tests(unittest.TestCase):
 
     def test_database_queue_payload_and_claim(self):
         fake=SupabaseStore.__new__(SupabaseStore)
-        fake._request=MagicMock(side_effect=[2,[{'queue_id':7,'signal_id':self.candidate()['id'],'payload':self.candidate(),'attempts':1}],1])
+        fake._request=MagicMock(side_effect=[2,[{'queue_id':7,'signal_id':self.candidate()['id'],'payload':self.candidate(),'attempts':1}],[{'id':self.candidate()['id'],'status':'active'}],1,1])
         queue=DatabaseDeliveryQueue(fake)
         self.assertEqual(queue.enqueue([self.candidate()]),2)
         claim=queue.claim('us')
-        self.assertEqual(claim.candidates[0]['symbol'],'AAPL')
+        self.assertEqual(claim.reconciled_candidates()[0]['lifecycle_status'],'active')
         claim.complete([self.candidate()['id']],{'telegram_message_id':123})
+        claim.cancel([self.candidate()['id']],'terminal')
         self.assertEqual(fake._request.call_args_list[0].args[1],'rpc/enqueue_delivery_signals')
         self.assertEqual(fake._request.call_args_list[1].args[1],'rpc/claim_delivery_batch')
-        self.assertEqual(fake._request.call_args_list[2].args[1],'rpc/complete_delivery_batch')
+        self.assertEqual(fake._request.call_args_list[2].args[1],'signals')
+        self.assertEqual(fake._request.call_args_list[3].args[1],'rpc/complete_delivery_batch')
+        self.assertEqual(fake._request.call_args_list[4].args[1],'rpc/cancel_delivery_batch')
+
+    def test_delivery_plan_is_concise_and_excludes_terminal(self):
+        candidates=[]
+        for index in range(15):
+            raw={**self.candidate(),'id':f's-{index}','symbol':f'S{index}','score':10-index % 5,'lifecycle_status':'active'}
+            candidates.append(scanner.Candidate.from_dict(raw))
+        candidates.append(scanner.Candidate.from_dict({**self.candidate(),'id':'extended','symbol':'EXT','lifecycle_status':'extended'}))
+        candidates.append(scanner.Candidate.from_dict({**self.candidate(),'id':'invalid','symbol':'BAD','lifecycle_status':'invalidated'}))
+        plan=scanner.build_delivery_plan(candidates)
+        self.assertEqual(len(plan['full_report']),16)
+        self.assertEqual(len(plan['digest']),10)
+        self.assertEqual(len(plan['details']),3)
+        self.assertEqual(plan['expected_messages'],6)
+
+    def test_delivery_completes_digest_and_csv_rows_once(self):
+        candidates=[]
+        for index in range(15):
+            raw={**self.candidate(),'id':f's-{index}','symbol':f'S{index}','score':10-index % 5,'lifecycle_status':'active'}
+            candidates.append(scanner.Candidate.from_dict(raw))
+        claim=MagicMock()
+        response={'result':{'message_id':123,'chat':{'id':456}}}
+        with patch.object(scanner,'send_telegram_message',return_value=response), patch.object(scanner,'send_telegram_document'), patch.object(scanner,'write_csv_report',return_value=Path('report.csv')), patch.object(scanner,'make_chart',return_value=None), patch.object(scanner.time,'sleep'):
+            delivered=scanner.deliver_candidates({},candidates,scanner.ScanStats('us-delivery'),False,claim)
+        self.assertEqual(len(delivered),15)
+        completed=[call.args[0] for call in claim.complete.call_args_list]
+        self.assertEqual(len(completed),2)
+        self.assertEqual(len(completed[0]),10)
+        self.assertEqual(len(completed[1]),5)
 
     def test_database_queue_reconciles_delivered_signal_ids(self):
         fake=SupabaseStore.__new__(SupabaseStore)

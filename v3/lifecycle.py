@@ -60,21 +60,41 @@ def evaluate_status(signal: Dict[str, Any], current: Dict[str, Any]) -> str:
     atr = _float(current.get("atr"))
     if close is None:
         return str(signal.get("status") or "confirmed")
-    if direction == "bullish":
-        if cloud_bottom is not None and close < cloud_bottom:
-            return "invalidated"
-        if kijun is not None and close < kijun:
-            return "invalidated"
-    else:
-        if cloud_top is not None and close > cloud_top:
-            return "invalidated"
-        if kijun is not None and close > kijun:
-            return "invalidated"
-    if sessions_since(
+    elapsed_sessions = sessions_since(
         str(signal.get("signal_date", "")),
         str(current.get("date", "")),
         str(signal.get("market", "")),
-    ) >= settings.lifecycle_complete_sessions:
+    )
+    # The signal candle establishes the lifecycle baseline. It cannot also
+    # invalidate the setup; invalidation starts with the next completed candle.
+    if elapsed_sessions <= 0:
+        return initial_status(signal)
+
+    metrics = dict(signal.get("metrics") or {})
+    signal_close = _float(signal.get("close"))
+    signal_kijun = _float(metrics.get("kijun"))
+    risk_plan = dict(signal.get("risk_plan") or {})
+    risk_invalidation = _float(risk_plan.get("invalidation"))
+    started_beyond_kijun = (
+        signal_close is not None
+        and signal_kijun is not None
+        and (signal_close >= signal_kijun if direction == "bullish" else signal_close <= signal_kijun)
+    )
+    if direction == "bullish":
+        if risk_invalidation is not None and close < risk_invalidation:
+            return "invalidated"
+        if cloud_bottom is not None and close < cloud_bottom:
+            return "invalidated"
+        if started_beyond_kijun and kijun is not None and close < kijun:
+            return "invalidated"
+    else:
+        if risk_invalidation is not None and close > risk_invalidation:
+            return "invalidated"
+        if cloud_top is not None and close > cloud_top:
+            return "invalidated"
+        if started_beyond_kijun and kijun is not None and close > kijun:
+            return "invalidated"
+    if elapsed_sessions >= settings.lifecycle_complete_sessions:
         return "completed"
     if atr and kijun is not None:
         distance = abs(close - kijun) / atr
