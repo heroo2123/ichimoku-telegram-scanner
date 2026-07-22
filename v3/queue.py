@@ -43,6 +43,34 @@ class QueueClaim:
     def candidates(self) -> List[Dict[str, Any]]:
         return [dict(row.get("payload") or {}) for row in self.rows]
 
+    def signal_statuses(self) -> Dict[str, str]:
+        """Return authoritative lifecycle states for every claimed signal."""
+
+        signal_ids = [str(row.get("signal_id") or "") for row in self.rows if row.get("signal_id")]
+        statuses: Dict[str, str] = {}
+        for start in range(0, len(signal_ids), 40):
+            batch = signal_ids[start:start + 40]
+            quoted = ",".join(f'"{value.replace(chr(34), "")}"' for value in batch)
+            rows = self.store._request(
+                "GET",
+                "signals",
+                params={"select": "id,status", "id": f"in.({quoted})"},
+            )
+            statuses.update({str(row["id"]): str(row.get("status") or "confirmed") for row in rows or []})
+        missing = sorted(set(signal_ids).difference(statuses))
+        if missing:
+            raise RuntimeError(f"Claimed delivery rows are missing {len(missing)} signal record(s)")
+        return statuses
+
+    def reconciled_candidates(self) -> List[Dict[str, Any]]:
+        statuses = self.signal_statuses()
+        candidates: List[Dict[str, Any]] = []
+        for row in self.rows:
+            payload = dict(row.get("payload") or {})
+            payload["lifecycle_status"] = statuses[str(row.get("signal_id"))]
+            candidates.append(payload)
+        return candidates
+
     def _queue_ids(self, signal_ids: Sequence[str]) -> List[int]:
         selected = set(signal_ids)
         return [int(row["queue_id"]) for row in self.rows if str(row.get("signal_id")) in selected]
@@ -72,6 +100,20 @@ class QueueClaim:
                 "p_queue_ids": queue_ids,
                 "p_worker_id": self.worker_id,
                 "p_error": str(error)[:1000],
+            },
+        )
+
+    def cancel(self, signal_ids: Sequence[str], reason: str) -> None:
+        queue_ids = self._queue_ids(signal_ids)
+        if not queue_ids:
+            return
+        self.store._request(
+            "POST",
+            "rpc/cancel_delivery_batch",
+            json={
+                "p_queue_ids": queue_ids,
+                "p_worker_id": self.worker_id,
+                "p_reason": str(reason)[:500],
             },
         )
 

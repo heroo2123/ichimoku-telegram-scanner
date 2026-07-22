@@ -27,11 +27,13 @@ Every candidate receives a 0–10 score and A/B/C/D grade using cloud position, 
 
 - Retries temporary Telegram failures with exponential backoff
 - Does not terminate the scan when one chart fails
-- Marks a signal delivered only after its digest succeeds
+- Marks a signal delivered only after its digest or full CSV report succeeds
 - Keeps unsuccessful alerts pending for the next run
 - Uses an atomic Supabase queue with the existing JSON state as a fallback
 - Runs a quiet 3:20 PM Kuwait catch-up if the primary 3 PM scheduler misses queued work
-- Sends a ranked digest, top detailed charts, CSV report, and final health summary
+- Reconciles queued rows against the latest lifecycle state before sending
+- Excludes invalidated/completed setups and keeps extended setups in the dashboard/CSV
+- Sends one ranked top-10 digest, up to three detailed charts, a full CSV report, and a final health summary
 
 Crypto is scanned after its UTC daily candle closes. US markets are scanned after the completed cash session. Scanning and Telegram delivery remain separate, so the dashboard can update before the scheduled message without using an incomplete candle.
 
@@ -73,4 +75,4 @@ Configure these GitHub Actions repository secrets:
 
 Edit `config.py` to adjust liquidity thresholds, stable/fiat asset sets, enabled signal types, grade cutoffs, detail limits, retry behavior, performance horizons, and stale-heartbeat thresholds.
 
-This remains a free-data scanner. Binance and Yahoo Finance can be delayed, incomplete, or temporarily rate-limited, so the code retries, rejects stale/invalid candles, and isolates failures but cannot guarantee institutional-grade coverage. US OHLC data is split-adjusted; crypto data remains native Binance spot data.
+This remains a free-data scanner. Binance and Yahoo Finance can be delayed, incomplete, or temporarily rate-limited, so the code retries missing batches and important index/futures symbols, separates provider misses from processing errors, rejects stale/invalid candles, and isolates failures but cannot guarantee institutional-grade coverage. Official settlement closes for indices and commodity futures are accepted when they fall outside the session high/low; ordinary stocks and crypto retain strict OHLC validation. US OHLC data is split-adjusted; crypto data remains native Binance spot data.

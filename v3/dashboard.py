@@ -13,7 +13,7 @@ from .settings import settings
 from .storage import get_store
 from .telegram_commands import handle_update
 
-app = FastAPI(title="Ichimoku Scanner V3", version="3.1.0")
+app = FastAPI(title="Ichimoku Scanner V3", version="3.1.1")
 
 COOKIE_NAME = "ichimoku_dashboard_session"
 COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365
@@ -90,7 +90,7 @@ async def security_headers(request: Request, call_next):
 
 @app.get("/health")
 def health() -> dict:
-    return {"ok": True, "version": "3.1.0", "supabase": settings.supabase_enabled}
+    return {"ok": True, "version": "3.1.1", "supabase": settings.supabase_enabled}
 
 
 @app.post("/auth/unlock")

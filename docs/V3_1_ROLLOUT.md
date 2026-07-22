@@ -12,6 +12,10 @@ V3.1 is additive and preserves the Telegram bot, the 3 PM Kuwait delivery contra
 6. Confirm the GitHub validation workflow, Telegram command activation, and Render auto-deploy are green.
 7. Run controlled dry scans and a queue round trip. Do not send synthetic trading alerts.
 
+## Delivery quality follow-up
+
+`202607220001_delivery_quality.sql` adds a service-role-only atomic queue-cancellation RPC and repairs signals that were incorrectly invalidated on the same candle that created them. The application then reconciles queue rows at send time, limits Telegram to a top-10 digest and three detailed charts, and preserves every nonterminal result in the CSV/dashboard. This migration is additive and does not change the 3 PM Kuwait schedule, dashboard URL, Telegram commands, or paper-only trading boundary.
+
 ## Rollback
 
 - Set `DELIVERY_BACKEND=local` to stop database queue use while retaining the JSON queue.
