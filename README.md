@@ -30,7 +30,7 @@ Every candidate receives a 0–10 score and A/B/C/D grade using cloud position, 
 - Marks a signal delivered only after its digest or full CSV report succeeds
 - Keeps unsuccessful alerts pending for the next run
 - Uses an atomic Supabase queue with the existing JSON state as a fallback
-- Runs a quiet 3:20 PM Kuwait catch-up if the primary 3 PM scheduler misses queued work
+- Starts the primary runner off-peak and time-gates it to 3 PM Kuwait, with a quiet 3:20 PM catch-up
 - Reconciles queued rows against the latest lifecycle state before sending
 - Excludes invalidated/completed setups and keeps extended setups in the dashboard/CSV
 - Sends one ranked top-10 digest, up to three detailed charts, a full CSV report, and a final health summary
