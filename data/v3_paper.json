@@ -2,7 +2,109 @@
   "cash": 100000,
   "closed_trades": [],
   "equity": 100000.0,
+  "fees_paid": 0.0,
+  "gross_exposure": 0.0,
+  "pending_orders": {
+    "Commodity Future|ZM=F|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "commodity-agriculture",
+      "market": "Commodity Future",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "Commodity Future|ZM=F|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "ZM=F"
+    },
+    "US Stock|AEHR|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "us-other",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|AEHR|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "AEHR"
+    },
+    "US Stock|ALLY|1D|bullish|kijun_bounce_bullish|2026-07-21": {
+      "cluster": "us-financial",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|ALLY|1D|bullish|kijun_bounce_bullish|2026-07-21",
+      "symbol": "ALLY"
+    },
+    "US Stock|ANGI|1D|bearish|cloud_breakdown|2026-07-21": {
+      "cluster": "us-other",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|ANGI|1D|bearish|cloud_breakdown|2026-07-21",
+      "symbol": "ANGI"
+    },
+    "US Stock|AVTX|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "us-biotech",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|AVTX|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "AVTX"
+    },
+    "US Stock|BFH|1D|bullish|trend_continuation_bullish|2026-07-21": {
+      "cluster": "us-financial",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|BFH|1D|bullish|trend_continuation_bullish|2026-07-21",
+      "symbol": "BFH"
+    },
+    "US Stock|CEVA|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "us-other",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|CEVA|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "CEVA"
+    },
+    "US Stock|CVE|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "us-energy",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|CVE|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "CVE"
+    },
+    "US Stock|FBIO|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "us-biotech",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|FBIO|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "FBIO"
+    },
+    "US Stock|FENY|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "us-energy",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|FENY|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "FENY"
+    },
+    "US Stock|FTXN|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "us-energy",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|FTXN|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "FTXN"
+    },
+    "US Stock|LSCC|1D|bullish|cloud_breakout|2026-07-21": {
+      "cluster": "us-semiconductor",
+      "market": "US Stock",
+      "queued_at": "2026-07-22T00:44:24+00:00",
+      "signal_date": "2026-07-21",
+      "signal_id": "US Stock|LSCC|1D|bullish|cloud_breakout|2026-07-21",
+      "symbol": "LSCC"
+    }
+  },
   "positions": {},
+  "realized_pnl": 0.0,
   "starting_equity": 100000,
-  "updated_at": "2026-07-21T13:23:36+00:00"
+  "unrealized_pnl": 0.0,
+  "updated_at": "2026-07-22T00:44:24+00:00"
 }

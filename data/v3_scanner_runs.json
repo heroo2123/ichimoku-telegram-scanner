@@ -1,35 +1,12 @@
 {
-  "crypto": {
-    "alerts_count": 0,
-    "delivered_count": 0,
-    "last_run_utc": "2026-07-21T13:23:31+00:00",
-    "mode": "delivery",
-    "stats": {
-      "delivery_deferred": 0,
-      "details_delivered": 0,
-      "details_failed": 0,
-      "digest_delivered": 0,
-      "digest_failed": 0,
-      "elapsed_seconds": 0.6,
-      "fresh_candidates": 0,
-      "market": "crypto-delivery",
-      "pending_loaded": 0,
-      "provider_errors": [],
-      "started_utc": "2026-07-21T13:23:30+00:00",
-      "symbols_attempted": 0,
-      "symbols_discovered": 0,
-      "symbols_failed": 0,
-      "symbols_filtered_liquidity": 0,
-      "symbols_filtered_universe": 0,
-      "symbols_with_data": 0
-    },
-    "status": "completed"
-  },
-  "us": {
-    "alerts_count": 630,
-    "delivered_count": 0,
-    "last_run_utc": "2026-07-22T00:38:22+00:00",
+  "c6f99902-4829-4536-991f-6eca9dd23192": {
+    "completed_at": "2026-07-22T00:38:23+00:00",
+    "error": null,
+    "market": "us",
     "mode": "deferred",
+    "run_id": "c6f99902-4829-4536-991f-6eca9dd23192",
+    "source": "github-actions",
+    "started_at": "2026-07-22T00:05:00+00:00",
     "stats": {
       "breadth_above_cloud": 2210,
       "breadth_above_pct": 54.34,
