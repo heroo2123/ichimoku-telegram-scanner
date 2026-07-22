@@ -2416,6 +2416,3410 @@
       "warnings": [],
       "weekly_alignment": "aligned"
     },
+    "Crypto Spot|ACEUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 0.0906,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|ACEUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.013478571428571428,
+        "atr_pct": 14.877,
+        "candle_size_atr": 2.152,
+        "cloud_bottom": 0.114,
+        "cloud_distance_atr": 1.736,
+        "cloud_distance_pct": 20.526,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.599,
+        "cloud_top": 0.13555,
+        "data_quality": {
+          "age_days": 1.158,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.088,
+        "kijun": 0.10779999999999999,
+        "kijun_distance_atr": 1.276,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.113,
+        "signal_open": 0.1129,
+        "tenkan": 0.10779999999999999,
+        "volume_ratio": 2.546
+      },
+      "name": "ACE/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "ACEUSDT",
+      "warnings": [
+        "Large signal candle: 2.2 ATR"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|ACXUSDC|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 0.04197,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|ACXUSDC|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0011442857142857177,
+        "atr_pct": 2.726,
+        "candle_size_atr": 2.071,
+        "cloud_bottom": 0.0422,
+        "cloud_distance_atr": 0.201,
+        "cloud_distance_pct": 0.545,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 9.089,
+        "cloud_top": 0.052599999999999994,
+        "data_quality": {
+          "age_days": 1.158,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 588
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.916,
+        "kijun": 0.04053,
+        "kijun_distance_atr": 1.258,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.04149,
+        "signal_open": 0.04187,
+        "tenkan": 0.04159,
+        "volume_ratio": 0.998
+      },
+      "name": "ACX/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 4,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "ACXUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 2.1 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|ALTUSDC|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.00637,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|ALTUSDC|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.00034571428571428584,
+        "atr_pct": 5.427,
+        "candle_size_atr": 0.434,
+        "cloud_bottom": 0.007355,
+        "cloud_distance_atr": 2.849,
+        "cloud_distance_pct": 13.392,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 2.386,
+        "cloud_top": 0.00818,
+        "data_quality": {
+          "age_days": 1.158,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.318,
+        "kijun": 0.00747,
+        "kijun_distance_atr": 3.182,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.00629,
+        "signal_open": 0.00631,
+        "tenkan": 0.00642,
+        "volume_ratio": 0.203
+      },
+      "name": "ALT/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "ALTUSDC",
+      "warnings": [
+        "Extended 3.2 ATR from Kijun"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|ALTUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.00638,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|ALTUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.00035999999999999997,
+        "atr_pct": 5.643,
+        "candle_size_atr": 0.5,
+        "cloud_bottom": 0.00734,
+        "cloud_distance_atr": 2.667,
+        "cloud_distance_pct": 13.079,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 2.292,
+        "cloud_top": 0.008165,
+        "data_quality": {
+          "age_days": 1.158,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.007424999999999999,
+        "kijun_distance_atr": 2.903,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.00631,
+        "signal_open": 0.00631,
+        "tenkan": 0.0064150000000000006,
+        "volume_ratio": 0.294
+      },
+      "name": "ALT/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "ALTUSDT",
+      "warnings": [
+        "Extended 2.9 ATR from Kijun"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|APTUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.61,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|APTUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.027928571428571452,
+        "atr_pct": 4.578,
+        "candle_size_atr": 0.859,
+        "cloud_bottom": 0.8492500000000001,
+        "cloud_distance_atr": 8.566,
+        "cloud_distance_pct": 28.172,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 2.641,
+        "cloud_top": 0.923,
+        "data_quality": {
+          "age_days": 1.159,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.7825,
+        "kijun_distance_atr": 6.176,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.605,
+        "signal_open": 0.605,
+        "tenkan": 0.6145,
+        "volume_ratio": 1.075
+      },
+      "name": "APT/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "APTUSDT",
+      "warnings": [
+        "Extended 6.2 ATR from Kijun"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|ARBBTC|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 1.34e-06,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|ARBBTC|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 9.785714285714284e-08,
+        "atr_pct": 7.303,
+        "candle_size_atr": 0.715,
+        "cloud_bottom": 1.4575e-06,
+        "cloud_distance_atr": 1.201,
+        "cloud_distance_pct": 8.062,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.945,
+        "cloud_top": 1.55e-06,
+        "data_quality": {
+          "age_days": 1.159,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 1.3899999999999998e-06,
+        "kijun_distance_atr": 0.511,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 1.39e-06,
+        "signal_open": 1.39e-06,
+        "tenkan": 1.3899999999999998e-06,
+        "volume_ratio": 0.35
+      },
+      "name": "ARB/BTC",
+      "reasons": [
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "ARBBTC",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|ARBUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.0889,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|ARBUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.006592857142857144,
+        "atr_pct": 7.416,
+        "candle_size_atr": 0.576,
+        "cloud_bottom": 0.10015,
+        "cloud_distance_atr": 1.706,
+        "cloud_distance_pct": 11.233,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.782,
+        "cloud_top": 0.1119,
+        "data_quality": {
+          "age_days": 1.159,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.111,
+        "kijun": 0.09165000000000001,
+        "kijun_distance_atr": 0.417,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.0904,
+        "signal_open": 0.0903,
+        "tenkan": 0.0882,
+        "volume_ratio": 0.73
+      },
+      "name": "ARB/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "ARBUSDC",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|ARBUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.089,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|ARBUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.006635714285714284,
+        "atr_pct": 7.456,
+        "candle_size_atr": 0.573,
+        "cloud_bottom": 0.100075,
+        "cloud_distance_atr": 1.669,
+        "cloud_distance_pct": 11.067,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.759,
+        "cloud_top": 0.11174999999999999,
+        "data_quality": {
+          "age_days": 1.159,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.111,
+        "kijun": 0.09179999999999999,
+        "kijun_distance_atr": 0.422,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.0904,
+        "signal_open": 0.0903,
+        "tenkan": 0.08825,
+        "volume_ratio": 0.521
+      },
+      "name": "ARB/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "ARBUSDT",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|ATUSDC|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 0.1405,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|ATUSDC|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.009349999999999997,
+        "atr_pct": 6.655,
+        "candle_size_atr": 0.556,
+        "cloud_bottom": 0.14515,
+        "cloud_distance_atr": 0.497,
+        "cloud_distance_pct": 3.204,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.139,
+        "cloud_top": 0.14645,
+        "data_quality": {
+          "age_days": 1.159,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 237
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.209,
+        "kijun": 0.1419,
+        "kijun_distance_atr": 0.15,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.1436,
+        "signal_open": 0.1439,
+        "tenkan": 0.15084999999999998,
+        "volume_ratio": 0.695
+      },
+      "name": "AT/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 5,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "ATUSDC",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|ATUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 0.1408,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|ATUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.009107142857142855,
+        "atr_pct": 6.468,
+        "candle_size_atr": 0.626,
+        "cloud_bottom": 0.1439,
+        "cloud_distance_atr": 0.34,
+        "cloud_distance_pct": 2.154,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.324,
+        "cloud_top": 0.14684999999999998,
+        "data_quality": {
+          "age_days": 1.159,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 237
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.14095000000000002,
+        "kijun_distance_atr": 0.016,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.1437,
+        "signal_open": 0.1437,
+        "tenkan": 0.1496,
+        "volume_ratio": 0.7
+      },
+      "name": "AT/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 5,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "ATUSDT",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|AUCTIONUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 3.36,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|AUCTIONUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.05642857142857146,
+        "atr_pct": 1.679,
+        "candle_size_atr": 1.063,
+        "cloud_bottom": 4.2975,
+        "cloud_distance_atr": 16.614,
+        "cloud_distance_pct": 21.815,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 6.158,
+        "cloud_top": 4.6450000000000005,
+        "data_quality": {
+          "age_days": 1.159,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.3,
+        "kijun": 3.8999999999999995,
+        "kijun_distance_atr": 9.57,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 3.33,
+        "signal_open": 3.32,
+        "tenkan": 3.395,
+        "volume_ratio": 1.002
+      },
+      "name": "AUCTION/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "AUCTIONUSDT",
+      "warnings": [
+        "Extended 9.6 ATR from Kijun"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|BANKUSDC|1D|bullish|kijun_bounce_bullish|2026-07-21": {
+      "close": 0.1819,
+      "date": "2026-07-21",
+      "direction": "bullish",
+      "grade": "B",
+      "id": "Crypto Spot|BANKUSDC|1D|bullish|kijun_bounce_bullish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.04246428571428571,
+        "atr_pct": 23.345,
+        "candle_size_atr": 4.879,
+        "cloud_bottom": 0.0351,
+        "cloud_distance_atr": 3.247,
+        "cloud_distance_pct": 313.409,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.21,
+        "cloud_top": 0.044,
+        "data_quality": {
+          "age_days": 1.16,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 251
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bullish",
+        "gap_pct": 0.187,
+        "kijun": 0.18045,
+        "kijun_distance_atr": 0.034,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.2667,
+        "signal_open": 0.2672,
+        "tenkan": 0.18475,
+        "volume_ratio": 4.174
+      },
+      "name": "BANK/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "kijun_bounce_bullish",
+      "symbol": "BANKUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 4.9 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|BANKUSDT|1D|bullish|kijun_bounce_bullish|2026-07-21": {
+      "close": 0.1823,
+      "date": "2026-07-21",
+      "direction": "bullish",
+      "grade": "B",
+      "id": "Crypto Spot|BANKUSDT|1D|bullish|kijun_bounce_bullish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.04264285714285714,
+        "atr_pct": 23.392,
+        "candle_size_atr": 4.875,
+        "cloud_bottom": 0.0351,
+        "cloud_distance_atr": 3.241,
+        "cloud_distance_pct": 313.379,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.211,
+        "cloud_top": 0.0441,
+        "data_quality": {
+          "age_days": 1.16,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 251
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bullish",
+        "gap_pct": 0.0,
+        "kijun": 0.18075,
+        "kijun_distance_atr": 0.036,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.2669,
+        "signal_open": 0.2669,
+        "tenkan": 0.18505,
+        "volume_ratio": 4.037
+      },
+      "name": "BANK/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "kijun_bounce_bullish",
+      "symbol": "BANKUSDT",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 4.9 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|BROCCOLI714USDT|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.0127,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|BROCCOLI714USDT|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.000617142857142857,
+        "atr_pct": 4.859,
+        "candle_size_atr": 1.086,
+        "cloud_bottom": 0.0142875,
+        "cloud_distance_atr": 2.572,
+        "cloud_distance_pct": 11.111,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.455,
+        "cloud_top": 0.01642,
+        "data_quality": {
+          "age_days": 1.16,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 482
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.082,
+        "kijun": 0.012740000000000001,
+        "kijun_distance_atr": 0.065,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.01222,
+        "signal_open": 0.01221,
+        "tenkan": 0.012660000000000001,
+        "volume_ratio": 1.024
+      },
+      "name": "BROCCOLI714/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "BROCCOLI714USDT",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|CGPTUSDC|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.01909,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|CGPTUSDC|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0007735714285714288,
+        "atr_pct": 4.052,
+        "candle_size_atr": 0.879,
+        "cloud_bottom": 0.027165,
+        "cloud_distance_atr": 10.439,
+        "cloud_distance_pct": 29.726,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 5.287,
+        "cloud_top": 0.031255,
+        "data_quality": {
+          "age_days": 1.161,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 558
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.022344999999999997,
+        "kijun_distance_atr": 4.208,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.01922,
+        "signal_open": 0.01922,
+        "tenkan": 0.01931,
+        "volume_ratio": 0.841
+      },
+      "name": "CGPT/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 4,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "CGPTUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 4.2 ATR from Kijun"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|CGPTUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.01909,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|CGPTUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0008078571428571429,
+        "atr_pct": 4.232,
+        "candle_size_atr": 0.916,
+        "cloud_bottom": 0.0271975,
+        "cloud_distance_atr": 10.036,
+        "cloud_distance_pct": 29.81,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 5.041,
+        "cloud_top": 0.03127,
+        "data_quality": {
+          "age_days": 1.161,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 558
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.022350000000000002,
+        "kijun_distance_atr": 4.035,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.01925,
+        "signal_open": 0.01925,
+        "tenkan": 0.019319999999999997,
+        "volume_ratio": 1.206
+      },
+      "name": "CGPT/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 5,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "CGPTUSDT",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 4.0 ATR from Kijun"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|CRVUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.2144,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|CRVUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.011692857142857144,
+        "atr_pct": 5.454,
+        "candle_size_atr": 0.462,
+        "cloud_bottom": 0.224575,
+        "cloud_distance_atr": 0.87,
+        "cloud_distance_pct": 4.531,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.592,
+        "cloud_top": 0.23149999999999998,
+        "data_quality": {
+          "age_days": 1.161,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 796
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.093,
+        "kijun": 0.21765,
+        "kijun_distance_atr": 0.278,
+        "lower_timeframe": {
+          "reason": "kijun_retest",
+          "status": "confirmed"
+        },
+        "previous_close": 0.2151,
+        "signal_open": 0.2149,
+        "tenkan": 0.2139,
+        "volume_ratio": 0.56
+      },
+      "name": "CRV/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "CRVUSDC",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|CRVUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.2147,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|CRVUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.011914285714285709,
+        "atr_pct": 5.549,
+        "candle_size_atr": 0.453,
+        "cloud_bottom": 0.22465000000000002,
+        "cloud_distance_atr": 0.835,
+        "cloud_distance_pct": 4.429,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.579,
+        "cloud_top": 0.23155000000000003,
+        "data_quality": {
+          "age_days": 1.161,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.046,
+        "kijun": 0.21775,
+        "kijun_distance_atr": 0.256,
+        "lower_timeframe": {
+          "reason": "kijun_retest",
+          "status": "confirmed"
+        },
+        "previous_close": 0.2152,
+        "signal_open": 0.2151,
+        "tenkan": 0.21415,
+        "volume_ratio": 0.676
+      },
+      "name": "CRV/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "CRVUSDT",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|CTSIUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.02296,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|CTSIUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0011985714285714286,
+        "atr_pct": 5.22,
+        "candle_size_atr": 0.818,
+        "cloud_bottom": 0.0276825,
+        "cloud_distance_atr": 3.94,
+        "cloud_distance_pct": 17.06,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 8.174,
+        "cloud_top": 0.03748,
+        "data_quality": {
+          "age_days": 1.161,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.086,
+        "kijun": 0.026035000000000003,
+        "kijun_distance_atr": 2.566,
+        "lower_timeframe": {
+          "reason": "kijun_retest",
+          "status": "confirmed"
+        },
+        "previous_close": 0.02336,
+        "signal_open": 0.02334,
+        "tenkan": 0.023775,
+        "volume_ratio": 1.335
+      },
+      "name": "CTSI/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "CTSIUSDT",
+      "warnings": [
+        "Extended 2.6 ATR from Kijun"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|DEXEUSDT|1D|bearish|cloud_breakdown|2026-07-21": {
+      "close": 6.2,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|DEXEUSDT|1D|bearish|cloud_breakdown|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 8.640357142857143,
+        "atr_pct": 139.361,
+        "candle_size_atr": 4.778,
+        "cloud_bottom": 13.434000000000001,
+        "cloud_distance_atr": 0.837,
+        "cloud_distance_pct": 53.848,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.526,
+        "cloud_top": 17.98075,
+        "data_quality": {
+          "age_days": 1.161,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bearish",
+        "gap_pct": -0.042,
+        "kijun": 27.54,
+        "kijun_distance_atr": 2.47,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 35.473,
+        "signal_open": 35.458,
+        "tenkan": 27.54,
+        "volume_ratio": 8.815
+      },
+      "name": "DEXE/USDT",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "cloud_breakdown",
+      "symbol": "DEXEUSDT",
+      "warnings": [
+        "Weekly trend opposed",
+        "Large signal candle: 4.8 ATR"
+      ],
+      "weekly_alignment": "opposed"
+    },
+    "Crypto Spot|DYDXUSDC|1D|bearish|tk_cross_bearish|2026-07-21": {
+      "close": 0.12081,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|DYDXUSDC|1D|bearish|tk_cross_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.007599285714285716,
+        "atr_pct": 6.29,
+        "candle_size_atr": 0.382,
+        "cloud_bottom": 0.14354,
+        "cloud_distance_atr": 2.991,
+        "cloud_distance_pct": 15.835,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.317,
+        "cloud_top": 0.1535475,
+        "data_quality": {
+          "age_days": 1.162,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 600
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.099,
+        "kijun": 0.177405,
+        "kijun_distance_atr": 7.447,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.12105,
+        "signal_open": 0.12093,
+        "tenkan": 0.13147,
+        "volume_ratio": 0.314
+      },
+      "name": "DYDX/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 4,
+      "signal_type": "tk_cross_bearish",
+      "symbol": "DYDXUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 7.4 ATR from Kijun"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|DYDXUSDT|1D|bearish|tk_cross_bearish|2026-07-21": {
+      "close": 0.12096,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|DYDXUSDT|1D|bearish|tk_cross_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.007750714285714285,
+        "atr_pct": 6.408,
+        "candle_size_atr": 0.375,
+        "cloud_bottom": 0.14349,
+        "cloud_distance_atr": 2.907,
+        "cloud_distance_pct": 15.701,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.313,
+        "cloud_top": 0.15367,
+        "data_quality": {
+          "age_days": 1.162,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.223,
+        "kijun": 0.17760499999999999,
+        "kijun_distance_atr": 7.308,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.12127,
+        "signal_open": 0.121,
+        "tenkan": 0.1316,
+        "volume_ratio": 0.39
+      },
+      "name": "DYDX/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "tk_cross_bearish",
+      "symbol": "DYDXUSDT",
+      "warnings": [
+        "Extended 7.3 ATR from Kijun"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|EPICUSDC|1D|bullish|cloud_breakout|2026-07-21": {
+      "close": 0.545,
+      "date": "2026-07-21",
+      "direction": "bullish",
+      "grade": "A",
+      "id": "Crypto Spot|EPICUSDC|1D|bullish|cloud_breakout|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.05007142857142858,
+        "atr_pct": 9.187,
+        "candle_size_atr": 2.157,
+        "cloud_bottom": 0.5085,
+        "cloud_distance_atr": 0.09,
+        "cloud_distance_pct": 0.833,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.639,
+        "cloud_top": 0.5405,
+        "data_quality": {
+          "age_days": 1.162,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 491
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bullish",
+        "gap_pct": -0.225,
+        "kijun": 0.5085,
+        "kijun_distance_atr": 0.729,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.445,
+        "signal_open": 0.444,
+        "tenkan": 0.5265,
+        "volume_ratio": 0.796
+      },
+      "name": "EPIC/USDC",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "cloud_breakout",
+      "symbol": "EPICUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 2.2 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|EPICUSDT|1D|bullish|cloud_breakout|2026-07-21": {
+      "close": 0.545,
+      "date": "2026-07-21",
+      "direction": "bullish",
+      "grade": "A",
+      "id": "Crypto Spot|EPICUSDT|1D|bullish|cloud_breakout|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.050714285714285726,
+        "atr_pct": 9.305,
+        "candle_size_atr": 2.149,
+        "cloud_bottom": 0.5075,
+        "cloud_distance_atr": 0.099,
+        "cloud_distance_pct": 0.926,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.641,
+        "cloud_top": 0.54,
+        "data_quality": {
+          "age_days": 1.162,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 496
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bullish",
+        "gap_pct": -0.224,
+        "kijun": 0.5075,
+        "kijun_distance_atr": 0.739,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.447,
+        "signal_open": 0.446,
+        "tenkan": 0.527,
+        "volume_ratio": 0.951
+      },
+      "name": "EPIC/USDT",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "cloud_breakout",
+      "symbol": "EPICUSDT",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 2.1 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|ERABNB|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.00016727,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|ERABNB|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.00018481714285714285,
+        "atr_pct": 110.49,
+        "candle_size_atr": 13.468,
+        "cloud_bottom": 0.0001884275,
+        "cloud_distance_atr": 0.114,
+        "cloud_distance_pct": 11.228,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.108,
+        "cloud_top": 0.000208385,
+        "data_quality": {
+          "age_days": 1.162,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 370
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.198,
+        "kijun": 0.0013533999999999998,
+        "kijun_distance_atr": 6.418,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.00011115,
+        "signal_open": 0.00011093,
+        "tenkan": 0.0013533999999999998,
+        "volume_ratio": 2.307
+      },
+      "name": "ERA/BNB",
+      "reasons": [
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 4,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "ERABNB",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 6.4 ATR from Kijun",
+        "Large signal candle: 13.5 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|HEMIUSDC|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 0.00537,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|HEMIUSDC|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0007264285714285714,
+        "atr_pct": 13.528,
+        "candle_size_atr": 3.263,
+        "cloud_bottom": 0.0069375,
+        "cloud_distance_atr": 2.158,
+        "cloud_distance_pct": 22.595,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.277,
+        "cloud_top": 0.007865,
+        "data_quality": {
+          "age_days": 1.163,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 302
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.292,
+        "kijun": 0.006534999999999999,
+        "kijun_distance_atr": 1.604,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.00684,
+        "signal_open": 0.00686,
+        "tenkan": 0.00601,
+        "volume_ratio": 3.398
+      },
+      "name": "HEMI/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "HEMIUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 3.3 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|HEMIUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 0.00537,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|HEMIUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0007528571428571428,
+        "atr_pct": 14.02,
+        "candle_size_atr": 3.175,
+        "cloud_bottom": 0.0069525,
+        "cloud_distance_atr": 2.102,
+        "cloud_distance_pct": 22.762,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.192,
+        "cloud_top": 0.00785,
+        "data_quality": {
+          "age_days": 1.164,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 302
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.00633,
+        "kijun_distance_atr": 1.275,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.00686,
+        "signal_open": 0.00686,
+        "tenkan": 0.005985,
+        "volume_ratio": 4.175
+      },
+      "name": "HEMI/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "HEMIUSDT",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 3.2 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|HOLOUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.0648,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|HOLOUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.004792857142857145,
+        "atr_pct": 7.396,
+        "candle_size_atr": 0.814,
+        "cloud_bottom": 0.066825,
+        "cloud_distance_atr": 0.423,
+        "cloud_distance_pct": 3.03,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.236,
+        "cloud_top": 0.07275000000000001,
+        "data_quality": {
+          "age_days": 1.164,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 314
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.478,
+        "kijun": 0.0649,
+        "kijun_distance_atr": 0.021,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.0628,
+        "signal_open": 0.0631,
+        "tenkan": 0.0682,
+        "volume_ratio": 0.905
+      },
+      "name": "HOLO/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 5,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "HOLOUSDC",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|JASMYUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.00458,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|JASMYUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0002385714285714287,
+        "atr_pct": 5.209,
+        "candle_size_atr": 0.838,
+        "cloud_bottom": 0.0054600000000000004,
+        "cloud_distance_atr": 3.689,
+        "cloud_distance_pct": 16.117,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 2.41,
+        "cloud_top": 0.006035,
+        "data_quality": {
+          "age_days": 1.164,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.217,
+        "kijun": 0.004955,
+        "kijun_distance_atr": 1.572,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.0046,
+        "signal_open": 0.00459,
+        "tenkan": 0.0045850000000000005,
+        "volume_ratio": 0.866
+      },
+      "name": "JASMY/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "JASMYUSDT",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|KMNOUSDC|1D|bearish|cloud_breakdown|2026-07-21": {
+      "close": 0.01836,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|KMNOUSDC|1D|bearish|cloud_breakdown|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0009635714285714282,
+        "atr_pct": 5.248,
+        "candle_size_atr": 0.778,
+        "cloud_bottom": 0.018492500000000002,
+        "cloud_distance_atr": 0.138,
+        "cloud_distance_pct": 0.717,
+        "cloud_dwell_candles": 1,
+        "cloud_thickness_atr": 2.218,
+        "cloud_top": 0.02063,
+        "data_quality": {
+          "age_days": 1.164,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 442
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.01762,
+        "kijun_distance_atr": 0.768,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.01886,
+        "signal_open": 0.01886,
+        "tenkan": 0.019705,
+        "volume_ratio": 0.178
+      },
+      "name": "KMNO/USDC",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Future cloud aligned",
+        "Clear cloud separation",
+        "Breakout followed 1 cloud candle(s)"
+      ],
+      "score": 6,
+      "signal_type": "cloud_breakdown",
+      "symbol": "KMNOUSDC",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|KMNOUSDT|1D|bearish|cloud_breakdown|2026-07-21": {
+      "close": 0.01836,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|KMNOUSDT|1D|bearish|cloud_breakdown|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0009699999999999994,
+        "atr_pct": 5.283,
+        "candle_size_atr": 0.814,
+        "cloud_bottom": 0.0184975,
+        "cloud_distance_atr": 0.142,
+        "cloud_distance_pct": 0.743,
+        "cloud_dwell_candles": 1,
+        "cloud_thickness_atr": 2.193,
+        "cloud_top": 0.020624999999999998,
+        "data_quality": {
+          "age_days": 1.165,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 442
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.017615,
+        "kijun_distance_atr": 0.768,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.01887,
+        "signal_open": 0.01887,
+        "tenkan": 0.019715,
+        "volume_ratio": 0.404
+      },
+      "name": "KMNO/USDT",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Future cloud aligned",
+        "Clear cloud separation",
+        "Breakout followed 1 cloud candle(s)"
+      ],
+      "score": 6,
+      "signal_type": "cloud_breakdown",
+      "symbol": "KMNOUSDT",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|LTCBTC|1D|bearish|cloud_breakdown|2026-07-21": {
+      "close": 0.000704,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|LTCBTC|1D|bearish|cloud_breakdown|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 1.8285714285714257e-05,
+        "atr_pct": 2.597,
+        "candle_size_atr": 1.313,
+        "cloud_bottom": 0.0007044999999999999,
+        "cloud_distance_atr": 0.027,
+        "cloud_distance_pct": 0.071,
+        "cloud_dwell_candles": 5,
+        "cloud_thickness_atr": 3.281,
+        "cloud_top": 0.0007645,
+        "data_quality": {
+          "age_days": 1.165,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.0007034999999999999,
+        "kijun_distance_atr": 0.027,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.000726,
+        "signal_open": 0.000726,
+        "tenkan": 0.0007155,
+        "volume_ratio": 0.977
+      },
+      "name": "LTC/BTC",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Breakout followed 5 cloud candle(s)"
+      ],
+      "score": 7,
+      "signal_type": "cloud_breakdown",
+      "symbol": "LTCBTC",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|LTCUSDC|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 46.84,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|LTCUSDC|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 1.4285714285714275,
+        "atr_pct": 3.05,
+        "candle_size_atr": 1.036,
+        "cloud_bottom": 48.105000000000004,
+        "cloud_distance_atr": 0.886,
+        "cloud_distance_pct": 2.63,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.715,
+        "cloud_top": 50.55500000000001,
+        "data_quality": {
+          "age_days": 1.165,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bearish",
+        "gap_pct": -0.021,
+        "kijun": 46.715,
+        "kijun_distance_atr": 0.088,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 47.34,
+        "signal_open": 47.33,
+        "tenkan": 45.260000000000005,
+        "volume_ratio": 1.105
+      },
+      "name": "LTC/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "LTCUSDC",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|LTCUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 46.87,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|LTCUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 1.4271428571428548,
+        "atr_pct": 3.045,
+        "candle_size_atr": 1.044,
+        "cloud_bottom": 48.1225,
+        "cloud_distance_atr": 0.878,
+        "cloud_distance_pct": 2.603,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.711,
+        "cloud_top": 50.565,
+        "data_quality": {
+          "age_days": 1.165,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.021,
+        "kijun": 46.760000000000005,
+        "kijun_distance_atr": 0.077,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 47.37,
+        "signal_open": 47.36,
+        "tenkan": 45.285,
+        "volume_ratio": 0.78
+      },
+      "name": "LTC/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "LTCUSDT",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|MAGICUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.0433,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|MAGICUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0016142857142857129,
+        "atr_pct": 3.728,
+        "candle_size_atr": 0.743,
+        "cloud_bottom": 0.054724999999999996,
+        "cloud_distance_atr": 7.077,
+        "cloud_distance_pct": 20.877,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 4.104,
+        "cloud_top": 0.06135,
+        "data_quality": {
+          "age_days": 1.165,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.234,
+        "kijun": 0.0511,
+        "kijun_distance_atr": 4.832,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.0427,
+        "signal_open": 0.0426,
+        "tenkan": 0.0435,
+        "volume_ratio": 0.703
+      },
+      "name": "MAGIC/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "MAGICUSDT",
+      "warnings": [
+        "Extended 4.8 ATR from Kijun"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|ONDOUSDC|1D|bullish|cloud_breakout|2026-07-21": {
+      "close": 0.4014,
+      "date": "2026-07-21",
+      "direction": "bullish",
+      "grade": "A",
+      "id": "Crypto Spot|ONDOUSDC|1D|bullish|cloud_breakout|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.026421428571428575,
+        "atr_pct": 6.582,
+        "candle_size_atr": 2.059,
+        "cloud_bottom": 0.36355000000000004,
+        "cloud_distance_atr": 1.117,
+        "cloud_distance_pct": 7.932,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.316,
+        "cloud_top": 0.3719,
+        "data_quality": {
+          "age_days": 1.166,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 467
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bullish",
+        "gap_pct": -0.14,
+        "kijun": 0.373,
+        "kijun_distance_atr": 1.075,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.358,
+        "signal_open": 0.3575,
+        "tenkan": 0.35835,
+        "volume_ratio": 2.411
+      },
+      "name": "ONDO/USDC",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "cloud_breakout",
+      "symbol": "ONDOUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 2.1 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|ONDOUSDT|1D|bullish|cloud_breakout|2026-07-21": {
+      "close": 0.4017,
+      "date": "2026-07-21",
+      "direction": "bullish",
+      "grade": "A",
+      "id": "Crypto Spot|ONDOUSDT|1D|bullish|cloud_breakout|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.02653571428571429,
+        "atr_pct": 6.606,
+        "candle_size_atr": 2.05,
+        "cloud_bottom": 0.36375,
+        "cloud_distance_atr": 1.116,
+        "cloud_distance_pct": 7.962,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 0.314,
+        "cloud_top": 0.372075,
+        "data_quality": {
+          "age_days": 1.166,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 467
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bullish",
+        "gap_pct": -0.056,
+        "kijun": 0.37324999999999997,
+        "kijun_distance_atr": 1.072,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.3583,
+        "signal_open": 0.3581,
+        "tenkan": 0.35855000000000004,
+        "volume_ratio": 2.406
+      },
+      "name": "ONDO/USDT",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "cloud_breakout",
+      "symbol": "ONDOUSDT",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 2.1 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|ONEUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.00138,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|ONEUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.00012714285714285714,
+        "atr_pct": 9.213,
+        "candle_size_atr": 6.135,
+        "cloud_bottom": 0.0018575,
+        "cloud_distance_atr": 3.756,
+        "cloud_distance_pct": 25.707,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.986,
+        "cloud_top": 0.00211,
+        "data_quality": {
+          "age_days": 1.166,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.001585,
+        "kijun_distance_atr": 1.612,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.00112,
+        "signal_open": 0.00112,
+        "tenkan": 0.0015,
+        "volume_ratio": 9.932
+      },
+      "name": "ONE/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 9,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "ONEUSDT",
+      "warnings": [
+        "Large signal candle: 6.1 ATR"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|POLFDUSD|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.08021,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|POLFDUSD|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.002483571428571429,
+        "atr_pct": 3.096,
+        "candle_size_atr": 0.833,
+        "cloud_bottom": 0.085785,
+        "cloud_distance_atr": 2.245,
+        "cloud_distance_pct": 6.499,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.592,
+        "cloud_top": 0.09470500000000001,
+        "data_quality": {
+          "age_days": 1.167,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 677
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.087,
+        "kijun": 0.08179,
+        "kijun_distance_atr": 0.636,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.08071,
+        "signal_open": 0.08078,
+        "tenkan": 0.07835,
+        "volume_ratio": 0.913
+      },
+      "name": "POL/FDUSD",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "POLFDUSD",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|POLUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.08008,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|POLUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0025399999999999984,
+        "atr_pct": 3.172,
+        "candle_size_atr": 0.819,
+        "cloud_bottom": 0.08565,
+        "cloud_distance_atr": 2.193,
+        "cloud_distance_pct": 6.503,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.549,
+        "cloud_top": 0.094665,
+        "data_quality": {
+          "age_days": 1.167,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 677
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.075,
+        "kijun": 0.081585,
+        "kijun_distance_atr": 0.593,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.08044,
+        "signal_open": 0.0805,
+        "tenkan": 0.078155,
+        "volume_ratio": 0.846
+      },
+      "name": "POL/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "POLUSDC",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|POLUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.08003,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|POLUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0026385714285714285,
+        "atr_pct": 3.297,
+        "candle_size_atr": 0.792,
+        "cloud_bottom": 0.0856875,
+        "cloud_distance_atr": 2.144,
+        "cloud_distance_pct": 6.602,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.404,
+        "cloud_top": 0.09467,
+        "data_quality": {
+          "age_days": 1.167,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 677
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.012,
+        "kijun": 0.081665,
+        "kijun_distance_atr": 0.62,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.08051,
+        "signal_open": 0.0805,
+        "tenkan": 0.07827,
+        "volume_ratio": 0.749
+      },
+      "name": "POL/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "POLUSDT",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|POLYXUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.0375,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|POLYXUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0015999999999999988,
+        "atr_pct": 4.267,
+        "candle_size_atr": 2.0,
+        "cloud_bottom": 0.046975,
+        "cloud_distance_atr": 5.922,
+        "cloud_distance_pct": 20.17,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 2.859,
+        "cloud_top": 0.05155,
+        "data_quality": {
+          "age_days": 1.167,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.267,
+        "kijun": 0.0458,
+        "kijun_distance_atr": 5.188,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.0374,
+        "signal_open": 0.0375,
+        "tenkan": 0.03765,
+        "volume_ratio": 4.569
+      },
+      "name": "POLYX/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "POLYXUSDT",
+      "warnings": [
+        "Extended 5.2 ATR from Kijun"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|QNTBTC|1D|bearish|tk_cross_bearish|2026-07-21": {
+      "close": 0.0009671,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|QNTBTC|1D|bearish|tk_cross_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 3.454285714285716e-05,
+        "atr_pct": 3.572,
+        "candle_size_atr": 0.938,
+        "cloud_bottom": 0.00099625,
+        "cloud_distance_atr": 0.844,
+        "cloud_distance_pct": 2.926,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.167,
+        "cloud_top": 0.001036575,
+        "data_quality": {
+          "age_days": 1.168,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bullish",
+        "gap_pct": -0.131,
+        "kijun": 0.0010586,
+        "kijun_distance_atr": 2.649,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.0009935,
+        "signal_open": 0.0009922,
+        "tenkan": 0.00104105,
+        "volume_ratio": 1.758
+      },
+      "name": "QNT/BTC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 4,
+      "signal_type": "tk_cross_bearish",
+      "symbol": "QNTBTC",
+      "warnings": [
+        "Extended 2.6 ATR from Kijun"
+      ],
+      "weekly_alignment": "neutral"
+    },
+    "Crypto Spot|SAPIENUSDC|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.0773,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|SAPIENUSDC|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.004557142857142856,
+        "atr_pct": 5.895,
+        "candle_size_atr": 1.009,
+        "cloud_bottom": 0.09397499999999999,
+        "cloud_distance_atr": 3.659,
+        "cloud_distance_pct": 17.744,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.915,
+        "cloud_top": 0.1027,
+        "data_quality": {
+          "age_days": 1.168,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 258
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.124,
+        "kijun": 0.0963,
+        "kijun_distance_atr": 4.169,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.0804,
+        "signal_open": 0.0803,
+        "tenkan": 0.07780000000000001,
+        "volume_ratio": 0.977
+      },
+      "name": "SAPIEN/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 4,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "SAPIENUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 4.2 ATR from Kijun"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|SAPIENUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.0773,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|SAPIENUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.004500000000000001,
+        "atr_pct": 5.821,
+        "candle_size_atr": 1.156,
+        "cloud_bottom": 0.094025,
+        "cloud_distance_atr": 3.717,
+        "cloud_distance_pct": 17.788,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.95,
+        "cloud_top": 0.1028,
+        "data_quality": {
+          "age_days": 1.168,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 258
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.124,
+        "kijun": 0.0963,
+        "kijun_distance_atr": 4.222,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.0805,
+        "signal_open": 0.0806,
+        "tenkan": 0.07780000000000001,
+        "volume_ratio": 1.259
+      },
+      "name": "SAPIEN/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 5,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "SAPIENUSDT",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 4.2 ATR from Kijun"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|SLPUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.000551,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|SLPUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 2.978571428571426e-05,
+        "atr_pct": 5.406,
+        "candle_size_atr": 0.806,
+        "cloud_bottom": 0.0006297500000000001,
+        "cloud_distance_atr": 2.644,
+        "cloud_distance_pct": 12.505,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 2.526,
+        "cloud_top": 0.000705,
+        "data_quality": {
+          "age_days": 1.169,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.18,
+        "kijun": 0.0005555,
+        "kijun_distance_atr": 0.151,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.000556,
+        "signal_open": 0.000555,
+        "tenkan": 0.0005365,
+        "volume_ratio": 0.268
+      },
+      "name": "SLP/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "SLPUSDT",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|SNXUSDC|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.232,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|SNXUSDC|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.014714285714285713,
+        "atr_pct": 6.342,
+        "candle_size_atr": 1.223,
+        "cloud_bottom": 0.27549999999999997,
+        "cloud_distance_atr": 2.956,
+        "cloud_distance_pct": 15.789,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.704,
+        "cloud_top": 0.33,
+        "data_quality": {
+          "age_days": 1.169,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 295
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bearish",
+        "gap_pct": 0.429,
+        "kijun": 0.259,
+        "kijun_distance_atr": 1.835,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.233,
+        "signal_open": 0.234,
+        "tenkan": 0.23299999999999998,
+        "volume_ratio": 1.952
+      },
+      "name": "SNX/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 7,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "SNXUSDC",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|SNXUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.232,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|SNXUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.015499999999999998,
+        "atr_pct": 6.681,
+        "candle_size_atr": 1.226,
+        "cloud_bottom": 0.27549999999999997,
+        "cloud_distance_atr": 2.806,
+        "cloud_distance_pct": 15.789,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.516,
+        "cloud_top": 0.33,
+        "data_quality": {
+          "age_days": 1.169,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.2595,
+        "kijun_distance_atr": 1.774,
+        "lower_timeframe": {
+          "reason": "kijun_retest",
+          "status": "confirmed"
+        },
+        "previous_close": 0.233,
+        "signal_open": 0.233,
+        "tenkan": 0.23299999999999998,
+        "volume_ratio": 1.494
+      },
+      "name": "SNX/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 9,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "SNXUSDT",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|TOWNSUSDC|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.00195,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|TOWNSUSDC|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0002535714285714286,
+        "atr_pct": 13.004,
+        "candle_size_atr": 2.563,
+        "cloud_bottom": 0.0028125,
+        "cloud_distance_atr": 3.401,
+        "cloud_distance_pct": 30.667,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 4.663,
+        "cloud_top": 0.003995,
+        "data_quality": {
+          "age_days": 1.17,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 351
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.002595,
+        "kijun_distance_atr": 2.544,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.00236,
+        "signal_open": 0.00236,
+        "tenkan": 0.00222,
+        "volume_ratio": 0.478
+      },
+      "name": "TOWNS/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 4,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "TOWNSUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 2.5 ATR from Kijun",
+        "Large signal candle: 2.6 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|TOWNSUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.00196,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|TOWNSUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.00025785714285714284,
+        "atr_pct": 13.156,
+        "candle_size_atr": 2.521,
+        "cloud_bottom": 0.0028125000000000003,
+        "cloud_distance_atr": 3.306,
+        "cloud_distance_pct": 30.311,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 4.062,
+        "cloud_top": 0.0038599999999999997,
+        "data_quality": {
+          "age_days": 1.17,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 351
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.0,
+        "kijun": 0.0026,
+        "kijun_distance_atr": 2.482,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.00236,
+        "signal_open": 0.00236,
+        "tenkan": 0.002225,
+        "volume_ratio": 0.547
+      },
+      "name": "TOWNS/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "TOWNSUSDT",
+      "warnings": [
+        "Weekly history unavailable",
+        "Large signal candle: 2.5 ATR"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|TRXXRP|1D|bullish|kijun_bounce_bullish|2026-07-21": {
+      "close": 0.2893,
+      "date": "2026-07-21",
+      "direction": "bullish",
+      "grade": "A",
+      "id": "Crypto Spot|TRXXRP|1D|bullish|kijun_bounce_bullish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.007971428571428565,
+        "atr_pct": 2.755,
+        "candle_size_atr": 1.355,
+        "cloud_bottom": 0.24395,
+        "cloud_distance_atr": 2.6,
+        "cloud_distance_pct": 7.717,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.089,
+        "cloud_top": 0.268575,
+        "data_quality": {
+          "age_days": 1.17,
+          "duplicates": 0,
+          "extreme_moves": 1,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [
+          "Extreme one-session moves requiring review: 1"
+        ],
+        "future_cloud": "bullish",
+        "gap_pct": -0.34,
+        "kijun": 0.28275,
+        "kijun_distance_atr": 0.822,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.2945,
+        "signal_open": 0.2935,
+        "tenkan": 0.29245,
+        "volume_ratio": 1.433
+      },
+      "name": "TRX/XRP",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 9,
+      "signal_type": "kijun_bounce_bullish",
+      "symbol": "TRXXRP",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|TURTLEUSDC|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.0359,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|TURTLEUSDC|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0013214285714285721,
+        "atr_pct": 3.681,
+        "candle_size_atr": 1.211,
+        "cloud_bottom": 0.0435,
+        "cloud_distance_atr": 5.751,
+        "cloud_distance_pct": 17.471,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.784,
+        "cloud_top": 0.0485,
+        "data_quality": {
+          "age_days": 1.17,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 273
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.275,
+        "kijun": 0.039349999999999996,
+        "kijun_distance_atr": 2.611,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.0363,
+        "signal_open": 0.0362,
+        "tenkan": 0.036250000000000004,
+        "volume_ratio": 0.54
+      },
+      "name": "TURTLE/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 4,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "TURTLEUSDC",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 2.6 ATR from Kijun"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|TURTLEUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.0359,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "C",
+      "id": "Crypto Spot|TURTLEUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0014142857142857151,
+        "atr_pct": 3.94,
+        "candle_size_atr": 1.202,
+        "cloud_bottom": 0.0436,
+        "cloud_distance_atr": 5.444,
+        "cloud_distance_pct": 17.661,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 3.571,
+        "cloud_top": 0.04865,
+        "data_quality": {
+          "age_days": 1.17,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 273
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.275,
+        "kijun": 0.03955,
+        "kijun_distance_atr": 2.581,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.0364,
+        "signal_open": 0.0363,
+        "tenkan": 0.036250000000000004,
+        "volume_ratio": 1.24
+      },
+      "name": "TURTLE/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Volume above average",
+        "Clear cloud separation"
+      ],
+      "score": 5,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "TURTLEUSDT",
+      "warnings": [
+        "Weekly history unavailable",
+        "Extended 2.6 ATR from Kijun"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|VIRTUALUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.6604,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|VIRTUALUSDC|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.04630714285714284,
+        "atr_pct": 7.012,
+        "candle_size_atr": 0.89,
+        "cloud_bottom": 0.6975,
+        "cloud_distance_atr": 0.801,
+        "cloud_distance_pct": 5.319,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.112,
+        "cloud_top": 0.749,
+        "data_quality": {
+          "age_days": 1.171,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 467
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.203,
+        "kijun": 0.67715,
+        "kijun_distance_atr": 0.362,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.6399,
+        "signal_open": 0.6412,
+        "tenkan": 0.5983499999999999,
+        "volume_ratio": 0.881
+      },
+      "name": "VIRTUAL/USDC",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "VIRTUALUSDC",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|VIRTUALUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21": {
+      "close": 0.6614,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|VIRTUALUSDT|1D|bearish|kijun_bounce_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.04683571428571427,
+        "atr_pct": 7.081,
+        "candle_size_atr": 0.888,
+        "cloud_bottom": 0.698375,
+        "cloud_distance_atr": 0.789,
+        "cloud_distance_pct": 5.294,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.088,
+        "cloud_top": 0.74935,
+        "data_quality": {
+          "age_days": 1.171,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 467
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": -0.016,
+        "kijun": 0.6777,
+        "kijun_distance_atr": 0.348,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.6421,
+        "signal_open": 0.642,
+        "tenkan": 0.59885,
+        "volume_ratio": 1.043
+      },
+      "name": "VIRTUAL/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "kijun_bounce_bearish",
+      "symbol": "VIRTUALUSDT",
+      "warnings": [
+        "Weekly history unavailable"
+      ],
+      "weekly_alignment": "unknown"
+    },
+    "Crypto Spot|XNOUSDT|1D|bearish|cloud_breakdown|2026-07-21": {
+      "close": 0.369,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|XNOUSDT|1D|bearish|cloud_breakdown|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.05285714285714286,
+        "atr_pct": 14.324,
+        "candle_size_atr": 3.216,
+        "cloud_bottom": 0.401,
+        "cloud_distance_atr": 0.605,
+        "cloud_distance_pct": 7.98,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.201,
+        "cloud_top": 0.4645,
+        "data_quality": {
+          "age_days": 1.172,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bullish",
+        "gap_pct": 0.0,
+        "kijun": 0.45099999999999996,
+        "kijun_distance_atr": 1.551,
+        "lower_timeframe": {
+          "reason": "lower_timeframe_cloud_failure",
+          "status": "invalidated"
+        },
+        "previous_close": 0.482,
+        "signal_open": 0.482,
+        "tenkan": 0.4535,
+        "volume_ratio": 6.908
+      },
+      "name": "XNO/USDT",
+      "reasons": [
+        "Fresh price/cloud break",
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Volume above average",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 9,
+      "signal_type": "cloud_breakdown",
+      "symbol": "XNOUSDT",
+      "warnings": [
+        "Large signal candle: 3.2 ATR"
+      ],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|XRPBNB|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 0.001989,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|XRPBNB|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 6.315000000000002e-05,
+        "atr_pct": 3.175,
+        "candle_size_atr": 1.647,
+        "cloud_bottom": 0.0019939,
+        "cloud_distance_atr": 0.078,
+        "cloud_distance_pct": 0.246,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.203,
+        "cloud_top": 0.0020699,
+        "data_quality": {
+          "age_days": 1.172,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.087,
+        "kijun": 0.00204625,
+        "kijun_distance_atr": 0.907,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.0019491,
+        "signal_open": 0.0019508,
+        "tenkan": 0.00208365,
+        "volume_ratio": 1.055
+      },
+      "name": "XRP/BNB",
+      "reasons": [
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned"
+      ],
+      "score": 6,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "XRPBNB",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|YFIUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21": {
+      "close": 2137.0,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "B",
+      "id": "Crypto Spot|YFIUSDT|1D|bearish|cloud_rejection_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 124.64285714285714,
+        "atr_pct": 5.833,
+        "candle_size_atr": 0.249,
+        "cloud_bottom": 2143.75,
+        "cloud_distance_atr": 0.054,
+        "cloud_distance_pct": 0.315,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.169,
+        "cloud_top": 2289.5,
+        "data_quality": {
+          "age_days": 1.172,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bullish",
+        "gap_pct": 0.331,
+        "kijun": 2214.5,
+        "kijun_distance_atr": 0.622,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 2115.0,
+        "signal_open": 2122.0,
+        "tenkan": 2288.0,
+        "volume_ratio": 0.197
+      },
+      "name": "YFI/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Price beyond Kijun",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 6,
+      "signal_type": "cloud_rejection_bearish",
+      "symbol": "YFIUSDT",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
+    "Crypto Spot|ZRXUSDT|1D|bearish|trend_continuation_bearish|2026-07-21": {
+      "close": 0.0851,
+      "date": "2026-07-21",
+      "direction": "bearish",
+      "grade": "A",
+      "id": "Crypto Spot|ZRXUSDT|1D|bearish|trend_continuation_bearish|2026-07-21",
+      "lagging_compare_date": "2026-06-21",
+      "market": "Crypto Spot",
+      "metrics": {
+        "atr": 0.0034071428571428577,
+        "atr_pct": 4.004,
+        "candle_size_atr": 0.998,
+        "cloud_bottom": 0.097625,
+        "cloud_distance_atr": 3.676,
+        "cloud_distance_pct": 12.83,
+        "cloud_dwell_candles": 0,
+        "cloud_thickness_atr": 1.71,
+        "cloud_top": 0.10345000000000001,
+        "data_quality": {
+          "age_days": 1.172,
+          "duplicates": 0,
+          "extreme_moves": 0,
+          "invalid_ohlc": 0,
+          "last_timestamp": "2026-07-21 00:00:00",
+          "nulls": 0,
+          "rows": 899
+        },
+        "data_quality_warnings": [],
+        "future_cloud": "bearish",
+        "gap_pct": 0.116,
+        "kijun": 0.0912,
+        "kijun_distance_atr": 1.79,
+        "lower_timeframe": {
+          "reason": "no_entry_trigger",
+          "status": "waiting"
+        },
+        "previous_close": 0.0864,
+        "signal_open": 0.0865,
+        "tenkan": 0.0879,
+        "volume_ratio": 0.703
+      },
+      "name": "ZRX/USDT",
+      "reasons": [
+        "Chikou confirms",
+        "Tenkan/Kijun aligned",
+        "Price beyond Kijun",
+        "Future cloud aligned",
+        "Weekly trend aligned",
+        "Clear cloud separation"
+      ],
+      "score": 8,
+      "signal_type": "trend_continuation_bearish",
+      "symbol": "ZRXUSDT",
+      "warnings": [],
+      "weekly_alignment": "aligned"
+    },
     "US Index|^IXIC|1D|bullish|trend_continuation_bullish|2026-07-21": {
       "close": 25837.20703125,
       "date": "2026-07-21",
