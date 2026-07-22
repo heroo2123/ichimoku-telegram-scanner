@@ -20,6 +20,7 @@ from v3.paper import update_paper_portfolio
 from v3.quality import validate_ohlcv
 from v3.queue import DatabaseDeliveryQueue, next_delivery_time
 from v3.risk import build_risk_plan, classify_cluster, correlation_warnings
+from v3.scheduling import seconds_until_utc
 from v3.storage import LocalStore, SupabaseStore
 from v3.dashboard import app
 
@@ -33,6 +34,12 @@ class V3Tests(unittest.TestCase):
             'weekly_alignment':'aligned','reasons':['x'],'warnings':[],
             'metrics':{'atr':2.0,'kijun':98.0,'cloud_top':97.0,'cloud_bottom':94.0,'kijun_distance_atr':1.0}
         }
+
+    def test_delivery_gate_waits_until_noon_utc(self):
+        before = datetime(2026, 7, 22, 11, 45, tzinfo=timezone.utc)
+        after = datetime(2026, 7, 22, 12, 1, tzinfo=timezone.utc)
+        self.assertEqual(seconds_until_utc(12, 0, now=before), 900)
+        self.assertEqual(seconds_until_utc(12, 0, now=after), 0)
 
     def test_risk_plan(self):
         plan=build_risk_plan(self.candidate())

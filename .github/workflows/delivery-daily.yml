@@ -3,8 +3,9 @@ name: Telegram Delivery at 3 PM Kuwait
 on:
   workflow_dispatch:
   schedule:
-    # 15:00 Kuwait (UTC+3) = 12:00 UTC.
-    - cron: '0 12 * * *'
+    # Start off-peak, then wait until 15:00 Kuwait (12:00 UTC). This avoids
+    # GitHub's common top-of-hour scheduler congestion without sending early.
+    - cron: '45 11 * * *'
     # Quiet catch-up protects against a delayed or missed primary scheduler run.
     - cron: '20 12 * * *'
 
@@ -30,6 +31,9 @@ jobs:
       - uses: actions/setup-python@v6
         with: { python-version: '3.11', cache: pip }
       - run: pip install -r requirements.txt
+      - name: Hold early scheduler until 3 PM Kuwait
+        if: github.event.schedule == '45 11 * * *'
+        run: python -m v3.scheduling --hour 12 --minute 0
       - name: Deliver queued signals
         shell: bash
         run: |
