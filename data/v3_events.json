@@ -11662,5 +11662,23 @@
       "to": "active"
     },
     "signal_id": "US Stock|FMTM|1D|bullish|cloud_breakout|2026-07-21"
+  },
+  {
+    "created_at": "2026-07-23T04:01:27+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.09035709926060267,
+        "close": 22.0,
+        "cloud_bottom": 21.663542655726843,
+        "cloud_top": 21.80328316153613,
+        "date": "2026-07-22",
+        "kijun": 21.946903841692286,
+        "open": 21.809999465942383
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "US Stock|JUCY|1D|bullish|trend_continuation_bullish|2026-07-21"
   }
 ]

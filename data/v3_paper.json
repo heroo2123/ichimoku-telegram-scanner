@@ -1,9 +1,9 @@
 {
   "cash": 99961.71038721068,
   "closed_trades": [],
-  "equity": 100264.1821,
+  "equity": 100207.0315,
   "fees_paid": 38.289612789321524,
-  "gross_exposure": 38529.5775,
+  "gross_exposure": 38472.427,
   "pending_orders": {
     "US Stock|AMPH|1D|bearish|cloud_breakdown|2026-07-22": {
       "cluster": "us-biotech",
@@ -31,7 +31,7 @@
       "entry_price": 332.26605611,
       "grade": "A",
       "invalidation": 312.84464645,
-      "last_price": 333.79998779296875,
+      "last_price": 331.6000061035156,
       "market": "Commodity Future",
       "opened_at": "2026-07-23T00:51:49+00:00",
       "score": 10,
@@ -159,7 +159,7 @@
       "entry_price": 37.53876046,
       "grade": "A",
       "invalidation": 33.32101998,
-      "last_price": 37.585201263427734,
+      "last_price": 37.584999084472656,
       "market": "US Stock",
       "opened_at": "2026-07-23T00:51:49+00:00",
       "score": 9,
@@ -186,6 +186,6 @@
   },
   "realized_pnl": 0.0,
   "starting_equity": 100000,
-  "unrealized_pnl": 302.4717,
-  "updated_at": "2026-07-23T00:51:49+00:00"
+  "unrealized_pnl": 245.3211,
+  "updated_at": "2026-07-23T04:02:11+00:00"
 }
