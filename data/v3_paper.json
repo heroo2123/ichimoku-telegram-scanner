@@ -1,27 +1,10 @@
 {
-  "cash": 99961.71038721068,
+  "cash": 99957.45719645839,
   "closed_trades": [],
-  "equity": 100207.0315,
-  "fees_paid": 38.289612789321524,
-  "gross_exposure": 38472.427,
-  "pending_orders": {
-    "US Stock|AMPH|1D|bearish|cloud_breakdown|2026-07-22": {
-      "cluster": "us-biotech",
-      "market": "US Stock",
-      "queued_at": "2026-07-23T00:51:49+00:00",
-      "signal_date": "2026-07-22",
-      "signal_id": "US Stock|AMPH|1D|bearish|cloud_breakdown|2026-07-22",
-      "symbol": "AMPH"
-    },
-    "US Stock|APPN|1D|bearish|cloud_breakdown|2026-07-22": {
-      "cluster": "us-other",
-      "market": "US Stock",
-      "queued_at": "2026-07-23T00:51:49+00:00",
-      "signal_date": "2026-07-22",
-      "signal_id": "US Stock|APPN|1D|bearish|cloud_breakdown|2026-07-22",
-      "symbol": "APPN"
-    }
-  },
+  "equity": 100317.3292,
+  "fees_paid": 42.542803541621566,
+  "gross_exposure": 42547.8246,
+  "pending_orders": {},
   "positions": {
     "Commodity Future|ZM=F|1D|bullish|cloud_breakout|2026-07-21": {
       "cluster": "commodity-agriculture",
@@ -31,7 +14,7 @@
       "entry_price": 332.26605611,
       "grade": "A",
       "invalidation": 312.84464645,
-      "last_price": 331.6000061035156,
+      "last_price": 333.20001220703125,
       "market": "Commodity Future",
       "opened_at": "2026-07-23T00:51:49+00:00",
       "score": 10,
@@ -55,6 +38,22 @@
       "symbol": "ALLY",
       "units": 146.74302447
     },
+    "US Stock|AMPH|1D|bearish|cloud_breakdown|2026-07-22": {
+      "cluster": "us-biotech",
+      "direction": "bearish",
+      "entry_fee": 2.2777,
+      "entry_model": "next_open",
+      "entry_price": 19.07045992,
+      "grade": "A",
+      "invalidation": 23.27500003,
+      "last_price": 18.8700008392334,
+      "market": "US Stock",
+      "opened_at": "2026-07-24T00:46:20+00:00",
+      "score": 10,
+      "signal_id": "US Stock|AMPH|1D|bearish|cloud_breakdown|2026-07-22",
+      "symbol": "AMPH",
+      "units": 119.43626813
+    },
     "US Stock|ANGI|1D|bearish|cloud_breakdown|2026-07-21": {
       "cluster": "us-other",
       "direction": "bearish",
@@ -63,13 +62,29 @@
       "entry_price": 6.00699523,
       "grade": "A",
       "invalidation": 9.64151795,
-      "last_price": 5.78000020980835,
+      "last_price": 5.420000076293945,
       "market": "US Stock",
       "opened_at": "2026-07-23T00:51:49+00:00",
       "score": 10,
       "signal_id": "US Stock|ANGI|1D|bearish|cloud_breakdown|2026-07-21",
       "symbol": "ANGI",
       "units": 137.68348068
+    },
+    "US Stock|APPN|1D|bearish|cloud_breakdown|2026-07-22": {
+      "cluster": "us-other",
+      "direction": "bearish",
+      "entry_fee": 1.9755,
+      "entry_model": "next_open",
+      "entry_price": 22.79859447,
+      "grade": "A",
+      "invalidation": 28.59232153,
+      "last_price": 21.959999084472656,
+      "market": "US Stock",
+      "opened_at": "2026-07-24T00:46:20+00:00",
+      "score": 10,
+      "signal_id": "US Stock|APPN|1D|bearish|cloud_breakdown|2026-07-22",
+      "symbol": "APPN",
+      "units": 86.64947264
     },
     "US Stock|BFH|1D|bullish|trend_continuation_bullish|2026-07-21": {
       "cluster": "us-financial",
@@ -95,7 +110,7 @@
       "entry_price": 39.95996863,
       "grade": "A",
       "invalidation": 33.20642873,
-      "last_price": 40.060001373291016,
+      "last_price": 38.7599983215332,
       "market": "US Stock",
       "opened_at": "2026-07-23T00:51:48+00:00",
       "score": 10,
@@ -175,7 +190,7 @@
       "entry_price": 131.98595817,
       "grade": "A",
       "invalidation": 111.37482303,
-      "last_price": 137.1699981689453,
+      "last_price": 138.1300048828125,
       "market": "US Stock",
       "opened_at": "2026-07-23T00:51:49+00:00",
       "score": 10,
@@ -186,6 +201,6 @@
   },
   "realized_pnl": 0.0,
   "starting_equity": 100000,
-  "unrealized_pnl": 245.3211,
-  "updated_at": "2026-07-23T14:36:37+00:00"
+  "unrealized_pnl": 359.872,
+  "updated_at": "2026-07-24T00:46:20+00:00"
 }
