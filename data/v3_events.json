@@ -30454,5 +30454,77 @@
       "to": "active"
     },
     "signal_id": "US Stock|NEOV|1D|bearish|kijun_bounce_bearish|2026-07-24"
+  },
+  {
+    "created_at": "2026-07-28T03:53:37+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.8471423557826451,
+        "close": 65.91999816894531,
+        "cloud_bottom": 62.5409335521559,
+        "cloud_top": 63.716338744343965,
+        "date": "2026-07-27",
+        "kijun": 63.69750213623047,
+        "open": 65.2300033569336
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "US Stock|COWZ|1D|bullish|cloud_breakout|2026-07-24"
+  },
+  {
+    "created_at": "2026-07-28T03:53:41+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.0049999782017298,
+        "close": 83.27999877929688,
+        "cloud_bottom": 80.12240898917284,
+        "cloud_top": 81.89764829034952,
+        "date": "2026-07-27",
+        "kijun": 83.52494931444451,
+        "open": 83.7300033569336
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "US Stock|SCZ|1D|bullish|cloud_breakout|2026-07-24"
+  },
+  {
+    "created_at": "2026-07-28T03:53:43+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 3.347142900739397,
+        "close": 94.44999694824219,
+        "cloud_bottom": 73.03999900817871,
+        "cloud_top": 79.93249893188477,
+        "date": "2026-07-27",
+        "kijun": 85.80999755859375,
+        "open": 90.29000091552734
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "US Stock|ECPG|1D|bullish|trend_continuation_bullish|2026-07-24"
+  },
+  {
+    "created_at": "2026-07-28T03:53:43+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.1735709054129464,
+        "close": 38.709999084472656,
+        "cloud_bottom": 34.49287420828503,
+        "cloud_top": 36.0032874864267,
+        "date": "2026-07-27",
+        "kijun": 35.78452011855765,
+        "open": 38.68000030517578
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "US Stock|REXR|1D|bullish|cloud_breakout|2026-07-24"
   }
 ]
