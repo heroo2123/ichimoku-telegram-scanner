@@ -44674,5 +44674,41 @@
       "to": "active"
     },
     "signal_id": "US Stock|TOPT|1D|bullish|cloud_rejection_bullish|2026-07-28"
+  },
+  {
+    "created_at": "2026-07-30T03:41:29+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 7.664287022181919,
+        "close": 320.70001220703125,
+        "cloud_bottom": 314.5500030517578,
+        "cloud_top": 321.0750045776367,
+        "date": "2026-07-29",
+        "kijun": 321.3000030517578,
+        "open": 324.1000061035156
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Commodity Future|ZM=F|1D|bullish|cloud_breakout|2026-07-28"
+  },
+  {
+    "created_at": "2026-07-30T03:42:10+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.21564252035958426,
+        "close": 30.033000946044922,
+        "cloud_bottom": 28.50894389314074,
+        "cloud_top": 29.454320129014466,
+        "date": "2026-07-29",
+        "kijun": 30.263501167297363,
+        "open": 30.033000946044922
+      },
+      "from": "confirmed",
+      "to": "invalidated"
+    },
+    "signal_id": "US Stock|KLMN|1D|bullish|kijun_bounce_bullish|2026-07-28"
   }
 ]
