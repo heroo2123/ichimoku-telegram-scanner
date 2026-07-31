@@ -49570,5 +49570,59 @@
       "to": "active"
     },
     "signal_id": "US Stock|JBND|1D|bearish|cloud_breakdown|2026-07-29"
+  },
+  {
+    "created_at": "2026-07-31T04:08:01+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 7.792857578822544,
+        "close": 314.1000061035156,
+        "cloud_bottom": 314.5500030517578,
+        "cloud_top": 320.375,
+        "date": "2026-07-30",
+        "kijun": 321.3000030517578,
+        "open": 316.1000061035156
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Commodity Future|ZM=F|1D|bullish|cloud_breakout|2026-07-29"
+  },
+  {
+    "created_at": "2026-07-31T04:08:08+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 20.285714285714285,
+        "close": 1177.25,
+        "cloud_bottom": 1122.625,
+        "cloud_top": 1161.9375,
+        "date": "2026-07-30",
+        "kijun": 1174.625,
+        "open": 1178.0
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Commodity Future|ZS=F|1D|bullish|tk_cross_bullish|2026-07-29"
+  },
+  {
+    "created_at": "2026-07-31T04:08:35+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 10.607142857142858,
+        "close": 445.75,
+        "cloud_bottom": 444.0,
+        "cloud_top": 444.0,
+        "date": "2026-07-30",
+        "kijun": 440.125,
+        "open": 448.25
+      },
+      "from": "extended",
+      "to": "entry_zone"
+    },
+    "signal_id": "Commodity Future|ZC=F|1D|bullish|tk_cross_bullish|2026-07-29"
   }
 ]
