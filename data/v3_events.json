@@ -55556,5 +55556,23 @@
       "to": "active"
     },
     "signal_id": "US Stock|SSD|1D|bullish|cloud_rejection_bullish|2026-07-30"
+  },
+  {
+    "created_at": "2026-08-01T04:03:21+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 20.482142857142858,
+        "close": 1172.0,
+        "cloud_bottom": 1122.625,
+        "cloud_top": 1159.75,
+        "date": "2026-07-31",
+        "kijun": 1174.625,
+        "open": 1177.0
+      },
+      "from": "active",
+      "to": "invalidated"
+    },
+    "signal_id": "Commodity Future|ZS=F|1D|bullish|trend_continuation_bullish|2026-07-30"
   }
 ]
