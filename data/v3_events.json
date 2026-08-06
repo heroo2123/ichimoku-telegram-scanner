@@ -77040,5 +77040,23 @@
       "to": "active"
     },
     "signal_id": "US Stock|WEC|1D|bearish|tk_cross_bearish|2026-08-04"
+  },
+  {
+    "created_at": "2026-08-06T03:55:42+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.05074429364813403,
+        "close": 24.780000686645508,
+        "cloud_bottom": 24.70371708803146,
+        "cloud_top": 24.721233398533357,
+        "date": "2026-08-05",
+        "kijun": 24.688452079450432,
+        "open": 24.780000686645508
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "US Stock|NXUS|1D|bullish|cloud_breakout|2026-08-04"
   }
 ]
