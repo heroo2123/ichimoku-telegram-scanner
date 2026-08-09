@@ -4582,5 +4582,45 @@
       "symbols_with_data": 0
     },
     "status": "completed"
+  },
+  "fe6cecaa-2575-496d-aea4-151e5e76f3da": {
+    "completed_at": "2026-08-09T02:38:55+00:00",
+    "error": null,
+    "market": "crypto",
+    "mode": "deferred",
+    "run_id": "fe6cecaa-2575-496d-aea4-151e5e76f3da",
+    "source": "github-actions",
+    "started_at": "2026-08-09T02:28:46+00:00",
+    "stats": {
+      "breadth_above_cloud": 63,
+      "breadth_above_pct": 8.25,
+      "breadth_below_cloud": 626,
+      "breadth_below_pct": 81.94,
+      "breadth_total": 764,
+      "csv_reported": 0,
+      "delivery_deferred": 74,
+      "details_delivered": 0,
+      "details_failed": 0,
+      "digest_delivered": 0,
+      "digest_failed": 0,
+      "digest_messages": 0,
+      "elapsed_seconds": 606.6,
+      "fresh_candidates": 74,
+      "lifecycle_skipped": 0,
+      "market": "crypto",
+      "pending_loaded": 0,
+      "provider_errors": [],
+      "started_utc": "2026-08-09T02:28:48+00:00",
+      "symbols_attempted": 918,
+      "symbols_discovered": 3680,
+      "symbols_failed": 154,
+      "symbols_filtered_liquidity": 0,
+      "symbols_filtered_quality": 0,
+      "symbols_filtered_universe": 2762,
+      "symbols_missing_data": 154,
+      "symbols_processing_errors": 0,
+      "symbols_with_data": 764
+    },
+    "status": "completed"
   }
 }
