@@ -1,311 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T00:41:36+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.266071047101702,
-        "close": 42.689998626708984,
-        "cloud_bottom": 33.239999771118164,
-        "cloud_top": 33.50000047683716,
-        "date": "2026-07-24",
-        "kijun": 38.76499938964844,
-        "open": 46.619998931884766
-      },
-      "from": "extended",
-      "to": "active"
-    },
-    "signal_id": "US Stock|THRM|1D|bullish|kijun_bounce_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:36+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.776071412222726,
-        "close": 16.979999542236328,
-        "cloud_bottom": 16.399999618530273,
-        "cloud_top": 16.80999994277954,
-        "date": "2026-07-24",
-        "kijun": 18.259999752044678,
-        "open": 16.260000228881836
-      },
-      "from": "extended",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|PRAA|1D|bearish|cloud_breakdown|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:37+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 6.917855398995536,
-        "close": 213.8300018310547,
-        "cloud_bottom": 198.336923277222,
-        "cloud_top": 203.1485661799255,
-        "date": "2026-07-24",
-        "kijun": 214.24800803814855,
-        "open": 210.6199951171875
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "US Stock|PGR|1D|bullish|cloud_breakout|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:38+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.9846432549612862,
-        "close": 25.75,
-        "cloud_bottom": 23.182564002535365,
-        "cloud_top": 24.143544418279003,
-        "date": "2026-07-24",
-        "kijun": 24.34360772323892,
-        "open": 24.770000457763672
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|HPQ|1D|bullish|kijun_bounce_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:38+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.3039285796029227,
-        "close": 3.4000000953674316,
-        "cloud_bottom": 3.1440000534057617,
-        "cloud_top": 3.6365000009536743,
-        "date": "2026-07-24",
-        "kijun": 3.8450000286102295,
-        "open": 3.6700000762939453
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|CCCC|1D|bullish|cloud_rejection_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:39+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.2353571993964059,
-        "close": 3.180000066757202,
-        "cloud_bottom": 3.1687499284744263,
-        "cloud_top": 3.904999852180481,
-        "date": "2026-07-24",
-        "kijun": 3.409999966621399,
-        "open": 3.2100000381469727
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|SANA|1D|bearish|cloud_rejection_bearish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:39+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.07134996141706194,
-        "close": 24.65999984741211,
-        "cloud_bottom": 24.656149854583703,
-        "cloud_top": 24.74653234043363,
-        "date": "2026-07-24",
-        "kijun": 24.73835432594386,
-        "open": 24.610000610351562
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|MFSB|1D|bearish|cloud_breakdown|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:40+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.931642804827009,
-        "close": 18.959999084472656,
-        "cloud_bottom": 19.37149953842163,
-        "cloud_top": 38.380499839782715,
-        "date": "2026-07-24",
-        "kijun": 21.962499618530273,
-        "open": 19.20159912109375
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|RDTL|1D|bearish|cloud_rejection_bearish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:41+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 3.0857137952532088,
-        "close": 84.80999755859375,
-        "cloud_bottom": 81.26998255582023,
-        "cloud_top": 84.86589716756313,
-        "date": "2026-07-24",
-        "kijun": 78.01399890525752,
-        "open": 85.06999969482422
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|MGK|1D|bullish|cloud_rejection_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:41+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 6.722001211983817,
-        "close": 169.07000732421875,
-        "cloud_bottom": 151.66062006831186,
-        "cloud_top": 161.25193131281623,
-        "date": "2026-07-24",
-        "kijun": 158.4175033569336,
-        "open": 165.66000366210938
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|PJT|1D|bullish|cloud_rejection_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:42+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.9790713105882917,
-        "close": 6.849999904632568,
-        "cloud_bottom": 5.944999814033508,
-        "cloud_top": 6.26749986410141,
-        "date": "2026-07-24",
-        "kijun": 7.0899999141693115,
-        "open": 7.389999866485596
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|AGPU|1D|bullish|kijun_bounce_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:42+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.6449999128069197,
-        "close": 109.86000061035156,
-        "cloud_bottom": 106.1092873491398,
-        "cloud_top": 112.04299725347437,
-        "date": "2026-07-24",
-        "kijun": 115.35515977545245,
-        "open": 111.01000213623047
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|AAXJ|1D|bullish|cloud_rejection_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:43+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.008864285714285713,
-        "close": 0.143,
-        "cloud_bottom": 0.14084999999999998,
-        "cloud_top": 0.17959999999999998,
-        "date": "2026-07-24",
-        "kijun": 0.1422,
-        "open": 0.1486
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "Crypto Spot|APEUSDC|1D|bearish|cloud_rejection_bearish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:44+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.05285726274762835,
-        "close": 23.43000030517578,
-        "cloud_bottom": 23.47531041531373,
-        "cloud_top": 23.549394604189857,
-        "date": "2026-07-24",
-        "kijun": 23.352684437339754,
-        "open": 23.43000030517578
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|TDTF|1D|bearish|cloud_breakdown|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:44+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.0140718732561385,
-        "close": 37.880001068115234,
-        "cloud_bottom": 35.00500011444092,
-        "cloud_top": 38.22749996185303,
-        "date": "2026-07-24",
-        "kijun": 39.55500030517578,
-        "open": 38.790000915527344
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|VOLT|1D|bullish|cloud_rejection_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:45+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.1803572518484935,
-        "close": 42.779998779296875,
-        "cloud_bottom": 41.69999980926514,
-        "cloud_top": 44.85749959945679,
-        "date": "2026-07-24",
-        "kijun": 47.5,
-        "open": 44.380001068115234
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|BAI|1D|bullish|cloud_rejection_bullish|2026-07-23"
-  },
-  {
-    "created_at": "2026-07-25T00:41:46+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.5967145647321428,
-        "close": 27.110000610351562,
-        "cloud_bottom": 29.732500076293945,
-        "cloud_top": 30.6850004196167,
-        "date": "2026-07-24",
-        "kijun": 29.570000648498535,
-        "open": 27.100000381469727
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|SKE|1D|bearish|trend_continuation_bearish|2026-07-23"
-  },
-  {
     "created_at": "2026-07-25T00:41:47+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89982,5 +89676,311 @@
       "to": "active"
     },
     "signal_id": "Crypto Spot|AEVOUSDT|1D|bearish|kijun_bounce_bearish|2026-08-10"
+  },
+  {
+    "created_at": "2026-08-13T03:05:10+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.09142862047467913,
+        "close": 10.779999732971191,
+        "cloud_bottom": 10.447225344693363,
+        "cloud_top": 10.60355824430777,
+        "date": "2026-08-12",
+        "kijun": 10.730861638815313,
+        "open": 10.819999694824219
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "US Stock|MUC|1D|bullish|kijun_bounce_bullish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:11+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.3047851834978377,
+        "close": 17.360000610351562,
+        "cloud_bottom": 17.893749475479126,
+        "cloud_top": 18.56100034713745,
+        "date": "2026-08-12",
+        "kijun": 20.59500026702881,
+        "open": 17.299999237060547
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "US Stock|CRTO|1D|bearish|cloud_breakdown|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:13+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.8360854557582311,
+        "close": 57.099998474121094,
+        "cloud_bottom": 43.109877069781874,
+        "cloud_top": 47.3811599077949,
+        "date": "2026-08-12",
+        "kijun": 52.42227318178365,
+        "open": 56.869998931884766
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "US Stock|CBL|1D|bullish|trend_continuation_bullish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:14+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.19964286259242467,
+        "close": 12.6899995803833,
+        "cloud_bottom": 12.554150154090323,
+        "cloud_top": 14.727761128875674,
+        "date": "2026-08-12",
+        "kijun": 12.298489905394412,
+        "open": 12.699999809265137
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "US Stock|EIDO|1D|bearish|cloud_breakdown|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:19+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.46214280809674946,
+        "close": 17.450000762939453,
+        "cloud_bottom": 15.119753953645857,
+        "cloud_top": 15.970626014184187,
+        "date": "2026-08-12",
+        "kijun": 16.99986275666872,
+        "open": 17.479999542236328
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "US Stock|TFSL|1D|bullish|kijun_bounce_bullish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:25+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.6999999455043248,
+        "close": 19.59000015258789,
+        "cloud_bottom": 18.732154888941523,
+        "cloud_top": 19.424296964445006,
+        "date": "2026-08-12",
+        "kijun": 19.840860289335915,
+        "open": 19.600000381469727
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "US Stock|BANC|1D|bullish|cloud_breakout|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:32+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.1021428789411272,
+        "close": 25.969999313354492,
+        "cloud_bottom": 21.8708071672755,
+        "cloud_top": 24.065083550982884,
+        "date": "2026-08-12",
+        "kijun": 25.134022519687193,
+        "open": 26.8799991607666
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "US Stock|HOG|1D|bullish|trend_continuation_bullish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:36+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.05285699026925223,
+        "close": 23.540000915527344,
+        "cloud_bottom": 23.593758006670193,
+        "cloud_top": 23.69489638386577,
+        "date": "2026-08-12",
+        "kijun": 23.67058753967285,
+        "open": 23.549999237060547
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "US Stock|TDTT|1D|bullish|kijun_bounce_bullish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:42+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.2479431969778878,
+        "close": 25.40999984741211,
+        "cloud_bottom": 25.729999542236328,
+        "cloud_top": 28.384999752044678,
+        "date": "2026-08-12",
+        "kijun": 28.53499984741211,
+        "open": 24.860000610351562
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "US Stock|STAA|1D|bearish|cloud_rejection_bearish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:43+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.25892857142857145,
+        "close": 9.359999656677246,
+        "cloud_bottom": 9.449153849125622,
+        "cloud_top": 12.299783117279867,
+        "date": "2026-08-12",
+        "kijun": 9.601479389405485,
+        "open": 9.510000228881836
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "US Stock|TETH|1D|bearish|kijun_bounce_bearish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:44+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.36678573063441683,
+        "close": 13.430000305175781,
+        "cloud_bottom": 13.417500019073486,
+        "cloud_top": 17.65999984741211,
+        "date": "2026-08-12",
+        "kijun": 13.160000324249268,
+        "open": 13.630000114440918
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "US Stock|ETHW|1D|bearish|kijun_bounce_bearish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:44+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.7474640437534876,
+        "close": 36.439998626708984,
+        "cloud_bottom": 38.45000076293945,
+        "cloud_top": 38.75,
+        "date": "2026-08-12",
+        "kijun": 40.18000030517578,
+        "open": 36.95000076293945
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "US Stock|IPI|1D|bearish|kijun_bounce_bearish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:45+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.9085726056780135,
+        "close": 73.58000183105469,
+        "cloud_bottom": 69.21967730789267,
+        "cloud_top": 74.52400395712374,
+        "date": "2026-08-12",
+        "kijun": 69.4799976348877,
+        "open": 72.33999633789062
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "US Stock|ALC|1D|bullish|cloud_breakout|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:46+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.3600000653948103,
+        "close": 90.54000091552734,
+        "cloud_bottom": 91.21189357972266,
+        "cloud_top": 91.23575239819357,
+        "date": "2026-08-12",
+        "kijun": 91.00209576825432,
+        "open": 90.63999938964844
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "US Stock|BOND|1D|bearish|kijun_bounce_bearish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:47+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.1438565935407366,
+        "close": 46.189998626708984,
+        "cloud_bottom": 46.516444869417654,
+        "cloud_top": 46.53865598960152,
+        "date": "2026-08-12",
+        "kijun": 46.4028896701559,
+        "open": 46.2400016784668
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "US Stock|JCPB|1D|bearish|kijun_bounce_bearish|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:48+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.3753570829119001,
+        "close": 4.289999961853027,
+        "cloud_bottom": 4.1399999260902405,
+        "cloud_top": 4.206249952316284,
+        "date": "2026-08-12",
+        "kijun": 4.5,
+        "open": 4.130000114440918
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "US Stock|ZNTL|1D|bearish|cloud_breakdown|2026-08-11"
+  },
+  {
+    "created_at": "2026-08-13T03:05:49+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.9292071206229073,
+        "close": 25.010000228881836,
+        "cloud_bottom": 18.800000190734863,
+        "cloud_top": 23.03250026702881,
+        "date": "2026-08-12",
+        "kijun": 25.660000801086426,
+        "open": 25.920000076293945
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "US Stock|STRZ|1D|bullish|cloud_rejection_bullish|2026-08-11"
   }
 ]
