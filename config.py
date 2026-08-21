@@ -59,6 +59,9 @@ TOP_DETAILED_ALERTS = 3
 DIGEST_SIGNALS_PER_MESSAGE = 10
 MAX_DIGEST_SIGNALS = 10
 MAX_REPORT_SIGNALS = 1000
+# These benchmark assets reserve a visible digest slot whenever they produce a
+# valid non-terminal signal. Their rule-based score and grade are never boosted.
+PRIORITY_DIGEST_SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT"]
 
 ATR_LENGTH = 14
 VOLUME_AVG_LENGTH = 20
