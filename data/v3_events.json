@@ -4,24 +4,6 @@
     "event_type": "status_changed",
     "payload": {
       "context": {
-        "atr": 0.15571437563214982,
-        "close": 8.479999542236328,
-        "cloud_bottom": 7.963706912511846,
-        "cloud_top": 8.347228526391586,
-        "date": "2026-08-04",
-        "kijun": 8.598775719665037,
-        "open": 8.390000343322754
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|CHW|1D|bullish|cloud_rejection_bullish|2026-08-03"
-  },
-  {
-    "created_at": "2026-08-05T00:41:54+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
         "atr": 1.0715000970023019,
         "close": 28.02440071105957,
         "cloud_bottom": 29.862499237060547,
@@ -89998,5 +89980,23 @@
       "to": "invalidated"
     },
     "signal_id": "US Stock|TSHA|1D|bullish|kijun_bounce_bullish|2026-08-18"
+  },
+  {
+    "created_at": "2026-08-21T02:17:21+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.07000010354178292,
+        "close": 6.526000022888184,
+        "cloud_bottom": 5.96025013923645,
+        "cloud_top": 6.217750072479248,
+        "date": "2026-08-20",
+        "kijun": 6.328250169754028,
+        "open": 6.479499816894531
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Commodity Future|HG=F|1D|bullish|trend_continuation_bullish|2026-08-19"
   }
 ]
