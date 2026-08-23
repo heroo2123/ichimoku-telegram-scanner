@@ -2534,5 +2534,47 @@
     "regime": "strong_bull",
     "score": 0.624,
     "volatility": "normal"
+  },
+  {
+    "as_of": "2026-08-23T02:15:05+00:00",
+    "breadth": "negative",
+    "components": {
+      "BNBUSDT": {
+        "annualized_vol": 0.3355780686794926,
+        "close": 695.28,
+        "cloud_bottom": 608.0125,
+        "cloud_top": 641.495,
+        "kijun": 631.665,
+        "trend": 1
+      },
+      "BTCUSDT": {
+        "annualized_vol": 0.49442961662743845,
+        "close": 77074.93,
+        "cloud_bottom": 66035.795,
+        "cloud_top": 70325.095,
+        "kijun": 68650.095,
+        "trend": 1
+      },
+      "ETHUSDT": {
+        "annualized_vol": 0.8487323096883208,
+        "close": 2422.6,
+        "cloud_bottom": 1829.3875,
+        "cloud_top": 1985.295,
+        "kijun": 2029.39,
+        "trend": 1
+      },
+      "universe_breadth": {
+        "above": 161,
+        "above_pct": 21.47,
+        "below": 411,
+        "below_pct": 54.8,
+        "score": -0.3333333333333333,
+        "total": 750
+      }
+    },
+    "market": "crypto",
+    "regime": "strong_bull",
+    "score": 0.6,
+    "volatility": "normal"
   }
 ]
