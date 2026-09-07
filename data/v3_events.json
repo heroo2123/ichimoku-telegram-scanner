@@ -1,2021 +1,5 @@
 [
   {
-    "created_at": "2026-08-21T00:10:44+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.6554291300733203,
-        "close": 12.880000114440918,
-        "cloud_bottom": 11.566890311119614,
-        "cloud_top": 14.016488923940152,
-        "date": "2026-08-20",
-        "kijun": 11.010338828642748,
-        "open": 12.510000228881836
-      },
-      "from": "active",
-      "to": "extended"
-    },
-    "signal_id": "US Stock|EQX|1D|bearish|cloud_breakdown|2026-08-18"
-  },
-  {
-    "created_at": "2026-08-21T00:10:44+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.0407145363943917,
-        "close": 20.329999923706055,
-        "cloud_bottom": 19.255000114440918,
-        "cloud_top": 24.440000534057617,
-        "date": "2026-08-20",
-        "kijun": 18.149999618530273,
-        "open": 20.639999389648438
-      },
-      "from": "extended",
-      "to": "active"
-    },
-    "signal_id": "US Stock|CTGO|1D|bearish|cloud_breakdown|2026-08-18"
-  },
-  {
-    "created_at": "2026-08-21T00:10:45+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 47.808933803013396,
-        "close": 444.8699951171875,
-        "cloud_bottom": 580.4850006103516,
-        "cloud_top": 604.4625091552734,
-        "date": "2026-08-20",
-        "kijun": 568.125,
-        "open": 453.2049865722656
-      },
-      "from": "active",
-      "to": "extended"
-    },
-    "signal_id": "US Stock|FN|1D|bearish|cloud_breakdown|2026-08-18"
-  },
-  {
-    "created_at": "2026-08-21T00:10:46+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.3528575897216797,
-        "close": 51.380001068115234,
-        "cloud_bottom": 53.6825008392334,
-        "cloud_top": 57.560001373291016,
-        "date": "2026-08-20",
-        "kijun": 53.060001373291016,
-        "open": 52.18000030517578
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|FISV|1D|bearish|kijun_bounce_bearish|2026-08-18"
-  },
-  {
-    "created_at": "2026-08-21T00:10:46+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.7323571613856725,
-        "close": 30.309999465942383,
-        "cloud_bottom": 24.670000076293945,
-        "cloud_top": 25.2450008392334,
-        "date": "2026-08-20",
-        "kijun": 26.739999771118164,
-        "open": 31.84000015258789
-      },
-      "from": "extended",
-      "to": "active"
-    },
-    "signal_id": "US Stock|DMRA|1D|bullish|trend_continuation_bullish|2026-08-18"
-  },
-  {
-    "created_at": "2026-08-21T00:10:47+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.38335701397487093,
-        "close": 6.110000133514404,
-        "cloud_bottom": 5.6650002002716064,
-        "cloud_top": 6.002500057220459,
-        "date": "2026-08-20",
-        "kijun": 6.1875,
-        "open": 6.269999980926514
-      },
-      "from": "active",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|TSHA|1D|bullish|kijun_bounce_bullish|2026-08-18"
-  },
-  {
-    "created_at": "2026-08-21T02:17:21+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.07000010354178292,
-        "close": 6.526000022888184,
-        "cloud_bottom": 5.96025013923645,
-        "cloud_top": 6.217750072479248,
-        "date": "2026-08-20",
-        "kijun": 6.328250169754028,
-        "open": 6.479499816894531
-      },
-      "from": "active",
-      "to": "extended"
-    },
-    "signal_id": "Commodity Future|HG=F|1D|bullish|trend_continuation_bullish|2026-08-19"
-  },
-  {
-    "created_at": "2026-08-22T00:03:07+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 4.606072562081473,
-        "close": 183.0399932861328,
-        "cloud_bottom": 181.73852818599468,
-        "cloud_top": 194.0637077993805,
-        "date": "2026-08-21",
-        "kijun": 182.26000213623047,
-        "open": 182.5399932861328
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|TMUS|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:09+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 19.840715680803573,
-        "close": 647.469970703125,
-        "cloud_bottom": 586.7448013886946,
-        "cloud_top": 587.0618666340049,
-        "date": "2026-08-21",
-        "kijun": 587.682120529254,
-        "open": 623.260009765625
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "US Stock|DE|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:10+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.654928479875837,
-        "close": 16.649999618530273,
-        "cloud_bottom": 16.385000228881836,
-        "cloud_top": 17.02300000190735,
-        "date": "2026-08-21",
-        "kijun": 16.80649995803833,
-        "open": 17.200000762939453
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|AUPH|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:10+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.2284285511289324,
-        "close": 3.390000104904175,
-        "cloud_bottom": 3.747499942779541,
-        "cloud_top": 3.747499942779541,
-        "date": "2026-08-21",
-        "kijun": 3.747499942779541,
-        "open": 3.2799999713897705
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|PRME|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:11+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.054500000000000014,
-        "close": 0.997,
-        "cloud_bottom": 0.97875,
-        "cloud_top": 1.51,
-        "date": "2026-08-21",
-        "kijun": 0.883,
-        "open": 0.876
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|ZROUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:13+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.1482142210006714,
-        "close": 3.109999895095825,
-        "cloud_bottom": 3.0425000190734863,
-        "cloud_top": 4.5,
-        "date": "2026-08-21",
-        "kijun": 2.9850000143051147,
-        "open": 2.9800000190734863
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|ALT|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:13+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.053071428571428596,
-        "close": 0.998,
-        "cloud_bottom": 0.981,
-        "cloud_top": 1.5135,
-        "date": "2026-08-21",
-        "kijun": 0.8845000000000001,
-        "open": 0.878
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|ZROFDUSD|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:13+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.05342857142857145,
-        "close": 0.996,
-        "cloud_bottom": 0.978,
-        "cloud_top": 1.51,
-        "date": "2026-08-21",
-        "kijun": 0.8835,
-        "open": 0.876
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|ZROUSDC|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:14+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.00032499999999999993,
-        "close": 0.00654,
-        "cloud_bottom": 0.0067425,
-        "cloud_top": 0.00875,
-        "date": "2026-08-21",
-        "kijun": 0.005815000000000001,
-        "open": 0.00589
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|ROSEUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:15+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.009907142857142856,
-        "close": 0.1898,
-        "cloud_bottom": 0.187575,
-        "cloud_top": 0.26105,
-        "date": "2026-08-21",
-        "kijun": 0.15505,
-        "open": 0.146
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|STXUSDC|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:16+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0022428571428571415,
-        "close": 0.04245,
-        "cloud_bottom": 0.045297500000000004,
-        "cloud_top": 0.057645,
-        "date": "2026-08-21",
-        "kijun": 0.03959,
-        "open": 0.03887
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|STEEMUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:16+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 4.907142857142856e-05,
-        "close": 0.000997,
-        "cloud_bottom": 0.0010325,
-        "cloud_top": 0.0013195,
-        "date": "2026-08-21",
-        "kijun": 0.0009175,
-        "open": 0.000881
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|CKBUSDC|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:17+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.006642857142857144,
-        "close": 0.1085,
-        "cloud_bottom": 0.12394999999999999,
-        "cloud_top": 0.1283,
-        "date": "2026-08-21",
-        "kijun": 0.1067,
-        "open": 0.0974
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|ARKMUSDC|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:18+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.01650714285714286,
-        "close": 0.33,
-        "cloud_bottom": 0.340875,
-        "cloud_top": 0.4021,
-        "date": "2026-08-21",
-        "kijun": 0.30955,
-        "open": 0.3033
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|RLCUSDT|1D|bearish|tk_cross_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:19+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.036142857142857136,
-        "close": 0.94,
-        "cloud_bottom": 0.9530000000000001,
-        "cloud_top": 1.1165,
-        "date": "2026-08-21",
-        "kijun": 0.838,
-        "open": 0.848
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|DOTUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:20+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0004,
-        "close": 0.00346,
-        "cloud_bottom": 0.0043625,
-        "cloud_top": 0.005085,
-        "date": "2026-08-21",
-        "kijun": 0.003515,
-        "open": 0.00303
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "Crypto Spot|RVNUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:21+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0011250000000000003,
-        "close": 0.02614,
-        "cloud_bottom": 0.0186625,
-        "cloud_top": 0.01998,
-        "date": "2026-08-21",
-        "kijun": 0.02224,
-        "open": 0.02099
-      },
-      "from": "entry_zone",
-      "to": "extended"
-    },
-    "signal_id": "Crypto Spot|KMNOUSDC|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:21+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.05978571428571423,
-        "close": 1.193,
-        "cloud_bottom": 1.16475,
-        "cloud_top": 1.4705,
-        "date": "2026-08-21",
-        "kijun": 1.1005,
-        "open": 1.087
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|GASUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:22+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.008221428571428574,
-        "close": 0.2018,
-        "cloud_bottom": 0.208975,
-        "cloud_top": 0.21865,
-        "date": "2026-08-21",
-        "kijun": 0.18395,
-        "open": 0.1817
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|XLMUSDC|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:22+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.00013707142857142854,
-        "close": 0.002446,
-        "cloud_bottom": 0.0024945,
-        "cloud_top": 0.003594,
-        "date": "2026-08-21",
-        "kijun": 0.0021780000000000002,
-        "open": 0.002211
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|XVGUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:23+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.008299999999999997,
-        "close": 0.2018,
-        "cloud_bottom": 0.209175,
-        "cloud_top": 0.21885000000000002,
-        "date": "2026-08-21",
-        "kijun": 0.18405,
-        "open": 0.1816
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|XLMUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:24+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.4674995967320033,
-        "close": 32.2599983215332,
-        "cloud_bottom": 32.822500228881836,
-        "cloud_top": 49.329999923706055,
-        "date": "2026-08-21",
-        "kijun": 30.354999542236328,
-        "open": 32.4900016784668
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|CSGP|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:25+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 10.343215942382812,
-        "close": 326.5,
-        "cloud_bottom": 315.9250030517578,
-        "cloud_top": 321.68750762939453,
-        "date": "2026-08-21",
-        "kijun": 329.1649932861328,
-        "open": 336.5
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|BURL|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:26+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.5680713653564453,
-        "close": 11.100000381469727,
-        "cloud_bottom": 9.139999866485596,
-        "cloud_top": 9.859999895095825,
-        "date": "2026-08-21",
-        "kijun": 10.549999952316284,
-        "open": 10.300000190734863
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|TRLV|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:27+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.5374997002737862,
-        "close": 17.600000381469727,
-        "cloud_bottom": 16.6093340079006,
-        "cloud_top": 16.867410727037083,
-        "date": "2026-08-21",
-        "kijun": 17.246653494622308,
-        "open": 18.059999465942383
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|PCG|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:28+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 7.574265710395991,
-        "close": 281.79998779296875,
-        "cloud_bottom": 259.24591170378756,
-        "cloud_top": 271.6051944606804,
-        "date": "2026-08-21",
-        "kijun": 273.06839355197945,
-        "open": 278.2099914550781
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|VRSN|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:29+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.06571401868547712,
-        "close": 22.450000762939453,
-        "cloud_bottom": 22.54309966931323,
-        "cloud_top": 22.615334857823065,
-        "date": "2026-08-21",
-        "kijun": 22.532359696790298,
-        "open": 22.469999313354492
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|GOVT|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:30+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 16.95128336698361,
-        "close": 389.1400146484375,
-        "cloud_bottom": 354.747232981465,
-        "cloud_top": 383.5648470513904,
-        "date": "2026-08-21",
-        "kijun": 394.4205258432496,
-        "open": 387.3599853515625
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|MOG-A|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:31+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.3321427958352225,
-        "close": 5.630000114440918,
-        "cloud_bottom": 5.774999976158142,
-        "cloud_top": 6.169999837875366,
-        "date": "2026-08-21",
-        "kijun": 5.859999895095825,
-        "open": 5.619999885559082
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|HDSN|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:31+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.3849999564034598,
-        "close": 52.75,
-        "cloud_bottom": 54.253569077593106,
-        "cloud_top": 54.50317067407762,
-        "date": "2026-08-21",
-        "kijun": 53.87600119079197,
-        "open": 52.84000015258789
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "US Stock|VGLT|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:32+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 3.181714194161551,
-        "close": 67.93000030517578,
-        "cloud_bottom": 51.8109583005972,
-        "cloud_top": 59.43168285480515,
-        "date": "2026-08-21",
-        "kijun": 58.53366053686202,
-        "open": 60.65999984741211
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "US Stock|VIRT|1D|bullish|tk_cross_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:33+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 4.151071275983538,
-        "close": 121.06999969482422,
-        "cloud_bottom": 125.42250061035156,
-        "cloud_top": 154.7550048828125,
-        "date": "2026-08-21",
-        "kijun": 119.41000366210938,
-        "open": 116.9000015258789
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|LULU|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:34+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.317856992994036,
-        "close": 14.279999732971191,
-        "cloud_bottom": 12.571608257361971,
-        "cloud_top": 14.525336071860073,
-        "date": "2026-08-21",
-        "kijun": 15.29498303788948,
-        "open": 14.5
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|MEI|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:35+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.8326405580735343,
-        "close": 91.47000122070312,
-        "cloud_bottom": 86.01422454172936,
-        "cloud_top": 91.79098288497522,
-        "date": "2026-08-21",
-        "kijun": 92.21290869802777,
-        "open": 91.2699966430664
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "US Stock|SIGI|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:36+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.365642547607422,
-        "close": 56.88999938964844,
-        "cloud_bottom": 51.814998626708984,
-        "cloud_top": 54.30999946594238,
-        "date": "2026-08-21",
-        "kijun": 54.095001220703125,
-        "open": 56.040000915527344
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|SKWD|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:37+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.08500031062534877,
-        "close": 20.329999923706055,
-        "cloud_bottom": 20.505192152700296,
-        "cloud_top": 20.525131741479107,
-        "date": "2026-08-21",
-        "kijun": 20.50903640094218,
-        "open": 20.34000015258789
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|FIIG|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:38+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.8857149396623885,
-        "close": 116.31999969482422,
-        "cloud_bottom": 108.54459592823794,
-        "cloud_top": 116.67876093748981,
-        "date": "2026-08-21",
-        "kijun": 114.97999954223633,
-        "open": 116.95999908447266
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|AAXJ|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:39+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.02635714285714286,
-        "close": 0.358,
-        "cloud_bottom": 0.354,
-        "cloud_top": 0.41000000000000003,
-        "date": "2026-08-21",
-        "kijun": 0.363,
-        "open": 0.344
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "Crypto Spot|ALPINEUSDT|1D|bearish|cloud_rejection_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:40+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.00346357142857143,
-        "close": 0.09165,
-        "cloud_bottom": 0.08107500000000001,
-        "cloud_top": 0.09424,
-        "date": "2026-08-21",
-        "kijun": 0.081315,
-        "open": 0.0806
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "Crypto Spot|DOGEFDUSD|1D|bearish|cloud_rejection_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:40+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.009464285714285718,
-        "close": 0.1991,
-        "cloud_bottom": 0.1667,
-        "cloud_top": 0.20440000000000003,
-        "date": "2026-08-21",
-        "kijun": 0.16845,
-        "open": 0.1644
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "Crypto Spot|WIFUSDC|1D|bearish|cloud_rejection_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:41+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 14.802143096923828,
-        "close": 101.7300033569336,
-        "cloud_bottom": 74.64000129699707,
-        "cloud_top": 94.97000122070312,
-        "date": "2026-08-21",
-        "kijun": 105.3599967956543,
-        "open": 108.0
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|AEHR|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:42+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 3.068572453090123,
-        "close": 83.41000366210938,
-        "cloud_bottom": 93.63477948905924,
-        "cloud_top": 114.78727449706079,
-        "date": "2026-08-21",
-        "kijun": 88.7400016784668,
-        "open": 86.29000091552734
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|PATK|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:43+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.3964285169328962,
-        "close": 43.380001068115234,
-        "cloud_bottom": 41.25205677044457,
-        "cloud_top": 42.87785620912054,
-        "date": "2026-08-21",
-        "kijun": 42.92769054648433,
-        "open": 43.5099983215332
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|CHT|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:44+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.4991429192679269,
-        "close": 10.859999656677246,
-        "cloud_bottom": 10.49750018119812,
-        "cloud_top": 11.422500133514404,
-        "date": "2026-08-21",
-        "kijun": 10.544000148773193,
-        "open": 10.649999618530273
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|NXE|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:44+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.8375001634870257,
-        "close": 41.5,
-        "cloud_bottom": 38.85344288764117,
-        "cloud_top": 41.8547566795357,
-        "date": "2026-08-21",
-        "kijun": 41.79314613272959,
-        "open": 42.18000030517578
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|RNST|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:45+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.4553576878138952,
-        "close": 53.869998931884766,
-        "cloud_bottom": 50.9180339772855,
-        "cloud_top": 51.14080285791412,
-        "date": "2026-08-21",
-        "kijun": 51.35499954223633,
-        "open": 54.0
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|SLB|1D|bullish|tk_cross_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:46+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0769286836896624,
-        "close": 6.579999923706055,
-        "cloud_bottom": 5.96025013923645,
-        "cloud_top": 6.217750072479248,
-        "date": "2026-08-21",
-        "kijun": 6.328250169754028,
-        "open": 6.479499816894531
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "Commodity Future|HG=F|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:47+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.041428571428571356,
-        "close": 0.533,
-        "cloud_bottom": 0.62125,
-        "cloud_top": 0.9375,
-        "date": "2026-08-21",
-        "kijun": 0.5925,
-        "open": 0.58
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "Crypto Spot|SANTOSUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:48+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0034914285714285737,
-        "close": 0.09153,
-        "cloud_bottom": 0.08087,
-        "cloud_top": 0.09405,
-        "date": "2026-08-21",
-        "kijun": 0.08116000000000001,
-        "open": 0.08047
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "Crypto Spot|DOGEUSDC|1D|bearish|cloud_rejection_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:48+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.009550000000000001,
-        "close": 0.1992,
-        "cloud_bottom": 0.16699999999999998,
-        "cloud_top": 0.20840000000000003,
-        "date": "2026-08-21",
-        "kijun": 0.16845,
-        "open": 0.1643
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "Crypto Spot|WIFUSDT|1D|bearish|cloud_rejection_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:49+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 6.007142857142861e-07,
-        "close": 1.857e-05,
-        "cloud_bottom": 1.7945e-05,
-        "cloud_top": 1.857e-05,
-        "date": "2026-08-21",
-        "kijun": 1.704e-05,
-        "open": 1.738e-05
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "Crypto Spot|XRPBTC|1D|bearish|cloud_rejection_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:49+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.001908571428571428,
-        "close": 0.04529,
-        "cloud_bottom": 0.0477825,
-        "cloud_top": 0.054205,
-        "date": "2026-08-21",
-        "kijun": 0.046055,
-        "open": 0.04223
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "Crypto Spot|KAVAUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:50+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.00019714285714285713,
-        "close": 0.00397,
-        "cloud_bottom": 0.003955,
-        "cloud_top": 0.004515,
-        "date": "2026-08-21",
-        "kijun": 0.00383,
-        "open": 0.00362
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|ANKRUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:51+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 5.849999999999999e-05,
-        "close": 0.000999,
-        "cloud_bottom": 0.00103225,
-        "cloud_top": 0.0013224999999999999,
-        "date": "2026-08-21",
-        "kijun": 0.0009625,
-        "open": 0.000884
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|CKBUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:51+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.017500000000000005,
-        "close": 0.23,
-        "cloud_bottom": 0.253,
-        "cloud_top": 0.2955,
-        "date": "2026-08-21",
-        "kijun": 0.236,
-        "open": 0.211
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "Crypto Spot|MTLUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:52+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0027285714285714283,
-        "close": 0.0561,
-        "cloud_bottom": 0.047825000000000006,
-        "cloud_top": 0.05475000000000001,
-        "date": "2026-08-21",
-        "kijun": 0.04820000000000001,
-        "open": 0.0469
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|MINAUSDT|1D|bearish|cloud_rejection_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:52+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.01386428571428572,
-        "close": 0.2412,
-        "cloud_bottom": 0.258825,
-        "cloud_top": 0.30055,
-        "date": "2026-08-21",
-        "kijun": 0.23575000000000002,
-        "open": 0.2217
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|XTZUSDT|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:53+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0034949999999999972,
-        "close": 0.09155,
-        "cloud_bottom": 0.08094,
-        "cloud_top": 0.094065,
-        "date": "2026-08-21",
-        "kijun": 0.08119,
-        "open": 0.08046
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "Crypto Spot|DOGEUSDT|1D|bearish|cloud_rejection_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:53+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 4.529114609507126,
-        "close": 148.35000610351562,
-        "cloud_bottom": 150.62239122821086,
-        "cloud_top": 155.0105357644621,
-        "date": "2026-08-21",
-        "kijun": 154.35000535023346,
-        "open": 148.5800018310547
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|DHI|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:54+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.562857219151088,
-        "close": 44.150001525878906,
-        "cloud_bottom": 43.331769963284486,
-        "cloud_top": 47.63474299157424,
-        "date": "2026-08-21",
-        "kijun": 44.28133073060916,
-        "open": 43.2599983215332
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "US Stock|LAZ|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:55+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 3.3392862592424666,
-        "close": 77.7300033569336,
-        "cloud_bottom": 86.56158920099517,
-        "cloud_top": 100.98912807539102,
-        "date": "2026-08-21",
-        "kijun": 76.69040075368922,
-        "open": 75.29000091552734
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|ZTS|1D|bearish|kijun_bounce_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:55+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.1082142421177457,
-        "close": 35.880001068115234,
-        "cloud_bottom": 35.35499954223633,
-        "cloud_top": 49.85999870300293,
-        "date": "2026-08-21",
-        "kijun": 33.31999969482422,
-        "open": 35.84000015258789
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|Z|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:56+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 3.769350324358259,
-        "close": 95.94000244140625,
-        "cloud_bottom": 118.09000205993652,
-        "cloud_top": 134.53999710083008,
-        "date": "2026-08-21",
-        "kijun": 103.95000076293945,
-        "open": 95.87000274658203
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|SITE|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:57+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.2033571686063494,
-        "close": 2.630000114440918,
-        "cloud_bottom": 2.7987499833106995,
-        "cloud_top": 3.5449999570846558,
-        "date": "2026-08-21",
-        "kijun": 2.837499976158142,
-        "open": 2.5799999237060547
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|EVEX|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:57+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.7770711353846959,
-        "close": 16.610000610351562,
-        "cloud_bottom": 17.386554396349137,
-        "cloud_top": 20.13755190055121,
-        "date": "2026-08-21",
-        "kijun": 16.90999937057495,
-        "open": 16.229999542236328
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "US Stock|PWP|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:58+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.5441417694091797,
-        "close": 39.93000030517578,
-        "cloud_bottom": 37.70545689895932,
-        "cloud_top": 40.1581357221302,
-        "date": "2026-08-21",
-        "kijun": 39.23236614826125,
-        "open": 40.099998474121094
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|DFEM|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:58+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.3704203420229941,
-        "close": 16.360000610351562,
-        "cloud_bottom": 14.75300227530696,
-        "cloud_top": 15.515850096201067,
-        "date": "2026-08-21",
-        "kijun": 15.651762986835795,
-        "open": 16.450000762939453
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|GAIN|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:03:59+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.2685870971307858,
-        "close": 102.26000213623047,
-        "cloud_bottom": 92.86214118451686,
-        "cloud_top": 96.71848038378808,
-        "date": "2026-08-21",
-        "kijun": 100.56034483328446,
-        "open": 102.69000244140625
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|PNFP|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:00+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.2378578186035156,
-        "close": 34.810001373291016,
-        "cloud_bottom": 30.490279913203985,
-        "cloud_top": 35.376878803825335,
-        "date": "2026-08-21",
-        "kijun": 36.932329598602436,
-        "open": 35.689998626708984
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|MOV|1D|bullish|cloud_rejection_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:00+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.6709995269775391,
-        "close": 39.4900016784668,
-        "cloud_bottom": 37.16174256030262,
-        "cloud_top": 39.68377219517346,
-        "date": "2026-08-21",
-        "kijun": 38.89396566573414,
-        "open": 39.66999816894531
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|DFAE|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:01+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 3.1792144775390625,
-        "close": 39.77000045776367,
-        "cloud_bottom": 44.95232378653719,
-        "cloud_top": 55.21561872623096,
-        "date": "2026-08-21",
-        "kijun": 45.739999771118164,
-        "open": 39.810001373291016
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|NAIL|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:02+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.2099996294294084,
-        "close": 81.56999969482422,
-        "cloud_bottom": 76.46811726585429,
-        "cloud_top": 81.70852092124592,
-        "date": "2026-08-21",
-        "kijun": 80.15999984741211,
-        "open": 81.97000122070312
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|IEMG|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:02+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.5324999945504325,
-        "close": 9.550000190734863,
-        "cloud_bottom": 8.725000143051147,
-        "cloud_top": 9.582500219345093,
-        "date": "2026-08-21",
-        "kijun": 9.640000343322754,
-        "open": 9.670000076293945
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|BCRX|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:03+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.2146432059151784,
-        "close": 61.09000015258789,
-        "cloud_bottom": 59.213433005337365,
-        "cloud_top": 61.34046589231712,
-        "date": "2026-08-21",
-        "kijun": 61.90380385087336,
-        "open": 61.459999084472656
-      },
-      "from": "confirmed",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|RRR|1D|bullish|cloud_rejection_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:04+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.7046435219900948,
-        "close": 35.83000183105469,
-        "cloud_bottom": 31.252359489371837,
-        "cloud_top": 32.84256093802202,
-        "date": "2026-08-21",
-        "kijun": 32.82341669155673,
-        "open": 34.709999084472656
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|DIN|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:04+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.39278595788138254,
-        "close": 16.670000076293945,
-        "cloud_bottom": 13.96595371256758,
-        "cloud_top": 15.444524652911785,
-        "date": "2026-08-21",
-        "kijun": 15.815954630147765,
-        "open": 16.6200008392334
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|APLE|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:05+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.1028570447649275,
-        "close": 40.97999954223633,
-        "cloud_bottom": 36.952687080965944,
-        "cloud_top": 39.330395392161286,
-        "date": "2026-08-21",
-        "kijun": 40.26999855041504,
-        "open": 41.060001373291016
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|LOB|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:05+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.5642858232770648,
-        "close": 37.130001068115234,
-        "cloud_bottom": 35.07068344841038,
-        "cloud_top": 35.389969881228325,
-        "date": "2026-08-21",
-        "kijun": 35.9415520456841,
-        "open": 37.47999954223633
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|IBCP|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:06+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.5199184533847474,
-        "close": 29.100000381469727,
-        "cloud_bottom": 27.13627502129291,
-        "cloud_top": 28.341008689481836,
-        "date": "2026-08-21",
-        "kijun": 28.717897223947865,
-        "open": 29.149999618530273
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|HFWA|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:07+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 4.576427459716797,
-        "close": 129.0500030517578,
-        "cloud_bottom": 142.87084541618825,
-        "cloud_top": 162.3450086925464,
-        "date": "2026-08-21",
-        "kijun": 130.02197761056476,
-        "open": 128.77000427246094
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "US Stock|HLI|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:08+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.26550003460475374,
-        "close": 4.96999979019165,
-        "cloud_bottom": 4.896250009536743,
-        "cloud_top": 5.232500076293945,
-        "date": "2026-08-21",
-        "kijun": 4.507499933242798,
-        "open": 4.829999923706055
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|PTLO|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:10+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.874285561697824,
-        "close": 113.41999816894531,
-        "cloud_bottom": 115.69258965822216,
-        "cloud_top": 125.18159710127239,
-        "date": "2026-08-21",
-        "kijun": 116.85000228881836,
-        "open": 114.27999877929688
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|XYL|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:10+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.4803564856209722,
-        "close": 21.399999618530273,
-        "cloud_bottom": 18.65780689643708,
-        "cloud_top": 19.591360346174245,
-        "date": "2026-08-21",
-        "kijun": 20.73357846609747,
-        "open": 21.299999237060547
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|DOC|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:11+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.8448925018310547,
-        "close": 48.34000015258789,
-        "cloud_bottom": 52.89374923706055,
-        "cloud_top": 61.91999816894531,
-        "date": "2026-08-21",
-        "kijun": 51.70000076293945,
-        "open": 48.75
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|KRUS|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:12+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 83.68860735212054,
-        "close": 866.7100219726562,
-        "cloud_bottom": 701.5600280761719,
-        "cloud_top": 861.260009765625,
-        "date": "2026-08-21",
-        "kijun": 822.1850280761719,
-        "open": 898.510009765625
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "US Stock|LITE|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:12+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.2849999836512974,
-        "close": 3.7799999713897705,
-        "cloud_bottom": 2.815000057220459,
-        "cloud_top": 3.2775000035762787,
-        "date": "2026-08-21",
-        "kijun": 3.549999952316284,
-        "open": 3.799999952316284
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|NNBR|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:13+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 6.931424822126116,
-        "close": 165.57000732421875,
-        "cloud_bottom": 164.95249557495117,
-        "cloud_top": 170.4749984741211,
-        "date": "2026-08-21",
-        "kijun": 164.02249908447266,
-        "open": 162.8699951171875
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|BOOT|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:14+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.3803571973528181,
-        "close": 17.639999389648438,
-        "cloud_bottom": 15.359567787645478,
-        "cloud_top": 16.573745489106887,
-        "date": "2026-08-21",
-        "kijun": 17.388164896152205,
-        "open": 17.59000015258789
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|TFSL|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:14+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.211520331246512,
-        "close": 69.19999694824219,
-        "cloud_bottom": 57.82052383950722,
-        "cloud_top": 61.92304965262249,
-        "date": "2026-08-21",
-        "kijun": 62.39609854230552,
-        "open": 68.31500244140625
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "US Stock|TECK|1D|bullish|tk_cross_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:15+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.0510714394705636,
-        "close": 35.81999969482422,
-        "cloud_bottom": 31.15304105259017,
-        "cloud_top": 35.008923413387194,
-        "date": "2026-08-21",
-        "kijun": 36.465999603271484,
-        "open": 35.54999923706055
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|SNDR|1D|bullish|cloud_breakout|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:16+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.689999716622489,
-        "close": 50.369998931884766,
-        "cloud_bottom": 50.00749969482422,
-        "cloud_top": 68.5,
-        "date": "2026-08-21",
-        "kijun": 47.595001220703125,
-        "open": 49.220001220703125
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|BSX|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:17+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.9807137080601284,
-        "close": 62.599998474121094,
-        "cloud_bottom": 61.904877048734036,
-        "cloud_top": 62.3019980483003,
-        "date": "2026-08-21",
-        "kijun": 62.92138082328847,
-        "open": 63.279998779296875
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|O|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:17+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.22985717228480748,
-        "close": 31.3700008392334,
-        "cloud_bottom": 29.824963848889354,
-        "cloud_top": 30.47885981454373,
-        "date": "2026-08-21",
-        "kijun": 30.813550967272207,
-        "open": 31.350000381469727
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|DBMF|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:18+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 5.110913890117493,
-        "close": 129.60000610351562,
-        "cloud_bottom": 111.79390359099875,
-        "cloud_top": 112.0727347097513,
-        "date": "2026-08-21",
-        "kijun": 115.93940654874919,
-        "open": 127.43000030517578
-      },
-      "from": "confirmed",
-      "to": "extended"
-    },
-    "signal_id": "US Stock|CF|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:18+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.8128580365862166,
-        "close": 87.0199966430664,
-        "cloud_bottom": 88.92809196077326,
-        "cloud_top": 101.73595640001554,
-        "date": "2026-08-21",
-        "kijun": 87.64538196181513,
-        "open": 86.48999786376953
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "US Stock|LEN|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:19+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.264671870640346,
-        "close": 56.83000183105469,
-        "cloud_bottom": 48.90522902934255,
-        "cloud_top": 52.16261624928174,
-        "date": "2026-08-21",
-        "kijun": 54.53793669036188,
-        "open": 57.43000030517578
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|TRST|1D|bullish|trend_continuation_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:20+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.027571201324463,
-        "close": 14.920000076293945,
-        "cloud_bottom": 15.53749966621399,
-        "cloud_top": 16.874999523162842,
-        "date": "2026-08-21",
-        "kijun": 15.199999809265137,
-        "open": 14.779999732971191
-      },
-      "from": "confirmed",
-      "to": "entry_zone"
-    },
-    "signal_id": "US Stock|DFH|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:21+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.7978575570242745,
-        "close": 44.209999084472656,
-        "cloud_bottom": 41.34141053555087,
-        "cloud_top": 41.710505624222186,
-        "date": "2026-08-21",
-        "kijun": 43.03572580084514,
-        "open": 44.529998779296875
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|SPFI|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:22+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0869286400931222,
-        "close": 25.84000015258789,
-        "cloud_bottom": 25.95544494655809,
-        "cloud_top": 25.989104533625635,
-        "date": "2026-08-21",
-        "kijun": 25.948677013979726,
-        "open": 25.860000610351562
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|CGCB|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:22+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.3157143252236502,
-        "close": 3.819999933242798,
-        "cloud_bottom": 5.00435744618018,
-        "cloud_top": 5.349189876042761,
-        "date": "2026-08-21",
-        "kijun": 4.117499947547913,
-        "open": 3.7799999713897705
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|FIP|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:23+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 3.317214693341936,
-        "close": 27.43000030517578,
-        "cloud_bottom": 22.500000476837158,
-        "cloud_top": 23.120500087738037,
-        "date": "2026-08-21",
-        "kijun": 25.352999210357666,
-        "open": 26.34000015258789
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "US Stock|UMAC|1D|bullish|kijun_bounce_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:23+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.6803240910458881,
-        "close": 22.149999618530273,
-        "cloud_bottom": 20.757597869592058,
-        "cloud_top": 20.943637806210145,
-        "date": "2026-08-21",
-        "kijun": 20.662063606522715,
-        "open": 22.170000076293945
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|NVGS|1D|bullish|tk_cross_bullish|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:24+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 7.8058591570172995,
-        "close": 125.95999908447266,
-        "cloud_bottom": 127.78849792480469,
-        "cloud_top": 148.7142505645752,
-        "date": "2026-08-21",
-        "kijun": 137.69249725341797,
-        "open": 128.00999450683594
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|ECG|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:25+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.5869284357343402,
-        "close": 13.470000267028809,
-        "cloud_bottom": 13.352499961853027,
-        "cloud_top": 13.394999980926514,
-        "date": "2026-08-21",
-        "kijun": 13.184999942779541,
-        "open": 13.270000457763672
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|ENTA|1D|bearish|cloud_breakdown|2026-08-20"
-  },
-  {
-    "created_at": "2026-08-22T00:04:25+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 6.771421814833161,
-        "close": 187.97999572753906,
-        "cloud_bottom": 205.45277782045113,
-        "cloud_top": 222.11809374822826,
-        "date": "2026-08-21",
-        "kijun": 197.61325645505707,
-        "open": 190.7899932861328
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|POOL|1D|bearish|trend_continuation_bearish|2026-08-20"
-  },
-  {
     "created_at": "2026-08-22T00:04:26+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +87982,2021 @@
       "to": "invalidated"
     },
     "signal_id": "Crypto Spot|IOSTUSDT|1D|bearish|kijun_bounce_bearish|2026-09-02"
+  },
+  {
+    "created_at": "2026-09-07T05:01:14+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0207857142857143,
+        "close": 0.397,
+        "cloud_bottom": 0.39599999999999996,
+        "cloud_top": 0.4675,
+        "date": "2026-09-06",
+        "kijun": 0.393,
+        "open": 0.391
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|UMAUSDT|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:14+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 3.428571428571431e-08,
+        "close": 1.02e-06,
+        "cloud_bottom": 1.1125e-06,
+        "cloud_top": 1.2499999999999999e-06,
+        "date": "2026-09-06",
+        "kijun": 1.03e-06,
+        "open": 1.01e-06
+      },
+      "from": "confirmed",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|HBARBTC|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:15+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00014864285714285712,
+        "close": 0.002917,
+        "cloud_bottom": 0.0028935000000000002,
+        "cloud_top": 0.003515,
+        "date": "2026-09-06",
+        "kijun": 0.0028465,
+        "open": 0.002829
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|ZILUSDT|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:15+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0009507142857142859,
+        "close": 0.01762,
+        "cloud_bottom": 0.017825,
+        "cloud_top": 0.026520000000000002,
+        "date": "2026-09-06",
+        "kijun": 0.01611,
+        "open": 0.01691
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|BLURUSDT|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:16+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.013307142857142854,
+        "close": 0.1662,
+        "cloud_bottom": 0.1817,
+        "cloud_top": 0.22375,
+        "date": "2026-09-06",
+        "kijun": 0.1817,
+        "open": 0.1705
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|AVAUSDT|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:17+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0008799999999999996,
+        "close": 0.01763,
+        "cloud_bottom": 0.017752499999999997,
+        "cloud_top": 0.02656,
+        "date": "2026-09-06",
+        "kijun": 0.01637,
+        "open": 0.01696
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|BLURUSDC|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:18+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.007392857142857141,
+        "close": 0.1396,
+        "cloud_bottom": 0.14115,
+        "cloud_top": 0.17915,
+        "date": "2026-09-06",
+        "kijun": 0.1461,
+        "open": 0.1399
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ALICEUSDT|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:18+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.014870714285714287,
+        "close": 0.11896,
+        "cloud_bottom": 0.069135,
+        "cloud_top": 0.11672500000000001,
+        "date": "2026-09-06",
+        "kijun": 0.091765,
+        "open": 0.11936
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|FFUSDT|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:19+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.014847857142857145,
+        "close": 0.11889,
+        "cloud_bottom": 0.06916749999999999,
+        "cloud_top": 0.11851,
+        "date": "2026-09-06",
+        "kijun": 0.09177500000000001,
+        "open": 0.11935
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|FFUSDC|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:19+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0018142857142857147,
+        "close": 0.0375,
+        "cloud_bottom": 0.036725,
+        "cloud_top": 0.049,
+        "date": "2026-09-06",
+        "kijun": 0.0341,
+        "open": 0.0362
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|POLYXUSDT|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:20+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0002135714285714286,
+        "close": 0.002128,
+        "cloud_bottom": 0.001425,
+        "cloud_top": 0.0018,
+        "date": "2026-09-06",
+        "kijun": 0.0020955,
+        "open": 0.002541
+      },
+      "from": "confirmed",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|1000CATUSDT|1D|bullish|kijun_bounce_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:20+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 4.857142857142856e-08,
+        "close": 1.13e-06,
+        "cloud_bottom": 1.175e-06,
+        "cloud_top": 1.2549999999999998e-06,
+        "date": "2026-09-06",
+        "kijun": 1.16e-06,
+        "open": 1.12e-06
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|DOGEBTC|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:21+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.012864285714285717,
+        "close": 0.2235,
+        "cloud_bottom": 0.178625,
+        "cloud_top": 0.2136,
+        "date": "2026-09-06",
+        "kijun": 0.20600000000000002,
+        "open": 0.2191
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ADAU|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:22+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.004214285714285712,
+        "close": 0.0806,
+        "cloud_bottom": 0.06709999999999999,
+        "cloud_top": 0.0788,
+        "date": "2026-09-06",
+        "kijun": 0.07045,
+        "open": 0.0801
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|AUSDT|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:23+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00020521428571428562,
+        "close": 0.00937,
+        "cloud_bottom": 0.0088845,
+        "cloud_top": 0.008994,
+        "date": "2026-09-06",
+        "kijun": 0.009129,
+        "open": 0.009601
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|BNBBTC|1D|bullish|trend_continuation_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:24+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0004235714285714285,
+        "close": 0.00442,
+        "cloud_bottom": 0.004565,
+        "cloud_top": 0.00588,
+        "date": "2026-09-06",
+        "kijun": 0.00439,
+        "open": 0.00435
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|JASMYUSDT|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:24+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.6434285714285713,
+        "close": 7.402,
+        "cloud_bottom": 4.1905,
+        "cloud_top": 5.956,
+        "date": "2026-09-06",
+        "kijun": 5.9065,
+        "open": 6.889
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ZENUSDC|1D|bullish|kumo_twist_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:24+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.001661428571428571,
+        "close": 0.01691,
+        "cloud_bottom": 0.01479,
+        "cloud_top": 0.01479,
+        "date": "2026-09-06",
+        "kijun": 0.01479,
+        "open": 0.01555
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|COTIUSDC|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:25+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0022000000000000006,
+        "close": 0.036,
+        "cloud_bottom": 0.03535,
+        "cloud_top": 0.07744999999999999,
+        "date": "2026-09-06",
+        "kijun": 0.0369,
+        "open": 0.0352
+      },
+      "from": "confirmed",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|OSMOUSDT|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:26+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00225,
+        "close": 0.0499,
+        "cloud_bottom": 0.049725,
+        "cloud_top": 0.05449999999999999,
+        "date": "2026-09-06",
+        "kijun": 0.047850000000000004,
+        "open": 0.0498
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|POWRUSDT|1D|bearish|cloud_breakdown|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:26+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0037114285714285717,
+        "close": 0.07006,
+        "cloud_bottom": 0.057694999999999996,
+        "cloud_top": 0.06937,
+        "date": "2026-09-06",
+        "kijun": 0.061845,
+        "open": 0.07059
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SKYUSDC|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:27+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.6450000000000001e-06,
+        "close": 3.027e-05,
+        "cloud_bottom": 2.962e-05,
+        "cloud_top": 3.0935e-05,
+        "date": "2026-09-06",
+        "kijun": 2.7485e-05,
+        "open": 2.745e-05
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|NEARBTC|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:28+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0002131428571428572,
+        "close": 0.002131,
+        "cloud_bottom": 0.0014475,
+        "cloud_top": 0.0018249999999999998,
+        "date": "2026-09-06",
+        "kijun": 0.002091,
+        "open": 0.002542
+      },
+      "from": "confirmed",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|1000CATUSDC|1D|bullish|kijun_bounce_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:28+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.04735714285714283,
+        "close": 0.787,
+        "cloud_bottom": 0.65325,
+        "cloud_top": 0.6935,
+        "date": "2026-09-06",
+        "kijun": 0.7275,
+        "open": 0.776
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ASTERUSDC|1D|bullish|kijun_bounce_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:29+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0003871428571428571,
+        "close": 0.0042,
+        "cloud_bottom": 0.0048675,
+        "cloud_top": 0.00692,
+        "date": "2026-09-06",
+        "kijun": 0.00428,
+        "open": 0.00405
+      },
+      "from": "confirmed",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|SOPHUSDT|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:29+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.01130714285714286,
+        "close": 0.2222,
+        "cloud_bottom": 0.17909999999999998,
+        "cloud_top": 0.21434999999999998,
+        "date": "2026-09-06",
+        "kijun": 0.20629999999999998,
+        "open": 0.2194
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ADAUSD1|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:30+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.04528571428571426,
+        "close": 0.79,
+        "cloud_bottom": 0.653,
+        "cloud_top": 0.6895,
+        "date": "2026-09-06",
+        "kijun": 0.729,
+        "open": 0.78
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ASTERU|1D|bullish|kijun_bounce_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:31+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.04849999999999998,
+        "close": 0.787,
+        "cloud_bottom": 0.6539999999999999,
+        "cloud_top": 0.694,
+        "date": "2026-09-06",
+        "kijun": 0.7304999999999999,
+        "open": 0.776
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ASTERUSDT|1D|bullish|kijun_bounce_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:32+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.022921428571428575,
+        "close": 0.2513,
+        "cloud_bottom": 0.167375,
+        "cloud_top": 0.19985000000000003,
+        "date": "2026-09-06",
+        "kijun": 0.21484999999999999,
+        "open": 0.2551
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SUSHIUSDT|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:32+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0038700000000000023,
+        "close": 0.07009,
+        "cloud_bottom": 0.0577475,
+        "cloud_top": 0.06934,
+        "date": "2026-09-06",
+        "kijun": 0.062,
+        "open": 0.07054
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SKYUSDT|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:33+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.04514285714285713,
+        "close": 0.787,
+        "cloud_bottom": 0.653,
+        "cloud_top": 0.6925,
+        "date": "2026-09-06",
+        "kijun": 0.7335,
+        "open": 0.781
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ASTERUSD1|1D|bullish|kijun_bounce_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:33+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0008207142857142857,
+        "close": 0.01555,
+        "cloud_bottom": 0.015532500000000001,
+        "cloud_top": 0.02384,
+        "date": "2026-09-06",
+        "kijun": 0.015495,
+        "open": 0.01543
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|DYMUSDT|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:34+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.001401428571428572,
+        "close": 0.04236,
+        "cloud_bottom": 0.0418625,
+        "cloud_top": 0.042865,
+        "date": "2026-09-06",
+        "kijun": 0.04082,
+        "open": 0.0416
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SOLETH|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:34+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0034571428571428552,
+        "close": 0.0701,
+        "cloud_bottom": 0.070075,
+        "cloud_top": 0.1222,
+        "date": "2026-09-06",
+        "kijun": 0.0691,
+        "open": 0.0687
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|HYPERUSDT|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:35+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0010085714285714283,
+        "close": 0.01401,
+        "cloud_bottom": 0.011355,
+        "cloud_top": 0.013085000000000001,
+        "date": "2026-09-06",
+        "kijun": 0.012705,
+        "open": 0.01419
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|PLUMEUSDT|1D|bullish|trend_continuation_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:36+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.01092857142857143,
+        "close": 0.1269,
+        "cloud_bottom": 0.127275,
+        "cloud_top": 0.16975,
+        "date": "2026-09-06",
+        "kijun": 0.1183,
+        "open": 0.126
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|KITEUSDC|1D|bearish|cloud_breakdown|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:36+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.011157142857142855,
+        "close": 0.1269,
+        "cloud_bottom": 0.127475,
+        "cloud_top": 0.1701,
+        "date": "2026-09-06",
+        "kijun": 0.1184,
+        "open": 0.1259
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|KITEUSDT|1D|bearish|cloud_breakdown|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:37+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.1598571428571429,
+        "close": 2.44,
+        "cloud_bottom": 1.94075,
+        "cloud_top": 2.1645000000000003,
+        "date": "2026-09-06",
+        "kijun": 2.017,
+        "open": 2.192
+      },
+      "from": "confirmed",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|NEARUSDC|1D|bullish|cloud_rejection_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:37+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00013635714285714268,
+        "close": 0.005264,
+        "cloud_bottom": 0.004318499999999999,
+        "cloud_top": 0.00445675,
+        "date": "2026-09-06",
+        "kijun": 0.0047810000000000005,
+        "open": 0.004862
+      },
+      "from": "confirmed",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|LINKETH|1D|bullish|trend_continuation_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:38+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.16007142857142861,
+        "close": 2.439,
+        "cloud_bottom": 1.9425,
+        "cloud_top": 2.1660000000000004,
+        "date": "2026-09-06",
+        "kijun": 2.0180000000000002,
+        "open": 2.192
+      },
+      "from": "confirmed",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|NEARUSDT|1D|bullish|cloud_rejection_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:38+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0008499999999999995,
+        "close": 0.0092,
+        "cloud_bottom": 0.014075,
+        "cloud_top": 0.01915,
+        "date": "2026-09-06",
+        "kijun": 0.0086,
+        "open": 0.009
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|MOVEUSDT|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:39+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0009992857142857145,
+        "close": 0.01399,
+        "cloud_bottom": 0.0113525,
+        "cloud_top": 0.013045000000000001,
+        "date": "2026-09-06",
+        "kijun": 0.012705,
+        "open": 0.01419
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|PLUMEUSDC|1D|bullish|trend_continuation_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:39+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 2.814285714285715e-07,
+        "close": 5.53e-06,
+        "cloud_bottom": 4.95e-06,
+        "cloud_top": 5.375e-06,
+        "date": "2026-09-06",
+        "kijun": 5.14e-06,
+        "open": 5.46e-06
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SHIBUSDT|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:40+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 2.6071428571428583e-07,
+        "close": 5.53e-06,
+        "cloud_bottom": 4.96e-06,
+        "cloud_top": 5.38e-06,
+        "date": "2026-09-06",
+        "kijun": 5.15e-06,
+        "open": 5.48e-06
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SHIBFDUSD|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:40+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.6583571428571429,
+        "close": 7.396,
+        "cloud_bottom": 4.1945,
+        "cloud_top": 5.9565,
+        "date": "2026-09-06",
+        "kijun": 5.9095,
+        "open": 6.889
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ZENUSDT|1D|bullish|kumo_twist_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:41+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.21707142857142864,
+        "close": 3.033,
+        "cloud_bottom": 1.8605,
+        "cloud_top": 2.2199999999999998,
+        "date": "2026-09-06",
+        "kijun": 2.4215,
+        "open": 2.95
+      },
+      "from": "confirmed",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|ARUSDC|1D|bullish|kumo_twist_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:42+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.01337142857142857,
+        "close": 0.2234,
+        "cloud_bottom": 0.178725,
+        "cloud_top": 0.21345,
+        "date": "2026-09-06",
+        "kijun": 0.20585,
+        "open": 0.2183
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ADAUSDT|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:42+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.22042857142857147,
+        "close": 3.037,
+        "cloud_bottom": 1.86125,
+        "cloud_top": 2.2249999999999996,
+        "date": "2026-09-06",
+        "kijun": 2.4210000000000003,
+        "open": 2.951
+      },
+      "from": "confirmed",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|ARUSDT|1D|bullish|kumo_twist_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:42+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00017642857142857155,
+        "close": 0.00212,
+        "cloud_bottom": 0.002235,
+        "cloud_top": 0.0029000000000000002,
+        "date": "2026-09-06",
+        "kijun": 0.002295,
+        "open": 0.00217
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|TOWNSUSDC|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:43+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0018714285714285708,
+        "close": 0.0314,
+        "cloud_bottom": 0.030875,
+        "cloud_top": 0.041999999999999996,
+        "date": "2026-09-06",
+        "kijun": 0.0287,
+        "open": 0.0307
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|KAIAUSDT|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:43+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.013321428571428571,
+        "close": 0.2235,
+        "cloud_bottom": 0.1786,
+        "cloud_top": 0.21335,
+        "date": "2026-09-06",
+        "kijun": 0.20585,
+        "open": 0.2184
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ADAUSDC|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:44+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.013078571428571434,
+        "close": 0.2235,
+        "cloud_bottom": 0.1791,
+        "cloud_top": 0.21365,
+        "date": "2026-09-06",
+        "kijun": 0.2062,
+        "open": 0.2187
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ADAFDUSD|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:44+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.01825,
+        "close": 0.2167,
+        "cloud_bottom": 0.154675,
+        "cloud_top": 0.20765,
+        "date": "2026-09-06",
+        "kijun": 0.18505,
+        "open": 0.2135
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|WIFUSDT|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:44+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00019000000000000006,
+        "close": 0.00212,
+        "cloud_bottom": 0.0022375,
+        "cloud_top": 0.0029000000000000002,
+        "date": "2026-09-06",
+        "kijun": 0.0023,
+        "open": 0.00218
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|TOWNSUSDT|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:45+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.002350000000000001,
+        "close": 0.036,
+        "cloud_bottom": 0.03545,
+        "cloud_top": 0.07745,
+        "date": "2026-09-06",
+        "kijun": 0.03795,
+        "open": 0.0354
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|OSMOUSDC|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:45+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 3.264285714285715e-07,
+        "close": 5.53e-06,
+        "cloud_bottom": 4.94e-06,
+        "cloud_top": 5.375e-06,
+        "date": "2026-09-06",
+        "kijun": 5.135e-06,
+        "open": 5.47e-06
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SHIBUSDC|1D|bullish|cloud_breakout|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:46+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0017214285714285719,
+        "close": 0.0315,
+        "cloud_bottom": 0.030875,
+        "cloud_top": 0.0427,
+        "date": "2026-09-06",
+        "kijun": 0.028700000000000003,
+        "open": 0.0308
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|KAIAUSDC|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:46+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0007607142857142855,
+        "close": 0.01552,
+        "cloud_bottom": 0.0155725,
+        "cloud_top": 0.02389,
+        "date": "2026-09-06",
+        "kijun": 0.015505,
+        "open": 0.01542
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|DYMUSDC|1D|bearish|kijun_bounce_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:47+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.04477857142857141,
+        "close": 0.5768,
+        "cloud_bottom": 0.399225,
+        "cloud_top": 0.401,
+        "date": "2026-09-06",
+        "kijun": 0.50225,
+        "open": 0.5729
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ETHFIUSDC|1D|bullish|trend_continuation_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:47+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00043071428571428584,
+        "close": 0.00514,
+        "cloud_bottom": 0.0036249999999999998,
+        "cloud_top": 0.003785,
+        "date": "2026-09-06",
+        "kijun": 0.004045,
+        "open": 0.00489
+      },
+      "from": "confirmed",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|DGBUSDT|1D|bullish|trend_continuation_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:48+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.04550000000000002,
+        "close": 0.5782,
+        "cloud_bottom": 0.399625,
+        "cloud_top": 0.4015,
+        "date": "2026-09-06",
+        "kijun": 0.5032,
+        "open": 0.5736
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|ETHFIUSDT|1D|bullish|trend_continuation_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:49+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.42571428571428555,
+        "close": 7.92,
+        "cloud_bottom": 6.445,
+        "cloud_top": 6.449999999999999,
+        "date": "2026-09-06",
+        "kijun": 6.914999999999999,
+        "open": 7.67
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|GMXUSDT|1D|bullish|trend_continuation_bullish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:50+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.004471428571428569,
+        "close": 0.0762,
+        "cloud_bottom": 0.0702,
+        "cloud_top": 0.13595,
+        "date": "2026-09-06",
+        "kijun": 0.07385,
+        "open": 0.07
+      },
+      "from": "confirmed",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|LAYERUSDT|1D|bearish|cloud_rejection_bearish|2026-09-05"
+  },
+  {
+    "created_at": "2026-09-07T05:01:50+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0004235714285714285,
+        "close": 0.00442,
+        "cloud_bottom": 0.004565,
+        "cloud_top": 0.00588,
+        "date": "2026-09-06",
+        "kijun": 0.00439,
+        "open": 0.00435
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|JASMYUSDT|1D|bearish|cloud_breakdown|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:50+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0010257142857142858,
+        "close": 0.01218,
+        "cloud_bottom": 0.012472500000000001,
+        "cloud_top": 0.01575,
+        "date": "2026-09-06",
+        "kijun": 0.011720000000000001,
+        "open": 0.01175
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|WOOUSDT|1D|bearish|kijun_bounce_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:51+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00242857142857143,
+        "close": 0.0474,
+        "cloud_bottom": 0.045375,
+        "cloud_top": 0.06015,
+        "date": "2026-09-06",
+        "kijun": 0.0471,
+        "open": 0.047
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|LUNAUSDT|1D|bearish|cloud_breakdown|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:52+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.16007142857142861,
+        "close": 2.439,
+        "cloud_bottom": 1.9425,
+        "cloud_top": 2.1660000000000004,
+        "date": "2026-09-06",
+        "kijun": 2.0180000000000002,
+        "open": 2.192
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|NEARUSDT|1D|bullish|cloud_breakout|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:52+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.1598571428571429,
+        "close": 2.44,
+        "cloud_bottom": 1.94075,
+        "cloud_top": 2.1645000000000003,
+        "date": "2026-09-06",
+        "kijun": 2.017,
+        "open": 2.192
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|NEARUSDC|1D|bullish|cloud_breakout|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:52+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.001878571428571428,
+        "close": 0.0339,
+        "cloud_bottom": 0.03205,
+        "cloud_top": 0.038349999999999995,
+        "date": "2026-09-06",
+        "kijun": 0.033049999999999996,
+        "open": 0.0328
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|IDUSDT|1D|bearish|cloud_rejection_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:53+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.008578571428571427,
+        "close": 0.1399,
+        "cloud_bottom": 0.152225,
+        "cloud_top": 0.173,
+        "date": "2026-09-06",
+        "kijun": 0.1399,
+        "open": 0.1297
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|IOUSDT|1D|bearish|trend_continuation_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:53+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00019000000000000006,
+        "close": 0.00212,
+        "cloud_bottom": 0.0022375,
+        "cloud_top": 0.0029000000000000002,
+        "date": "2026-09-06",
+        "kijun": 0.0023,
+        "open": 0.00218
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|TOWNSUSDT|1D|bearish|cloud_breakdown|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:54+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00017642857142857155,
+        "close": 0.00212,
+        "cloud_bottom": 0.002235,
+        "cloud_top": 0.0029000000000000002,
+        "date": "2026-09-06",
+        "kijun": 0.002295,
+        "open": 0.00217
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|TOWNSUSDC|1D|bearish|cloud_breakdown|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:55+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.3907142857142855,
+        "close": 5.312,
+        "cloud_bottom": 5.013249999999999,
+        "cloud_top": 5.1135,
+        "date": "2026-09-06",
+        "kijun": 5.007,
+        "open": 4.948
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|INJUSDT|1D|bearish|kijun_bounce_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:55+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 3.826428571428571,
+        "close": 39.14,
+        "cloud_bottom": 39.855000000000004,
+        "cloud_top": 40.165,
+        "date": "2026-09-06",
+        "kijun": 40.185,
+        "open": 40.79
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|GIGGLEUSDC|1D|bullish|cloud_breakout|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:56+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.6450000000000001e-06,
+        "close": 3.027e-05,
+        "cloud_bottom": 2.962e-05,
+        "cloud_top": 3.0935e-05,
+        "date": "2026-09-06",
+        "kijun": 2.7485e-05,
+        "open": 2.745e-05
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|NEARBTC|1D|bearish|kijun_bounce_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:56+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.007849999999999998,
+        "close": 0.1574,
+        "cloud_bottom": 0.14265,
+        "cloud_top": 0.14645,
+        "date": "2026-09-06",
+        "kijun": 0.1609,
+        "open": 0.1507
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|ATUSDC|1D|bullish|cloud_breakout|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:57+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.38914285714285707,
+        "close": 5.307,
+        "cloud_bottom": 5.00975,
+        "cloud_top": 5.1105,
+        "date": "2026-09-06",
+        "kijun": 5.0045,
+        "open": 4.953
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|INJUSDC|1D|bearish|kijun_bounce_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:58+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0022000000000000006,
+        "close": 0.036,
+        "cloud_bottom": 0.03535,
+        "cloud_top": 0.07744999999999999,
+        "date": "2026-09-06",
+        "kijun": 0.0369,
+        "open": 0.0352
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|OSMOUSDT|1D|bearish|cloud_rejection_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:58+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.021935714285714288,
+        "close": 0.199,
+        "cloud_bottom": 0.19725,
+        "cloud_top": 0.513,
+        "date": "2026-09-06",
+        "kijun": 0.1976,
+        "open": 0.1976
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|0GUSDT|1D|bearish|kijun_bounce_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:59+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.04764285714285711,
+        "close": 0.964,
+        "cloud_bottom": 0.9227500000000001,
+        "cloud_top": 1.2610000000000001,
+        "date": "2026-09-06",
+        "kijun": 0.93,
+        "open": 0.95
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|AXSUSDC|1D|bearish|cloud_breakdown|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:01:59+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.002172857142857143,
+        "close": 0.02162,
+        "cloud_bottom": 0.0242,
+        "cloud_top": 0.04167,
+        "date": "2026-09-06",
+        "kijun": 0.02317,
+        "open": 0.02198
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SCRUSDT|1D|bearish|kijun_bounce_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:00+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.015564285714285713,
+        "close": 0.2181,
+        "cloud_bottom": 0.224575,
+        "cloud_top": 0.2339,
+        "date": "2026-09-06",
+        "kijun": 0.211,
+        "open": 0.2061
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|EIGENUSDC|1D|bearish|trend_continuation_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:00+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00785,
+        "close": 0.1575,
+        "cloud_bottom": 0.14235,
+        "cloud_top": 0.14684999999999998,
+        "date": "2026-09-06",
+        "kijun": 0.15785,
+        "open": 0.1504
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|ATUSDT|1D|bullish|cloud_breakout|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:01+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.016249999999999997,
+        "close": 0.2183,
+        "cloud_bottom": 0.22462500000000002,
+        "cloud_top": 0.23345,
+        "date": "2026-09-06",
+        "kijun": 0.21065,
+        "open": 0.2061
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|EIGENUSDT|1D|bearish|trend_continuation_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:01+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 3.914285714285715,
+        "close": 39.15,
+        "cloud_bottom": 39.85,
+        "cloud_top": 40.0,
+        "date": "2026-09-06",
+        "kijun": 40.185,
+        "open": 40.7
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|GIGGLEUSDT|1D|bullish|cloud_breakout|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:02+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.015299999999999998,
+        "close": 0.2181,
+        "cloud_bottom": 0.22475,
+        "cloud_top": 0.23365000000000002,
+        "date": "2026-09-06",
+        "kijun": 0.21105,
+        "open": 0.2063
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|EIGENFDUSD|1D|bearish|trend_continuation_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:02+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 6.469999999999999,
+        "close": 71.34,
+        "cloud_bottom": 33.307500000000005,
+        "cloud_top": 43.515,
+        "date": "2026-09-06",
+        "kijun": 53.80500000000001,
+        "open": 65.43
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|DASHUSDC|1D|bullish|kijun_bounce_bullish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:03+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.02134285714285714,
+        "close": 0.3872,
+        "cloud_bottom": 0.364,
+        "cloud_top": 0.371825,
+        "date": "2026-09-06",
+        "kijun": 0.37755,
+        "open": 0.3702
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|ONDOUSDC|1D|bearish|cloud_rejection_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:03+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 6.490714285714286,
+        "close": 71.31,
+        "cloud_bottom": 33.275000000000006,
+        "cloud_top": 43.465,
+        "date": "2026-09-06",
+        "kijun": 53.760000000000005,
+        "open": 65.49
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|DASHUSDT|1D|bullish|kijun_bounce_bullish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-07T05:02:07+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0002131428571428572,
+        "close": 0.002131,
+        "cloud_bottom": 0.0014475,
+        "cloud_top": 0.0018249999999999998,
+        "date": "2026-09-06",
+        "kijun": 0.002091,
+        "open": 0.002542
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|1000CATUSDC|1D|bullish|cloud_breakout|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:15+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 8.621428898402623,
+        "close": 138.14999389648438,
+        "cloud_bottom": 164.0625,
+        "cloud_top": 169.875,
+        "date": "2026-09-04",
+        "kijun": 156.1750030517578,
+        "open": 138.14999389648438
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Commodity Future|OJ=F|1D|bearish|kijun_bounce_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:16+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0002135714285714286,
+        "close": 0.002128,
+        "cloud_bottom": 0.001425,
+        "cloud_top": 0.0018,
+        "date": "2026-09-06",
+        "kijun": 0.0020955,
+        "open": 0.002541
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Crypto Spot|1000CATUSDT|1D|bullish|cloud_breakout|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:35+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.002172857142857143,
+        "close": 0.02162,
+        "cloud_bottom": 0.0242,
+        "cloud_top": 0.04167,
+        "date": "2026-09-06",
+        "kijun": 0.02317,
+        "open": 0.02198
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|SCRUSDT|1D|bearish|kijun_bounce_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:36+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.38914285714285707,
+        "close": 5.307,
+        "cloud_bottom": 5.00975,
+        "cloud_top": 5.1105,
+        "date": "2026-09-06",
+        "kijun": 5.0045,
+        "open": 4.953
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|INJUSDC|1D|bearish|kijun_bounce_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:37+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0016457142857142866,
+        "close": 0.02957,
+        "cloud_bottom": 0.027827499999999998,
+        "cloud_top": 0.035155000000000006,
+        "date": "2026-09-06",
+        "kijun": 0.028935,
+        "open": 0.02882
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|FLOWUSDT|1D|bearish|cloud_rejection_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:37+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.001878571428571428,
+        "close": 0.0339,
+        "cloud_bottom": 0.03205,
+        "cloud_top": 0.038349999999999995,
+        "date": "2026-09-06",
+        "kijun": 0.033049999999999996,
+        "open": 0.0328
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|IDUSDT|1D|bearish|cloud_rejection_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:38+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.20914285714285713,
+        "close": 2.611,
+        "cloud_bottom": 1.967,
+        "cloud_top": 2.003,
+        "date": "2026-09-06",
+        "kijun": 2.396,
+        "open": 2.491
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|MORPHOUSDT|1D|bullish|kijun_bounce_bullish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:39+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.3907142857142855,
+        "close": 5.312,
+        "cloud_bottom": 5.013249999999999,
+        "cloud_top": 5.1135,
+        "date": "2026-09-06",
+        "kijun": 5.007,
+        "open": 4.948
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|INJUSDT|1D|bearish|kijun_bounce_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:39+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00897142857142857,
+        "close": 0.1877,
+        "cloud_bottom": 0.1916,
+        "cloud_top": 0.21885000000000002,
+        "date": "2026-09-06",
+        "kijun": 0.1875,
+        "open": 0.1839
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|XLMUSDT|1D|bearish|kijun_bounce_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:39+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 6.490714285714286,
+        "close": 71.31,
+        "cloud_bottom": 33.275000000000006,
+        "cloud_top": 43.465,
+        "date": "2026-09-06",
+        "kijun": 53.760000000000005,
+        "open": 65.49
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|DASHUSDT|1D|bullish|cloud_breakout|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:40+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 6.469999999999999,
+        "close": 71.34,
+        "cloud_bottom": 33.307500000000005,
+        "cloud_top": 43.515,
+        "date": "2026-09-06",
+        "kijun": 53.80500000000001,
+        "open": 65.43
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|DASHUSDC|1D|bullish|cloud_breakout|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:40+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.008914285714285708,
+        "close": 0.1878,
+        "cloud_bottom": 0.1915,
+        "cloud_top": 0.21865,
+        "date": "2026-09-06",
+        "kijun": 0.18745,
+        "open": 0.1839
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|XLMUSDC|1D|bearish|kijun_bounce_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:41+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.22642857142857134,
+        "close": 3.6,
+        "cloud_bottom": 2.81,
+        "cloud_top": 4.3,
+        "date": "2026-09-06",
+        "kijun": 2.95,
+        "open": 2.93
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|METISUSDT|1D|bearish|cloud_rejection_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:54+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.016249999999999997,
+        "close": 0.2183,
+        "cloud_bottom": 0.22462500000000002,
+        "cloud_top": 0.23345,
+        "date": "2026-09-06",
+        "kijun": 0.21065,
+        "open": 0.2061
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|EIGENUSDT|1D|bearish|kijun_bounce_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:55+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 8.598571428571429,
+        "close": 136.89,
+        "cloud_bottom": 87.965,
+        "cloud_top": 88.375,
+        "date": "2026-09-06",
+        "kijun": 115.05000000000001,
+        "open": 134.4
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|AAVEUSDC|1D|bullish|tk_cross_bullish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:02:55+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.20392857142857132,
+        "close": 2.612,
+        "cloud_bottom": 1.965,
+        "cloud_top": 2.0015,
+        "date": "2026-09-06",
+        "kijun": 2.3965,
+        "open": 2.489
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|MORPHOUSDC|1D|bullish|kijun_bounce_bullish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:03:34+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.00043071428571428584,
+        "close": 0.00514,
+        "cloud_bottom": 0.0036249999999999998,
+        "cloud_top": 0.003785,
+        "date": "2026-09-06",
+        "kijun": 0.004045,
+        "open": 0.00489
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|DGBUSDT|1D|bullish|trend_continuation_bullish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:03:34+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 2.1807142857142874,
+        "close": 54.98,
+        "cloud_bottom": 44.8225,
+        "cloud_top": 49.915000000000006,
+        "date": "2026-09-06",
+        "kijun": 49.155,
+        "open": 54.71
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|LTCUSDC|1D|bullish|cloud_breakout|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:03:35+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.02134285714285714,
+        "close": 0.3872,
+        "cloud_bottom": 0.364,
+        "cloud_top": 0.371825,
+        "date": "2026-09-06",
+        "kijun": 0.37755,
+        "open": 0.3702
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Crypto Spot|ONDOUSDC|1D|bearish|cloud_rejection_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:03:35+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 1.1817142857142857,
+        "close": 5.487,
+        "cloud_bottom": 1.8559999999999999,
+        "cloud_top": 1.8650000000000002,
+        "date": "2026-09-06",
+        "kijun": 4.536,
+        "open": 5.089
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|PROMUSDT|1D|bullish|kijun_bounce_bullish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:03:36+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.0012607142857142854,
+        "close": 0.02728,
+        "cloud_bottom": 0.023567499999999998,
+        "cloud_top": 0.030205000000000003,
+        "date": "2026-09-06",
+        "kijun": 0.026395000000000002,
+        "open": 0.02724
+      },
+      "from": "entry_zone",
+      "to": "active"
+    },
+    "signal_id": "Crypto Spot|DOLOUSDC|1D|bearish|tk_cross_bearish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-07T05:03:36+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 2.19857142857143,
+        "close": 54.97,
+        "cloud_bottom": 44.865,
+        "cloud_top": 49.945,
+        "date": "2026-09-06",
+        "kijun": 49.185,
+        "open": 54.7
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Crypto Spot|LTCUSDT|1D|bullish|cloud_breakout|2026-09-03"
   }
 ]
