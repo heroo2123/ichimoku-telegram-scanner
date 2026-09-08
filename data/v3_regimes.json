@@ -3706,5 +3706,55 @@
     "regime": "strong_bull",
     "score": 0.701,
     "volatility": "normal"
+  },
+  {
+    "as_of": "2026-09-08T01:32:58+00:00",
+    "breadth": "mixed",
+    "components": {
+      "^GSPC": {
+        "annualized_vol": 0.08304307474827657,
+        "close": 7718.60009765625,
+        "cloud_bottom": 6968.905029296875,
+        "cloud_top": 7401.1099853515625,
+        "kijun": 7537.01513671875,
+        "trend": 1
+      },
+      "^NDX": {
+        "annualized_vol": 0.12942618806969583,
+        "close": 29544.150390625,
+        "cloud_bottom": 26801.8095703125,
+        "cloud_top": 29034.8623046875,
+        "kijun": 28909.2998046875,
+        "trend": 1
+      },
+      "^RUT": {
+        "annualized_vol": 0.12481044751167675,
+        "close": 2975.64990234375,
+        "cloud_bottom": 2725.7900390625,
+        "cloud_top": 2935.090087890625,
+        "kijun": 2961.969970703125,
+        "trend": 1
+      },
+      "^VIX": {
+        "annualized_vol": 0.8005247132522361,
+        "close": 15.300000190734863,
+        "cloud_bottom": 18.392499923706055,
+        "cloud_top": 25.12999963760376,
+        "kijun": 17.339999675750732,
+        "trend": -1
+      },
+      "universe_breadth": {
+        "above": 2110,
+        "above_pct": 50.73,
+        "below": 1366,
+        "below_pct": 32.84,
+        "score": 0.1788891560471267,
+        "total": 4159
+      }
+    },
+    "market": "us",
+    "regime": "strong_bull",
+    "score": 0.666,
+    "volatility": "low"
   }
 ]
