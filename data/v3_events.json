@@ -1,41 +1,5 @@
 [
   {
-    "created_at": "2026-08-24T02:15:28+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.17142857142857146,
-        "close": 2.83,
-        "cloud_bottom": 2.9025,
-        "cloud_top": 4.3,
-        "date": "2026-08-23",
-        "kijun": 2.6500000000000004,
-        "open": 2.69
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "Crypto Spot|METISUSDT|1D|bearish|cloud_rejection_bearish|2026-08-21"
-  },
-  {
-    "created_at": "2026-08-24T02:15:28+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.009914285714285714,
-        "close": 0.0931,
-        "cloud_bottom": 0.09555,
-        "cloud_top": 0.1093,
-        "date": "2026-08-23",
-        "kijun": 0.09165000000000001,
-        "open": 0.0887
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "Crypto Spot|LSKUSDT|1D|bearish|kijun_bounce_bearish|2026-08-21"
-  },
-  {
     "created_at": "2026-08-24T02:15:29+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89962,41 @@
       "to": "active"
     },
     "signal_id": "US Stock|VOO|1D|bullish|trend_continuation_bullish|2026-09-03"
+  },
+  {
+    "created_at": "2026-09-09T04:55:15+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 8.43928473336356,
+        "close": 132.60000610351562,
+        "cloud_bottom": 164.0625,
+        "cloud_top": 169.875,
+        "date": "2026-09-08",
+        "kijun": 156.1750030517578,
+        "open": 132.60000610351562
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Commodity Future|OJ=F|1D|bearish|kijun_bounce_bearish|2026-09-04"
+  },
+  {
+    "created_at": "2026-09-09T04:56:07+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 8.43928473336356,
+        "close": 132.60000610351562,
+        "cloud_bottom": 164.0625,
+        "cloud_top": 169.875,
+        "date": "2026-09-08",
+        "kijun": 156.1750030517578,
+        "open": 132.60000610351562
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Commodity Future|OJ=F|1D|bearish|kijun_bounce_bearish|2026-09-03"
   }
 ]
