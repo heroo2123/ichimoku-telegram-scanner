@@ -1,77 +1,5 @@
 [
   {
-    "created_at": "2026-09-10T04:57:26+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 5.238573346819196,
-        "close": 137.9199981689453,
-        "cloud_bottom": 160.47749710083008,
-        "cloud_top": 206.94499969482422,
-        "date": "2026-09-09",
-        "kijun": 149.6599998474121,
-        "open": 140.25999450683594
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|PODD|1D|bearish|trend_continuation_bearish|2026-09-08"
-  },
-  {
-    "created_at": "2026-09-10T04:57:27+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.2310711996895924,
-        "close": 25.600000381469727,
-        "cloud_bottom": 26.098000049591064,
-        "cloud_top": 26.575000762939453,
-        "date": "2026-09-09",
-        "kijun": 25.894999504089355,
-        "open": 27.100000381469727
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|PRPO|1D|bullish|kijun_bounce_bullish|2026-09-08"
-  },
-  {
-    "created_at": "2026-09-10T04:57:27+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 2.3585711887904575,
-        "close": 54.619998931884766,
-        "cloud_bottom": 48.6200008392334,
-        "cloud_top": 51.87125110626221,
-        "date": "2026-09-09",
-        "kijun": 53.03499984741211,
-        "open": 57.29999923706055
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|SRRK|1D|bullish|trend_continuation_bullish|2026-09-08"
-  },
-  {
-    "created_at": "2026-09-10T04:57:28+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.3615000247955322,
-        "close": 6.289999961853027,
-        "cloud_bottom": 4.495000004768372,
-        "cloud_top": 5.4375,
-        "date": "2026-09-09",
-        "kijun": 5.875,
-        "open": 6.309999942779541
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|STLN|1D|bullish|kijun_bounce_bullish|2026-09-08"
-  },
-  {
     "created_at": "2026-09-10T04:57:29+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89926,77 @@
       "to": "entry_zone"
     },
     "signal_id": "US Stock|NOV|1D|bullish|kijun_bounce_bullish|2026-09-21"
+  },
+  {
+    "created_at": "2026-09-25T05:11:50+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 3.9428536551339284,
+        "close": 337.625,
+        "cloud_bottom": 351.2312545776367,
+        "cloud_top": 357.2250061035156,
+        "date": "2026-09-24",
+        "kijun": 342.2749938964844,
+        "open": 336.9750061035156
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "Commodity Future|GF=F|1D|bearish|trend_continuation_bearish|2026-09-23"
+  },
+  {
+    "created_at": "2026-09-25T05:12:18+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.5321426391601562,
+        "close": 17.579999923706055,
+        "cloud_bottom": 15.165000438690186,
+        "cloud_top": 15.46250033378601,
+        "date": "2026-09-24",
+        "kijun": 16.624999523162842,
+        "open": 17.75
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "Commodity Future|SB=F|1D|bullish|trend_continuation_bullish|2026-09-23"
+  },
+  {
+    "created_at": "2026-09-25T05:12:22+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 3.9428536551339284,
+        "close": 337.625,
+        "cloud_bottom": 351.2312545776367,
+        "cloud_top": 357.2250061035156,
+        "date": "2026-09-24",
+        "kijun": 342.2749938964844,
+        "open": 336.9750061035156
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "Commodity Future|GF=F|1D|bearish|trend_continuation_bearish|2026-09-22"
+  },
+  {
+    "created_at": "2026-09-25T05:12:24+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.5321426391601562,
+        "close": 17.579999923706055,
+        "cloud_bottom": 15.165000438690186,
+        "cloud_top": 15.46250033378601,
+        "date": "2026-09-24",
+        "kijun": 16.624999523162842,
+        "open": 17.75
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "Commodity Future|SB=F|1D|bullish|trend_continuation_bullish|2026-09-22"
   }
 ]
