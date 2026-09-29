@@ -1,23 +1,5 @@
 [
   {
-    "created_at": "2026-09-12T01:37:57+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.0009542857142857142,
-        "close": 0.01351,
-        "cloud_bottom": 0.011455,
-        "cloud_top": 0.013085000000000001,
-        "date": "2026-09-11",
-        "kijun": 0.012715,
-        "open": 0.0128
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "Crypto Spot|PLUMEUSDT|1D|bullish|cloud_rejection_bullish|2026-09-09"
-  },
-  {
     "created_at": "2026-09-12T01:37:58+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89980,23 @@
       "to": "invalidated"
     },
     "signal_id": "US Stock|OII|1D|bullish|kijun_bounce_bullish|2026-09-24"
+  },
+  {
+    "created_at": "2026-09-29T06:03:10+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.5099996839250837,
+        "close": 17.459999084472656,
+        "cloud_bottom": 15.165000438690186,
+        "cloud_top": 15.46250033378601,
+        "date": "2026-09-28",
+        "kijun": 16.624999523162842,
+        "open": 17.579999923706055
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "Commodity Future|SB=F|1D|bullish|trend_continuation_bullish|2026-09-25"
   }
 ]
