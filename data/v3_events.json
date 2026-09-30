@@ -4,24 +4,6 @@
     "event_type": "status_changed",
     "payload": {
       "context": {
-        "atr": 0.08400000000000003,
-        "close": 1.381,
-        "cloud_bottom": 1.45525,
-        "cloud_top": 1.8315,
-        "date": "2026-09-12",
-        "kijun": 1.4315,
-        "open": 1.391
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "Crypto Spot|RENDERUSDT|1D|bearish|kijun_bounce_bearish|2026-09-11"
-  },
-  {
-    "created_at": "2026-09-13T05:06:57+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
         "atr": 0.004827142857142858,
         "close": 0.11,
         "cloud_bottom": 0.082375,
@@ -89998,5 +89980,23 @@
       "to": "active"
     },
     "signal_id": "US Stock|DDWM|1D|bullish|cloud_breakout|2026-09-25"
+  },
+  {
+    "created_at": "2026-09-30T05:50:44+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.531428337097168,
+        "close": 17.81999969482422,
+        "cloud_bottom": 15.165000438690186,
+        "cloud_top": 15.46250033378601,
+        "date": "2026-09-29",
+        "kijun": 16.624999523162842,
+        "open": 17.450000762939453
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "Commodity Future|SB=F|1D|bullish|trend_continuation_bullish|2026-09-28"
   }
 ]
