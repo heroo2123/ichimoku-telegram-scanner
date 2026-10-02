@@ -1,23 +1,5 @@
 [
   {
-    "created_at": "2026-09-16T01:51:47+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.2150719506399972,
-        "close": 31.440799713134766,
-        "cloud_bottom": 29.61308915922924,
-        "cloud_top": 31.230517190687216,
-        "date": "2026-09-15",
-        "kijun": 31.57249927520752,
-        "open": 31.559999465942383
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|EDGU|1D|bullish|kijun_bounce_bullish|2026-09-14"
-  },
-  {
     "created_at": "2026-09-16T01:51:48+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89980,23 @@
       "to": "entry_zone"
     },
     "signal_id": "US Stock|NVTS|1D|bearish|kijun_bounce_bearish|2026-09-29"
+  },
+  {
+    "created_at": "2026-10-02T05:55:12+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.09682141031537737,
+        "close": 6.48199987411499,
+        "cloud_bottom": 5.998000144958496,
+        "cloud_top": 6.4095001220703125,
+        "date": "2026-10-01",
+        "kijun": 6.449749946594238,
+        "open": 6.460000038146973
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Commodity Future|HG=F|1D|bullish|trend_continuation_bullish|2026-09-30"
   }
 ]
