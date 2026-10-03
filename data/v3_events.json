@@ -1,41 +1,5 @@
 [
   {
-    "created_at": "2026-09-16T05:12:03+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.0041426249912806,
-        "close": 18.799999237060547,
-        "cloud_bottom": 18.55500030517578,
-        "cloud_top": 18.857500076293945,
-        "date": "2026-09-15",
-        "kijun": 19.684999465942383,
-        "open": 19.540000915527344
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|DAPP|1D|bullish|kijun_bounce_bullish|2026-09-14"
-  },
-  {
-    "created_at": "2026-09-16T05:12:03+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.7147857121058873,
-        "close": 12.225000381469727,
-        "cloud_bottom": 13.46999979019165,
-        "cloud_top": 13.481750011444092,
-        "date": "2026-09-15",
-        "kijun": 13.743500232696533,
-        "open": 13.470000267028809
-      },
-      "from": "entry_zone",
-      "to": "invalidated"
-    },
-    "signal_id": "US Stock|DSGN|1D|bullish|cloud_rejection_bullish|2026-09-14"
-  },
-  {
     "created_at": "2026-09-16T05:12:04+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89962,41 @@
       "to": "invalidated"
     },
     "signal_id": "Crypto Spot|SANDUSDT|1D|bearish|cloud_rejection_bearish|2026-09-30"
+  },
+  {
+    "created_at": "2026-10-03T05:32:03+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.97291442326137,
+        "close": 25.739999771118164,
+        "cloud_bottom": 26.683081360220463,
+        "cloud_top": 28.031503925165026,
+        "date": "2026-10-02",
+        "kijun": 27.552418832209504,
+        "open": 25.799999237060547
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "US Stock|ADEA|1D|bearish|trend_continuation_bearish|2026-10-01"
+  },
+  {
+    "created_at": "2026-10-03T05:32:08+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 303.42857142857144,
+        "close": 5670.0,
+        "cloud_bottom": 4620.0,
+        "cloud_top": 5304.25,
+        "date": "2026-10-02",
+        "kijun": 5833.5,
+        "open": 5490.0
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "Commodity Future|CC=F|1D|bullish|cloud_rejection_bullish|2026-10-01"
   }
 ]
