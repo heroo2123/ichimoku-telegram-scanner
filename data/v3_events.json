@@ -1,23 +1,5 @@
 [
   {
-    "created_at": "2026-09-19T01:36:44+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.13150000000000003,
-        "close": 1.999,
-        "cloud_bottom": 1.4865,
-        "cloud_top": 1.5604999999999998,
-        "date": "2026-09-18",
-        "kijun": 1.8305,
-        "open": 1.915
-      },
-      "from": "entry_zone",
-      "to": "active"
-    },
-    "signal_id": "Crypto Spot|CVXUSDC|1D|bullish|kijun_bounce_bullish|2026-09-16"
-  },
-  {
     "created_at": "2026-09-19T01:36:45+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89980,23 @@
       "to": "active"
     },
     "signal_id": "US Stock|QUAD|1D|bullish|cloud_rejection_bullish|2026-10-05"
+  },
+  {
+    "created_at": "2026-10-08T06:17:54+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.07664285387311663,
+        "close": 6.596499919891357,
+        "cloud_bottom": 5.998000144958496,
+        "cloud_top": 6.4095001220703125,
+        "date": "2026-10-07",
+        "kijun": 6.490000009536743,
+        "open": 6.579999923706055
+      },
+      "from": "extended",
+      "to": "active"
+    },
+    "signal_id": "Commodity Future|HG=F|1D|bullish|trend_continuation_bullish|2026-10-05"
   }
 ]
