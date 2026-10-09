@@ -1,41 +1,5 @@
 [
   {
-    "created_at": "2026-09-21T05:12:34+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.001800000000000005,
-        "close": 0.0358,
-        "cloud_bottom": 0.035625000000000004,
-        "cloud_top": 0.0415,
-        "date": "2026-09-20",
-        "kijun": 0.03755,
-        "open": 0.0361
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "Crypto Spot|TNSRUSDT|1D|bearish|tk_cross_bearish|2026-09-19"
-  },
-  {
-    "created_at": "2026-09-21T05:12:34+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 0.004235714285714286,
-        "close": 0.0864,
-        "cloud_bottom": 0.08615,
-        "cloud_top": 0.0941,
-        "date": "2026-09-20",
-        "kijun": 0.09635,
-        "open": 0.0848
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "Crypto Spot|RIFUSDT|1D|bearish|cloud_breakdown|2026-09-19"
-  },
-  {
     "created_at": "2026-09-21T05:12:35+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89962,41 @@
       "to": "entry_zone"
     },
     "signal_id": "US Stock|MIR|1D|bearish|cloud_rejection_bearish|2026-10-06"
+  },
+  {
+    "created_at": "2026-10-09T06:23:19+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 34.092869349888396,
+        "close": 1625.699951171875,
+        "cloud_bottom": 1741.875,
+        "cloud_top": 1882.8499755859375,
+        "date": "2026-10-08",
+        "kijun": 1753.4500122070312,
+        "open": 1625.699951171875
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Commodity Future|PL=F|1D|bearish|tk_cross_bearish|2026-10-07"
+  },
+  {
+    "created_at": "2026-10-09T06:23:20+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 4.135716029575893,
+        "close": 338.0249938964844,
+        "cloud_bottom": 348.6437454223633,
+        "cloud_top": 354.8999938964844,
+        "date": "2026-10-08",
+        "kijun": 335.7875061035156,
+        "open": 338.32501220703125
+      },
+      "from": "entry_zone",
+      "to": "invalidated"
+    },
+    "signal_id": "Commodity Future|GF=F|1D|bearish|trend_continuation_bearish|2026-10-07"
   }
 ]
