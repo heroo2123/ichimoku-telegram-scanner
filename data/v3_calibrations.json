@@ -2583,5 +2583,240 @@
       ]
     },
     "trained_at": "2026-10-04T08:37:54+00:00"
+  },
+  {
+    "direction": "all",
+    "horizon": 10,
+    "market": "all",
+    "metrics": {
+      "accuracy": 0.4738,
+      "base_rate": 0.473911,
+      "baseline_brier_score": 0.249319,
+      "brier_score": 0.255027,
+      "brier_skill_score": -0.022894,
+      "count": 18129,
+      "deployable": false,
+      "validation_count": 9065
+    },
+    "model": {
+      "accuracy": 0.4738,
+      "base_rate": 0.473911,
+      "baseline_brier_score": 0.249319,
+      "brier_score": 0.255027,
+      "brier_skill_score": -0.022894,
+      "count": 18129,
+      "deployable": false,
+      "features": [
+        "intercept",
+        "score",
+        "weekly_aligned",
+        "volume_ratio",
+        "cloud_distance_atr",
+        "kijun_distance_atr",
+        "cloud_thickness_atr"
+      ],
+      "horizon": 10,
+      "ready": true,
+      "validation": "expanding_window_walk_forward",
+      "validation_count": 9065,
+      "weights": [
+        0.1562813,
+        -0.01580896,
+        -0.14995968,
+        -0.05997427,
+        0.04758472,
+        0.02229736,
+        -0.01111083
+      ]
+    },
+    "trained_at": "2026-10-11T09:08:01+00:00"
+  },
+  {
+    "direction": "bullish",
+    "horizon": 10,
+    "market": "Crypto Spot",
+    "metrics": {
+      "accuracy": 0.565533,
+      "base_rate": 0.447672,
+      "baseline_brier_score": 0.247262,
+      "brier_score": 0.249206,
+      "brier_skill_score": -0.007864,
+      "count": 6057,
+      "deployable": false,
+      "validation_count": 3029
+    },
+    "model": {
+      "accuracy": 0.565533,
+      "base_rate": 0.447672,
+      "baseline_brier_score": 0.247262,
+      "brier_score": 0.249206,
+      "brier_skill_score": -0.007864,
+      "count": 6057,
+      "deployable": false,
+      "features": [
+        "intercept",
+        "score",
+        "weekly_aligned",
+        "volume_ratio",
+        "cloud_distance_atr",
+        "kijun_distance_atr",
+        "cloud_thickness_atr"
+      ],
+      "horizon": 10,
+      "ready": true,
+      "validation": "expanding_window_walk_forward",
+      "validation_count": 3029,
+      "weights": [
+        0.25638388,
+        -0.03376254,
+        -0.06893853,
+        -0.00682352,
+        0.39017805,
+        -0.02048187,
+        -0.56544078
+      ]
+    },
+    "trained_at": "2026-10-11T09:08:02+00:00"
+  },
+  {
+    "direction": "bearish",
+    "horizon": 10,
+    "market": "Crypto Spot",
+    "metrics": {
+      "accuracy": 0.391069,
+      "base_rate": 0.450609,
+      "baseline_brier_score": 0.247561,
+      "brier_score": 0.261085,
+      "brier_skill_score": -0.054632,
+      "count": 4434,
+      "deployable": false,
+      "validation_count": 2217
+    },
+    "model": {
+      "accuracy": 0.391069,
+      "base_rate": 0.450609,
+      "baseline_brier_score": 0.247561,
+      "brier_score": 0.261085,
+      "brier_skill_score": -0.054632,
+      "count": 4434,
+      "deployable": false,
+      "features": [
+        "intercept",
+        "score",
+        "weekly_aligned",
+        "volume_ratio",
+        "cloud_distance_atr",
+        "kijun_distance_atr",
+        "cloud_thickness_atr"
+      ],
+      "horizon": 10,
+      "ready": true,
+      "validation": "expanding_window_walk_forward",
+      "validation_count": 2217,
+      "weights": [
+        -0.05621812,
+        0.0626364,
+        -0.27452373,
+        0.02783664,
+        -0.11356547,
+        0.06270488,
+        0.058966
+      ]
+    },
+    "trained_at": "2026-10-11T09:08:03+00:00"
+  },
+  {
+    "direction": "bullish",
+    "horizon": 10,
+    "market": "US Stock",
+    "metrics": {
+      "accuracy": 0.537492,
+      "base_rate": 0.537492,
+      "baseline_brier_score": 0.248594,
+      "brier_score": 0.256865,
+      "brier_skill_score": -0.03327,
+      "count": 6027,
+      "deployable": false,
+      "validation_count": 3014
+    },
+    "model": {
+      "accuracy": 0.537492,
+      "base_rate": 0.537492,
+      "baseline_brier_score": 0.248594,
+      "brier_score": 0.256865,
+      "brier_skill_score": -0.03327,
+      "count": 6027,
+      "deployable": false,
+      "features": [
+        "intercept",
+        "score",
+        "weekly_aligned",
+        "volume_ratio",
+        "cloud_distance_atr",
+        "kijun_distance_atr",
+        "cloud_thickness_atr"
+      ],
+      "horizon": 10,
+      "ready": true,
+      "validation": "expanding_window_walk_forward",
+      "validation_count": 3014,
+      "weights": [
+        0.63646211,
+        -0.14958892,
+        -0.28106004,
+        -0.12404535,
+        -0.2644021,
+        0.22548228,
+        0.18244922
+      ]
+    },
+    "trained_at": "2026-10-11T09:08:05+00:00"
+  },
+  {
+    "direction": "bearish",
+    "horizon": 10,
+    "market": "US Stock",
+    "metrics": {
+      "accuracy": 0.573201,
+      "base_rate": 0.255583,
+      "baseline_brier_score": 0.19026,
+      "brier_score": 0.226019,
+      "brier_skill_score": -0.187946,
+      "count": 1611,
+      "deployable": false,
+      "validation_count": 806
+    },
+    "model": {
+      "accuracy": 0.573201,
+      "base_rate": 0.255583,
+      "baseline_brier_score": 0.19026,
+      "brier_score": 0.226019,
+      "brier_skill_score": -0.187946,
+      "count": 1611,
+      "deployable": false,
+      "features": [
+        "intercept",
+        "score",
+        "weekly_aligned",
+        "volume_ratio",
+        "cloud_distance_atr",
+        "kijun_distance_atr",
+        "cloud_thickness_atr"
+      ],
+      "horizon": 10,
+      "ready": true,
+      "validation": "expanding_window_walk_forward",
+      "validation_count": 806,
+      "weights": [
+        -0.29061001,
+        0.02561353,
+        -0.87714142,
+        0.12788638,
+        -0.42278828,
+        -0.27742807,
+        0.72649738
+      ]
+    },
+    "trained_at": "2026-10-11T09:08:06+00:00"
   }
 ]
