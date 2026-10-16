@@ -1,41 +1,5 @@
 [
   {
-    "created_at": "2026-09-29T03:03:14+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 9.022859845842634,
-        "close": 261.989990234375,
-        "cloud_bottom": 216.88937982037044,
-        "cloud_top": 246.39921214371,
-        "date": "2026-09-28",
-        "kijun": 246.39921214371,
-        "open": 260.6600036621094
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|MTRN|1D|bullish|tk_cross_bullish|2026-09-25"
-  },
-  {
-    "created_at": "2026-09-29T03:03:14+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.2112862723214286,
-        "close": 71.8949966430664,
-        "cloud_bottom": 67.02760887633121,
-        "cloud_top": 69.51150131225586,
-        "date": "2026-09-28",
-        "kijun": 69.48400115966797,
-        "open": 71.83000183105469
-      },
-      "from": "extended",
-      "to": "active"
-    },
-    "signal_id": "US Stock|EMGF|1D|bullish|trend_continuation_bullish|2026-09-25"
-  },
-  {
     "created_at": "2026-09-29T03:03:15+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89962,41 @@
       "to": "active"
     },
     "signal_id": "Crypto Spot|DODOUSDT|1D|bearish|cloud_rejection_bearish|2026-10-13"
+  },
+  {
+    "created_at": "2026-10-16T04:49:43+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 2.2214286667960033,
+        "close": 16.459999084472656,
+        "cloud_bottom": 16.93499994277954,
+        "cloud_top": 22.889999866485596,
+        "date": "2026-10-15",
+        "kijun": 10.4399995803833,
+        "open": 0.0
+      },
+      "from": "active",
+      "to": "invalidated"
+    },
+    "signal_id": "US Index|^VIX|1D|bearish|kijun_bounce_bearish|2026-10-14"
+  },
+  {
+    "created_at": "2026-10-16T04:50:00+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 0.1879801362308172,
+        "close": 16.6299991607666,
+        "cloud_bottom": 17.228019566994192,
+        "cloud_top": 17.243259617042806,
+        "date": "2026-10-15",
+        "kijun": 16.740445536129375,
+        "open": 16.489999771118164
+      },
+      "from": "active",
+      "to": "entry_zone"
+    },
+    "signal_id": "US Stock|MLN|1D|bearish|trend_continuation_bearish|2026-10-14"
   }
 ]
