@@ -1,41 +1,5 @@
 [
   {
-    "created_at": "2026-10-01T02:30:57+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.7572174109604555,
-        "close": 91.69999694824219,
-        "cloud_bottom": 83.48342186474427,
-        "cloud_top": 92.48407521168751,
-        "date": "2026-09-30",
-        "kijun": 94.3544837455587,
-        "open": 92.22000122070312
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|RBCAA|1D|bullish|cloud_rejection_bullish|2026-09-29"
-  },
-  {
-    "created_at": "2026-10-01T02:30:58+00:00",
-    "event_type": "status_changed",
-    "payload": {
-      "context": {
-        "atr": 1.1678570338657923,
-        "close": 52.90999984741211,
-        "cloud_bottom": 48.05956502166465,
-        "cloud_top": 52.93572852283747,
-        "date": "2026-09-30",
-        "kijun": 54.141574689578846,
-        "open": 53.20000076293945
-      },
-      "from": "confirmed",
-      "to": "active"
-    },
-    "signal_id": "US Stock|CNO|1D|bullish|cloud_rejection_bullish|2026-09-29"
-  },
-  {
     "created_at": "2026-10-01T02:30:58+00:00",
     "event_type": "status_changed",
     "payload": {
@@ -89998,5 +89962,41 @@
       "to": "active"
     },
     "signal_id": "US Stock|QTRX|1D|bearish|cloud_rejection_bearish|2026-10-14"
+  },
+  {
+    "created_at": "2026-10-17T04:43:49+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 4.010714394705636,
+        "close": 101.41000366210938,
+        "cloud_bottom": 82.58749961853027,
+        "cloud_top": 92.33499908447266,
+        "date": "2026-10-16",
+        "kijun": 90.49499893188477,
+        "open": 97.55000305175781
+      },
+      "from": "active",
+      "to": "extended"
+    },
+    "signal_id": "Commodity Future|CL=F|1D|bullish|trend_continuation_bullish|2026-10-15"
+  },
+  {
+    "created_at": "2026-10-17T04:43:51+00:00",
+    "event_type": "status_changed",
+    "payload": {
+      "context": {
+        "atr": 13.099373953683036,
+        "close": 461.1000061035156,
+        "cloud_bottom": 488.2922087872985,
+        "cloud_top": 500.97688062488686,
+        "date": "2026-10-16",
+        "kijun": 481.73479837406177,
+        "open": 465.75
+      },
+      "from": "confirmed",
+      "to": "active"
+    },
+    "signal_id": "US Stock|HUBB|1D|bearish|trend_continuation_bearish|2026-10-15"
   }
 ]
